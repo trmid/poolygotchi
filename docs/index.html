@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A gamified interface for the PoolTogether savings protocol.">
+  <meta name="color-scheme" content="dark light">
+
+  <title>Poolygotchi</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="build/bundle.css">
+  <link rel="stylesheet" href="style/icofont/icofont.min.css">
+
+  <script defer src="build/bundle.js"></script>
+
+  <!-- Initialize Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        if ((location.pathname || "/").match(/\//)?.length == 1) {
+
+          // Register sw:
+          const sw = await navigator.serviceWorker.register("sw.js");
+          sw.addEventListener("updatefound", () => {
+            console.log("update found!");
+            const newWorker = sw.installing;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "activated") location.reload();
+            });
+          });
+        }
+      });
+    }
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
