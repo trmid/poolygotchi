@@ -1,9 +1,12 @@
-# svelte-static-spa
-A template repository for building a single page web app (SPA) with Svelte.
+# Poolygotchi
+
+## A gamified interface for the PoolTogether protocol.
+
+![Poolygotchi Concept Art](./docs/img/poolygotchi_concept_art.png)
 
 ## Installation
 
-Clone or fork this repo and run `npm i`.
+Clone or fork this repo and run `npm i`. 
 
 ## Development
 
