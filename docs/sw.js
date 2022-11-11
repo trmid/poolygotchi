@@ -1,5 +1,5 @@
-const cacheName = `0.1.0`; // Change value to force update
-const filesToCache = `["./","build/bundle.js","build/bundle.css","build/bundle.js.map","favicon.png","files/poolygotchi_project_proposal.pdf","index.html","style/Comfortaa.ttf","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
+const cacheName = `0.1.1`; // Change value to force update
+const filesToCache = `["./","build/bundle.js","build/bundle.css","build/bundle.js.map","favicon.png","files/poolygotchi_project_proposal.pdf","img/birb.png","img/icon.svg","img/logo.svg","img/poolygotchi_concept_art.png","index.html","style/Comfortaa.ttf","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
 
 self.addEventListener("install", event => {
 	// Kick out the old service worker

@@ -1,11 +1,14 @@
-<h1>poolygotchi</h1>
-<h2>A Gamified Interface for the PoolTogether Protocol</h2>
-<h3>Project Proposal</h3>
-<object id="proposal" title="Poolygotchi Project proposal" data="./files/poolygotchi_project_proposal.pdf" width="1024" height="800" />
+<script type="ts">
+  import Game from "../components/Game.svelte";
+  import Title from "../components/Title.svelte";
+</script>
 
-<style>
-  #proposal {
-    max-width: 100%;
-    max-height: 90vh;
-  }
-</style>
+<section class="center-content">
+
+  <!-- Title -->
+  <Title />
+
+  <!-- Game -->
+  <Game />
+
+</section>

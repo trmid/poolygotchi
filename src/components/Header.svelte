@@ -1,13 +1,21 @@
 <script type="ts">
-  import { link } from "svelte-spa-router";
+  const announcements = [
+    "Now with more feathers!",
+    "Ribbit 🐸",
+    "Slow and steady 🐢",
+    "Chirp chirp 🐦",
+  ];
+  let index = Math.floor(Math.random() * announcements.length);
 </script>
 
-<header class="margins">
-  <a href="/" use:link>Home</a>
+<header class="margins text-gradient">
+  {announcements[index]}
 </header>
 
 <style>
   header {
     padding: 1rem;
+    text-align: center;
+    font-weight: bold;
   }
 </style>
