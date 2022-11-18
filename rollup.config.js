@@ -15,7 +15,7 @@ import nodePackage from "./package.json";
 const production = !process.env.ROLLUP_WATCH;
 
 // Output path:
-const out = "docs"; // use 'docs' for github pages compatibility
+const out = "docs";
 
 function serve() {
 	let server;
