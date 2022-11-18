@@ -2,7 +2,7 @@
 
 ## A gamified interface for the PoolTogether protocol.
 
-![Poolygotchi Concept Art](./docs/img/poolygotchi_concept_art.png)
+![Poolygotchi Concept Art](./docs/archive/banner.png)
 
 ## Installation
 
