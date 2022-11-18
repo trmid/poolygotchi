@@ -2,16 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A gamified interface for the PoolTogether savings protocol.">
 
   <title>Poolygotchi</title>
 
+  <!-- Primary Meta Tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="title" content="Poolygotchi">
+  <meta name="description" content="Your digital pet that helps you save money and win prizes! Hatch your poolygotchi, set your goals, and have fun while saving with the PoolTogether protocol.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://poolygotchi.com/">
+  <meta property="og:title" content="Poolygotchi">
+  <meta property="og:description" content="Your digital pet that helps you save money and win prizes! Hatch your poolygotchi, set your goals, and have fun while saving with the PoolTogether protocol.">
+  <meta property="og:image" content="https://poolygotchi.com/img/banner.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://poolygotchi.com/">
+  <meta property="twitter:title" content="Poolygotchi">
+  <meta property="twitter:description" content="Your digital pet that helps you save money and win prizes! Hatch your poolygotchi, set your goals, and have fun while saving with the PoolTogether protocol.">
+  <meta property="twitter:image" content="https://poolygotchi.com/img/banner.png">
+
+  <!-- Links -->
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style/app.css">
   <link rel="stylesheet" href="build/bundle.css">
   <link rel="stylesheet" href="style/icofont/icofont.min.css">
 
+  <!-- Scripts -->
   <script defer src="build/bundle.js"></script>
 
   <!-- Initialize Service Worker -->
@@ -23,7 +43,7 @@
           // Register sw:
           const sw = await navigator.serviceWorker.register("sw.js");
           sw.addEventListener("updatefound", () => {
-            console.log("update found!");
+            console.log("SW update found!");
             const newWorker = sw.installing;
             newWorker.addEventListener("statechange", () => {
               if (newWorker.state === "activated") location.reload();
@@ -33,68 +53,6 @@
       });
     }
   </script>
-
-  <!-- Global CSS -->
-  <style>
-    @font-face {
-      font-family: Comfortaa;
-      src: url(style/Comfortaa.ttf);
-    }
-
-    /* CSS Vars */
-    :root {
-      --c0: #512BC7;
-      --c1: #2900C0;
-      --c2: #40F99B;
-      --c3: #F5FBEF;
-      --c4: #E85D75;
-
-      --tri-gradient: linear-gradient(-45deg, var(--c2), var(--c3), var(--c4));
-    }
-
-    html {
-      min-height: 100%;
-      background-color: #2900C0;
-      background: linear-gradient(165deg, var(--c0), var(--c1));
-      color: var(--c3);
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Comfortaa, sans-serif;
-    }
-
-    .margins {
-      margin: 0 auto;
-      padding: 1rem;
-      max-width: 1024px;
-    }
-
-    .center-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .text-gradient {
-      width: fit-content;
-      background: var(--tri-gradient);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    h1 {
-      font-size: 54px;
-    }
-
-    a,
-    a:visited {
-      color: inherit;
-    }
-  </style>
 </head>
 
 <body>

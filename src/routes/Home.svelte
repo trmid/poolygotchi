@@ -5,9 +5,6 @@
 
 <section class="center-content">
 
-  <!-- Title -->
-  <Title />
-
   <!-- Game -->
   <Game />
 
