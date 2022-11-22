@@ -33,6 +33,12 @@ h1 {
   font-size: 54px;
 }
 
+.content-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--c0);
+}
+
 a,
 a:visited {
   color: inherit;
@@ -57,7 +63,7 @@ a.btn {
 .margins {
   margin: 0 auto;
   padding: 1rem;
-  max-width: 1024px;
+  max-width: 720px;
 }
 
 .center-content {
