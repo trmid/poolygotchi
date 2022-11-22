@@ -1,8 +1,6 @@
 <script type="ts">
   import { link } from "svelte-spa-router";
   import { page } from "../routes";
-
-  $: console.log($page);
 </script>
 
 <!-- Navigation -->
