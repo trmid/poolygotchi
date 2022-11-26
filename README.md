@@ -1,8 +1,8 @@
-# Poolygotchi
+# Pocket Pooly
 
 ## A gamified interface for the PoolTogether protocol.
 
-![Poolygotchi Concept Art](./docs/archive/banner.png)
+![Pocket Pooly Concept Art](./docs/archive/banner.png)
 
 ## Installation
 
