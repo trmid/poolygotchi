@@ -1,4 +1,4 @@
-import { BigNumber, PopulatedTransaction, constants as EtherConst, ContractReceipt } from "ethers";
+import type { BigNumber, PopulatedTransaction, constants as EtherConst, ContractReceipt } from "ethers";
 import type { TransactionReceipt } from '@ethersproject/abstract-provider/src.ts/index';
 import WeaverFi from "weaverfi";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
@@ -119,90 +119,90 @@ export interface Account {
   sendTX(tx: PopulatedTransaction): Promise<string>
 }
 
-export abstract class BaseAccount implements Account {
+// export abstract class BaseAccount implements Account {
 
-  // TODO: create constructor that accepts address and ethers Signer object
-  // Any wallet that is not made from ethers needs a custom Signer implementation to work with this
+//   // TODO: create constructor that accepts address and ethers Signer object
+//   // Any wallet that is not made from ethers needs a custom Signer implementation to work with this
 
-  // Override this getter in extensions:
-  get address(): Address {
-    return EtherConst.AddressZero;
-  }
-  async savingsGoal(): Promise<SavingsGoal | null> {
-    return Poolygotchi.savingsGoal(this.address);
-  }
-  async healthFactor(): Promise<number> {
-    const goal = await this.savingsGoal();
-    if(!goal) return 0;
-    const { startBalance, startDateSeconds, timeSpanSeconds, amount } = goal;
-    const currentBalance = await PoolTogether.totalDeposited(this.address);
-    const balanceDiff = currentBalance.sub(startBalance);
-    const currentDateSeconds = Math.floor(Date.now() / 1000);
-    const actualRate = balanceDiff.div(BigNumber.from(currentDateSeconds).sub(startDateSeconds));
-    const goalRate = amount.div(timeSpanSeconds);
+//   // Override this getter in extensions:
+//   get address(): Address {
+//     return EtherConst.AddressZero;
+//   }
+//   async savingsGoal(): Promise<SavingsGoal | null> {
+//     return Poolygotchi.savingsGoal(this.address);
+//   }
+//   async healthFactor(): Promise<number> {
+//     const goal = await this.savingsGoal();
+//     if(!goal) return 0;
+//     const { startBalance, startDateSeconds, timeSpanSeconds, amount } = goal;
+//     const currentBalance = await PoolTogether.totalDeposited(this.address);
+//     const balanceDiff = currentBalance.sub(startBalance);
+//     const currentDateSeconds = Math.floor(Date.now() / 1000);
+//     const actualRate = balanceDiff.div(BigNumber.from(currentDateSeconds).sub(startDateSeconds));
+//     const goalRate = amount.div(timeSpanSeconds);
 
-    // TODO: calculate fractional healthFactor from actualRate and goalRate
+//     // TODO: calculate fractional healthFactor from actualRate and goalRate
 
-    return 1;
-  }
-  async poolygotchiType(): Promise<BigNumber> {
-    return await Poolygotchi.type(this.address);
-  }
-  async poolygotchiGrowth(): Promise<number> {
-    return 0; // TODO: calculate growth from current time and goal start time
-  }
-  async ensName(): Promise<string | null> {
-    return await WeaverFi.eth.lookupENS(this.address);
-  }
-  async ensAvatar(): Promise<string | null> {
-    const name = await this.ensName();
-    if(name) {
-      const provider = providers.eth[0];
-      const resolver = await provider.getResolver(name);
-      const avatar = await resolver?.getAvatar();
-      if(avatar) {
-        return avatar.url;
-      }
-    }
-    return null;
-  }
-  async poolyAvatars(): Promise<string[] | null> {
+//     return 1;
+//   }
+//   async poolygotchiType(): Promise<BigNumber> {
+//     return await Poolygotchi.type(this.address);
+//   }
+//   async poolygotchiGrowth(): Promise<number> {
+//     return 0; // TODO: calculate growth from current time and goal start time
+//   }
+//   async ensName(): Promise<string | null> {
+//     return await WeaverFi.eth.lookupENS(this.address);
+//   }
+//   async ensAvatar(): Promise<string | null> {
+//     const name = await this.ensName();
+//     if(name) {
+//       const provider = providers.eth[0];
+//       const resolver = await provider.getResolver(name);
+//       const avatar = await resolver?.getAvatar();
+//       if(avatar) {
+//         return avatar.url;
+//       }
+//     }
+//     return null;
+//   }
+//   async poolyAvatars(): Promise<string[] | null> {
 
-    // TODO: fetch array of all pooly and FOP related avatars that the account owns and return URLs of each
+//     // TODO: fetch array of all pooly and FOP related avatars that the account owns and return URLs of each
 
-    return [];
-  }
-  async getAvatar(): Promise<string> {
-    let avatar = localStorage.getItem(`avatar-${this.address}`);
-    if(!avatar) {
-      avatar = await this.ensAvatar();
-    }
-    if(!avatar) {
-      avatar = (await this.poolyAvatars() ?? [])[0];
-    }
-    if(!avatar) {
-      avatar = "favicon.png";
-    }
-    this.setAvatar(avatar);
-    return avatar;
-  }
-  setAvatar(url: string) {
-    localStorage.setItem(`avatar-${this.address}`, url);
-  }
-  async unclaimedPrizes(): Promise<any[]> {
-    return []; // TODO
-  }
-  async totalDeposit(): Promise<BigNumber> {
-    return PoolTogether.totalDeposited(this.address);
-  }
-  async hatch(goal: Omit<SavingsGoal, "startDateSeconds">, type: BigNumber): Promise<string> {
+//     return [];
+//   }
+//   async getAvatar(): Promise<string> {
+//     let avatar = localStorage.getItem(`avatar-${this.address}`);
+//     if(!avatar) {
+//       avatar = await this.ensAvatar();
+//     }
+//     if(!avatar) {
+//       avatar = (await this.poolyAvatars() ?? [])[0];
+//     }
+//     if(!avatar) {
+//       avatar = "favicon.png";
+//     }
+//     this.setAvatar(avatar);
+//     return avatar;
+//   }
+//   setAvatar(url: string) {
+//     localStorage.setItem(`avatar-${this.address}`, url);
+//   }
+//   async unclaimedPrizes(): Promise<any[]> {
+//     return []; // TODO
+//   }
+//   async totalDeposit(): Promise<BigNumber> {
+//     return PoolTogether.totalDeposited(this.address);
+//   }
+//   async hatch(goal: Omit<SavingsGoal, "startDateSeconds">, type: BigNumber): Promise<string> {
     
-    return "";
-  }
+//     return "";
+//   }
 
-  // Default sendTX with no functionality:
-  sendTX(tx: PopulatedTransaction): Promise<string> {
-    throw new Error("cannot sendTX from abstract Account function");
-  }
+//   // Default sendTX with no functionality:
+//   sendTX(tx: PopulatedTransaction): Promise<string> {
+//     throw new Error("cannot sendTX from abstract Account function");
+//   }
 
-}
+// }
