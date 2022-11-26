@@ -11,13 +11,18 @@
   --c3: #F5FBEF;
   --c4: #E85D75;
 
+  --shadow-color: #0004;
+
+  --bg-gradient: linear-gradient(165deg, var(--c0), var(--c1));
   --tri-gradient: linear-gradient(-65deg, var(--c2), var(--c3), var(--c4));
 }
 
+/* HTML & Body */
 html {
   min-height: 100%;
   background-color: #2900C0;
-  background: linear-gradient(165deg, var(--c0), var(--c1));
+  background: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--c3);
 }
 
@@ -29,10 +34,19 @@ body {
   line-height: 1.3;
 }
 
+/* Headers */
 h1 {
   font-size: 54px;
 }
 
+/* Content Box */
+.content-box {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--c0);
+}
+
+/* Anchor Tag */
 a,
 a:visited {
   color: inherit;
@@ -54,12 +68,14 @@ a.btn {
   text-decoration: none;
 }
 
+/* Adds uniform margins and centers on parent */
 .margins {
   margin: 0 auto;
   padding: 1rem;
-  max-width: 1024px;
+  max-width: 720px;
 }
 
+/* Centers all content */
 .center-content {
   display: flex;
   flex-direction: column;
@@ -67,6 +83,7 @@ a.btn {
   text-align: center;
 }
 
+/* Text Gradient */
 .text-gradient {
   width: fit-content;
   background: var(--tri-gradient);
@@ -75,7 +92,34 @@ a.btn {
   -webkit-text-fill-color: transparent;
 }
 
+/* No Text Select Class */
 .no-select, .text-gradient {
   user-select: none;
   -moz-user-select: none;
+}
+
+/* Custom Scrollbar */
+:not(.classic-scroll)::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background-color: var(--c0);
+}
+
+:not(.classic-scroll)::-webkit-scrollbar-corner {
+  background-color: var(--c0);
+}
+
+:not(.classic-scroll)::-webkit-scrollbar-thumb {
+  background-color: #fff5;
+  border: 3px solid var(--c0);
+  border-radius: 6px;
+  background-clip: padding-box;
+}
+
+:not(.classic-scroll)::-webkit-scrollbar-thumb:hover {
+  background-color: var(--c3);
+}
+
+:not(.classic-scroll)::-webkit-scrollbar-track {
+  border-radius: 3px;
 }

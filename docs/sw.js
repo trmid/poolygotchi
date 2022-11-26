@@ -1,5 +1,5 @@
-const cacheName = `0.1.2`; // Change value to force update
-const filesToCache = `["./","build/bundle.js","build/bundle.css","archive/banner.png","archive/birb.png","archive/poolygotchi_concept_art.png","archive/poolygotchi_project_proposal.pdf","build/bundle.js.map","favicon.png","files/poolygotchi_project_proposal_v1.2.pdf","img/banner.png","img/banner.svg","img/icon.svg","img/logo.svg","img/logo_jp.png","img/logo_jp.svg","img/logo_jp_desktop.png","img/logo_jp_desktop.svg","img/logo_stacked.png","img/logo_stacked.svg","index.html","style/Comfortaa.ttf","style/app.css","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
+const cacheName = `0.1.3`; // Change value to force update
+const filesToCache = `["./","build/bundle.js","build/bundle.css","CNAME","archive/banner.png","archive/birb.png","archive/poolygotchi_concept_art.png","archive/poolygotchi_project_proposal.pdf","build/bundle.js.map","favicon.png","files/poolygotchi_project_proposal_v1.2.pdf","img/banner.png","img/banner.svg","img/icon.svg","img/logo.svg","img/logo_jp.png","img/logo_jp.svg","img/logo_jp_desktop.png","img/logo_jp_desktop.svg","img/logo_stacked.png","img/logo_stacked.svg","index.html","manifest.json","style/Comfortaa.ttf","style/app.css","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
 
 self.addEventListener("install", event => {
 	// Kick out the old service worker
