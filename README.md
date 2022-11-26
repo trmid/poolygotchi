@@ -2,7 +2,7 @@
 
 ## A gamified interface for the PoolTogether protocol.
 
-![Pocket Pooly Concept Art](./docs/archive/banner.png)
+![Pocket Pooly Banner](./docs/img/banner.png)
 
 ## Installation
 
