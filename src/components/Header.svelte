@@ -19,10 +19,10 @@
   <!-- Title -->
   <Title />
 
-  <!-- Nav -->
-  <!-- <Nav /> -->
-
 </header>
+
+<!-- Nav -->
+<Nav />
 
 <style>
   header {
