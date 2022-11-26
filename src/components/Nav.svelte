@@ -1,10 +1,7 @@
 <script type="ts">
   import { link } from "svelte-spa-router";
   import { page } from "../routes";
-  import { client } from "../classes/account/account";
   import { onMount } from "svelte";
-  import { connect, fetchEnsName } from '@wagmi/core'
-  import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask';
 
   let nav: HTMLElement | undefined;
   let stickyNav = false;
@@ -16,13 +13,6 @@
       stickyNav = bb.top == 0;
       requestAnimationFrame(() => checkingSticky = false);
     }
-  };
-
-  const connectWC = async () => {
-    const res = await connect({
-      connector: new MetaMaskConnector(),
-    });
-    console.log(res.account);
   };
 </script>
 

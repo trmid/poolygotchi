@@ -1,6 +1,6 @@
 <script type="ts">
   import Title from "./Title.svelte";
-  // import Nav from "./Nav.svelte";
+  import Nav from "./Nav.svelte";
 
   const announcements = [
     "Now with more feathers!",

@@ -42,7 +42,7 @@ h1 {
 /* Content Box */
 .content-box {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   background-color: var(--c0);
 }
 
