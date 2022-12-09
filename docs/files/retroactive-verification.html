@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pocket Pooly Data Design</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p><img src="https://pocketpooly.com/img/banner.png" alt="Pocket Pooly"></p>
+<h1 id="pocket-pooly---imported-data-design">Pocket Pooly - Imported Data Design</h1>
+<h2 id="goal">Goal</h2>
+<p>Pocket Pooly needs to reference accurate PoolTogether protocol deposit data to accurately reflect a player’s ability to meet their savings goal.</p>
+<h2 id="problem">Problem</h2>
+<p>Since PoolTogether is multi-chain, it is difficult to aggregate the deposit data from all PT deployments in a trustless and provable manner.</p>
+<h2 id="design-options">Design Options</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Retroactive Verification</th>
+<th>Bridge Data to OP</th>
+<th>Deploy Multi-chain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pros</td>
+<td>- Great UX<br>- Low complexity<br>- Cheap for users &amp; devs</td>
+<td>- Fast data verification</td>
+<td>- High data security<br>- Fast data verification</td>
+</tr>
+<tr>
+<td>Cons</td>
+<td>- Airdrops must be centrally compiled</td>
+<td>- High complexity<br>- High user gas fees</td>
+<td>- Poor UX<br>- High maintenance overhead</td>
+</tr>
+</tbody>
+</table><h2 id="what-is-retroactive-verification">What is Retroactive Verification?</h2>
+<p>In Pocket Pooly, Retroactive Verification is the process that will be used to check and verify if a user has been meeting their savings goal in order to be eligible for certain achievements and airdrops. With Retroactive Verification, a player is essentially “trusted” to provide an accurate report of their current PoolTogether balance across all chains at the time of setting their goal. This value is integral to the gameplay of Pocket Pooly and will affect the mood and health of the player’s pocket pooly on a daily basis. The “truthfulness” of this deposit data does not matter much in the day-to-day interactions a player makes; after all, if a player goes out of their way to provide false data, they are only sabotaging their own savings goals and lying to themselves. However, the integrity of this data matters greatly when awarding players for good behavior (aka. meeting their savings goal).</p>
+<p>So how does Retroactive Verification prove data integrity? At any point in time, anyone can take a snapshot of the players’ current deposits and goals and compare the data that they provided on-chain and double check it with the real on-chain data at the time they provided it. If any records are mismatched, we can deduce that the player was lying about their balance and exclude them from the reward airdrop.</p>
+<h2 id="summary">Summary</h2>
+<p>Retroactive Verification is a simple solution for a dapp that needs a cheap method to use cross-chain data with low data availability and high data security. For Pocket Pooly, this method will provide a better user experience by keeping player gas fees to a minimum while still allowing them to deposit on any chain that PoolTogether supports.</p>
+</div>
+</body>
+
+</html>
