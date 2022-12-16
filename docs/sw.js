@@ -1,4 +1,4 @@
-const cacheName = `0.1.3`; // Change value to force update
+const cacheName = `0.1.4`; // Change value to force update
 const filesToCache = `["./","build/bundle.js","build/bundle.css","CNAME","archive/banner.png","archive/birb.png","archive/poolygotchi_concept_art.png","archive/poolygotchi_project_proposal.pdf","build/bundle.js.map","favicon.png","files/poolygotchi_project_proposal_v1.2.pdf","img/banner.png","img/banner.svg","img/icon.svg","img/logo.svg","img/logo_jp.png","img/logo_jp.svg","img/logo_jp_desktop.png","img/logo_jp_desktop.svg","img/pocket_pooly_logo.png","img/pocket_pooly_logo.svg","index.html","manifest.json","style/Comfortaa.ttf","style/app.css","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
 
 self.addEventListener("install", event => {
@@ -32,7 +32,7 @@ self.addEventListener("fetch", event => {
 		caches.open(cacheName).then(cache => 
 			cache.match(event.request).then(response => {
         const networkResponse = fetch(event.request).then(networkResponse => {
-					cache.put(event.request, networkResponse.clone());
+          if(response) cache.put(event.request, networkResponse.clone()); // only cache files previously in cache
 					return networkResponse;
 				}).catch(console.warn);
 				return response ?? networkResponse;

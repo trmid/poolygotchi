@@ -9,13 +9,8 @@
 <!-- Header -->
 <Header />
 
-<!-- Main -->
-<main class="margins">
-
-  <!-- Router -->
-	<Router {routes} on:routeLoaded={(e) => page.set(e.detail)} />
-
-</main>
+<!-- Router -->
+<Router {routes} on:routeLoaded={(e) => page.set(e.detail)} />
 
 <!-- Footer -->
 <Footer />

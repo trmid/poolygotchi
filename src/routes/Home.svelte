@@ -1,11 +1,13 @@
 <script type="ts">
   import Game from "../components/Game.svelte";
-  import Title from "../components/Title.svelte";
+  import Main from "../components/Main.svelte";
 </script>
 
-<section class="center-content">
+<Main>
+  <section class="center-content">
 
-  <!-- Game -->
-  <Game />
+    <!-- Game -->
+    <Game />
 
-</section>
+  </section>
+</Main>
