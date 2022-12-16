@@ -1,6 +1,6 @@
 
 <!-- Title -->
-<img id="title" src="./img/logo_stacked.svg" alt="pocket pooly" />
+<img id="title" src="./img/logo_stacked.svg" alt="poolygotchi" />
 
 <!-- Style -->
 <style>
