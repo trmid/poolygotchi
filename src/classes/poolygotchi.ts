@@ -3,7 +3,7 @@ import type { BigNumber } from "ethers";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
 import type { BaseAccount } from "./account";
 
-export class PocketPooly {
+export class Poolygotchi {
 
   /* Static vars */
   static chain: Chain = "op";
@@ -37,7 +37,7 @@ export class PocketPooly {
             }
           ],
           "indexed": false,
-          "internalType": "struct PocketPoolyHatchery.AssetLibrary",
+          "internalType": "struct PoolygotchiHatchery.AssetLibrary",
           "name": "environment",
           "type": "tuple"
         }
@@ -68,7 +68,7 @@ export class PocketPooly {
             }
           ],
           "indexed": false,
-          "internalType": "struct PocketPoolyHatchery.AssetLibrary",
+          "internalType": "struct PoolygotchiHatchery.AssetLibrary",
           "name": "species",
           "type": "tuple"
         }
@@ -234,7 +234,7 @@ export class PocketPooly {
           "type": "address"
         }
       ],
-      "name": "hasPocketPooly",
+      "name": "hasPoolygotchi",
       "outputs": [
         {
           "internalType": "bool",
@@ -338,7 +338,7 @@ export class PocketPooly {
           "type": "address"
         }
       ],
-      "name": "pocketPoolyOf",
+      "name": "PoolygotchiOf",
       "outputs": [
         {
           "components": [
@@ -378,7 +378,7 @@ export class PocketPooly {
               "type": "string"
             }
           ],
-          "internalType": "struct PocketPoolyHatchery.PocketPooly",
+          "internalType": "struct PoolygotchiHatchery.Poolygotchi",
           "name": "",
           "type": "tuple"
         }
@@ -462,16 +462,16 @@ export class PocketPooly {
 
   /* Functions */
   public rawData() {
-    return PocketPooly.pocketPoolyOf(this.address);
+    return Poolygotchi.PoolygotchiOf(this.address);
   }
 
   /* Static Functions */
   static contract = {
-    call: (method: string, args?: any[]) => WeaverFi[this.chain].query(PocketPooly.address, PocketPooly.abi, method, args ?? [])
+    call: (method: string, args?: any[]) => WeaverFi[this.chain].query(Poolygotchi.address, Poolygotchi.abi, method, args ?? [])
   }
 
-  static hasPocketPooly(address: Address): Promise<boolean> {
-    return this.contract.call("hasPocketPooly", [address]);
+  static hasPoolygotchi(address: Address): Promise<boolean> {
+    return this.contract.call("hasPoolygotchi", [address]);
   }
 
   static numSpecies(): Promise<BigNumber> {
@@ -490,13 +490,13 @@ export class PocketPooly {
     return this.contract.call("environmentURI", [environmentId]);
   }
 
-  static pocketPoolyOf(address: Address): Promise<BigNumber> {
-    return this.contract.call("pocketPoolyOf", [address]);
+  static PoolygotchiOf(address: Address): Promise<BigNumber> {
+    return this.contract.call("PoolygotchiOf", [address]);
   }
 
 }
 
-export class PocketPoolySigner extends PocketPooly {
+export class PoolygotchiSigner extends Poolygotchi {
 
   /* Private vars */
   private account: BaseAccount;

@@ -1,11 +1,11 @@
 
 <!-- Title -->
-<img id="title" src="./img/logo_stacked.svg" alt="pocket pooly" />
+<img id="title" src="./img/logo.svg" alt="poolygotchi" />
 
 <!-- Style -->
 <style>
   #title {
-    width: 350px;
+    width: 500px;
     max-width: 90%;
     font-size: 54px;
   }
