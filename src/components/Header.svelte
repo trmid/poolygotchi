@@ -22,7 +22,7 @@
 </header>
 
 <!-- Nav -->
-<!-- <Nav /> -->
+<Nav />
 
 <style>
   header {

@@ -1,8 +1,8 @@
-<p class="center-content svelte-snphpj" style="background-color: var(--c4); padding: 1rem; border-radius:1rem;">
+<!-- <p class="center-content svelte-snphpj" style="background-color: var(--c4); padding: 1rem; border-radius:1rem;">
   🚧 This app is currently under development 🚧
   <br>
   Please check back later for more information and updates!
-</p>
+</p> -->
 
 <section class="content-box" style:margin-bottom="2rem">
   <h2 class="center-content">About the Game</h2>
