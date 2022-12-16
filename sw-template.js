@@ -32,7 +32,7 @@ self.addEventListener("fetch", event => {
 		caches.open(cacheName).then(cache => 
 			cache.match(event.request).then(response => {
         const networkResponse = fetch(event.request).then(networkResponse => {
-					cache.put(event.request, networkResponse.clone());
+          if(response) cache.put(event.request, networkResponse.clone()); // only cache files previously in cache
 					return networkResponse;
 				}).catch(console.warn);
 				return response ?? networkResponse;
