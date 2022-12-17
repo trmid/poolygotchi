@@ -9,7 +9,6 @@ contract PoolygotchiHatchery is Ownable {
   // uint constant MAX_INT32 = 2**32 - 1;
   
   struct Poolygotchi {
-    uint256 goalStartBalance;
     uint256 goalAmountWeekly;
     uint64 goalStartDate;
     uint64 hatchDate;
@@ -24,7 +23,7 @@ contract PoolygotchiHatchery is Ownable {
   }
 
   event Hatch(address indexed pooler);
-  event SetGoal(address indexed pooler, uint256 startBalance, uint256 amountWeekly);
+  event SetGoal(address indexed pooler, uint256 amountWeekly);
   event Morph(address indexed pooler, uint64 speciesId);
   event Move(address indexed pooler, uint64 environmentId);
   event Name(address indexed pooler, string name);
@@ -77,7 +76,7 @@ contract PoolygotchiHatchery is Ownable {
     return _nextEnvironmentId;
   }
 
-  function PoolygotchiOf(address pooler) external view returns (Poolygotchi memory) {
+  function poolygotchiOf(address pooler) external view _hasPoolygotchi(_msgSender()) returns (Poolygotchi memory) {
     return _Poolygotchi[pooler];
   }
 
@@ -128,11 +127,10 @@ contract PoolygotchiHatchery is Ownable {
     emit AddEnvironment(id, _environment[id]);
   }
 
-  function setGoal(uint256 startBalance, uint256 amountWeekly) public _hasPoolygotchi(_msgSender()) {
-    _Poolygotchi[_msgSender()].goalStartBalance = startBalance;
+  function setGoal(uint256 amountWeekly) public _hasPoolygotchi(_msgSender()) {
     _Poolygotchi[_msgSender()].goalAmountWeekly = amountWeekly;
     _Poolygotchi[_msgSender()].goalStartDate = uint64(block.timestamp);
-    emit SetGoal(_msgSender(), startBalance, amountWeekly);
+    emit SetGoal(_msgSender(), amountWeekly);
   }
 
   function morphInto(uint64 speciesId) public
@@ -158,12 +156,12 @@ contract PoolygotchiHatchery is Ownable {
     emit Name(_msgSender(), name);
   }
 
-  function hatch(string memory name, uint64 speciesId, uint64 environmentId, uint256 startBalance, uint256 amountWeekly) external {
+  function hatch(string memory name, uint64 speciesId, uint64 environmentId, uint256 amountWeekly) external {
     require(!hasPoolygotchi(_msgSender()), "Hatchery: already hatched");
     setName(name);
     setEnvironment(environmentId);
     morphInto(speciesId);
-    setGoal(startBalance, amountWeekly);
+    setGoal(amountWeekly);
     _Poolygotchi[_msgSender()].hatchDate = uint64(block.timestamp);
     emit Hatch(_msgSender());
   }
