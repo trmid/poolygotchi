@@ -66,7 +66,7 @@ a:hover {
   text-decoration-color: var(--c3);
 }
 
-a.btn, button {
+.btn, button {
   min-width: 4rem;
   text-align: center;
   display: inline-block;
@@ -83,8 +83,8 @@ a.btn, button {
   outline: 1px solid #0004;
 }
 
-a.btn:hover, button:hover,
-a.btn.outline, button.outline {
+.btn:hover, button:hover,
+.btn.outline, button.outline {
   outline: 1px solid #fff4;
 }
 

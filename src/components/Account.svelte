@@ -14,7 +14,7 @@
 <script type="ts">
   import ifEnter from "../utils/key";
   import Address from "./Address.svelte";
-    import { connect } from "./ConnectOverlay.svelte";
+  import { connect } from "./ConnectOverlay.svelte";
 
   // UI Variables:
   let showAccountOptions = false;
@@ -32,7 +32,7 @@
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <img
     id="avatar"
-    class="border hover"
+    class="btn border hover"
     src="{$account.avatar}"
     alt="User Avatar"
     tabindex="0"
@@ -58,7 +58,9 @@
     gap: 0.5rem;
   }
   #avatar {
-    border-radius: 50%;
+    min-width: 0;
+    max-height: 100%;
+    padding: 0;
   }
   #avatar:hover {
     outline: 1px solid #fff4;
