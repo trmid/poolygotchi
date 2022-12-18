@@ -17,8 +17,8 @@
     import { connect } from "./ConnectOverlay.svelte";
 
   // UI Variables:
-  let showAccountInfo = false;
-  const toggleAccountInfo = (state = !showAccountInfo) => showAccountInfo = state;
+  let showAccountOptions = false;
+  const toggleAccountInfo = (state = !showAccountOptions) => showAccountOptions = state;
 </script>
 
 <!-- Window -->
@@ -29,11 +29,6 @@
 
 {#if $account}
 <div id="account">
-  {#if showAccountInfo}
-  <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
-    disconnect
-  </button>
-  {:else}
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <img
     id="avatar"
@@ -41,8 +36,13 @@
     src="{$account.avatar}"
     alt="User Avatar"
     tabindex="0"
-    on:click|stopPropagation={() => toggleAccountInfo(true)}
-    on:keydown|stopPropagation={ifEnter(() => toggleAccountInfo(true))}>
+    on:click|stopPropagation={() => toggleAccountInfo()}
+    on:keydown|stopPropagation={ifEnter(() => toggleAccountInfo())}>
+  {#if showAccountOptions}
+  <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
+    disconnect
+  </button>
+  {:else}
   <Address address={$account.address} />
   {/if}
 </div>
@@ -59,5 +59,9 @@
   }
   #avatar {
     border-radius: 50%;
+  }
+  #avatar:hover {
+    outline: 1px solid #fff4;
+    cursor: pointer;
   }
 </style>

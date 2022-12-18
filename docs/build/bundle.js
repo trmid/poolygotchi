@@ -46118,7 +46118,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		c: function create() {
     			button = element("button");
     			button.textContent = "connect";
-    			add_location(button, file$3, 46, 0, 1313);
+    			add_location(button, file$3, 46, 0, 1317);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -46152,14 +46152,19 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     // (27:0) {#if $account}
     function create_if_block(ctx) {
     	let div;
+    	let img;
+    	let img_src_value;
+    	let t;
     	let current_block_type_index;
     	let if_block;
     	let current;
+    	let mounted;
+    	let dispose;
     	const if_block_creators = [create_if_block_1, create_else_block];
     	const if_blocks = [];
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*showAccountInfo*/ ctx[0]) return 0;
+    		if (/*showAccountOptions*/ ctx[0]) return 0;
     		return 1;
     	}
 
@@ -46169,17 +46174,40 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	const block = {
     		c: function create() {
     			div = element("div");
+    			img = element("img");
+    			t = space();
     			if_block.c();
+    			attr_dev(img, "id", "avatar");
+    			attr_dev(img, "class", "border hover svelte-1obme4x");
+    			if (!src_url_equal(img.src, img_src_value = /*$account*/ ctx[1].avatar)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "User Avatar");
+    			attr_dev(img, "tabindex", "0");
+    			add_location(img, file$3, 29, 2, 872);
     			attr_dev(div, "id", "account");
-    			attr_dev(div, "class", "svelte-dzqqah");
-    			add_location(div, file$3, 27, 0, 785);
+    			attr_dev(div, "class", "svelte-1obme4x");
+    			add_location(div, file$3, 27, 0, 794);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
+    			append_dev(div, img);
+    			append_dev(div, t);
     			if_blocks[current_block_type_index].m(div, null);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(img, "click", stop_propagation(/*click_handler_1*/ ctx[5]), false, false, true),
+    					listen_dev(img, "keydown", stop_propagation(ifEnter(/*keydown_handler_1*/ ctx[6])), false, false, true)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, dirty) {
+    			if (!current || dirty & /*$account*/ 2 && !src_url_equal(img.src, img_src_value = /*$account*/ ctx[1].avatar)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
     			let previous_block_index = current_block_type_index;
     			current_block_type_index = select_block_type_1(ctx);
 
@@ -46218,6 +46246,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			if_blocks[current_block_type_index].d();
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -46232,15 +46262,10 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	return block;
     }
 
-    // (33:2) {:else}
+    // (42:2) {:else}
     function create_else_block(ctx) {
-    	let img;
-    	let img_src_value;
-    	let t;
     	let address;
     	let current;
-    	let mounted;
-    	let dispose;
 
     	address = new Address({
     			props: { address: /*$account*/ ctx[1].address },
@@ -46249,36 +46274,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	const block = {
     		c: function create() {
-    			img = element("img");
-    			t = space();
     			create_component(address.$$.fragment);
-    			attr_dev(img, "id", "avatar");
-    			attr_dev(img, "class", "border hover svelte-dzqqah");
-    			if (!src_url_equal(img.src, img_src_value = /*$account*/ ctx[1].avatar)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "User Avatar");
-    			attr_dev(img, "tabindex", "0");
-    			add_location(img, file$3, 34, 2, 1002);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, img, anchor);
-    			insert_dev(target, t, anchor);
     			mount_component(address, target, anchor);
     			current = true;
-
-    			if (!mounted) {
-    				dispose = [
-    					listen_dev(img, "click", stop_propagation(/*click_handler_2*/ ctx[6]), false, false, true),
-    					listen_dev(img, "keydown", stop_propagation(ifEnter(/*keydown_handler_1*/ ctx[7])), false, false, true)
-    				];
-
-    				mounted = true;
-    			}
     		},
     		p: function update(ctx, dirty) {
-    			if (!current || dirty & /*$account*/ 2 && !src_url_equal(img.src, img_src_value = /*$account*/ ctx[1].avatar)) {
-    				attr_dev(img, "src", img_src_value);
-    			}
-
     			const address_changes = {};
     			if (dirty & /*$account*/ 2) address_changes.address = /*$account*/ ctx[1].address;
     			address.$set(address_changes);
@@ -46293,11 +46295,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(img);
-    			if (detaching) detach_dev(t);
     			destroy_component(address, detaching);
-    			mounted = false;
-    			run_all(dispose);
     		}
     	};
 
@@ -46305,14 +46303,14 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(33:2) {:else}",
+    		source: "(42:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (29:2) {#if showAccountInfo}
+    // (38:2) {#if showAccountOptions}
     function create_if_block_1(ctx) {
     	let button;
     	let mounted;
@@ -46322,13 +46320,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		c: function create() {
     			button = element("button");
     			button.textContent = "disconnect";
-    			add_location(button, file$3, 29, 2, 830);
+    			add_location(button, file$3, 38, 2, 1140);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", stop_propagation(/*click_handler_1*/ ctx[5]), false, false, true);
+    				dispose = listen_dev(button, "click", stop_propagation(/*click_handler_2*/ ctx[7]), false, false, true);
     				mounted = true;
     			}
     		},
@@ -46346,7 +46344,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(29:2) {#if showAccountInfo}",
+    		source: "(38:2) {#if showAccountOptions}",
     		ctx
     	});
 
@@ -46469,8 +46467,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	$$self.$$.on_destroy.push(() => $$unsubscribe_account());
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Account', slots, []);
-    	let showAccountInfo = false;
-    	const toggleAccountInfo = (state = !showAccountInfo) => $$invalidate(0, showAccountInfo = state);
+    	let showAccountOptions = false;
+    	const toggleAccountInfo = (state = !showAccountOptions) => $$invalidate(0, showAccountOptions = state);
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -46479,9 +46477,9 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	const click_handler = () => toggleAccountInfo(false);
     	const keydown_handler = () => toggleAccountInfo(false);
-    	const click_handler_1 = () => disconnect().catch(console.error);
-    	const click_handler_2 = () => toggleAccountInfo(true);
-    	const keydown_handler_1 = () => toggleAccountInfo(true);
+    	const click_handler_1 = () => toggleAccountInfo();
+    	const keydown_handler_1 = () => toggleAccountInfo();
+    	const click_handler_2 = () => disconnect().catch(console.error);
     	const click_handler_3 = () => connect().catch(console.error);
 
     	$$self.$capture_state = () => ({
@@ -46492,13 +46490,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		ifEnter,
     		Address,
     		connect,
-    		showAccountInfo,
+    		showAccountOptions,
     		toggleAccountInfo,
     		$account
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('showAccountInfo' in $$props) $$invalidate(0, showAccountInfo = $$props.showAccountInfo);
+    		if ('showAccountOptions' in $$props) $$invalidate(0, showAccountOptions = $$props.showAccountOptions);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -46506,14 +46504,14 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	}
 
     	return [
-    		showAccountInfo,
+    		showAccountOptions,
     		$account,
     		toggleAccountInfo,
     		click_handler,
     		keydown_handler,
     		click_handler_1,
-    		click_handler_2,
     		keydown_handler_1,
+    		click_handler_2,
     		click_handler_3
     	];
     }
