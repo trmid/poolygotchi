@@ -1,8 +1,9 @@
 <script type="ts">
   import { link } from "svelte-spa-router";
   import { page } from "../routes";
-  import { onMount } from "svelte";
+  import Account from "./Account.svelte";
 
+  // Navigation Vars:
   let nav: HTMLElement | undefined;
   let stickyNav = false;
   let checkingSticky = false;
@@ -14,6 +15,9 @@
       requestAnimationFrame(() => checkingSticky = false);
     }
   };
+
+  // Connection Vars:
+
 </script>
 
 <!-- Event Listeners -->
@@ -21,6 +25,7 @@
 
 <!-- Navigation -->
 <nav class="margins" class:sticky={stickyNav} bind:this={nav}>
+  <Account/>
   <a class="btn" class:selected={$page?.location === "/"} href="/" use:link>play</a>
   <a class="btn" class:selected={$page?.location === "/about"} href="/about" use:link>about</a>
 </nav>
