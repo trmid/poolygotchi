@@ -16,6 +16,25 @@
   import Address from "./Address.svelte";
   import { connect } from "./ConnectOverlay.svelte";
 
+  // Update account avatar on resolution:
+  let avatarList: string[] = [];
+  $: $account && resolveAccountAvatar($account);
+  function resolveAccountAvatar(a: Account) {
+    avatarList = [];
+    a.allAvatars().then(avatars => {
+      if(a == $account) {
+        console.log("Fetched avatars:", avatars);
+        avatarList = avatars.map(x => x.url);
+        if(avatarList.length > 0) {
+          if($account.avatar !== avatarList[0]) {
+            console.log("Setting avatar from:", $account.avatar, "to:", avatarList[0]);
+            $account.avatar = avatarList[0];
+          }
+        }
+      }
+    }).catch(console.error);
+  }
+
   // UI Variables:
   let showAccountOptions = false;
   const toggleAccountInfo = (state = !showAccountOptions) => showAccountOptions = state;
@@ -29,6 +48,8 @@
 
 {#if $account}
 <div id="account">
+
+  <!-- Avatar Image -->
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <img
     id="avatar"
@@ -38,12 +59,23 @@
     tabindex="0"
     on:click|stopPropagation={() => toggleAccountInfo()}
     on:keydown|stopPropagation={ifEnter(() => toggleAccountInfo())}>
+
+  <!-- Account Options -->
   {#if showAccountOptions}
   <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
     disconnect
   </button>
   {:else}
-  <Address address={$account.address} />
+
+  <!-- Account Address -->
+  {#await $account.ensName()}
+  <Address address={$account.address}/>
+  {:then name}
+  <Address address={$account.address} {name}/>
+  {:catch err}
+  <Address address={$account.address}/>
+  {/await}
+
   {/if}
 </div>
 {:else}
@@ -59,7 +91,7 @@
   }
   #avatar {
     min-width: 0;
-    max-height: 100%;
+    width: 32px;
     padding: 0;
   }
   #avatar:hover {

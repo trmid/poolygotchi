@@ -12,6 +12,7 @@
 <!-- Component -->
 <script type="ts">
   export let address: string
+  export let name: string | null = null;
   let showCopyAlert = false;
   let copyAlertTimeout: undefined | NodeJS.Timeout;
   const copyAddress = () => {
@@ -25,7 +26,7 @@
 </script>
 
 <!-- Format address preview -->
-<button class="address monospace" title="copy" class:alert-copy={showCopyAlert} on:click={copyAddress}>{shortAddress(address)}</button>
+<button class="address monospace" title="copy" class:alert-copy={showCopyAlert} on:click={copyAddress}>{name ?? shortAddress(address)}</button>
 
 <!-- Style -->
 <style>
