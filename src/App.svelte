@@ -4,6 +4,7 @@
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
   import { page, routes } from "./routes";
+  import ConnectOverlay from "./components/ConnectOverlay.svelte";
 </script>
 
 <!-- Header -->
@@ -14,3 +15,6 @@
 
 <!-- Footer -->
 <Footer />
+
+<!-- Connect Overlay -->
+<ConnectOverlay />

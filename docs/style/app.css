@@ -38,6 +38,14 @@ body {
 h1 {
   font-size: 54px;
 }
+h3 {
+  background: linear-gradient(165deg, #fff4, #fff0);
+  color: var(--c3);
+  /* font-size: 24px; */
+  outline: 1px solid #fff5;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
 
 /* Content Box */
 .content-box {
@@ -58,14 +66,26 @@ a:hover {
   text-decoration-color: var(--c3);
 }
 
-a.btn {
-  width: 4rem;
+a.btn, button {
+  min-width: 4rem;
   text-align: center;
   display: inline-block;
   background-color: var(--c0);
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
   border-radius: 5px;
+  line-height: 1.5;
   padding: 7px 10px;
   text-decoration: none;
+  cursor: pointer;
+  outline: 1px solid #0004;
+}
+
+a.btn:hover, button:hover,
+a.btn.outline, button.outline {
+  outline: 1px solid #fff4;
 }
 
 /* Adds uniform margins and centers on parent */

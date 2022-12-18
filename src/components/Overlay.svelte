@@ -14,6 +14,7 @@
 
 <style>
   #overlay-bg {
+    isolation: isolate;
     position: fixed;
     inset: 0;
     background-color: #0004;
@@ -27,7 +28,7 @@
     max-height: calc(100vh - 1rem);
     padding: 1rem;
     border-radius: 1rem;
-    background-color: white;
+    background-color: var(--c0);
     box-shadow: 2px 2px 7px #0006;
   }
 </style>

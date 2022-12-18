@@ -18,8 +18,8 @@
   #container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin: 0.5rem;
+    gap: 1rem;
+    margin-top: 0.5rem;
   }
   #logo, #logo>:global(*) {
     width: 2rem;

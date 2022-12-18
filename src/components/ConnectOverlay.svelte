@@ -19,6 +19,7 @@
         };
         stopConnecting = (err: string | Error) => {
           if(get(connectionPromise)) {
+            console.log("Setting null");
             connectionPromise.set(null);
             reject(err instanceof Error ? err : new Error(err));
           }
@@ -34,13 +35,15 @@
 <!-- Component -->
 <script type="ts">
   import Overlay from "./Overlay.svelte";
-  import { SignClient } from "@walletconnect/sign-client/dist/types/client";
+  import SignClient from "@walletconnect/sign-client";
+  import { W3mModal } from "@web3modal/ui";
   import { Web3Modal } from "@web3modal/standalone";
   import { onDestroy } from "svelte";
   import WCAccount from "../utils/account/wc";
   import { ethers } from "ethers";
   import InjectedAccount from "../utils/account/injected";
-    import ConnectOption from "./ConnectOption.svelte";
+  import ConnectOption from "./ConnectOption.svelte";
+  if(!W3mModal) throw new Error("Missing W3mModal import! This is necessary for rollup iife bundle creation.");
 
   // Function to Close Overlay:
   const close = () => {
@@ -62,6 +65,29 @@
       signClientWC = await SignClient.init({
         projectId: walletConnectProjectId
       });
+      signClientWC.on("session_event", (event) => {
+        // Handle session events, such as "chainChanged", "accountsChanged", etc.
+        console.log(event);
+      });
+      signClientWC.on("session_update", ({ topic, params }) => {
+        try {
+          const { namespaces } = params;
+          const _session = signClientWC?.session.get(topic);
+          // Overwrite the `namespaces` of the existing session with the incoming one.
+          const updatedSession = { ..._session, namespaces };
+          console.log("Updated Session: ", updatedSession);
+        } catch(err) {
+          console.warn("Error during session_update for topic: ", topic);
+          console.error(err);
+        }
+      });
+      signClientWC.on("session_delete", () => {
+        console.log("Session Deleted!");
+        // Session was deleted -> reset the dapp state, clean up from user session, etc.
+        if($account instanceof WCAccount) {
+          $account = null;
+        }
+      });
     }
     const { uri, approval } = await signClientWC.connect({
       requiredNamespaces: {
@@ -78,27 +104,6 @@
         },
       },
     });
-    signClientWC.on("session_event", (event) => {
-      // Handle session events, such as "chainChanged", "accountsChanged", etc.
-      console.log(event);
-    });
-    signClientWC.on("session_update", ({ topic, params }) => {
-      try {
-        const { namespaces } = params;
-        const _session = signClientWC?.session.get(topic);
-        // Overwrite the `namespaces` of the existing session with the incoming one.
-        const updatedSession = { ..._session, namespaces };
-        console.log("Updated Session: ", updatedSession);
-      } catch(err) {
-        console.warn("Error during session_update for topic: ", topic);
-        console.error(err);
-      }
-    });
-    signClientWC.on("session_delete", () => {
-      console.log("Session Deleted!");
-      // Session was deleted -> reset the dapp state, clean up from user session, etc.
-      $account = null;
-    });
     try {
       if (uri) {
         web3Modal.openModal({ uri, standaloneChains: chainList });
@@ -107,7 +112,7 @@
       }
       const session = await approval();
       console.log(session);
-      $account = new WCAccount(signClientWC, session);
+      resolveConnection(new WCAccount(signClientWC, session));
     } catch(err) {
       console.error(err);
     } finally {
@@ -145,14 +150,16 @@
     //   }
     //   throw new Error("Not connected to Avalanche Chain...");
     // }
-    $account = new InjectedAccount(signer, await signer.getAddress());
+    resolveConnection(new InjectedAccount(signer, await signer.getAddress()));
     // Also check if we are synced with the network and signer changes:
     if(!$injectedSynced) {
       try {
         // Update signer on account change:
         ethereum.on("accountsChanged", async () => {
-          $account?.disconnect();
-          await connectInjected().catch(console.error);
+          if($account instanceof InjectedAccount) {
+            $account?.disconnect();
+            await connectInjected().catch(console.error);
+          }
         });
         // Reload page on network change:
         // const provider = new ethers.providers.JsonRpcProvider(network.rpcUrls[0], network);

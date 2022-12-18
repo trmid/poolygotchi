@@ -1,14 +1,22 @@
 <script type="ts">
   import Screen from "./Screen.svelte";
+
+  const interact = async () => {
+    try {
+      console.log("interacted");
+    } catch (err) {
+      console.error(err);
+    }
+  }
 </script>
 
 <!-- Device Container -->
 <div id="device">
   <Screen />
   <div id="buttons">
-    <div title="Home" id="home-btn" class="btn"><i class="icofont-ui-home" /></div>
-    <div title="Interact!" id="interact-btn" class="btn"><i class="icofont-comment" /></div>
-    <div title="Menu" id="menu-btn" class="btn"><i class="icofont-navigation-menu" /></div>
+    <button title="Home" id="home-btn"><i class="icofont-ui-home" /></button>
+    <button title="Interact!" id="interact-btn" on:click={interact}><i class="icofont-comment" /></button>
+    <button title="Menu" id="menu-btn"><i class="icofont-navigation-menu" /></button>
   </div>
 </div>
 
@@ -35,13 +43,15 @@
     align-items: center;
   }
 
-  .btn {
+  #buttons > button {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 120%;
     width: 36px;
+    min-width: 0;
+    padding: 0;
     height: 36px;
     color: var(--c0);
     background-color: var(--c3);
@@ -51,7 +61,7 @@
     cursor: pointer;
   }
 
-  .btn:active {
+  #buttons > button:active {
     background: var(--tri-gradient);
   }
 

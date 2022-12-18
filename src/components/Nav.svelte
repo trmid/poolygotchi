@@ -26,13 +26,15 @@
 <!-- Navigation -->
 <nav class="margins" class:sticky={stickyNav} bind:this={nav}>
   <Account/>
-  <a class="btn" class:selected={$page?.location === "/"} href="/" use:link>play</a>
-  <a class="btn" class:selected={$page?.location === "/about"} href="/about" use:link>about</a>
+  <a class="btn" class:outline={$page?.location === "/"} href="/" use:link>play</a>
+  <a class="btn" class:outline={$page?.location === "/about"} href="/about" use:link>about</a>
 </nav>
 
 <!-- Style -->
 <style>
   nav {
+    isolation: isolate;
+    z-index: 10;
     position: relative;
     display: flex;
     justify-content: center;
@@ -56,14 +58,6 @@
 
   nav.sticky::before {
     opacity: 1;
-  }
-
-  nav.sticky a.btn:not(.selected) {
-    outline: 1px solid #0005;
-  }
-
-  a.btn.selected {
-    outline: 1px solid #fff5;
   }
 
   @media screen and (min-width: 720px) {
