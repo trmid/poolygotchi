@@ -27,7 +27,6 @@
         avatarList = avatars.map(x => x.url);
         if(avatarList.length > 0) {
           if($account.avatar !== avatarList[0]) {
-            console.log("Setting avatar from:", $account.avatar, "to:", avatarList[0]);
             $account.avatar = avatarList[0];
           }
         }
@@ -91,7 +90,7 @@
   }
   #avatar {
     min-width: 0;
-    width: 32px;
+    max-height: 38px;
     padding: 0;
   }
   #avatar:hover {
