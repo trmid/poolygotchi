@@ -12,6 +12,7 @@
   --c4: #E85D75;
 
   --shadow-color: #0004;
+  --box-shadow: 2px 2px 7px var(--shadow-color);
 
   --bg-gradient: linear-gradient(165deg, var(--c0), var(--c1));
   --tri-gradient: linear-gradient(-65deg, var(--c2), var(--c3), var(--c4));

@@ -36,17 +36,17 @@
 
   // UI Variables:
   let showAccountOptions = false;
-  const toggleAccountInfo = (state = !showAccountOptions) => showAccountOptions = state;
+  const toggleAccountOptions = (state = !showAccountOptions) => showAccountOptions = state;
 </script>
 
 <!-- Window -->
 <svelte:window
-  on:click={() => toggleAccountInfo(false)}
-  on:keydown={ifEnter(() => toggleAccountInfo(false))}
+  on:click={() => toggleAccountOptions(false)}
+  on:keydown={ifEnter(() => toggleAccountOptions(false))}
 />
 
 {#if $account}
-<div id="account">
+<div id="account" class:raised={showAccountOptions}>
 
   <!-- Avatar Image -->
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -56,26 +56,32 @@
     src="{$account.avatar}"
     alt="User Avatar"
     tabindex="0"
-    on:click|stopPropagation={() => toggleAccountInfo()}
-    on:keydown|stopPropagation={ifEnter(() => toggleAccountInfo())}>
+    title="account"
+    on:click|stopPropagation={() => toggleAccountOptions()}
+    on:keydown|stopPropagation={ifEnter(() => toggleAccountOptions())}>
 
   <!-- Account Options -->
   {#if showAccountOptions}
-  <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
-    disconnect
-  </button>
-  {:else}
+  <div id="options" on:click|stopPropagation on:keydown|stopPropagation>
 
-  <!-- Account Address -->
-  {#await $account.ensName()}
-  <Address address={$account.address}/>
-  {:then name}
-  <Address address={$account.address} {name}/>
-  {:catch err}
-  <Address address={$account.address}/>
-  {/await}
+    <!-- Account Address -->
+    <div id="address">
+      {#await $account.ensName()}
+      <Address address={$account.address}/>
+      {:then name}
+      <Address address={$account.address} {name}/>
+      {:catch err}
+      <Address address={$account.address}/>
+      {/await}
+    </div>
 
+    <!-- Disconnect -->
+    <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
+      disconnect
+    </button>
+  </div>
   {/if}
+
 </div>
 {:else}
 <button on:click={() => connect().catch(console.error)}>connect</button>
@@ -84,17 +90,38 @@
 <!-- Style -->
 <style>
   #account {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    --avatar-height: 38px;
+  }
+  #account.raised {
+    z-index: 2;
   }
   #avatar {
     min-width: 0;
-    max-height: 38px;
+    max-height: var(--avatar-height);
     padding: 0;
   }
   #avatar:hover {
     outline: 1px solid #fff4;
     cursor: pointer;
+  }
+  #options {
+    position: absolute;
+    z-index: -1;
+    padding: 0.5rem;
+    left: -0.5rem;
+    top: -0.5rem;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--c0);
+  }
+  #address {
+    margin-left: calc(0.5rem + var(--avatar-height));
   }
 </style>
