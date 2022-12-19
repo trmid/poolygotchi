@@ -23,8 +23,8 @@ export abstract class BaseAccount {
     const storageID = `avatar:${this.address.toLowerCase()}`;
     return localStorage.getItem(storageID);
   }
-  async ensName(): Promise<string | null> {
-    return await WeaverFi.eth.lookupENS(this.address as Address);
+  ensName() {
+    return BaseAccount.ensName(this.address);
   }
   async ensAvatar(): Promise<string | null> {
     const name = await this.ensName();
@@ -119,6 +119,23 @@ export abstract class BaseAccount {
     // Return avatars:
     return avatars.sort((a, b) => b.weight - a.weight);
   }
+
+  /* Static functions */
+  static async ensName(address: string, { useCache = false } = {}) {
+    const cacheKey = `ens-name-${address.toLowerCase()}`;
+    const promise = WeaverFi.eth.lookupENS(address as Address).then(name => {
+      if(name) {
+        localStorage.setItem(cacheKey, name);
+      }
+      return name;
+    });
+    if(useCache) {
+      const name = localStorage.getItem(cacheKey);
+      if(name) return name;
+    }
+    return await promise;
+  }
+
 }
 
 export default interface Account {
