@@ -15,18 +15,19 @@
   import ifEnter from "../utils/key";
   import Address from "./Address.svelte";
   import { connect } from "./ConnectOverlay.svelte";
+  import Overlay from "./Overlay.svelte";
 
   // Update account avatar on resolution:
   let avatarList: string[] = [];
   $: $account && resolveAccountAvatar($account);
   function resolveAccountAvatar(a: Account) {
-    avatarList = [];
     a.allAvatars().then(avatars => {
       if(a == $account) {
         console.log("Fetched avatars:", avatars);
+        // Set avatar to highest weight uri (if not set before)
         avatarList = avatars.map(x => x.url);
         if(avatarList.length > 0) {
-          if($account.avatar !== avatarList[0]) {
+          if(!$account.storedAvatar && avatarList[0] !== $account.defaultAvatar) {
             $account.avatar = avatarList[0];
           }
         }
@@ -36,6 +37,7 @@
 
   // UI Variables:
   let showAccountOptions = false;
+  let showAvatarSelector = false;
   const toggleAccountOptions = (state = !showAccountOptions) => showAccountOptions = state;
 </script>
 
@@ -75,8 +77,13 @@
       {/await}
     </div>
 
+    <!-- Avatar Change -->
+    <button on:click={() => showAvatarSelector = true}>
+      change avatar
+    </button>
+
     <!-- Disconnect -->
-    <button on:click|stopPropagation={() => disconnect().catch(console.error)}>
+    <button on:click={() => disconnect().catch(console.error)}>
       disconnect
     </button>
   </div>
@@ -85,6 +92,23 @@
 </div>
 {:else}
 <button on:click={() => connect().catch(console.error)}>connect</button>
+{/if}
+
+<!-- Avatar Selector -->
+{#if showAvatarSelector}
+<Overlay close={() => showAvatarSelector = false} width={300}>
+  <h3>select an avatar</h3>
+  <p>
+    <i>{avatarList.length} option{avatarList.length > 1 ? 's' : ''} found</i>
+  </p>
+  <div id="avatar-selector">
+    {#each avatarList as avatar, i}
+      <button class="avatar-option" on:click={() => $account && ($account.avatar = avatar) && (showAvatarSelector = false)} class:selected={avatar === $account?.avatar}>
+        <img src={avatar} alt="avatar option #{i}">
+      </button>
+    {/each}
+  </div>
+</Overlay>
 {/if}
 
 <!-- Style -->
@@ -120,8 +144,31 @@
     gap: 0.5rem;
     border-radius: 0.5rem;
     background-color: var(--c0);
+    width: max-content;
   }
   #address {
     margin-left: calc(0.5rem + var(--avatar-height));
+  }
+  #avatar-selector {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .avatar-option {
+    padding: 0;
+    min-width: 0;
+    background: var(--bg-gradient);
+    overflow: hidden;
+  }
+  .avatar-option > img {
+    display: block;
+    width: 38px;
+    height: 38px;
+  }
+  .avatar-option.selected {
+    outline: 2px solid var(--c2);
   }
 </style>

@@ -1,4 +1,4 @@
-const cacheName = `0.1.4`; // Change value to force update
+const cacheName = `0.1.5`; // Change value to force update
 const filesToCache = `["./","build/bundle.js","build/bundle.css","archive/banner.png","archive/birb.png","archive/poolygotchi_concept_art.png","archive/poolygotchi_project_proposal.pdf","assets/environments/0-living-room/environment.png","assets/species/0-pooly/crying.gif","assets/species/0-pooly/happy.gif","assets/species/0-pooly/neutral.gif","assets/species/0-pooly/sad.gif","assets/species/0-pooly/sleeping.gif","assets/species/0-pooly/walking.gif","build/bundle.js.map","CNAME","favicon.png","files/poolygotchi_project_proposal_v1.2.pdf","img/banner.png","img/banner.svg","img/icon.svg","img/logo.svg","img/logo_jp.png","img/logo_jp.svg","img/logo_jp_desktop.png","img/logo_jp_desktop.svg","img/pocket_pooly_logo.png","img/pocket_pooly_logo.svg","img/wc_logo.svg","index.html","manifest.json","scripts/ipfs.min.js","style/app.css","style/Comfortaa.ttf","style/icofont/fonts/icofont.woff","style/icofont/fonts/icofont.woff2","style/icofont/icofont.min.css"]`; // Generated filenames as string array
 
 self.addEventListener("install", event => {

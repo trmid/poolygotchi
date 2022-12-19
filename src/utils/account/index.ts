@@ -17,7 +17,7 @@ export abstract class BaseAccount {
     localStorage.setItem(`avatar:${this.address.toLowerCase()}`, url);
   }
   get defaultAvatar() {
-    return createIcon({ seed: this.address.toLowerCase() }).toDataURL() as string;
+    return createIcon({ seed: this.address.toLowerCase(), scale: 8 }).toDataURL() as string;
   }
   get storedAvatar() {
     const storageID = `avatar:${this.address.toLowerCase()}`;
