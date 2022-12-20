@@ -2,3 +2,4 @@
 /docs/build/bundle.js.map
 /.vscode/
 .DS_Store
+/temp/
