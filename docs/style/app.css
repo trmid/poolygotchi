@@ -20,11 +20,14 @@
 
 /* HTML & Body */
 html {
-  min-height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
   background-color: #2900C0;
   background: var(--bg-gradient);
   background-attachment: fixed;
   color: var(--c3);
+  overflow-x: hidden;
 }
 
 html,
@@ -33,6 +36,13 @@ body {
   padding: 0;
   font-family: Comfortaa, sans-serif;
   line-height: 1.3;
+}
+
+body {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 /* Headers */

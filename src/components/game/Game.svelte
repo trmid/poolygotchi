@@ -30,6 +30,7 @@
 
 <!-- Device Container -->
 <div id="device">
+  <div class="case" />
   <Screen />
   <Buttons buttons={$buttons} />
 </div>
@@ -43,17 +44,17 @@
     margin: 1rem 0;
   }
 
-  /* #device::before {
-    content: "";
+  #device > .case {
     position: absolute;
     z-index: -1;
     background-color: var(--c0);
+    background: linear-gradient(0deg, #0000 5%, #fff2 40%, #fff2 60%, #0000 95%);
     border-radius: 50%;
     top: -30%;
-    bottom: -20%;
-    left: -40%;
-    right: -40%;
-  } */
+    bottom: -15%;
+    left: -35%;
+    right: -35%;
+  }
 
   @media screen and (max-width: 320px) {
     #device {

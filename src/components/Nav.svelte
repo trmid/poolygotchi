@@ -21,7 +21,7 @@
 </script>
 
 <!-- Event Listeners -->
-<svelte:window on:scroll={checkSticky} />
+<svelte:body on:scroll={checkSticky} />
 
 <!-- Navigation -->
 <nav class="margins" class:sticky={stickyNav} bind:this={nav}>

@@ -2480,7 +2480,7 @@ var app = (function () {
 
     			add_location(h3, file$f, 10, 2, 283);
     			attr_dev(div, "id", "menu");
-    			attr_dev(div, "class", "svelte-riduy2");
+    			attr_dev(div, "class", "svelte-htz5kw");
     			add_location(div, file$f, 9, 0, 265);
     		},
     		l: function claim(nodes) {
@@ -2960,9 +2960,11 @@ var app = (function () {
     const file$c = "src/components/game/Game.svelte";
 
     function create_fragment$d(ctx) {
-    	let div;
+    	let div1;
+    	let div0;
+    	let t0;
     	let screen;
-    	let t;
+    	let t1;
     	let buttons_1;
     	let current;
     	screen = new Screen({ $$inline: true });
@@ -2974,22 +2976,28 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			t0 = space();
     			create_component(screen.$$.fragment);
-    			t = space();
+    			t1 = space();
     			create_component(buttons_1.$$.fragment);
-    			attr_dev(div, "id", "device");
-    			attr_dev(div, "class", "svelte-uohl47");
-    			add_location(div, file$c, 25, 0, 1078);
+    			attr_dev(div0, "class", "case svelte-1l8jceb");
+    			add_location(div0, file$c, 26, 2, 1098);
+    			attr_dev(div1, "id", "device");
+    			attr_dev(div1, "class", "svelte-1l8jceb");
+    			add_location(div1, file$c, 25, 0, 1078);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(screen, div, null);
-    			append_dev(div, t);
-    			mount_component(buttons_1, div, null);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t0);
+    			mount_component(screen, div1, null);
+    			append_dev(div1, t1);
+    			mount_component(buttons_1, div1, null);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -3009,7 +3017,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			destroy_component(screen);
     			destroy_component(buttons_1);
     		}
@@ -61478,11 +61486,12 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     const file$2 = "src/components/Nav.svelte";
 
     function create_fragment$3(ctx) {
+    	let t0;
     	let nav_1;
     	let account;
-    	let t0;
+    	let t1;
     	let a0;
-    	let t2;
+    	let t3;
     	let a1;
     	let current;
     	let mounted;
@@ -61491,42 +61500,44 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	const block = {
     		c: function create() {
+    			t0 = space();
     			nav_1 = element("nav");
     			create_component(account.$$.fragment);
-    			t0 = space();
+    			t1 = space();
     			a0 = element("a");
     			a0.textContent = "play";
-    			t2 = space();
+    			t3 = space();
     			a1 = element("a");
     			a1.textContent = "about";
     			attr_dev(a0, "class", "btn");
     			attr_dev(a0, "href", "/");
     			toggle_class(a0, "outline", /*$page*/ ctx[2]?.location === "/");
-    			add_location(a0, file$2, 24, 2, 655);
+    			add_location(a0, file$2, 24, 2, 653);
     			attr_dev(a1, "class", "btn");
     			attr_dev(a1, "href", "/about");
     			toggle_class(a1, "outline", /*$page*/ ctx[2]?.location === "/about");
-    			add_location(a1, file$2, 25, 2, 739);
+    			add_location(a1, file$2, 25, 2, 737);
     			attr_dev(nav_1, "class", "margins svelte-1aqsiax");
     			toggle_class(nav_1, "sticky", /*stickyNav*/ ctx[1]);
-    			add_location(nav_1, file$2, 22, 0, 577);
+    			add_location(nav_1, file$2, 22, 0, 575);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
+    			insert_dev(target, t0, anchor);
     			insert_dev(target, nav_1, anchor);
     			mount_component(account, nav_1, null);
-    			append_dev(nav_1, t0);
+    			append_dev(nav_1, t1);
     			append_dev(nav_1, a0);
-    			append_dev(nav_1, t2);
+    			append_dev(nav_1, t3);
     			append_dev(nav_1, a1);
     			/*nav_1_binding*/ ctx[4](nav_1);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(window, "scroll", /*checkSticky*/ ctx[3], false, false, false),
+    					listen_dev(document.body, "scroll", /*checkSticky*/ ctx[3], false, false, false),
     					action_destroyer(link.call(null, a0)),
     					action_destroyer(link.call(null, a1))
     				];
@@ -61557,6 +61568,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(nav_1);
     			destroy_component(account);
     			/*nav_1_binding*/ ctx[4](null);
