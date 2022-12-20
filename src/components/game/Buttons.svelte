@@ -1,19 +1,14 @@
 <!-- Component -->
 <script type="ts">
-  const interact = async () => {
-    try {
-      console.log("interacted");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  import type { DeviceButtons } from "./game";
+  export let buttons: DeviceButtons;
 </script>
 
 <!-- Content -->
 <div id="buttons">
-  <button title="Home" id="home-btn"><i class="icofont-ui-home" /></button>
-  <button title="Interact!" id="interact-btn" on:click={interact}><i class="icofont-comment" /></button>
-  <button title="Menu" id="menu-btn"><i class="icofont-navigation-menu" /></button>
+  <button title={buttons.left.title} id="left-btn" on:click={buttons.left.action}><i class={buttons.left.class} /></button>
+  <button title={buttons.middle.title} id="middle-btn" on:click={buttons.middle.action}><i class={buttons.middle.class} /></button>
+  <button title={buttons.right.title} id="right-btn" on:click={buttons.right.action}><i class={buttons.right.class} /></button>
 </div>
 
 <!-- Style -->
@@ -49,7 +44,7 @@
     background: var(--tri-gradient);
   }
 
-  #interact-btn {
+  #middle-btn {
     top: 20%;
     scale: 1.1;
   }

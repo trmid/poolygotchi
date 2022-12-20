@@ -1,8 +1,18 @@
-<script type="ts"></script>
+<!-- Component -->
+<script type="ts">
+  import { showMenu } from "./Game.svelte";
+  import Menu from "./Menu.svelte";
+</script>
 
 <!-- Screen -->
 <div id="screen">
 
+  <!-- Game elements go here -->
+
+  <!-- Menu -->
+  {#if $showMenu}
+    <Menu />
+  {/if}
 </div>
 
 <!-- Style -->
@@ -17,5 +27,6 @@
     border: 3px solid var(--c0);
     outline: 3px solid var(--c3);
     box-sizing: border-box;
+    overflow: hidden;
   }
 </style>
