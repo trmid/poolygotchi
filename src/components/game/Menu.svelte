@@ -27,7 +27,6 @@
     align-items: stretch;
     gap: 0.5rem;
     padding: 0.5rem;
-    background-color: var(--c0);
-    opacity: 0.8;
+    background-color: #0004;
   }
 </style>
