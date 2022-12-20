@@ -25,6 +25,7 @@
 <!-- Style -->
 <style>
   button:focus {
+    background: var(--bg-gradient);
     outline: 1px solid var(--c3);
     animation-name: outline-pulse;
     animation-duration: 1.2s;

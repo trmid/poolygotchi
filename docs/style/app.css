@@ -158,7 +158,7 @@ a:hover {
 @keyframes outline-pulse {
   0% {
     outline-width: 1px;
-    outline-color: var(--c1);
+    outline-color: var(--c3);
   }
   50% {
     outline-width: 5px;
@@ -166,6 +166,6 @@ a:hover {
   }
   100% {
     outline-width: 1px;
-    outline-color: var(--c1);
+    outline-color: var(--c3);
   }
 }

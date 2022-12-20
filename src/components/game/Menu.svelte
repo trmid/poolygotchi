@@ -6,10 +6,18 @@
   const asButton = (component: UIComponent): UIButton => {
     if(component.type === "button") return component as UIButton;
     throw new Error("expected button");
-  }
+  };
+
+  const keyDown = (e: KeyboardEvent) => {
+    if(e.key === "ArrowUp") {
+      $menuSelectedIndex = Math.max(0, $menuSelectedIndex - 1);
+    } else if(e.key === "ArrowDown") {
+      $menuSelectedIndex = Math.min($menuComponents.length - 1, $menuSelectedIndex + 1);
+    }
+  };
 </script>
 
-<div id="menu">
+<div id="menu" on:keydown={keyDown}>
   <h3>menu</h3>
   {#each $menuComponents as component, i}
   {#if component.type === "button"}
