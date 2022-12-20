@@ -3,6 +3,7 @@ import { Contract, ethers } from "ethers";
 import WeaverFi, { Address } from "weaverfi";
 import { providers } from "weaverfi/dist/functions";
 import erc721 from "../../solidity/node_modules/@openzeppelin/contracts/build/contracts/ERC721.json";
+import { Poolygotchi } from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
 
 export abstract class BaseAccount {
@@ -119,6 +120,13 @@ export abstract class BaseAccount {
     // Return avatars:
     return avatars.sort((a, b) => b.weight - a.weight);
   }
+  async poolygotchi(): Promise<Poolygotchi | null> {
+    if(await Poolygotchi.hasPoolygotchi(this.address)) {
+      return new Poolygotchi(this.address);
+    } else {
+      return null;
+    }
+  }
 
   /* Static functions */
   static async ensName(address: string, { useCache = false } = {}) {
@@ -151,4 +159,5 @@ export default interface Account {
   ensAvatar(): Promise<string | null>
   poolyAvatars(): Promise<string[]>
   allAvatars(): Promise<{ url: string, weight: number }[]>
+  poolygotchi(): Promise<Poolygotchi | null>
 }
