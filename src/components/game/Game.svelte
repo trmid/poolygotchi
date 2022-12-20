@@ -18,6 +18,16 @@
     right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
   });
 
+  /* Helper Functions */
+  export function selectMenuComponent(component: UIComponent) {
+    const index = get(menuComponents).indexOf(component);
+    if(index > -1) {
+      menuSelectedIndex.set(index);
+    } else {
+      throw new Error("Selecting non-existent component");
+    }
+  }
+
 </script>
 
 <!-- Component -->

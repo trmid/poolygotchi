@@ -154,3 +154,18 @@ a:hover {
 :not(.classic-scroll)::-webkit-scrollbar-track {
   border-radius: 3px;
 }
+
+@keyframes outline-pulse {
+  0% {
+    outline-width: 1px;
+    outline-color: var(--c1);
+  }
+  50% {
+    outline-width: 5px;
+    outline-color: var(--c3);
+  }
+  100% {
+    outline-width: 1px;
+    outline-color: var(--c1);
+  }
+}

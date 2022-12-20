@@ -11,9 +11,9 @@
 
 <div id="menu">
   <h3>menu</h3>
-  {#each $menuComponents as component}
+  {#each $menuComponents as component, i}
   {#if component.type === "button"}
-  <UIButtonSvelte button={asButton(component)} />
+  <UIButtonSvelte button={asButton(component)} selected={$menuSelectedIndex == i} />
   {/if}
   {/each}
 </div>
