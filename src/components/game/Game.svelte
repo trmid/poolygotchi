@@ -3,7 +3,7 @@
   import type { UIComponent, DeviceButtons, UIButton } from "./game";
 
   /* Game State Stores */
-  export const account = writable<Account | null>(null);
+  export const poolygotchi = writable<Poolygotchi | null>(null);
   export const viewingAsGuest = writable(false);
   export const menuComponents = writable<UIComponent[]>([
     { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
@@ -36,6 +36,7 @@
   import Buttons from "./Buttons.svelte";
   import { get, writable } from "svelte/store";
   import type Account from "../../utils/account";
+    import type { Poolygotchi } from "../../utils/poolygotchi";
 </script>
 
 <!-- Device Container -->

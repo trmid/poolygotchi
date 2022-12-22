@@ -1,7 +1,8 @@
 import WeaverFi from "weaverfi";
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
-import type { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
+import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 
 export class Poolygotchi {
 
@@ -19,37 +20,15 @@ export class Poolygotchi {
   }
 
   /* Functions */
-  public rawData() {
-    return Poolygotchi.PoolygotchiOf(this.address);
+  public rawData(): Promise<PoolygotchiHatchery.PoolygotchiStructOutput> {
+    return Poolygotchi.function("poolygotchiOf")(this.address);
   }
 
   /* Static Functions */
-  static contract = {
-    call: (method: string, args?: any[]) => WeaverFi[this.chain].query(Poolygotchi.address, Poolygotchi.abi as ABI, method, args ?? [])
-  }
-
-  static hasPoolygotchi(address: string): Promise<boolean> {
-    return this.contract.call("hasPoolygotchi", [address]);
-  }
-
-  static numSpecies(): Promise<BigNumber> {
-    return this.contract.call("numSpecies");
-  }
-
-  static numEnvironments(): Promise<BigNumber> {
-    return this.contract.call("numEnvironments");
-  }
-
-  static speciesURI(speciesId: BigNumber) {
-    return this.contract.call("speciesURI", [speciesId]);
-  }
-
-  static environmentURI(environmentId: BigNumber) {
-    return this.contract.call("environmentURI", [environmentId]);
-  }
-
-  static PoolygotchiOf(address: string): Promise<BigNumber> {
-    return this.contract.call("PoolygotchiOf", [address]);
+  static function<T extends keyof PoolygotchiHatchery["functions"]>(method: T) {
+    return <PoolygotchiHatchery[T]>((...args: any) => {
+      WeaverFi[this.chain].query(Poolygotchi.address, Poolygotchi.abi as ABI, method, args ?? []);
+    });
   }
 
 }

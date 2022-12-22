@@ -121,7 +121,7 @@ export abstract class BaseAccount {
     return avatars.sort((a, b) => b.weight - a.weight);
   }
   async poolygotchi(): Promise<Poolygotchi | null> {
-    if(await Poolygotchi.hasPoolygotchi(this.address)) {
+    if(await Poolygotchi.function("hasPoolygotchi")(this.address)) {
       return new Poolygotchi(this.address);
     } else {
       return null;
