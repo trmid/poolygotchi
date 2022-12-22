@@ -40,7 +40,7 @@ contract PoolygotchiHatchery is Ownable {
   constructor() Ownable() { }
 
   modifier validWhitelist(address whitelist) {
-    require(IWhitelist(whitelist).supportsInterface(type(IWhitelist).interfaceId) || whitelist == address(0), "Hatchery: invalid whitelist");
+    require(whitelist == address(0) || IWhitelist(whitelist).supportsInterface(type(IWhitelist).interfaceId), "Hatchery: invalid whitelist");
     _;
   }
 
