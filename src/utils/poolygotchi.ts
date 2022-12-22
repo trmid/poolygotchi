@@ -1,6 +1,5 @@
 import WeaverFi from "weaverfi";
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
-import { ethers } from "ethers";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 
@@ -12,7 +11,8 @@ export class Poolygotchi {
   static abi = hatcheryInfo.abi;
 
   /* Private vars */
-  private address: string;
+  public readonly address: string;
+  private dataCache: PoolygotchiHatchery.PoolygotchiStructOutput | null = null;
 
   /* Constructor */
   constructor(address: string) {
@@ -20,8 +20,13 @@ export class Poolygotchi {
   }
 
   /* Functions */
-  public rawData(): Promise<PoolygotchiHatchery.PoolygotchiStructOutput> {
-    return Poolygotchi.function("poolygotchiOf")(this.address);
+  public async data({ useCache = true } = {}): Promise<PoolygotchiHatchery.PoolygotchiStructOutput> {
+    if(!this.dataCache || !useCache) this.dataCache = await Poolygotchi.function("poolygotchiOf")(this.address);
+    return this.dataCache;
+  }
+
+  public async healthFactor() {
+    return 1;
   }
 
   /* Static Functions */

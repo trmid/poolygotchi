@@ -1,6 +1,8 @@
 <!-- Module -->
 <script type="ts" context="module">
   import type { UIComponent, DeviceButtons, UIButton } from "./game";
+  import { get, writable } from "svelte/store";
+  import type { Poolygotchi } from "../../utils/poolygotchi";
 
   /* Game State Stores */
   export const poolygotchi = writable<Poolygotchi | null>(null);
@@ -34,9 +36,6 @@
 <script type="ts">
   import Screen from "./Screen.svelte";
   import Buttons from "./Buttons.svelte";
-  import { get, writable } from "svelte/store";
-  import type Account from "../../utils/account";
-    import type { Poolygotchi } from "../../utils/poolygotchi";
 </script>
 
 <!-- Device Container -->

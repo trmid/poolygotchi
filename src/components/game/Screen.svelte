@@ -1,10 +1,9 @@
 <!-- Component -->
 <script type="ts">
   import { showMenu } from "./Game.svelte";
-  import Menu from "./Menu.svelte";
   import { poolygotchi } from "./Game.svelte";
-  import { Poolygotchi } from "../../utils/poolygotchi";
-  import { normalizeImageURI } from "../../utils/uri";
+  import Menu from "./Menu.svelte";
+  import Environment from "./Environment.svelte";
 </script>
 
 <!-- Screen -->
@@ -12,12 +11,14 @@
 
   <!-- Game elements go here -->
   {#if $poolygotchi}
-    {#await $poolygotchi.rawData() then data}
-      {#await Poolygotchi.function("environmentURI")(data.environmentId) then uri}
-        {#await normalizeImageURI(uri + "/environment.png", "image/png") then environmentImageURI}
-        <img id="background" src="{environmentImageURI}" alt="background environment" />
-        {/await}
-      {/await}
+    {#await $poolygotchi.data() then data}
+
+      <!-- Environment -->
+      <Environment environmentId={data.environmentId} />
+
+      <!-- Poolygotchi -->
+
+
     {/await}
   {/if}
 
@@ -43,12 +44,5 @@
     outline: 3px solid var(--c3);
     box-sizing: border-box;
     overflow: hidden;
-  }
-
-  #background {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
   }
 </style>
