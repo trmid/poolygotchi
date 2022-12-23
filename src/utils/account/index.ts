@@ -3,7 +3,7 @@ import { Contract, ethers } from "ethers";
 import WeaverFi, { Address } from "weaverfi";
 import { providers } from "weaverfi/dist/functions";
 import erc721 from "../../solidity/node_modules/@openzeppelin/contracts/build/contracts/ERC721.json";
-import { Poolygotchi } from "../poolygotchi";
+import Poolygotchi from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
 
 export abstract class BaseAccount {

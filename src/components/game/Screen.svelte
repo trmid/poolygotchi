@@ -2,9 +2,12 @@
 <script type="ts">
   import { showMenu } from "./Game.svelte";
   import { poolygotchi } from "./Game.svelte";
+  import { account } from "../Account.svelte";
   import Menu from "./Menu.svelte";
   import Environment from "./Environment.svelte";
   import Poolygotchi from "./Poolygotchi.svelte";
+  import AccountSetup from "./AccountSetup.svelte";
+    import Welcome from "./Welcome.svelte";
 </script>
 
 <!-- Screen -->
@@ -21,11 +24,15 @@
       <Poolygotchi poolygotchi={$poolygotchi} />
 
     {/await}
+  {:else if $account}
+    <AccountSetup />
+  {:else}
+    <Welcome />
   {/if}
 
   <!-- Menu -->
   {#if $showMenu}
-  <Menu />
+    <Menu />
   {/if}
 </div>
 

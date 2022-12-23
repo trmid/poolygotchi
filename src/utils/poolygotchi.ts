@@ -5,7 +5,7 @@ import type { ABI, Address, Chain } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 import { ethers } from "ethers";
 
-export class Poolygotchi {
+export default class Poolygotchi {
 
   /* Static vars */
   static address: Address = hatcheryAddress;
