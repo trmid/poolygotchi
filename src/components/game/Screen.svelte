@@ -4,6 +4,7 @@
   import { poolygotchi } from "./Game.svelte";
   import Menu from "./Menu.svelte";
   import Environment from "./Environment.svelte";
+  import Poolygotchi from "./Poolygotchi.svelte";
 </script>
 
 <!-- Screen -->
@@ -17,13 +18,10 @@
       <Environment environmentId={data.environmentId} />
 
       <!-- Poolygotchi -->
-
+      <Poolygotchi poolygotchi={$poolygotchi} />
 
     {/await}
   {/if}
-
-  <!-- TODO: remove test environment -->
-  <!-- <img id="background" src="assets/environments/0-living-room/environment.png" alt="background environment" /> -->
 
   <!-- Menu -->
   {#if $showMenu}
