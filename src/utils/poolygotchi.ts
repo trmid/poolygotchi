@@ -1,13 +1,14 @@
 import WeaverFi from "weaverfi";
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
+import { hatcheryAddress, network } from "../config";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
+import { ethers } from "ethers";
 
 export class Poolygotchi {
 
   /* Static vars */
-  static chain: Chain = "op";
-  static address: Address = "0x"; // TODO: set contract address
+  static address: Address = hatcheryAddress;
   static abi = hatcheryInfo.abi;
 
   /* Private vars */
@@ -21,7 +22,7 @@ export class Poolygotchi {
 
   /* Functions */
   public async data({ useCache = true } = {}): Promise<PoolygotchiHatchery.PoolygotchiStructOutput> {
-    if(!this.dataCache || !useCache) this.dataCache = await Poolygotchi.function("poolygotchiOf")(this.address);
+    if(!this.dataCache || !useCache) this.dataCache = await Poolygotchi.contract().poolygotchiOf(this.address);
     return this.dataCache;
   }
 
@@ -30,10 +31,8 @@ export class Poolygotchi {
   }
 
   /* Static Functions */
-  static function<T extends keyof PoolygotchiHatchery["functions"]>(method: T) {
-    return <PoolygotchiHatchery[T]>((...args: any) => {
-      WeaverFi[this.chain].query(Poolygotchi.address, Poolygotchi.abi as ABI, method, args ?? []);
-    });
+  static contract() {
+    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(network.rpcUrls[0], network)) as PoolygotchiHatchery;
   }
 
 }
