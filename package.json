@@ -34,5 +34,8 @@
     "tslib": "^2.0.0",
     "typescript": "^4.0.0",
     "weaverfi": "^1.35.2"
+  },
+  "dependencies": {
+    "byte-base64": "^1.1.0"
   }
 }

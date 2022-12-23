@@ -1,4 +1,6 @@
 import { ipfsClient, IPFS_GATEWAY } from "./ipfs";
+import wait from "./wait";
+import * as base64 from "byte-base64";
 
 export const fetchJSON = async (uri: string): Promise<any> => {
 
@@ -17,17 +19,14 @@ export const fetchJSON = async (uri: string): Promise<any> => {
   const ipfsMatch = matchIpfsUri(uri);
   if(ipfsMatch) {
     const gatewayURI = `${IPFS_GATEWAY}${ipfsMatch[2]}`;
-    return await Promise.race([
-      fetchContentFromIPFS(uri).then(ipfsContent => {
-        const decoder = new TextDecoder();
-        let content = "";
-        for(let i = 0; i < ipfsContent.length; i++) {
-          content += decoder.decode(ipfsContent[i]);
-        }
-        return JSON.parse(content);
-      }),
-      fetch(gatewayURI).then(res => res.json())
-    ]);
+    return await fetchContentFromIPFS(uri).then(ipfsContent => {
+      const decoder = new TextDecoder();
+      let content = "";
+      for(let i = 0; i < ipfsContent.length; i++) {
+        content += decoder.decode(ipfsContent[i]);
+      }
+      return JSON.parse(content);
+    }).catch((err) => { console.error(err); return fetch(gatewayURI).then(res => res.json()) });
   }
 
   throw new Error("Could not recognize URI format...");
@@ -39,18 +38,14 @@ export const normalizeImageURI = async (uri: string, mime: string, { ipfsUriType
     const gatewayURI = `${IPFS_GATEWAY}${ipfsMatch[2]}`;
     return await Promise.race([
       fetchContentFromIPFS(uri).then(ipfsContent => {
+        const blob = new Blob(ipfsContent, {type: mime});
         if(ipfsUriType === "blob") {
-          return URL.createObjectURL(new Blob(ipfsContent, {type: mime}));
+          return URL.createObjectURL(blob);
         } else {
-          let content = "";
-          const decoder= new TextDecoder();
-          for(let i = 0; i < ipfsContent.length; i++) {
-            content += decoder.decode(ipfsContent[i]);
-          }
-          return `data:${mime};base64,${window.btoa(content)}`;
+          return blob.arrayBuffer().then(buffer => base64.bytesToBase64(new Uint8Array(buffer))).then(b64 => { return `data:${mime};base64,${b64}`; });
         }
-      }),
-      fetch(gatewayURI).then(() => gatewayURI)
+      }).catch((err) => { console.error(err); return gatewayURI; }),
+      wait(30).then(() => gatewayURI)
     ]);
   } else {
     return uri;
