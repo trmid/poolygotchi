@@ -60944,7 +60944,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     			add_location(h3, file$c, 18, 2, 589);
     			attr_dev(div, "id", "menu");
-    			attr_dev(div, "class", "svelte-p8x897");
+    			attr_dev(div, "class", "svelte-16a52jo");
     			add_location(div, file$c, 17, 0, 550);
     		},
     		l: function claim(nodes) {

@@ -34,9 +34,15 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
     background-color: #0004;
+  }
+
+  #menu > :global(*) {
+    box-sizing: border-box;
+    width: 16rem;
+    max-width: 90%;
   }
 </style>
