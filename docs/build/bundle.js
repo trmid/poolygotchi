@@ -61198,15 +61198,21 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let img;
     	let img_src_value;
     	let img_alt_value;
+    	let style_transition_duration = `${/*walkingDuration*/ ctx[1]}s`;
+    	let style_transform = `translateX(-50%) scaleX(${/*direction*/ ctx[3]})`;
+    	let style_left = `${20 + 60 * /*x*/ ctx[2]}%`;
 
     	const block = {
     		c: function create() {
     			img = element("img");
     			attr_dev(img, "id", "poolygotchi");
-    			if (!src_url_equal(img.src, img_src_value = /*animation*/ ctx[1].src)) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*animation*/ ctx[4].src)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", img_alt_value = "Poolygotchi of " + /*poolygotchi*/ ctx[0].address.slice(0, 6) + "...");
-    			attr_dev(img, "class", "svelte-cplly8");
-    			add_location(img, file$a, 37, 0, 1120);
+    			attr_dev(img, "class", "svelte-fz0wdo");
+    			set_style(img, "transition-duration", style_transition_duration);
+    			set_style(img, "transform", style_transform);
+    			set_style(img, "left", style_left);
+    			add_location(img, file$a, 65, 0, 1907);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -61215,12 +61221,24 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			insert_dev(target, img, anchor);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*animation*/ 2 && !src_url_equal(img.src, img_src_value = /*animation*/ ctx[1].src)) {
+    			if (dirty & /*animation*/ 16 && !src_url_equal(img.src, img_src_value = /*animation*/ ctx[4].src)) {
     				attr_dev(img, "src", img_src_value);
     			}
 
     			if (dirty & /*poolygotchi*/ 1 && img_alt_value !== (img_alt_value = "Poolygotchi of " + /*poolygotchi*/ ctx[0].address.slice(0, 6) + "...")) {
     				attr_dev(img, "alt", img_alt_value);
+    			}
+
+    			if (dirty & /*walkingDuration*/ 2 && style_transition_duration !== (style_transition_duration = `${/*walkingDuration*/ ctx[1]}s`)) {
+    				set_style(img, "transition-duration", style_transition_duration);
+    			}
+
+    			if (dirty & /*direction*/ 8 && style_transform !== (style_transform = `translateX(-50%) scaleX(${/*direction*/ ctx[3]})`)) {
+    				set_style(img, "transform", style_transform);
+    			}
+
+    			if (dirty & /*x*/ 4 && style_left !== (style_left = `${20 + 60 * /*x*/ ctx[2]}%`)) {
+    				set_style(img, "left", style_left);
     			}
     		},
     		i: noop$2,
@@ -61247,6 +61265,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	validate_slots('Poolygotchi', slots, []);
     	let { poolygotchi } = $$props;
 
+    	// Variables:
     	let animations = {
     		crying: new Image(),
     		happy: new Image(),
@@ -61257,8 +61276,12 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	};
 
     	let healthFactor = 1;
-    	let emotion = 'neutral';
+    	let state = 'neutral';
+    	let walkingDuration = 1;
+    	let x = 0.5;
+    	let direction = 1;
 
+    	// Function to update animation images from active poolygotchi
     	const updateAnimations = () => {
     		poolygotchi.data().then(data => {
     			console.log(data);
@@ -61267,7 +61290,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     				const url = `assets/species/${data.speciesId.toString()}/${key}.gif`;
     				const image = new Image();
     				image.src = url;
-    				$$invalidate(2, animations[key] = image, animations);
+    				$$invalidate(5, animations[key] = image, animations);
     			}
 
     			console.log(animations);
@@ -61275,11 +61298,25 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		}).catch(console.error);
     	};
 
+    	// Decision loop:
     	const timer = setInterval(
     		() => {
-    			$$invalidate(3, emotion = ['neutral', 'crying', 'happy', 'sad', 'sleeping', 'walking'][Math.floor(Math.random() * 6)]);
+    			const possibleStates = ['neutral', 'walking'];
+    			if (healthFactor >= 1) possibleStates.push('happy'); else possibleStates.push('sad');
+    			if (healthFactor < 0.5) possibleStates.push('crying');
+    			$$invalidate(6, state = possibleStates[Math.floor(Math.random() * possibleStates.length)]);
+
+    			if (state === 'walking') {
+    				const walkTo = Math.random();
+    				$$invalidate(1, walkingDuration = Math.abs(walkTo - x) * 5);
+    				if (walkTo > x) $$invalidate(3, direction = 1); else $$invalidate(3, direction = -1);
+    				$$invalidate(2, x = walkTo);
+    				setTimeout(() => $$invalidate(6, state = 'neutral'), walkingDuration * 1000);
+    			} else if (state !== 'neutral') {
+    				setTimeout(() => $$invalidate(6, state = 'neutral'), 2000);
+    			}
     		},
-    		2000
+    		6000
     	);
 
     	onDestroy(() => {
@@ -61307,7 +61344,10 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		poolygotchi,
     		animations,
     		healthFactor,
-    		emotion,
+    		state,
+    		walkingDuration,
+    		x,
+    		direction,
     		updateAnimations,
     		timer,
     		animation
@@ -61315,10 +61355,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	$$self.$inject_state = $$props => {
     		if ('poolygotchi' in $$props) $$invalidate(0, poolygotchi = $$props.poolygotchi);
-    		if ('animations' in $$props) $$invalidate(2, animations = $$props.animations);
+    		if ('animations' in $$props) $$invalidate(5, animations = $$props.animations);
     		if ('healthFactor' in $$props) healthFactor = $$props.healthFactor;
-    		if ('emotion' in $$props) $$invalidate(3, emotion = $$props.emotion);
-    		if ('animation' in $$props) $$invalidate(1, animation = $$props.animation);
+    		if ('state' in $$props) $$invalidate(6, state = $$props.state);
+    		if ('walkingDuration' in $$props) $$invalidate(1, walkingDuration = $$props.walkingDuration);
+    		if ('x' in $$props) $$invalidate(2, x = $$props.x);
+    		if ('direction' in $$props) $$invalidate(3, direction = $$props.direction);
+    		if ('animation' in $$props) $$invalidate(4, animation = $$props.animation);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -61327,15 +61370,16 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*poolygotchi*/ 1) {
+    			// Reactive variables:
     			(updateAnimations());
     		}
 
-    		if ($$self.$$.dirty & /*animations, emotion*/ 12) {
-    			$$invalidate(1, animation = animations[emotion]);
+    		if ($$self.$$.dirty & /*animations, state*/ 96) {
+    			$$invalidate(4, animation = animations[state]);
     		}
     	};
 
-    	return [poolygotchi, animation, animations, emotion];
+    	return [poolygotchi, walkingDuration, x, direction, animation, animations, state];
     }
 
     class Poolygotchi extends SvelteComponentDev {
