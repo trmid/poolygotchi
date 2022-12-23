@@ -8,6 +8,8 @@ const app = new App({
 });
 
 // Preload CIDs from IPFS:
-["QmTuGMphQyvHYYNjN2A4V6FfekLRaDqZjPjAvE72hTUoL3"].map(preloadCID);
+window.addEventListener("load", () => {
+  ["QmTuGMphQyvHYYNjN2A4V6FfekLRaDqZjPjAvE72hTUoL3"].map(preloadCID);
+});
 
 export default app;
