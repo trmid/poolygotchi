@@ -3,6 +3,7 @@
   import type { UIComponent, DeviceButtons, UIButton } from "./game";
   import { get, writable } from "svelte/store";
   import type { Poolygotchi } from "../../utils/poolygotchi";
+  import { account } from "../Account.svelte";
 
   /* Game State Stores */
   export const poolygotchi = writable<Poolygotchi | null>(null);
@@ -30,6 +31,13 @@
     }
   }
 
+  /* Subscriptions */
+  account.subscribe(account => {
+    if(account) {
+      account.poolygotchi().then(poolygotchi.set).catch(console.error);
+    }
+  });
+  poolygotchi.subscribe(console.log);
 </script>
 
 <!-- Component -->
