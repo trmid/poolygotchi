@@ -23,7 +23,7 @@
   {/if}
 
   <!-- TODO: remove test environment -->
-  <img id="background" src="assets/environments/0-living-room/environment.png" alt="background environment" />
+  <!-- <img id="background" src="assets/environments/0-living-room/environment.png" alt="background environment" /> -->
 
   <!-- Menu -->
   {#if $showMenu}
