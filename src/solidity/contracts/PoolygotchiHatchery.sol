@@ -22,7 +22,7 @@ contract PoolygotchiHatchery is Ownable {
     string uri;
   }
 
-  event Hatch(address indexed pooler);
+  event Hatch(address indexed pooler, string name, uint64 speciesId, uint64 environmentId, uint256 amountWeekly);
   event SetGoal(address indexed pooler, uint256 amountWeekly);
   event Morph(address indexed pooler, uint64 speciesId);
   event Move(address indexed pooler, uint64 environmentId);
@@ -156,14 +156,20 @@ contract PoolygotchiHatchery is Ownable {
     emit Name(_msgSender(), name);
   }
 
-  function hatch(string memory name, uint64 speciesId, uint64 environmentId, uint256 amountWeekly) external {
+  function hatch(string memory name, uint64 speciesId, uint64 environmentId, uint256 amountWeekly) external
+    _whitelisted(_species[speciesId].whitelist)
+    speciesExists(speciesId)
+    _whitelisted(_environment[environmentId].whitelist)
+    environmentExists(environmentId)
+  {
     require(!hasPoolygotchi(_msgSender()), "Hatchery: already hatched");
-    setName(name);
-    setEnvironment(environmentId);
-    morphInto(speciesId);
-    setGoal(amountWeekly);
+    _Poolygotchi[_msgSender()].name = name;
+    _Poolygotchi[_msgSender()].environmentId = environmentId;
+    _Poolygotchi[_msgSender()].speciesId = speciesId;
+    _Poolygotchi[_msgSender()].goalAmountWeekly = amountWeekly;
+    _Poolygotchi[_msgSender()].goalStartDate = uint64(block.timestamp);
     _Poolygotchi[_msgSender()].hatchDate = uint64(block.timestamp);
-    emit Hatch(_msgSender());
+    emit Hatch(_msgSender(), name, speciesId, environmentId, amountWeekly);
   }
 
 }
