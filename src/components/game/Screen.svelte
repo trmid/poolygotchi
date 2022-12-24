@@ -7,7 +7,7 @@
   import Environment from "./Environment.svelte";
   import Poolygotchi from "./Poolygotchi.svelte";
   import AccountSetup from "./AccountSetup.svelte";
-    import Welcome from "./Welcome.svelte";
+  import Welcome from "./Welcome.svelte";
 </script>
 
 <!-- Screen -->

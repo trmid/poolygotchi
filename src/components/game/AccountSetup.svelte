@@ -2,8 +2,9 @@
 <script type="ts">
   import { BigNumber, BigNumberish } from "ethers";
   import { onMount } from "svelte";
-  import { account } from "../Account.svelte";
+  import { account, disconnect } from "../Account.svelte";
   import Poolygotchi from "../../utils/poolygotchi";
+  import { buttons, menuComponents } from "./Game.svelte";
 
   // Pooly Attributes
   let name: string = "Anon Pooly"
@@ -47,8 +48,33 @@
 
   // On Mount:
   onMount(() => {
+
+    // Get accurate asset counts:
     Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
     Poolygotchi.contract().numEnvironments().then(num => numEnvironments = num).catch(console.error);
+
+    // Set menu options:
+    $menuComponents = [];
+
+    // Set device buttons:
+    $buttons = {
+      left: {
+        title: "back",
+        class: "icofont-arrow-left",
+        action: back
+      },
+      middle: {
+        title: "cancel",
+        class: "icofont-ui-close",
+        action: disconnect
+      },
+      right: {
+        title: "next",
+        class: "icofont-arrow-right",
+        action: next
+      }
+    };
+
   });
 
 </script>

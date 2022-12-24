@@ -1,7 +1,7 @@
 <!-- Component -->
 <script type="ts">
   import { onDestroy } from "svelte";
-  import type { Poolygotchi } from "../../utils/poolygotchi";
+  import type Poolygotchi from "../../utils/poolygotchi";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;

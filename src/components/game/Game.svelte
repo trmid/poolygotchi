@@ -2,23 +2,21 @@
 <script type="ts" context="module">
   import type { UIComponent, DeviceButtons, UIButton } from "./game";
   import { get, writable } from "svelte/store";
-  import type { Poolygotchi } from "../../utils/poolygotchi";
+  import type Poolygotchi from "../../utils/poolygotchi";
   import { account } from "../Account.svelte";
+  import { connect } from "../ConnectOverlay.svelte";
+  import { push } from "svelte-spa-router";
 
   /* Game State Stores */
   export const poolygotchi = writable<Poolygotchi | null>(null);
   export const viewingAsGuest = writable(false);
-  export const menuComponents = writable<UIComponent[]>([
-    { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
-    { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
-    { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
-  ]);
+  export const menuComponents = writable<UIComponent[]>([]);
   export const menuSelectedIndex = writable(0);
   export const showMenu = writable(false);
   export const buttons = writable<DeviceButtons>({
-    left: { title: "Home", class: "icofont-ui-home", action: () => {console.log("home")} },
-    middle: { title: "Interact!", class: "icofont-comment", action: () => {console.log("interact")} },
-    right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
+    left: { title: "-", class: "icofont-minus", action: () => null },
+    middle: { title: "connect", class: "icofont-wallet", action: () => connect().catch(console.error) },
+    right: { title: "about", class: "icofont-question", action: () => push("/about") }
   });
 
   /* Helper Functions */
@@ -34,7 +32,24 @@
   /* Subscriptions */
   account.subscribe(account => {
     if(account) {
-      account.poolygotchi().then(poolygotchi.set).catch(console.error);
+      account.poolygotchi()
+        .then(gotchi => {
+          poolygotchi.set(gotchi);
+          if(gotchi) {
+            buttons.set({
+              left: { title: "Home", class: "icofont-ui-home", action: () => {console.log("home")} },
+              middle: { title: "Interact!", class: "icofont-comment", action: () => {console.log("interact")} },
+              right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
+            });
+            menuSelectedIndex.set(0);
+            menuComponents.set([
+              { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
+              { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
+              { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
+            ]);
+          }
+        })
+        .catch(console.error);
     }
   });
   poolygotchi.subscribe(console.log);
