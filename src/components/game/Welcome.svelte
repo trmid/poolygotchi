@@ -1,3 +1,22 @@
+<!-- Component -->
+<script type="ts">
+  import { onMount, onDestroy } from "svelte";
+  import { push } from "svelte-spa-router";
+  import { connect } from "../ConnectOverlay.svelte";
+  import { buttons, setDefaultUI } from "./Game.svelte";
+
+  // Lifecycle:
+  onMount(() => {
+    $buttons = {
+      left: { title: "-", class: "icofont-minus", action: () => null },
+      middle: { title: "connect", class: "icofont-wallet", action: () => connect().catch(console.error) },
+      right: { title: "about", class: "icofont-question", action: () => push("/about") }
+    };
+  });
+  onDestroy(() => {
+    setDefaultUI();
+  });
+</script>
 
 <!-- Content -->
 <div id="container">

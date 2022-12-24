@@ -4,7 +4,8 @@
   import { onMount } from "svelte";
   import { account, disconnect } from "../Account.svelte";
   import Poolygotchi from "../../utils/poolygotchi";
-  import { buttons, menuComponents } from "./Game.svelte";
+  import { buttons, menuComponents, setDefaultUI } from "./Game.svelte";
+  import { onDestroy } from "svelte";
 
   // Pooly Attributes
   let name: string = "Anon Pooly"
@@ -75,6 +76,11 @@
       }
     };
 
+  });
+
+  // On Destroy:
+  onDestroy(() => {
+    setDefaultUI();
   });
 
 </script>

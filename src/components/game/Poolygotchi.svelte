@@ -1,7 +1,10 @@
 <!-- Component -->
 <script type="ts">
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
+  import { get } from "svelte/store";
   import type Poolygotchi from "../../utils/poolygotchi";
+  import type { UIButton } from "./game";
+  import { buttons, menuComponents, menuSelectedIndex, setDefaultUI, showMenu } from "./Game.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
@@ -61,8 +64,26 @@
       setTimeout(() => state = 'neutral', 2000);
     }
   }, 6000);
+
+  // On Mount:
+  onMount(() => {
+    $buttons = {
+      left: { title: "Home", class: "icofont-ui-home", action: () => {console.log("home")} },
+      middle: { title: "Interact!", class: "icofont-comment", action: () => {console.log("interact")} },
+      right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
+    };
+    $menuSelectedIndex = 0;
+    $menuComponents = [
+      { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
+      { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
+      { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
+    ];
+  });
+
+  // On Destroy:
   onDestroy(() => {
     clearInterval(timer);
+    setDefaultUI();
   });
 </script>
 
