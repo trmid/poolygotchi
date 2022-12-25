@@ -6,6 +6,7 @@
   import Poolygotchi from "../../utils/poolygotchi";
   import { buttons, menuComponents, setDefaultUI } from "./Game.svelte";
   import { onDestroy } from "svelte";
+  import PoolTogether from "../../utils/poolTogether";
 
   // Pooly Attributes
   let name: string = "Anon Pooly"
@@ -17,7 +18,7 @@
   let page = 0;
   const maxPage = 3;
   let numSpecies: BigNumberish = 3;
-  let numEnvironments: BigNumberish = 2;
+  let numEnvironments: BigNumberish = 3;
 
   // Navigation functions:
   const back = () => {
@@ -47,8 +48,30 @@
     if(environmentId.gte(numEnvironments)) environmentId = 0;
   };
 
+  // Hatch Function:
+  async function hatch() {
+    try {
+      // TODO:
+      if(!$account) throw new Error("missing account");
+      const address = $account.address;
+      await $account.sign(
+        await Poolygotchi.contract().populateTransaction.hatch(
+          name,
+          speciesId,
+          environmentId,
+          BigNumber.from(Math.floor(weeklyGoal)).mul(10**6),
+          await PoolTogether.totalDeposited(address)
+        )
+      );
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
   // On Mount:
   onMount(() => {
+
+    PoolTogether.totalDeposited("0xa184aa8488908b43cCf43b5Ef13Ae528693Dfd00").catch(console.error);
 
     // Get accurate asset counts:
     Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
@@ -88,27 +111,36 @@
 <!-- Content -->
 <div id="container">
   {#if page == 0}
-  <h3>Choose Your Poolygotchi</h3>
-  <div class="column">
-    <div class="selector">
-      <button on:click={prevSpecies}><i class="icofont-caret-left" /></button>
-      <img class="poolygotchi" src="assets/species/{speciesId}/neutral.gif" alt="poolygotchi species {speciesId}">
-      <button on:click={nextSpecies}><i class="icofont-caret-right" /></button>
+    <h3>Choose Your Poolygotchi</h3>
+    <div class="column">
+      <div class="selector">
+        <button on:click={prevSpecies}><i class="icofont-caret-left" /></button>
+        <img class="poolygotchi" src="assets/species/{speciesId}/neutral.gif" alt="poolygotchi species {speciesId}">
+        <button on:click={nextSpecies}><i class="icofont-caret-right" /></button>
+      </div>
+      <input id="name-input" type="text" placeholder="Name Tag" bind:value={name}>
     </div>
-    <input id="name-input" type="text" placeholder="Name Tag" bind:value={name}>
-  </div>
   {:else if page == 1}
-  <h3>Select Your Environment</h3>
-  <div class="selector">
-    <button on:click={prevEnvironment}><i class="icofont-caret-left" /></button>
-    <img class="environment" src="assets/environments/{environmentId}/environment.png" alt="poolygotchi environment {environmentId}">
-    <button on:click={nextEnvironment}><i class="icofont-caret-right" /></button>
-  </div>
+    <h3>Select Your Environment</h3>
+    <div class="selector">
+      <button on:click={prevEnvironment}><i class="icofont-caret-left" /></button>
+      <img class="environment" src="assets/environments/{environmentId}/environment.png" alt="poolygotchi environment {environmentId}">
+      <button on:click={nextEnvironment}><i class="icofont-caret-right" /></button>
+    </div>
   {:else if page == 2}
-  <h3>Set Your Goal</h3>
-  <input type="number" placeholder="Weekly Savings Goal" bind:value={weeklyGoal}>
+    <h3>Set Your Goal</h3>
+    <div id="goal-num">
+      <img src="img/usdc.webp" alt="USDC">
+      <input type="number" placeholder="Weekly Savings Goal" bind:value={weeklyGoal}>
+      <strong><i>(per week)</i></strong>
+    </div>
   {:else if page == 3}
-  <button>Hatch!</button>
+    <div id="hatch">
+      <button on:click={hatch}>
+        <img src="favicon.png" alt="poolygotchi egg">
+        Hatch!
+      </button>
+    </div>
   {/if}
   <div id="page-selector">
     <button on:click={back} class:hidden={page == 0}>back</button>
@@ -186,5 +218,48 @@
 
   button.hidden {
     visibility: hidden;
+  }
+
+  #goal-num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #goal-num > img {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+
+  #goal-num > input {
+    width: 5rem;
+  }
+
+  #hatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  #hatch > button {
+    height: 5rem;
+    padding: 1rem 2rem;
+    font-size: 24px;
+    font-weight: bold;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  #hatch > button > img {
+    width: 48px;
+    height: 48px;
   }
 </style>
