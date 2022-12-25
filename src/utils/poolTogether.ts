@@ -6,22 +6,6 @@ import mainnet from "./poolTogetherContracts.json";
 export default class PoolTogether {
 
   static async totalDeposited(address: string) {
-    // const prizePoolNetwork = new PrizePoolNetwork(
-    //   {
-    //     1: providers.eth[0],
-    //     10: providers.op[0],
-    //     137: providers.poly[0],
-    //     43114: providers.avax[0]
-    //   },
-    //   mainnet as any
-    // );
-    // let balance = BigNumber.from(0);
-    // const usersBalances = await prizePoolNetwork.getUsersPrizePoolBalances(address);
-    // for(const userBalance of usersBalances) {
-    //   balance.add(userBalance.balances.token);
-    // }
-    // console.log(`Total balance (${address}): ${balance}`);
-    // return balance;
     const chainIdMap: Record<number, Chain> = {
       1: 'eth',
       10: 'op',
