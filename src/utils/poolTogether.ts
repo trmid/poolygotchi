@@ -16,12 +16,10 @@ export default class PoolTogether {
     for(const deployment of mainnet.contracts) {
       if(deployment.type === "Ticket") {
         const chain = chainIdMap[deployment.chainId];
-        console.log(chain);
         const chainBalance: BigNumber = await query(chain, deployment.address as Address, deployment.abi as any, "balanceOf", [address]);
         balance = balance.add(chainBalance);
       }
     }
-    console.log(`Total balance (${address}): ${balance}`);
     return balance;
   }
 

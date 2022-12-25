@@ -71,8 +71,6 @@
   // On Mount:
   onMount(() => {
 
-    PoolTogether.totalDeposited("0xa184aa8488908b43cCf43b5Ef13Ae528693Dfd00").catch(console.error);
-
     // Get accurate asset counts:
     Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
     Poolygotchi.contract().numEnvironments().then(num => numEnvironments = num).catch(console.error);
