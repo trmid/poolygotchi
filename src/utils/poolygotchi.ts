@@ -3,7 +3,8 @@ import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.so
 import { hatcheryAddress, network } from "../config";
 import type { ABI, Address, Chain } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
+import PoolTogether from "./poolTogether";
 
 export default class Poolygotchi {
 
@@ -27,7 +28,12 @@ export default class Poolygotchi {
   }
 
   public async healthFactor() {
-    return 1;
+    const secondsInWeek = 60 * 60 * 24 * 7;
+    const { goalAmountWeekly, startBalance } = await this.data();
+    const totalDeposited = await PoolTogether.totalDeposited(this.address);
+    const balanceChange = totalDeposited.sub(startBalance);
+    const secondsOff = balanceChange.mul(secondsInWeek).div(BigNumber.from(goalAmountWeekly));
+    return secondsOff.toNumber() / secondsInWeek;
   }
 
   /* Static Functions */

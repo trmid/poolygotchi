@@ -48,20 +48,24 @@
 
   // Decision loop:
   const timer = setInterval(() => {
-    const possibleStates: State[] = ['neutral', 'walking'];
-    if(healthFactor >= 1) possibleStates.push('happy');
-    else possibleStates.push('sad');
-    if(healthFactor < 0.5) possibleStates.push('crying');
-    state = possibleStates[Math.floor(Math.random() * possibleStates.length)];
-    if(state === 'walking') {
-      const walkTo = Math.random();
-      walkingDuration = Math.abs(walkTo - x) * 5;
-      if(walkTo > x) direction = 1;
-      else direction = -1;
-      x = walkTo;
-      setTimeout(() => state = 'neutral', walkingDuration * 1000);
-    } else if(state !== 'neutral') {
-      setTimeout(() => state = 'neutral', 2000);
+    if(healthFactor < -2) {
+      state = 'sleeping';
+    } else {
+      const possibleStates: State[] = ['neutral', 'walking'];
+      if(healthFactor >= 0) possibleStates.push('happy');
+      else possibleStates.push('sad');
+      if(healthFactor < -1) possibleStates.push('crying');
+      state = possibleStates[Math.floor(Math.random() * possibleStates.length)];
+      if(state === 'walking') {
+        const walkTo = Math.random();
+        walkingDuration = Math.abs(walkTo - x) * 5;
+        if(walkTo > x) direction = 1;
+        else direction = -1;
+        x = walkTo;
+        setTimeout(() => state = 'neutral', walkingDuration * 1000);
+      } else if(state !== 'neutral') {
+        setTimeout(() => state = 'neutral', 2000);
+      }
     }
   }, 6000);
 
