@@ -18,6 +18,7 @@
     "@tsconfig/svelte": "^2.0.0",
     "@walletconnect/sign-client": "^2.1.4",
     "@web3modal/standalone": "^2.0.0-beta.9",
+    "byte-base64": "^1.1.0",
     "ethers": "^5.7.2",
     "hardhat": "^2.12.4",
     "ipfs-core": "^0.17.0",
@@ -34,8 +35,5 @@
     "tslib": "^2.0.0",
     "typescript": "^4.0.0",
     "weaverfi": "^1.35.2"
-  },
-  "dependencies": {
-    "byte-base64": "^1.1.0"
   }
 }
