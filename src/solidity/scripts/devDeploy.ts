@@ -12,7 +12,7 @@ async function main() {
   (await hatchery.addSpecies(`ipfs://QmdBJMfBJdm7D9b6ckHA2afBayiNnizFbo4waH4gts2DKp`, ethers.constants.AddressZero)).wait();
   (await hatchery.addSpecies(`ipfs://QmctUVpak9D6m6C9mkY9BVQACg4Q9nNohCMjGMKo76vHyv`, ethers.constants.AddressZero)).wait();
   (await hatchery.addSpecies(`ipfs://QmZGmQVouFUctKHiZU9SKRfrF9Q4A25Q1E6qAM2z57qo6A`, ethers.constants.AddressZero)).wait();
-  (await hatchery.hatch("Gerald", 0, 0, 100000000)).wait();
+  (await hatchery.hatch("Gerald", 0, 0, 100000000, 0)).wait();
 
   const configPath = `${__dirname}/../../config.ts`;
   console.log(configPath);
