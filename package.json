@@ -5,12 +5,13 @@
   "scripts": {
     "build": "NODE_ENV=production && rollup -c",
     "build-win": "set NODE_ENV=production && rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "node dev.js",
     "start": "sirv docs --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
     "@download/blockies": "^1.0.3",
+    "@pooltogether/v4-client-js": "^0.17.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
