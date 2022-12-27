@@ -88,6 +88,18 @@ const copyIpfsMin = () => ({
 	}
 });
 
+// Custom plugin to fix pooltogether dynamic debug module:
+const ignoreDebugModule = () => ({
+  name: "Ignore require('debug')",
+  writeBundle: (options, bundle) => {
+    // console.log(options, bundle);
+    const file = `${out}/build/bundle.js`;
+    const content = fs.readFileSync(file, { encoding: 'utf-8' });
+    fs.writeFileSync(file, content.replaceAll(/require\(['"]debug['"]\)/g, `(() => (() => null))`));
+    console.log('\x1b[32m%s\x1b[0m', `Ignored require('debug') statements in ${file}`);
+  }
+});
+
 export default {
 	input: 'src/main.ts',
 	output: {
@@ -141,7 +153,10 @@ export default {
 		generateSW(),
 
 		// Copy ipfs.min.js to out folder
-		copyIpfsMin()
+		copyIpfsMin(),
+
+    // Hotfix for pooltogether dynamic require of debug module
+    ignoreDebugModule(),
 	],
 	watch: {
 		clearScreen: false

@@ -1196,7 +1196,7 @@ var app = (function () {
         });
     }
 
-    function parse$1(str, loose) {
+    function parse$2(str, loose) {
     	if (str instanceof RegExp) return { keys:false, pattern:str };
     	var c, o, tmp, ext, keys=[], pattern='', arr = str.split('/');
     	arr[0] || arr.shift();
@@ -1715,7 +1715,7 @@ var app = (function () {
     				throw Error('Invalid value for "path" argument - strings must start with / or *');
     			}
 
-    			const { pattern, keys } = parse$1(path);
+    			const { pattern, keys } = parse$2(path);
     			this.path = path;
 
     			// Check if the component is wrapped and we have conditions
@@ -2045,7 +2045,7 @@ var app = (function () {
     		onDestroy,
     		createEventDispatcher,
     		afterUpdate,
-    		parse: parse$1,
+    		parse: parse$2,
     		routes,
     		prefix,
     		restoreScrollState,
@@ -2350,7 +2350,7 @@ var app = (function () {
     	return a;
     }
 
-    function createCommonjsModule$1(fn) {
+    function createCommonjsModule$4(fn) {
       var module = { exports: {} };
     	return fn(module, module.exports), module.exports;
     }
@@ -2368,7 +2368,7 @@ var app = (function () {
 
     var require$$0$2 = /*@__PURE__*/getAugmentedNamespace(_nodeResolve_empty$1);
 
-    var bn = createCommonjsModule$1(function (module) {
+    var bn = createCommonjsModule$4(function (module) {
     (function (module, exports) {
 
       // Utils
@@ -7156,7 +7156,7 @@ var app = (function () {
 
     const version$o = "properties/5.7.0";
 
-    var __awaiter$l = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$m = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -7187,7 +7187,7 @@ var app = (function () {
         return null;
     }
     function resolveProperties(object) {
-        return __awaiter$l(this, void 0, void 0, function* () {
+        return __awaiter$m(this, void 0, void 0, function* () {
             const promises = Object.keys(object).map((key) => {
                 const value = object[key];
                 return Promise.resolve(value).then((v) => ({ key: key, value: v }));
@@ -8290,7 +8290,7 @@ var app = (function () {
      * @license MIT
      */
 
-    var sha3 = createCommonjsModule$1(function (module) {
+    var sha3 = createCommonjsModule$4(function (module) {
     /*jslint bitwise: true */
     (function () {
 
@@ -9543,7 +9543,7 @@ var app = (function () {
     // NFKC (composed)             // (decomposed)
     const EtherSymbol = "\u039e"; // "\uD835\uDF63";
 
-    var index$2 = /*#__PURE__*/Object.freeze({
+    var index$3 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         AddressZero: AddressZero,
         NegativeOne: NegativeOne$1,
@@ -10738,7 +10738,7 @@ var app = (function () {
         ]));
     }
 
-    var __awaiter$k = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$l = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -11081,7 +11081,7 @@ var app = (function () {
         }
         // Replaces all address types with ENS names with their looked up address
         static resolveNames(domain, types, value, resolveName) {
-            return __awaiter$k(this, void 0, void 0, function* () {
+            return __awaiter$l(this, void 0, void 0, function* () {
                 // Make a copy to isolate it from the object passed in
                 domain = shallowCopy(domain);
                 // Look up all ENS names
@@ -11800,7 +11800,7 @@ var app = (function () {
 
     const version$i = "abstract-provider/5.7.0";
 
-    var __awaiter$j = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$k = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -11826,7 +11826,7 @@ var app = (function () {
             defineReadOnly(this, "_isProvider", true);
         }
         getFeeData() {
-            return __awaiter$j(this, void 0, void 0, function* () {
+            return __awaiter$k(this, void 0, void 0, function* () {
                 const { block, gasPrice } = yield resolveProperties({
                     block: this.getBlock("latest"),
                     gasPrice: this.getGasPrice().catch((error) => {
@@ -11862,7 +11862,7 @@ var app = (function () {
 
     const version$h = "abstract-signer/5.7.0";
 
-    var __awaiter$i = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$j = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -11890,20 +11890,20 @@ var app = (function () {
         ///////////////////
         // Sub-classes MAY override these
         getBalance(blockTag) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("getBalance");
                 return yield this.provider.getBalance(this.getAddress(), blockTag);
             });
         }
         getTransactionCount(blockTag) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("getTransactionCount");
                 return yield this.provider.getTransactionCount(this.getAddress(), blockTag);
             });
         }
         // Populates "from" if unspecified, and estimates the gas for the transaction
         estimateGas(transaction) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("estimateGas");
                 const tx = yield resolveProperties(this.checkTransaction(transaction));
                 return yield this.provider.estimateGas(tx);
@@ -11911,7 +11911,7 @@ var app = (function () {
         }
         // Populates "from" if unspecified, and calls with the transaction
         call(transaction, blockTag) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("call");
                 const tx = yield resolveProperties(this.checkTransaction(transaction));
                 return yield this.provider.call(tx, blockTag);
@@ -11919,7 +11919,7 @@ var app = (function () {
         }
         // Populates all fields in a transaction, signs it and sends it to the network
         sendTransaction(transaction) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("sendTransaction");
                 const tx = yield this.populateTransaction(transaction);
                 const signedTx = yield this.signTransaction(tx);
@@ -11927,26 +11927,26 @@ var app = (function () {
             });
         }
         getChainId() {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("getChainId");
                 const network = yield this.provider.getNetwork();
                 return network.chainId;
             });
         }
         getGasPrice() {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("getGasPrice");
                 return yield this.provider.getGasPrice();
             });
         }
         getFeeData() {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("getFeeData");
                 return yield this.provider.getFeeData();
             });
         }
         resolveName(name) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 this._checkProvider("resolveName");
                 return yield this.provider.resolveName(name);
             });
@@ -11992,10 +11992,10 @@ var app = (function () {
         // Notes:
         //  - We allow gasPrice for EIP-1559 as long as it matches maxFeePerGas
         populateTransaction(transaction) {
-            return __awaiter$i(this, void 0, void 0, function* () {
+            return __awaiter$j(this, void 0, void 0, function* () {
                 const tx = yield resolveProperties(this.checkTransaction(transaction));
                 if (tx.to != null) {
-                    tx.to = Promise.resolve(tx.to).then((to) => __awaiter$i(this, void 0, void 0, function* () {
+                    tx.to = Promise.resolve(tx.to).then((to) => __awaiter$j(this, void 0, void 0, function* () {
                         if (to == null) {
                             return null;
                         }
@@ -12171,7 +12171,7 @@ var app = (function () {
         throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
     };
 
-    var inherits_browser$1 = createCommonjsModule$1(function (module) {
+    var inherits_browser$1 = createCommonjsModule$4(function (module) {
     if (typeof Object.create === 'function') {
       // implementation from standard node.js 'util' module
       module.exports = function inherits(ctor, superCtor) {
@@ -12592,7 +12592,7 @@ var app = (function () {
       return res;
     };
 
-    var common$1 = {
+    var common$2 = {
     	BlockHash: BlockHash_1
     };
 
@@ -12643,7 +12643,7 @@ var app = (function () {
     }
     var g1_256_1 = g1_256$1;
 
-    var common = {
+    var common$1 = {
     	ft_1: ft_1_1,
     	ch32: ch32_1,
     	maj32: maj32_1,
@@ -12657,8 +12657,8 @@ var app = (function () {
     var rotl32$1 = utils$8.rotl32;
     var sum32$2 = utils$8.sum32;
     var sum32_5$1 = utils$8.sum32_5;
-    var ft_1 = common.ft_1;
-    var BlockHash$3 = common$1.BlockHash;
+    var ft_1 = common$1.ft_1;
+    var BlockHash$3 = common$2.BlockHash;
 
     var sha1_K = [
       0x5A827999, 0x6ED9EBA1,
@@ -12726,14 +12726,14 @@ var app = (function () {
     var sum32$1 = utils$8.sum32;
     var sum32_4$1 = utils$8.sum32_4;
     var sum32_5 = utils$8.sum32_5;
-    var ch32 = common.ch32;
-    var maj32 = common.maj32;
-    var s0_256 = common.s0_256;
-    var s1_256 = common.s1_256;
-    var g0_256 = common.g0_256;
-    var g1_256 = common.g1_256;
+    var ch32 = common$1.ch32;
+    var maj32 = common$1.maj32;
+    var s0_256 = common$1.s0_256;
+    var s1_256 = common$1.s1_256;
+    var g0_256 = common$1.g0_256;
+    var g1_256 = common$1.g1_256;
 
-    var BlockHash$2 = common$1.BlockHash;
+    var BlockHash$2 = common$2.BlockHash;
 
     var sha256_K = [
       0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
@@ -12859,7 +12859,7 @@ var app = (function () {
     var sum64_5_hi = utils$8.sum64_5_hi;
     var sum64_5_lo = utils$8.sum64_5_lo;
 
-    var BlockHash$1 = common$1.BlockHash;
+    var BlockHash$1 = common$2.BlockHash;
 
     var sha512_K = [
       0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd,
@@ -13220,7 +13220,7 @@ var app = (function () {
     var sum32 = utils$8.sum32;
     var sum32_3 = utils$8.sum32_3;
     var sum32_4 = utils$8.sum32_4;
-    var BlockHash = common$1.BlockHash;
+    var BlockHash = common$2.BlockHash;
 
     function RIPEMD160() {
       if (!(this instanceof RIPEMD160))
@@ -13254,7 +13254,7 @@ var app = (function () {
         var T = sum32(
           rotl32(
             sum32_4(A, f$2(j, B, C, D), msg[r$5[j] + start], K$2(j)),
-            s$6[j]),
+            s$7[j]),
           E);
         A = E;
         E = D;
@@ -13342,7 +13342,7 @@ var app = (function () {
       12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11
     ];
 
-    var s$6 = [
+    var s$7 = [
       11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8,
       7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12,
       11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5,
@@ -13405,11 +13405,11 @@ var app = (function () {
       return this.outer.digest(enc);
     };
 
-    var hash_1$1 = createCommonjsModule$1(function (module, exports) {
+    var hash_1$1 = createCommonjsModule$4(function (module, exports) {
     var hash = exports;
 
     hash.utils = utils$8;
-    hash.common = common$1;
+    hash.common = common$2;
     hash.sha = sha$1;
     hash.ripemd = ripemd;
     hash.hmac = hmac$1;
@@ -13423,7 +13423,7 @@ var app = (function () {
     hash.ripemd160 = hash.ripemd.ripemd160;
     });
 
-    function createCommonjsModule(fn, basedir, module) {
+    function createCommonjsModule$3(fn, basedir, module) {
     	return module = {
     		path: basedir,
     		exports: {},
@@ -13449,7 +13449,7 @@ var app = (function () {
         throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
     };
 
-    var utils_1 = createCommonjsModule(function (module, exports) {
+    var utils_1 = createCommonjsModule$3(function (module, exports) {
 
     var utils = exports;
 
@@ -13509,7 +13509,7 @@ var app = (function () {
     };
     });
 
-    var utils_1$1 = createCommonjsModule(function (module, exports) {
+    var utils_1$1 = createCommonjsModule$3(function (module, exports) {
 
     var utils = exports;
 
@@ -14008,7 +14008,7 @@ var app = (function () {
       return r;
     };
 
-    var inherits_browser = createCommonjsModule(function (module) {
+    var inherits_browser = createCommonjsModule$3(function (module) {
     if (typeof Object.create === 'function') {
       // implementation from standard node.js 'util' module
       module.exports = function inherits(ctor, superCtor) {
@@ -14975,7 +14975,7 @@ var app = (function () {
       return this.z.cmpn(0) === 0;
     };
 
-    var curve_1 = createCommonjsModule(function (module, exports) {
+    var curve_1 = createCommonjsModule$3(function (module, exports) {
 
     var curve = exports;
 
@@ -14985,7 +14985,7 @@ var app = (function () {
     curve.edwards = /*RicMoo:ethers:require(./edwards)*/(null);
     });
 
-    var curves_1 = createCommonjsModule(function (module, exports) {
+    var curves_1 = createCommonjsModule$3(function (module, exports) {
 
     var curves = exports;
 
@@ -15832,7 +15832,7 @@ var app = (function () {
       throw new Error('Unable to find valid recovery factor');
     };
 
-    var elliptic_1 = createCommonjsModule(function (module, exports) {
+    var elliptic_1 = createCommonjsModule$3(function (module, exports) {
 
     var elliptic = exports;
 
@@ -16286,7 +16286,7 @@ var app = (function () {
         tx.type = null;
         return tx;
     }
-    function parse(rawTransaction) {
+    function parse$1(rawTransaction) {
         const payload = arrayify(rawTransaction);
         // Legacy and EIP-155 Transactions
         if (payload[0] > 0x7f) {
@@ -16312,12 +16312,12 @@ var app = (function () {
         recoverAddress: recoverAddress,
         accessListify: accessListify,
         serialize: serialize$1,
-        parse: parse
+        parse: parse$1
     });
 
     const version$e = "contracts/5.7.0";
 
-    var __awaiter$h = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$i = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -16336,7 +16336,7 @@ var app = (function () {
         ccipReadEnabled: true
     };
     function resolveName(resolver, nameOrPromise) {
-        return __awaiter$h(this, void 0, void 0, function* () {
+        return __awaiter$i(this, void 0, void 0, function* () {
             const name = yield nameOrPromise;
             if (typeof (name) !== "string") {
                 logger$r.throwArgumentError("invalid address or ENS name", "name", name);
@@ -16360,7 +16360,7 @@ var app = (function () {
     }
     // Recursively replaces ENS names with promises to resolve the name and resolves all properties
     function resolveAddresses(resolver, value, paramType) {
-        return __awaiter$h(this, void 0, void 0, function* () {
+        return __awaiter$i(this, void 0, void 0, function* () {
             if (Array.isArray(paramType)) {
                 return yield Promise.all(paramType.map((paramType, index) => {
                     return resolveAddresses(resolver, ((Array.isArray(value)) ? value[index] : value[paramType.name]), paramType);
@@ -16385,7 +16385,7 @@ var app = (function () {
         });
     }
     function populateTransaction(contract, fragment, args) {
-        return __awaiter$h(this, void 0, void 0, function* () {
+        return __awaiter$i(this, void 0, void 0, function* () {
             // If an extra argument is given, it is overrides
             let overrides = {};
             if (args.length === fragment.inputs.length + 1 && typeof (args[args.length - 1]) === "object") {
@@ -16401,7 +16401,7 @@ var app = (function () {
                     overrides.from = resolveProperties({
                         override: resolveName(contract.signer, overrides.from),
                         signer: contract.signer.getAddress()
-                    }).then((check) => __awaiter$h(this, void 0, void 0, function* () {
+                    }).then((check) => __awaiter$i(this, void 0, void 0, function* () {
                         if (getAddress(check.signer) !== check.override) {
                             logger$r.throwError("Contract with a Signer cannot override from", Logger.errors.UNSUPPORTED_OPERATION, {
                                 operation: "overrides.from"
@@ -16526,7 +16526,7 @@ var app = (function () {
     function buildEstimate(contract, fragment) {
         const signerOrProvider = (contract.signer || contract.provider);
         return function (...args) {
-            return __awaiter$h(this, void 0, void 0, function* () {
+            return __awaiter$i(this, void 0, void 0, function* () {
                 if (!signerOrProvider) {
                     logger$r.throwError("estimate require a provider or signer", Logger.errors.UNSUPPORTED_OPERATION, {
                         operation: "estimateGas"
@@ -16577,7 +16577,7 @@ var app = (function () {
     function buildCall(contract, fragment, collapseSimple) {
         const signerOrProvider = (contract.signer || contract.provider);
         return function (...args) {
-            return __awaiter$h(this, void 0, void 0, function* () {
+            return __awaiter$i(this, void 0, void 0, function* () {
                 // Extract the "blockTag" override if present
                 let blockTag = undefined;
                 if (args.length === fragment.inputs.length + 1 && typeof (args[args.length - 1]) === "object") {
@@ -16615,7 +16615,7 @@ var app = (function () {
     }
     function buildSend(contract, fragment) {
         return function (...args) {
-            return __awaiter$h(this, void 0, void 0, function* () {
+            return __awaiter$i(this, void 0, void 0, function* () {
                 if (!contract.signer) {
                     logger$r.throwError("sending a transaction requires a signer", Logger.errors.UNSUPPORTED_OPERATION, {
                         operation: "sendTransaction"
@@ -17275,7 +17275,7 @@ var app = (function () {
             return tx;
         }
         deploy(...args) {
-            return __awaiter$h(this, void 0, void 0, function* () {
+            return __awaiter$i(this, void 0, void 0, function* () {
                 let overrides = {};
                 // If 1 extra parameter was passed in, it contains overrides
                 if (args.length === this.interface.deploy.inputs.length + 1) {
@@ -17987,7 +17987,7 @@ var app = (function () {
         shuffled: shuffled
     });
 
-    var aesJs = createCommonjsModule$1(function (module, exports) {
+    var aesJs = createCommonjsModule$4(function (module, exports) {
 
     (function(root) {
 
@@ -18921,7 +18921,7 @@ var app = (function () {
         return null;
     }
 
-    var scrypt = createCommonjsModule$1(function (module, exports) {
+    var scrypt = createCommonjsModule$4(function (module, exports) {
 
     (function(root) {
         const MAX_VALUE = 0x7fffffff;
@@ -19401,7 +19401,7 @@ var app = (function () {
 
     var scrypt$1 = scrypt;
 
-    var __awaiter$g = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$h = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -19547,7 +19547,7 @@ var app = (function () {
         return _getAccount(data, key);
     }
     function decrypt(json, password, progressCallback) {
-        return __awaiter$g(this, void 0, void 0, function* () {
+        return __awaiter$h(this, void 0, void 0, function* () {
             const data = JSON.parse(json);
             const key = yield _computeKdfKey(data, password, pbkdf2, scrypt$1.scrypt, progressCallback);
             return _getAccount(data, key);
@@ -19743,7 +19743,7 @@ var app = (function () {
 
     const version$8 = "wallet/5.7.0";
 
-    var __awaiter$f = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$g = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -19836,12 +19836,12 @@ var app = (function () {
             });
         }
         signMessage(message) {
-            return __awaiter$f(this, void 0, void 0, function* () {
+            return __awaiter$g(this, void 0, void 0, function* () {
                 return joinSignature(this._signingKey().signDigest(hashMessage(message)));
             });
         }
         _signTypedData(domain, types, value) {
-            return __awaiter$f(this, void 0, void 0, function* () {
+            return __awaiter$g(this, void 0, void 0, function* () {
                 // Populate any ENS names
                 const populated = yield TypedDataEncoder.resolveNames(domain, types, value, (name) => {
                     if (this.provider == null) {
@@ -20159,7 +20159,7 @@ var app = (function () {
 
     const version$6 = "web/5.7.1";
 
-    var __awaiter$e = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$f = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -20169,7 +20169,7 @@ var app = (function () {
         });
     };
     function getUrl(href, options) {
-        return __awaiter$e(this, void 0, void 0, function* () {
+        return __awaiter$f(this, void 0, void 0, function* () {
             if (options == null) {
                 options = {};
             }
@@ -20225,7 +20225,7 @@ var app = (function () {
         });
     }
 
-    var __awaiter$d = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$e = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -20392,7 +20392,7 @@ var app = (function () {
             return { promise, cancel };
         })();
         const runningFetch = (function () {
-            return __awaiter$d(this, void 0, void 0, function* () {
+            return __awaiter$e(this, void 0, void 0, function* () {
                 for (let attempt = 0; attempt < attemptLimit; attempt++) {
                     let response = null;
                     try {
@@ -21126,7 +21126,7 @@ var app = (function () {
             return result;
         }
         transaction(value) {
-            return parse(value);
+            return parse$1(value);
         }
         receiptLog(value) {
             return Formatter.check(this.formats.receiptLog, value);
@@ -21251,7 +21251,7 @@ var app = (function () {
         console.log("==========================");
     }
 
-    var __awaiter$c = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$d = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -21520,7 +21520,7 @@ var app = (function () {
             return this._supportsEip2544;
         }
         _fetch(selector, parameters) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 // e.g. keccak256("addr(bytes32,uint256)")
                 const tx = {
                     to: this.address,
@@ -21555,7 +21555,7 @@ var app = (function () {
             });
         }
         _fetchBytes(selector, parameters) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const result = yield this._fetch(selector, parameters);
                 if (result != null) {
                     return _parseBytes(result, 0);
@@ -21616,7 +21616,7 @@ var app = (function () {
             return null;
         }
         getAddress(coinType) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 if (coinType == null) {
                     coinType = 60;
                 }
@@ -21657,7 +21657,7 @@ var app = (function () {
             });
         }
         getAvatar() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const linkage = [{ type: "name", content: this.name }];
                 try {
                     // test data for ricmoo.eth
@@ -21770,7 +21770,7 @@ var app = (function () {
             });
         }
         getContentHash() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 // keccak256("contenthash()")
                 const hexBytes = yield this._fetchBytes("0xbc1c58d1");
                 // No contenthash
@@ -21816,7 +21816,7 @@ var app = (function () {
             });
         }
         getText(key) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 // The key encoded as parameter to fetchBytes
                 let keyBytes = toUtf8Bytes(key);
                 // The nodehash consumes the first slot, so the string pointer targets
@@ -21884,7 +21884,7 @@ var app = (function () {
             this._fastQueryDate = 0;
         }
         _ready() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 if (this._network == null) {
                     let network = null;
                     if (this._networkPromise) {
@@ -21944,7 +21944,7 @@ var app = (function () {
             return getNetwork((network == null) ? "homestead" : network);
         }
         ccipReadFetch(tx, calldata, urls) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 if (this.disableCcipRead || urls.length === 0) {
                     return null;
                 }
@@ -21980,7 +21980,7 @@ var app = (function () {
         // Fetches the blockNumber, but will reuse any result that is less
         // than maxAge old or has been requested since the last request
         _getInternalBlockNumber(maxAge) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this._ready();
                 // Allowing stale data up to maxAge old
                 if (maxAge > 0) {
@@ -22041,7 +22041,7 @@ var app = (function () {
             });
         }
         poll() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const pollId = nextPollId++;
                 // Track all running promises, so we can trigger a post-poll once they are complete
                 const runners = [];
@@ -22197,14 +22197,14 @@ var app = (function () {
         // This method should query the network if the underlying network
         // can change, such as when connected to a JSON-RPC backend
         detectNetwork() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 return logger$g.throwError("provider does not support network detection", Logger.errors.UNSUPPORTED_OPERATION, {
                     operation: "provider.detectNetwork"
                 });
             });
         }
         getNetwork() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const network = yield this._ready();
                 // Make sure we are still connected to the same network; this is
                 // only an external call for backends which can have the underlying
@@ -22316,12 +22316,12 @@ var app = (function () {
             }
         }
         waitForTransaction(transactionHash, confirmations, timeout) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 return this._waitForTransaction(transactionHash, (confirmations == null) ? 1 : confirmations, timeout || 0, null);
             });
         }
         _waitForTransaction(transactionHash, confirmations, timeout, replaceable) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const receipt = yield this.getTransactionReceipt(transactionHash);
                 // Receipt is already good
                 if ((receipt ? receipt.confirmations : 0) >= confirmations) {
@@ -22353,7 +22353,7 @@ var app = (function () {
                     if (replaceable) {
                         let lastBlockNumber = replaceable.startBlock;
                         let scannedBlock = null;
-                        const replaceHandler = (blockNumber) => __awaiter$c(this, void 0, void 0, function* () {
+                        const replaceHandler = (blockNumber) => __awaiter$d(this, void 0, void 0, function* () {
                             if (done) {
                                 return;
                             }
@@ -22361,7 +22361,7 @@ var app = (function () {
                             // we will trade off a little bit of latency for more consistent
                             // results and fewer JSON-RPC calls
                             yield stall$1(1000);
-                            this.getTransactionCount(replaceable.from).then((nonce) => __awaiter$c(this, void 0, void 0, function* () {
+                            this.getTransactionCount(replaceable.from).then((nonce) => __awaiter$d(this, void 0, void 0, function* () {
                                 if (done) {
                                     return;
                                 }
@@ -22465,12 +22465,12 @@ var app = (function () {
             });
         }
         getBlockNumber() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 return this._getInternalBlockNumber(0);
             });
         }
         getGasPrice() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const result = yield this.perform("getGasPrice", {});
                 try {
@@ -22485,7 +22485,7 @@ var app = (function () {
             });
         }
         getBalance(addressOrName, blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({
                     address: this._getAddress(addressOrName),
@@ -22504,7 +22504,7 @@ var app = (function () {
             });
         }
         getTransactionCount(addressOrName, blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({
                     address: this._getAddress(addressOrName),
@@ -22523,7 +22523,7 @@ var app = (function () {
             });
         }
         getCode(addressOrName, blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({
                     address: this._getAddress(addressOrName),
@@ -22542,7 +22542,7 @@ var app = (function () {
             });
         }
         getStorageAt(addressOrName, position, blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({
                     address: this._getAddress(addressOrName),
@@ -22571,7 +22571,7 @@ var app = (function () {
             if (hash != null && tx.hash !== hash) {
                 logger$g.throwError("Transaction hash mismatch from Provider.sendTransaction.", Logger.errors.UNKNOWN_ERROR, { expectedHash: tx.hash, returnedHash: hash });
             }
-            result.wait = (confirms, timeout) => __awaiter$c(this, void 0, void 0, function* () {
+            result.wait = (confirms, timeout) => __awaiter$d(this, void 0, void 0, function* () {
                 if (confirms == null) {
                     confirms = 1;
                 }
@@ -22608,7 +22608,7 @@ var app = (function () {
             return result;
         }
         sendTransaction(signedTransaction) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const hexTx = yield Promise.resolve(signedTransaction).then(t => hexlify(t));
                 const tx = this.formatter.transaction(signedTransaction);
@@ -22628,7 +22628,7 @@ var app = (function () {
             });
         }
         _getTransactionRequest(transaction) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 const values = yield transaction;
                 const tx = {};
                 ["from", "to"].forEach((key) => {
@@ -22662,7 +22662,7 @@ var app = (function () {
             });
         }
         _getFilter(filter) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 filter = yield filter;
                 const result = {};
                 if (filter.address != null) {
@@ -22684,7 +22684,7 @@ var app = (function () {
             });
         }
         _call(transaction, blockTag, attempt) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 if (attempt >= MAX_CCIP_REDIRECTS) {
                     logger$g.throwError("CCIP read exceeded maximum redirections", Logger.errors.SERVER_ERROR, {
                         redirects: attempt, transaction
@@ -22766,7 +22766,7 @@ var app = (function () {
             });
         }
         call(transaction, blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const resolved = yield resolveProperties({
                     transaction: this._getTransactionRequest(transaction),
@@ -22777,7 +22777,7 @@ var app = (function () {
             });
         }
         estimateGas(transaction) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({
                     transaction: this._getTransactionRequest(transaction)
@@ -22795,7 +22795,7 @@ var app = (function () {
             });
         }
         _getAddress(addressOrName) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 addressOrName = yield addressOrName;
                 if (typeof (addressOrName) !== "string") {
                     logger$g.throwArgumentError("invalid address or ENS name", "name", addressOrName);
@@ -22810,7 +22810,7 @@ var app = (function () {
             });
         }
         _getBlock(blockHashOrBlockTag, includeTransactions) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 blockHashOrBlockTag = yield blockHashOrBlockTag;
                 // If blockTag is a number (not "latest", etc), this is the block number
@@ -22832,7 +22832,7 @@ var app = (function () {
                         logger$g.throwArgumentError("invalid block hash or block tag", "blockHashOrBlockTag", blockHashOrBlockTag);
                     }
                 }
-                return poll(() => __awaiter$c(this, void 0, void 0, function* () {
+                return poll(() => __awaiter$d(this, void 0, void 0, function* () {
                     const block = yield this.perform("getBlock", params);
                     // Block was not found
                     if (block == null) {
@@ -22888,11 +22888,11 @@ var app = (function () {
             return (this._getBlock(blockHashOrBlockTag, true));
         }
         getTransaction(transactionHash) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 transactionHash = yield transactionHash;
                 const params = { transactionHash: this.formatter.hash(transactionHash, true) };
-                return poll(() => __awaiter$c(this, void 0, void 0, function* () {
+                return poll(() => __awaiter$d(this, void 0, void 0, function* () {
                     const result = yield this.perform("getTransaction", params);
                     if (result == null) {
                         if (this._emitted["t:" + transactionHash] == null) {
@@ -22918,11 +22918,11 @@ var app = (function () {
             });
         }
         getTransactionReceipt(transactionHash) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 transactionHash = yield transactionHash;
                 const params = { transactionHash: this.formatter.hash(transactionHash, true) };
-                return poll(() => __awaiter$c(this, void 0, void 0, function* () {
+                return poll(() => __awaiter$d(this, void 0, void 0, function* () {
                     const result = yield this.perform("getTransactionReceipt", params);
                     if (result == null) {
                         if (this._emitted["t:" + transactionHash] == null) {
@@ -22952,7 +22952,7 @@ var app = (function () {
             });
         }
         getLogs(filter) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 const params = yield resolveProperties({ filter: this._getFilter(filter) });
                 const logs = yield this.perform("getLogs", params);
@@ -22965,13 +22965,13 @@ var app = (function () {
             });
         }
         getEtherPrice() {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 yield this.getNetwork();
                 return this.perform("getEtherPrice", {});
             });
         }
         _getBlockTag(blockTag) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 blockTag = yield blockTag;
                 if (typeof (blockTag) === "number" && blockTag < 0) {
                     if (blockTag % 1) {
@@ -22988,7 +22988,7 @@ var app = (function () {
             });
         }
         getResolver(name) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 let currentName = name;
                 while (true) {
                     if (currentName === "" || currentName === ".") {
@@ -23016,7 +23016,7 @@ var app = (function () {
             });
         }
         _getResolver(name, operation) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 if (operation == null) {
                     operation = "ENS";
                 }
@@ -23040,7 +23040,7 @@ var app = (function () {
             });
         }
         resolveName(name) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 name = yield name;
                 // If it is already an address, nothing to resolve
                 try {
@@ -23064,7 +23064,7 @@ var app = (function () {
             });
         }
         lookupAddress(address) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 address = yield address;
                 address = this.formatter.address(address);
                 const node = address.substring(2).toLowerCase() + ".addr.reverse";
@@ -23085,7 +23085,7 @@ var app = (function () {
             });
         }
         getAvatar(nameOrAddress) {
-            return __awaiter$c(this, void 0, void 0, function* () {
+            return __awaiter$d(this, void 0, void 0, function* () {
                 let resolver = null;
                 if (isHexString(nameOrAddress)) {
                     // Address; reverse lookup
@@ -23240,7 +23240,7 @@ var app = (function () {
         }
     }
 
-    var __awaiter$b = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$c = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -23433,7 +23433,7 @@ var app = (function () {
                 transaction.gasLimit = this.provider.estimateGas(estimate);
             }
             if (transaction.to != null) {
-                transaction.to = Promise.resolve(transaction.to).then((to) => __awaiter$b(this, void 0, void 0, function* () {
+                transaction.to = Promise.resolve(transaction.to).then((to) => __awaiter$c(this, void 0, void 0, function* () {
                     if (to == null) {
                         return null;
                     }
@@ -23476,7 +23476,7 @@ var app = (function () {
             });
         }
         sendTransaction(transaction) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 // This cannot be mined any earlier than any recent block
                 const blockNumber = yield this.provider._getInternalBlockNumber(100 + 2 * this.provider.pollingInterval);
                 // Send the transaction
@@ -23485,7 +23485,7 @@ var app = (function () {
                     // Unfortunately, JSON-RPC only provides and opaque transaction hash
                     // for a response, and we need the actual transaction, so we poll
                     // for it; it should show up very quickly
-                    return yield poll(() => __awaiter$b(this, void 0, void 0, function* () {
+                    return yield poll(() => __awaiter$c(this, void 0, void 0, function* () {
                         const tx = yield this.provider.getTransaction(hash);
                         if (tx === null) {
                             return undefined;
@@ -23500,7 +23500,7 @@ var app = (function () {
             });
         }
         signMessage(message) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 const data = ((typeof (message) === "string") ? toUtf8Bytes(message) : message);
                 const address = yield this.getAddress();
                 try {
@@ -23519,7 +23519,7 @@ var app = (function () {
             });
         }
         _legacySignMessage(message) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 const data = ((typeof (message) === "string") ? toUtf8Bytes(message) : message);
                 const address = yield this.getAddress();
                 try {
@@ -23539,7 +23539,7 @@ var app = (function () {
             });
         }
         _signTypedData(domain, types, value) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 // Populate any ENS names (in-place)
                 const populated = yield TypedDataEncoder.resolveNames(domain, types, value, (name) => {
                     return this.provider.resolveName(name);
@@ -23564,7 +23564,7 @@ var app = (function () {
             });
         }
         unlock(password) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 const provider = this.provider;
                 const address = yield this.getAddress();
                 return provider.send("personal_unlockAccount", [address.toLowerCase(), password, null]);
@@ -23644,7 +23644,7 @@ var app = (function () {
             return this._cache["detectNetwork"];
         }
         _uncachedDetectNetwork() {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 yield timer(0);
                 let chainId = null;
                 try {
@@ -23774,7 +23774,7 @@ var app = (function () {
             return null;
         }
         perform(method, params) {
-            return __awaiter$b(this, void 0, void 0, function* () {
+            return __awaiter$c(this, void 0, void 0, function* () {
                 // Legacy networks do not like the type field being passed along (which
                 // is fair), so we delete type if it is 0 and a non-EIP-1559 network
                 if (method === "call" || method === "estimateGas") {
@@ -23917,7 +23917,7 @@ var app = (function () {
         };
     }
 
-    var __awaiter$a = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$b = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24054,7 +24054,7 @@ var app = (function () {
             });
         }
         poll() {
-            return __awaiter$a(this, void 0, void 0, function* () {
+            return __awaiter$b(this, void 0, void 0, function* () {
                 return null;
             });
         }
@@ -24096,7 +24096,7 @@ var app = (function () {
             return "ws:/\/localhost:8546";
         }
         _subscribe(tag, param, processFunc) {
-            return __awaiter$a(this, void 0, void 0, function* () {
+            return __awaiter$b(this, void 0, void 0, function* () {
                 let subIdPromise = this._subIds[tag];
                 if (subIdPromise == null) {
                     subIdPromise = Promise.all(param).then((param) => {
@@ -24190,7 +24190,7 @@ var app = (function () {
             });
         }
         destroy() {
-            return __awaiter$a(this, void 0, void 0, function* () {
+            return __awaiter$b(this, void 0, void 0, function* () {
                 // Wait until we have connected before trying to disconnect
                 if (this.websocket.readyState === WS$1.CONNECTING) {
                     yield (new Promise((resolve) => {
@@ -24209,7 +24209,7 @@ var app = (function () {
         }
     }
 
-    var __awaiter$9 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$a = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24235,7 +24235,7 @@ var app = (function () {
             const _super = Object.create(null, {
                 detectNetwork: { get: () => super.detectNetwork }
             });
-            return __awaiter$9(this, void 0, void 0, function* () {
+            return __awaiter$a(this, void 0, void 0, function* () {
                 let network = this.network;
                 if (network == null) {
                     network = yield _super.detectNetwork.call(this);
@@ -24424,7 +24424,7 @@ var app = (function () {
         }
     }
 
-    var __awaiter$8 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$9 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24456,7 +24456,7 @@ var app = (function () {
             const _super = Object.create(null, {
                 perform: { get: () => super.perform }
             });
-            return __awaiter$8(this, void 0, void 0, function* () {
+            return __awaiter$9(this, void 0, void 0, function* () {
                 // The Cloudflare provider does not support eth_blockNumber,
                 // so we get the latest block and pull it from that
                 if (method === "getBlockNumber") {
@@ -24468,7 +24468,7 @@ var app = (function () {
         }
     }
 
-    var __awaiter$7 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$8 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24665,7 +24665,7 @@ var app = (function () {
             return params;
         }
         fetch(module, params, post) {
-            return __awaiter$7(this, void 0, void 0, function* () {
+            return __awaiter$8(this, void 0, void 0, function* () {
                 const url = (post ? this.getPostUrl() : this.getUrl(module, params));
                 const payload = (post ? this.getPostData(module, params) : null);
                 const procFunc = (module === "proxy") ? getJsonResult : getResult;
@@ -24702,7 +24702,7 @@ var app = (function () {
             });
         }
         detectNetwork() {
-            return __awaiter$7(this, void 0, void 0, function* () {
+            return __awaiter$8(this, void 0, void 0, function* () {
                 return this.network;
             });
         }
@@ -24710,7 +24710,7 @@ var app = (function () {
             const _super = Object.create(null, {
                 perform: { get: () => super.perform }
             });
-            return __awaiter$7(this, void 0, void 0, function* () {
+            return __awaiter$8(this, void 0, void 0, function* () {
                 switch (method) {
                     case "getBlockNumber":
                         return this.fetch("proxy", { action: "eth_blockNumber" });
@@ -24850,7 +24850,7 @@ var app = (function () {
         //       Error: Result window is too large, PageNo x Offset size must
         //              be less than or equal to 10000
         getHistory(addressOrName, startBlock, endBlock) {
-            return __awaiter$7(this, void 0, void 0, function* () {
+            return __awaiter$8(this, void 0, void 0, function* () {
                 const params = {
                     action: "txlist",
                     address: (yield this.resolveName(addressOrName)),
@@ -24881,7 +24881,7 @@ var app = (function () {
         }
     }
 
-    var __awaiter$6 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$7 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -25142,7 +25142,7 @@ var app = (function () {
     // If we are doing a blockTag query, we need to make sure the backend is
     // caught up to the FallbackProvider, before sending a request to it.
     function waitForSync(config, blockNumber) {
-        return __awaiter$6(this, void 0, void 0, function* () {
+        return __awaiter$7(this, void 0, void 0, function* () {
             const provider = (config.provider);
             if ((provider.blockNumber != null && provider.blockNumber >= blockNumber) || blockNumber === -1) {
                 return provider;
@@ -25166,7 +25166,7 @@ var app = (function () {
         });
     }
     function getRunner(config, currentBlockNumber, method, params) {
-        return __awaiter$6(this, void 0, void 0, function* () {
+        return __awaiter$7(this, void 0, void 0, function* () {
             let provider = config.provider;
             switch (method) {
                 case "getBlockNumber":
@@ -25271,13 +25271,13 @@ var app = (function () {
             this._highestBlockNumber = -1;
         }
         detectNetwork() {
-            return __awaiter$6(this, void 0, void 0, function* () {
+            return __awaiter$7(this, void 0, void 0, function* () {
                 const networks = yield Promise.all(this.providerConfigs.map((c) => c.provider.getNetwork()));
                 return checkNetworks(networks);
             });
         }
         perform(method, params) {
-            return __awaiter$6(this, void 0, void 0, function* () {
+            return __awaiter$7(this, void 0, void 0, function* () {
                 // Sending transactions is special; always broadcast it to all backends
                 if (method === "sendTransaction") {
                     const results = yield Promise.all(this.providerConfigs.map((c) => {
@@ -25912,7 +25912,7 @@ var app = (function () {
         }, options);
     }
 
-    var index$1 = /*#__PURE__*/Object.freeze({
+    var index$2 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         Provider: Provider,
         BaseProvider: BaseProvider,
@@ -26208,7 +26208,7 @@ var app = (function () {
         splitSignature: splitSignature,
         joinSignature: joinSignature,
         accessListify: accessListify,
-        parseTransaction: parse,
+        parseTransaction: parse$1,
         serializeTransaction: serialize$1,
         get TransactionTypes () { return TransactionTypes; },
         getJsonWalletAddress: getJsonWalletAddress,
@@ -26233,19 +26233,19 @@ var app = (function () {
 
     const logger = new Logger(version$2);
 
-    var ethers = /*#__PURE__*/Object.freeze({
+    var ethers$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         Signer: Signer,
         Wallet: Wallet,
         VoidSigner: VoidSigner,
         getDefaultProvider: getDefaultProvider,
-        providers: index$1,
+        providers: index$2,
         BaseContract: BaseContract,
         Contract: Contract,
         ContractFactory: ContractFactory,
         BigNumber: BigNumber,
         FixedNumber: FixedNumber,
-        constants: index$2,
+        constants: index$3,
         get errors () { return ErrorCode; },
         logger: logger,
         utils: utils$7,
@@ -26257,25 +26257,25 @@ var app = (function () {
     try {
         const anyGlobal = window;
         if (anyGlobal._ethers == null) {
-            anyGlobal._ethers = ethers;
+            anyGlobal._ethers = ethers$1;
         }
     }
     catch (error) { }
 
     var lib_esm = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        ethers: ethers,
+        ethers: ethers$1,
         Signer: Signer,
         Wallet: Wallet,
         VoidSigner: VoidSigner,
         getDefaultProvider: getDefaultProvider,
-        providers: index$1,
+        providers: index$2,
         BaseContract: BaseContract,
         Contract: Contract,
         ContractFactory: ContractFactory,
         BigNumber: BigNumber,
         FixedNumber: FixedNumber,
-        constants: index$2,
+        constants: index$3,
         get errors () { return ErrorCode; },
         logger: logger,
         utils: utils$7,
@@ -26284,7 +26284,7 @@ var app = (function () {
         Wordlist: Wordlist
     });
 
-    var chains = createCommonjsModule$1(function (module, exports) {
+    var chains = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.chains = exports.defaultRpcEndpoints = void 0;
     /* ========================================================================================================================================================================= */
@@ -28209,7 +28209,7 @@ var app = (function () {
 
     var axios = axios_1;
 
-    var error = createCommonjsModule$1(function (module, exports) {
+    var error = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.WeaverError = void 0;
     // Class to handle WeaverFi Errors:
@@ -28239,7 +28239,7 @@ var app = (function () {
     exports.WeaverError = WeaverError;
     });
 
-    var ABIs = createCommonjsModule$1(function (module, exports) {
+    var ABIs = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.pika = exports.lostworlds = exports.platypus = exports.truefi = exports.harvest = exports.paladin = exports.paraswap = exports.apwine = exports.alligator = exports.moonpot = exports.avalaunch = exports.pangolin = exports.bouje = exports.wonderland = exports.cream = exports.yieldyak = exports.sushiswap = exports.apeswap = exports.everest = exports.teddy = exports.cycle = exports.scream = exports.penguin = exports.mstable = exports.axial = exports.benqi = exports.quickswap = exports.wault = exports.beefy = exports.spookyswap = exports.venus = exports.yearn = exports.compound = exports.bzx = exports.curve = exports.alpaca = exports.belt = exports.autofarm = exports.lydia = exports.pancakeswap = exports.traderjoe = exports.snowball = exports.beethovenx = exports.balancer = exports.aave = exports.nftABI = exports.lpABI = exports.minABI = void 0;
     /* ========================================================================================================================================================================= */
@@ -28846,7 +28846,7 @@ var app = (function () {
 
     var require$$1$1 = functions;
 
-    var aave$4 = createCommonjsModule$1(function (module, exports) {
+    var aave$4 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getIncentivesV3 = exports.getMarketBalancesV3 = exports.getIncentives = exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -29033,7 +29033,7 @@ var app = (function () {
     exports.getIncentivesV3 = getIncentivesV3;
     });
 
-    var alligator = createCommonjsModule$1(function (module, exports) {
+    var alligator = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedGTR = exports.getFarmBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -29147,7 +29147,7 @@ var app = (function () {
 
     var require$$0$1 = prices;
 
-    var projectFunctions = createCommonjsModule$1(function (module, exports) {
+    var projectFunctions = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.addStableToken = exports.addAxialToken = exports.addBalancerLikeToken = exports.addBalancerToken = exports.addBZXToken = exports.addCurveToken = exports.addAlpacaToken = exports.add4BeltToken = exports.addAaveBLPToken = exports.addSpookyToken = exports.addBeltToken = exports.addTraderJoeToken = void 0;
     // Imports:
@@ -29570,7 +29570,7 @@ var app = (function () {
     exports.addStableToken = addStableToken;
     });
 
-    var autofarm$3 = createCommonjsModule$1(function (module, exports) {
+    var autofarm$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -29636,7 +29636,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var avalaunch = createCommonjsModule$1(function (module, exports) {
+    var avalaunch = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedLP = exports.getStakedXAVA = exports.get = void 0;
     // Imports:
@@ -29696,7 +29696,7 @@ var app = (function () {
     exports.getStakedLP = getStakedLP;
     });
 
-    var axial = createCommonjsModule$1(function (module, exports) {
+    var axial = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedAXIAL = exports.getPoolBalancesV2 = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -29822,7 +29822,7 @@ var app = (function () {
     exports.getStakedAXIAL = getStakedAXIAL;
     });
 
-    var beefy$3 = createCommonjsModule$1(function (module, exports) {
+    var beefy$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBIFI = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -29942,7 +29942,7 @@ var app = (function () {
     exports.getStakedBIFI = getStakedBIFI;
     });
 
-    var benqi = createCommonjsModule$1(function (module, exports) {
+    var benqi = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -30005,7 +30005,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var cream$4 = createCommonjsModule$1(function (module, exports) {
+    var cream$4 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -30070,7 +30070,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var curve$3 = createCommonjsModule$1(function (module, exports) {
+    var curve$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getGaugeFactoryPoolBalances = exports.getFactoryPoolBalances = exports.getCryptoPoolBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -30239,7 +30239,7 @@ var app = (function () {
     };
     });
 
-    var cycle = createCommonjsModule$1(function (module, exports) {
+    var cycle = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedCYCLE = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -30346,7 +30346,7 @@ var app = (function () {
     exports.getStakedCYCLE = getStakedCYCLE;
     });
 
-    var lostworlds = createCommonjsModule$1(function (module, exports) {
+    var lostworlds = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedLOST = exports.get = void 0;
     // Imports:
@@ -30385,7 +30385,7 @@ var app = (function () {
     exports.getStakedLOST = getStakedLOST;
     });
 
-    var lydia = createCommonjsModule$1(function (module, exports) {
+    var lydia = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMaximusFarmBalances = exports.getAutoLYDFarmBalance = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -30496,7 +30496,7 @@ var app = (function () {
     exports.getMaximusFarmBalances = getMaximusFarmBalances;
     });
 
-    var pangolin = createCommonjsModule$1(function (module, exports) {
+    var pangolin = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -30555,7 +30555,7 @@ var app = (function () {
     exports.getFarmBalances = getFarmBalances;
     });
 
-    var penguin = createCommonjsModule$1(function (module, exports) {
+    var penguin = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getClubPenguinBalance = exports.getStakedPEFI = exports.getIglooBalances = exports.get = void 0;
     // Imports:
@@ -30650,7 +30650,7 @@ var app = (function () {
     exports.getClubPenguinBalance = getClubPenguinBalance;
     });
 
-    var platypus = createCommonjsModule$1(function (module, exports) {
+    var platypus = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFactoryPoolBalances = exports.getPoolBalances = exports.getStakedPTP = exports.get = void 0;
     // Imports:
@@ -30770,7 +30770,7 @@ var app = (function () {
     exports.getFactoryPoolBalances = getFactoryPoolBalances;
     });
 
-    var pooltogether$3 = createCommonjsModule$1(function (module, exports) {
+    var pooltogether$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalanceV4 = exports.get = void 0;
     // Imports:
@@ -30806,7 +30806,7 @@ var app = (function () {
     exports.getPoolBalanceV4 = getPoolBalanceV4;
     });
 
-    var snowball = createCommonjsModule$1(function (module, exports) {
+    var snowball = createCommonjsModule$4(function (module, exports) {
     var __importDefault = (commonjsGlobal && commonjsGlobal.__importDefault) || function (mod) {
         return (mod && mod.__esModule) ? mod : { "default": mod };
     };
@@ -30908,7 +30908,7 @@ var app = (function () {
     exports.getStakedSNOB = getStakedSNOB;
     });
 
-    var teddy = createCommonjsModule$1(function (module, exports) {
+    var teddy = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedTEDDY = exports.getStabilityPoolBalance = exports.getTroveBalance = exports.get = void 0;
     // Imports:
@@ -30998,7 +30998,7 @@ var app = (function () {
     exports.getStakedTEDDY = getStakedTEDDY;
     });
 
-    var traderjoe = createCommonjsModule$1(function (module, exports) {
+    var traderjoe = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.getBoostedFarmBalances = exports.getFarmV3Balances = exports.getFarmV2Balances = exports.getStakedJOE = exports.get = void 0;
     // Imports:
@@ -31224,7 +31224,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var yieldyak = createCommonjsModule$1(function (module, exports) {
+    var yieldyak = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedYAK = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -31342,7 +31342,7 @@ var app = (function () {
     exports.getStakedYAK = getStakedYAK;
     });
 
-    var apeswap$1 = createCommonjsModule$1(function (module, exports) {
+    var apeswap$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -31446,7 +31446,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var autofarm$2 = createCommonjsModule$1(function (module, exports) {
+    var autofarm$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getAutoVaultBalance = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -31547,7 +31547,7 @@ var app = (function () {
     exports.getAutoVaultBalance = getAutoVaultBalance;
     });
 
-    var beefy$2 = createCommonjsModule$1(function (module, exports) {
+    var beefy$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBIFI = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -31691,7 +31691,7 @@ var app = (function () {
     exports.getStakedBIFI = getStakedBIFI;
     });
 
-    var belt = createCommonjsModule$1(function (module, exports) {
+    var belt = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.getPoolBalances = exports.getStakedBELT = exports.get = void 0;
     // Imports:
@@ -31828,7 +31828,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var cream$3 = createCommonjsModule$1(function (module, exports) {
+    var cream$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -31903,7 +31903,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var moonpot = createCommonjsModule$1(function (module, exports) {
+    var moonpot = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPotBalances = exports.get = void 0;
     // Imports:
@@ -31980,7 +31980,7 @@ var app = (function () {
     exports.getPotBalances = getPotBalances;
     });
 
-    var pancakeswap = createCommonjsModule$1(function (module, exports) {
+    var pancakeswap = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getAutoCakePoolBalance = exports.getFarmBalancesV2 = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -32109,7 +32109,7 @@ var app = (function () {
     exports.getAutoCakePoolBalance = getAutoCakePoolBalance;
     });
 
-    var venus = createCommonjsModule$1(function (module, exports) {
+    var venus = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedXVS = exports.getStakedVAI = exports.getPendingRewards = exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -32227,7 +32227,7 @@ var app = (function () {
     exports.getStakedXVS = getStakedXVS;
     });
 
-    var aave$3 = createCommonjsModule$1(function (module, exports) {
+    var aave$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedLP = exports.getStakedAAVE = exports.getIncentives = exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -32380,7 +32380,7 @@ var app = (function () {
     exports.getStakedLP = getStakedLP;
     });
 
-    var apwine$1 = createCommonjsModule$1(function (module, exports) {
+    var apwine$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFutureBalances = exports.getStakedAPW = exports.get = void 0;
     // Imports:
@@ -32558,7 +32558,7 @@ var app = (function () {
     };
     });
 
-    var balancer$1 = createCommonjsModule$1(function (module, exports) {
+    var balancer$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -32701,7 +32701,7 @@ var app = (function () {
     exports.getPoolBalances = getPoolBalances;
     });
 
-    var compound = createCommonjsModule$1(function (module, exports) {
+    var compound = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -32764,7 +32764,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var cream$2 = createCommonjsModule$1(function (module, exports) {
+    var cream$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedCREAM = exports.get = void 0;
     // Imports:
@@ -32811,7 +32811,7 @@ var app = (function () {
     exports.getStakedCREAM = getStakedCREAM;
     });
 
-    var curve$2 = createCommonjsModule$1(function (module, exports) {
+    var curve$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFactoryPoolBalances = exports.getCryptoPoolBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -32957,7 +32957,7 @@ var app = (function () {
     };
     });
 
-    var mstable$1 = createCommonjsModule$1(function (module, exports) {
+    var mstable$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStaked = exports.getVaultBalances = exports.getPoolBalances = exports.getAssetBalances = exports.get = void 0;
     // Imports:
@@ -33136,7 +33136,7 @@ var app = (function () {
     exports.getStaked = getStaked;
     });
 
-    var pooltogether$2 = createCommonjsModule$1(function (module, exports) {
+    var pooltogether$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalanceV4 = exports.get = void 0;
     // Imports:
@@ -33172,7 +33172,7 @@ var app = (function () {
     exports.getPoolBalanceV4 = getPoolBalanceV4;
     });
 
-    var sushiswap$1 = createCommonjsModule$1(function (module, exports) {
+    var sushiswap$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFarmV2Balances = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -33269,7 +33269,7 @@ var app = (function () {
     exports.getFarmV2Balances = getFarmV2Balances;
     });
 
-    var yearn = createCommonjsModule$1(function (module, exports) {
+    var yearn = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getTokenBalances = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -33384,7 +33384,7 @@ var app = (function () {
     exports.getTokenBalances = getTokenBalances;
     });
 
-    var aave$2 = createCommonjsModule$1(function (module, exports) {
+    var aave$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getIncentivesV3 = exports.getMarketBalancesV3 = exports.get = void 0;
     // Imports:
@@ -33491,7 +33491,7 @@ var app = (function () {
     exports.getIncentivesV3 = getIncentivesV3;
     });
 
-    var autofarm$1 = createCommonjsModule$1(function (module, exports) {
+    var autofarm$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -33557,7 +33557,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var beefy$1 = createCommonjsModule$1(function (module, exports) {
+    var beefy$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBIFI = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -33688,7 +33688,7 @@ var app = (function () {
     exports.getStakedBIFI = getStakedBIFI;
     });
 
-    var beethovenx = createCommonjsModule$1(function (module, exports) {
+    var beethovenx = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -33908,7 +33908,7 @@ var app = (function () {
     exports.getStakedBalances = getStakedBalances;
     });
 
-    var bouje = createCommonjsModule$1(function (module, exports) {
+    var bouje = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -33969,7 +33969,7 @@ var app = (function () {
     exports.getPoolBalances = getPoolBalances;
     });
 
-    var cream$1 = createCommonjsModule$1(function (module, exports) {
+    var cream$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -34034,7 +34034,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var curve$1 = createCommonjsModule$1(function (module, exports) {
+    var curve$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFactoryPoolBalances = exports.getCryptoPoolBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -34180,7 +34180,7 @@ var app = (function () {
     };
     });
 
-    var scream = createCommonjsModule$1(function (module, exports) {
+    var scream = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedSCREAM = exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -34259,7 +34259,7 @@ var app = (function () {
     exports.getStakedSCREAM = getStakedSCREAM;
     });
 
-    var spookyswap = createCommonjsModule$1(function (module, exports) {
+    var spookyswap = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBOO = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -34328,7 +34328,7 @@ var app = (function () {
     exports.getStakedBOO = getStakedBOO;
     });
 
-    var aave$1 = createCommonjsModule$1(function (module, exports) {
+    var aave$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getIncentivesV3 = exports.getMarketBalancesV3 = exports.get = void 0;
     // Imports:
@@ -34435,7 +34435,7 @@ var app = (function () {
     exports.getIncentivesV3 = getIncentivesV3;
     });
 
-    var pika = createCommonjsModule$1(function (module, exports) {
+    var pika = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getUserRewardsV2 = exports.getUserStakeV2 = exports.get = void 0;
     // Imports:
@@ -34484,7 +34484,7 @@ var app = (function () {
     exports.getUserRewardsV2 = getUserRewardsV2;
     });
 
-    var pooltogether$1 = createCommonjsModule$1(function (module, exports) {
+    var pooltogether$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalanceV4 = exports.get = void 0;
     // Imports:
@@ -34520,7 +34520,7 @@ var app = (function () {
     exports.getPoolBalanceV4 = getPoolBalanceV4;
     });
 
-    var aave = createCommonjsModule$1(function (module, exports) {
+    var aave = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getIncentivesV3 = exports.getMarketBalancesV3 = exports.getIncentives = exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -34707,7 +34707,7 @@ var app = (function () {
     exports.getIncentivesV3 = getIncentivesV3;
     });
 
-    var apeswap = createCommonjsModule$1(function (module, exports) {
+    var apeswap = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -34811,7 +34811,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var apwine = createCommonjsModule$1(function (module, exports) {
+    var apwine = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFutureBalances = exports.get = void 0;
     // Imports:
@@ -34929,7 +34929,7 @@ var app = (function () {
     };
     });
 
-    var autofarm = createCommonjsModule$1(function (module, exports) {
+    var autofarm = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -35000,7 +35000,7 @@ var app = (function () {
     exports.getVaultBalances = getVaultBalances;
     });
 
-    var balancer = createCommonjsModule$1(function (module, exports) {
+    var balancer = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -35110,7 +35110,7 @@ var app = (function () {
     exports.getPoolBalances = getPoolBalances;
     });
 
-    var beefy = createCommonjsModule$1(function (module, exports) {
+    var beefy = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedBIFI = exports.getVaultBalances = exports.get = void 0;
     // Imports:
@@ -35230,7 +35230,7 @@ var app = (function () {
     exports.getStakedBIFI = getStakedBIFI;
     });
 
-    var cream = createCommonjsModule$1(function (module, exports) {
+    var cream = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getMarketBalances = exports.get = void 0;
     // Imports:
@@ -35295,7 +35295,7 @@ var app = (function () {
     exports.getMarketBalances = getMarketBalances;
     });
 
-    var curve = createCommonjsModule$1(function (module, exports) {
+    var curve = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFactoryPoolBalances = exports.getCryptoPoolBalances = exports.getPoolBalances = exports.get = void 0;
     // Imports:
@@ -35441,7 +35441,7 @@ var app = (function () {
     };
     });
 
-    var mstable = createCommonjsModule$1(function (module, exports) {
+    var mstable = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getPoolBalances = exports.getAssetBalances = exports.get = void 0;
     // Imports:
@@ -35518,7 +35518,7 @@ var app = (function () {
     exports.getPoolBalances = getPoolBalances;
     });
 
-    var pooltogether = createCommonjsModule$1(function (module, exports) {
+    var pooltogether = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getCommunityPoolBalance = exports.getPoolBalanceV4 = exports.get = void 0;
     // Imports:
@@ -35570,7 +35570,7 @@ var app = (function () {
     exports.getCommunityPoolBalance = getCommunityPoolBalance;
     });
 
-    var quickswap = createCommonjsModule$1(function (module, exports) {
+    var quickswap = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getStakedQUICK = exports.getDualFarmBalances = exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -35717,7 +35717,7 @@ var app = (function () {
     };
     });
 
-    var sushiswap = createCommonjsModule$1(function (module, exports) {
+    var sushiswap = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getFarmBalances = exports.get = void 0;
     // Imports:
@@ -35956,7 +35956,7 @@ var app = (function () {
     	default: _default
     }, '__esModule', {value: true});
 
-    var projects = createCommonjsModule$1(function (module, exports) {
+    var projects = createCommonjsModule$4(function (module, exports) {
     /* [HEED MY WARNING FELLOW DEV!] This file was auto-generated during build by '/pre-build/projects.js'. Any changes to this file directly will not persist after building. [FARE THEE WELL] */
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.projects = void 0;
@@ -36041,9 +36041,9 @@ var app = (function () {
     };
     });
 
-    var ethers_1 = /*@__PURE__*/getAugmentedNamespace(lib_esm);
+    var ethers = /*@__PURE__*/getAugmentedNamespace(lib_esm);
 
-    var ens = createCommonjsModule$1(function (module, exports) {
+    var ens = createCommonjsModule$4(function (module, exports) {
     var __importDefault = (commonjsGlobal && commonjsGlobal.__importDefault) || function (mod) {
         return (mod && mod.__esModule) ? mod : { "default": mod };
     };
@@ -36055,7 +36055,7 @@ var app = (function () {
 
     // Initializations:
     const ensSubgraphURL = 'https://api.thegraph.com/subgraphs/name/ensdomains/ens';
-    const ethProvider = new ethers_1.ethers.providers.StaticJsonRpcProvider(chains.chains.eth.rpcs[0]);
+    const ethProvider = new ethers.ethers.providers.StaticJsonRpcProvider(chains.chains.eth.rpcs[0]);
     /* ========================================================================================================================================================================= */
     /**
      * Function to resolve an ENS domain name into an address.
@@ -36123,7 +36123,7 @@ var app = (function () {
     exports.getSubgraphDomains = getSubgraphDomains;
     });
 
-    var abi_1 = /*@__PURE__*/getAugmentedNamespace(lib_esm$c);
+    var abi$2 = /*@__PURE__*/getAugmentedNamespace(lib_esm$c);
 
     var address_1 = /*@__PURE__*/getAugmentedNamespace(lib_esm$g);
 
@@ -36165,7 +36165,7 @@ var app = (function () {
 
     var web_1 = /*@__PURE__*/getAugmentedNamespace(lib_esm$3);
 
-    var utils$5 = createCommonjsModule$1(function (module, exports) {
+    var utils$5 = createCommonjsModule$4(function (module, exports) {
     var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
         if (k2 === undefined) k2 = k;
         Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -36189,20 +36189,20 @@ var app = (function () {
     exports.formatBytes32String = exports.Utf8ErrorFuncs = exports.toUtf8String = exports.toUtf8CodePoints = exports.toUtf8Bytes = exports._toEscapedUtf8String = exports.nameprep = exports.hexDataSlice = exports.hexDataLength = exports.hexZeroPad = exports.hexValue = exports.hexStripZeros = exports.hexConcat = exports.isHexString = exports.hexlify = exports.base64 = exports.base58 = exports.TransactionDescription = exports.LogDescription = exports.Interface = exports.SigningKey = exports.HDNode = exports.defaultPath = exports.isBytesLike = exports.isBytes = exports.zeroPad = exports.stripZeros = exports.concat = exports.arrayify = exports.shallowCopy = exports.resolveProperties = exports.getStatic = exports.defineReadOnly = exports.deepCopy = exports.checkProperties = exports.poll = exports.fetchJson = exports._fetchData = exports.RLP = exports.Logger = exports.checkResultErrors = exports.FormatTypes = exports.ParamType = exports.FunctionFragment = exports.EventFragment = exports.ErrorFragment = exports.ConstructorFragment = exports.Fragment = exports.defaultAbiCoder = exports.AbiCoder = void 0;
     exports.Indexed = exports.Utf8ErrorReason = exports.UnicodeNormalizationForm = exports.SupportedAlgorithm = exports.mnemonicToSeed = exports.isValidMnemonic = exports.entropyToMnemonic = exports.mnemonicToEntropy = exports.getAccountPath = exports.verifyTypedData = exports.verifyMessage = exports.recoverPublicKey = exports.computePublicKey = exports.recoverAddress = exports.computeAddress = exports.getJsonWalletAddress = exports.TransactionTypes = exports.serializeTransaction = exports.parseTransaction = exports.accessListify = exports.joinSignature = exports.splitSignature = exports.soliditySha256 = exports.solidityKeccak256 = exports.solidityPack = exports.shuffled = exports.randomBytes = exports.sha512 = exports.sha256 = exports.ripemd160 = exports.keccak256 = exports.computeHmac = exports.commify = exports.parseUnits = exports.formatUnits = exports.parseEther = exports.formatEther = exports.isAddress = exports.getCreate2Address = exports.getContractAddress = exports.getIcapAddress = exports.getAddress = exports._TypedDataEncoder = exports.id = exports.isValidName = exports.namehash = exports.hashMessage = exports.dnsEncode = exports.parseBytes32String = void 0;
 
-    Object.defineProperty(exports, "AbiCoder", { enumerable: true, get: function () { return abi_1.AbiCoder; } });
-    Object.defineProperty(exports, "checkResultErrors", { enumerable: true, get: function () { return abi_1.checkResultErrors; } });
-    Object.defineProperty(exports, "ConstructorFragment", { enumerable: true, get: function () { return abi_1.ConstructorFragment; } });
-    Object.defineProperty(exports, "defaultAbiCoder", { enumerable: true, get: function () { return abi_1.defaultAbiCoder; } });
-    Object.defineProperty(exports, "ErrorFragment", { enumerable: true, get: function () { return abi_1.ErrorFragment; } });
-    Object.defineProperty(exports, "EventFragment", { enumerable: true, get: function () { return abi_1.EventFragment; } });
-    Object.defineProperty(exports, "FormatTypes", { enumerable: true, get: function () { return abi_1.FormatTypes; } });
-    Object.defineProperty(exports, "Fragment", { enumerable: true, get: function () { return abi_1.Fragment; } });
-    Object.defineProperty(exports, "FunctionFragment", { enumerable: true, get: function () { return abi_1.FunctionFragment; } });
-    Object.defineProperty(exports, "Indexed", { enumerable: true, get: function () { return abi_1.Indexed; } });
-    Object.defineProperty(exports, "Interface", { enumerable: true, get: function () { return abi_1.Interface; } });
-    Object.defineProperty(exports, "LogDescription", { enumerable: true, get: function () { return abi_1.LogDescription; } });
-    Object.defineProperty(exports, "ParamType", { enumerable: true, get: function () { return abi_1.ParamType; } });
-    Object.defineProperty(exports, "TransactionDescription", { enumerable: true, get: function () { return abi_1.TransactionDescription; } });
+    Object.defineProperty(exports, "AbiCoder", { enumerable: true, get: function () { return abi$2.AbiCoder; } });
+    Object.defineProperty(exports, "checkResultErrors", { enumerable: true, get: function () { return abi$2.checkResultErrors; } });
+    Object.defineProperty(exports, "ConstructorFragment", { enumerable: true, get: function () { return abi$2.ConstructorFragment; } });
+    Object.defineProperty(exports, "defaultAbiCoder", { enumerable: true, get: function () { return abi$2.defaultAbiCoder; } });
+    Object.defineProperty(exports, "ErrorFragment", { enumerable: true, get: function () { return abi$2.ErrorFragment; } });
+    Object.defineProperty(exports, "EventFragment", { enumerable: true, get: function () { return abi$2.EventFragment; } });
+    Object.defineProperty(exports, "FormatTypes", { enumerable: true, get: function () { return abi$2.FormatTypes; } });
+    Object.defineProperty(exports, "Fragment", { enumerable: true, get: function () { return abi$2.Fragment; } });
+    Object.defineProperty(exports, "FunctionFragment", { enumerable: true, get: function () { return abi$2.FunctionFragment; } });
+    Object.defineProperty(exports, "Indexed", { enumerable: true, get: function () { return abi$2.Indexed; } });
+    Object.defineProperty(exports, "Interface", { enumerable: true, get: function () { return abi$2.Interface; } });
+    Object.defineProperty(exports, "LogDescription", { enumerable: true, get: function () { return abi$2.LogDescription; } });
+    Object.defineProperty(exports, "ParamType", { enumerable: true, get: function () { return abi$2.ParamType; } });
+    Object.defineProperty(exports, "TransactionDescription", { enumerable: true, get: function () { return abi$2.TransactionDescription; } });
 
     Object.defineProperty(exports, "getAddress", { enumerable: true, get: function () { return address_1.getAddress; } });
     Object.defineProperty(exports, "getCreate2Address", { enumerable: true, get: function () { return address_1.getCreate2Address; } });
@@ -36399,7 +36399,7 @@ var app = (function () {
         };
         return __assign$5.apply(this, arguments);
     };
-    var __awaiter$5 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter$6 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36408,7 +36408,7 @@ var app = (function () {
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     };
-    var __generator$5 = (undefined && undefined.__generator) || function (thisArg, body) {
+    var __generator$6 = (undefined && undefined.__generator) || function (thisArg, body) {
         var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
         return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
         function verb(n) { return function (v) { return step([n, v]); }; }
@@ -36541,9 +36541,9 @@ var app = (function () {
          */
         Multicall.prototype.call = function (contractCallContexts, contractCallOptions) {
             if (contractCallOptions === void 0) { contractCallOptions = {}; }
-            return __awaiter$5(this, void 0, void 0, function () {
+            return __awaiter$6(this, void 0, void 0, function () {
                 var aggregateResponse, returnObject, response, contractCallsResults, originalContractCallContext, returnObjectResult, method, methodContext, originalContractCallMethodContext, outputTypes, decodedReturnValues;
-                return __generator$5(this, function (_a) {
+                return __generator$6(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             if (!Array.isArray(contractCallContexts)) {
@@ -36698,9 +36698,9 @@ var app = (function () {
          * @param calls The calls
          */
         Multicall.prototype.execute = function (calls, options) {
-            return __awaiter$5(this, void 0, void 0, function () {
+            return __awaiter$6(this, void 0, void 0, function () {
                 var _a;
-                return __generator$5(this, function (_b) {
+                return __generator$6(this, function (_b) {
                     switch (_b.label) {
                         case 0:
                             _a = this._executionType;
@@ -36724,10 +36724,10 @@ var app = (function () {
          * @param calls The calls context
          */
         Multicall.prototype.executeWithWeb3 = function (calls, options) {
-            return __awaiter$5(this, void 0, void 0, function () {
+            return __awaiter$6(this, void 0, void 0, function () {
                 var web3, networkId, contract, callParams, contractResponse, contractResponse;
                 var _a, _b;
-                return __generator$5(this, function (_c) {
+                return __generator$6(this, function (_c) {
                     switch (_c.label) {
                         case 0:
                             web3 = this.getTypedOptions().web3Instance;
@@ -36763,9 +36763,9 @@ var app = (function () {
          * @param calls The calls
          */
         Multicall.prototype.executeWithEthersOrCustom = function (calls, options) {
-            return __awaiter$5(this, void 0, void 0, function () {
+            return __awaiter$6(this, void 0, void 0, function () {
                 var ethersProvider, customProvider, network, contract, overrideOptions, contractResponse, contractResponse;
-                return __generator$5(this, function (_a) {
+                return __generator$6(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             ethersProvider = this.getTypedOptions()
@@ -36928,7 +36928,7 @@ var app = (function () {
         Multicall: Multicall
     });
 
-    var tokens = createCommonjsModule$1(function (module, exports) {
+    var tokens = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.arb_data = exports.op_data = exports.cronos_data = exports.avax_data = exports.ftm_data = exports.poly_data = exports.bsc_data = exports.eth_data = void 0;
     /* ========================================================================================================================================================================= */
@@ -37623,7 +37623,7 @@ var app = (function () {
 
     var ethereum_multicall_1 = /*@__PURE__*/getAugmentedNamespace(esm$1);
 
-    var functions = createCommonjsModule$1(function (module, exports) {
+    var functions = createCommonjsModule$4(function (module, exports) {
     var __importDefault = (commonjsGlobal && commonjsGlobal.__importDefault) || function (mod) {
         return (mod && mod.__esModule) ? mod : { "default": mod };
     };
@@ -37664,7 +37664,7 @@ var app = (function () {
      * Function to update ethers providers for a chain.
      */
     const updateChainProviders = (chain) => {
-        exports.providers[chain] = chains.chains[chain].rpcs.map(url => new ethers_1.ethers.providers.StaticJsonRpcProvider(url, chains.chains[chain].id));
+        exports.providers[chain] = chains.chains[chain].rpcs.map(url => new ethers.ethers.providers.StaticJsonRpcProvider(url, chains.chains[chain].id));
     };
     exports.updateChainProviders = updateChainProviders;
     /**
@@ -37695,7 +37695,7 @@ var app = (function () {
         let rpcID = 0;
         while (result === undefined && errors < maxQueryRetries) {
             try {
-                let contract = new ethers_1.ethers.Contract(address, abi, exports.providers[chain][rpcID]);
+                let contract = new ethers.ethers.Contract(address, abi, exports.providers[chain][rpcID]);
                 if (block) {
                     result = await contract[method](...args, { blockTag: block });
                 }
@@ -37745,7 +37745,7 @@ var app = (function () {
                 (options === null || options === void 0 ? void 0 : options.logs) && console.info(`Querying ${event} events on blocks ${lastQueriedBlock} to ${targetBlock}...`);
                 while (result === undefined) {
                     try {
-                        let contract = new ethers_1.ethers.Contract(address, abi, exports.providers[chain][rpcID]);
+                        let contract = new ethers.ethers.Contract(address, abi, exports.providers[chain][rpcID]);
                         let eventFilter = contract.filters[event](...args);
                         result = await contract.queryFilter(eventFilter, lastQueriedBlock, targetBlock);
                         (options === null || options === void 0 ? void 0 : options.logs) && result.length > 0 && console.info(`Found ${result.length} ${event} events.`);
@@ -38030,7 +38030,7 @@ var app = (function () {
      * @returns True or false, depending on if the hash is a valid address or not.
      */
     const isAddress = (address) => {
-        return ethers_1.ethers.utils.isAddress(address);
+        return ethers.ethers.utils.isAddress(address);
     };
     exports.isAddress = isAddress;
     /* ========================================================================================================================================================================= */
@@ -38449,7 +38449,7 @@ var app = (function () {
      * @returns A regular JavaScript number.
      */
     const parseBN = (bn) => {
-        return parseInt(ethers_1.ethers.BigNumber.from(bn).toString());
+        return parseInt(ethers.ethers.BigNumber.from(bn).toString());
     };
     exports.parseBN = parseBN;
     /* ========================================================================================================================================================================= */
@@ -38640,7 +38640,7 @@ var app = (function () {
     };
     });
 
-    var prices = createCommonjsModule$1(function (module, exports) {
+    var prices = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.updatePrices = exports.queryParaSwapPrice = exports.query1InchPrice = exports.queryCoinGeckoPrices = exports.checkTokenPrice = exports.getTokenPrice = exports.getNativeTokenPrices = exports.getChainTokenPrices = exports.getAllTokenPrices = exports.prices = void 0;
     // Imports:
@@ -39077,7 +39077,7 @@ var app = (function () {
     };
     });
 
-    var chainFunctions = createCommonjsModule$1(function (module, exports) {
+    var chainFunctions = createCommonjsModule$4(function (module, exports) {
     var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
         if (k2 === undefined) k2 = k;
         var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -39317,7 +39317,7 @@ var app = (function () {
     exports.ETHChainFunctions = ETHChainFunctions;
     });
 
-    var types$3 = createCommonjsModule$1(function (module, exports) {
+    var types$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isXToken = exports.isDebtToken = exports.isLPToken = exports.isToken = exports.isNativeToken = void 0;
     // Token Type Guards:
@@ -39343,7 +39343,7 @@ var app = (function () {
     exports.isXToken = isXToken;
     });
 
-    var dist = createCommonjsModule$1(function (module, exports) {
+    var dist = createCommonjsModule$4(function (module, exports) {
     var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
         if (k2 === undefined) k2 = k;
         var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -81352,25 +81352,8682 @@ var app = (function () {
     	contracts: contracts
     };
 
-    class PoolTogether {
-        static async totalDeposited(address) {
-            const chainIdMap = {
-                1: 'eth',
-                10: 'op',
-                137: 'poly',
-                43114: 'avax'
-            };
-            let balance = BigNumber.from(0);
-            for (const deployment of mainnet.contracts) {
-                if (deployment.type === "Ticket") {
-                    const chain = chainIdMap[deployment.chainId];
-                    const chainBalance = await functions.query(chain, deployment.address, deployment.abi, "balanceOf", [address]);
-                    balance = balance.add(chainBalance);
+    function calculateFractionOfPrize(tierTotalPrizes, tierValue) {
+      var value = tierValue ? tierValue.toString() : '0';
+      var totalPrizes = tierTotalPrizes || '1';
+      var valueAtTierIndexUnformatted = parseUnits(value, 9);
+      return valueAtTierIndexUnformatted.div(totalPrizes);
+    }
+
+    function calculateNormalizeBalancePicksFromTotalPicks(numberOfPicks, normalizedBalance) {
+      if (!numberOfPicks || !normalizedBalance) return BigNumber.from(0);
+      return BigNumber.from(numberOfPicks).mul(BigNumber.from(normalizedBalance)).div(BigNumber.from('1000000000000000000'));
+    }
+
+    function createDrawResultsObject(drawId) {
+      return {
+        prizes: [],
+        totalValue: BigNumber.from('0'),
+        drawId: drawId
+      };
+    }
+
+    function _extends() {
+      _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+
+        return target;
+      };
+
+      return _extends.apply(this, arguments);
+    }
+
+    function _unsupportedIterableToArray(o, minLen) {
+      if (!o) return;
+      if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+      var n = Object.prototype.toString.call(o).slice(8, -1);
+      if (n === "Object" && o.constructor) n = o.constructor.name;
+      if (n === "Map" || n === "Set") return Array.from(o);
+      if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+    }
+
+    function _arrayLikeToArray(arr, len) {
+      if (len == null || len > arr.length) len = arr.length;
+
+      for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+
+    function _createForOfIteratorHelperLoose(o, allowArrayLike) {
+      var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+      if (it) return (it = it.call(o)).next.bind(it);
+
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+        return function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        };
+      }
+
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+
+    var sortByPrizeAwardableDesc = function sortByPrizeAwardableDesc(a, b) {
+      var bSubA = b.amount.sub(a.amount);
+      if (bSubA.isZero()) return 0;
+      if (bSubA.isNegative()) return -1;
+      return 1;
+    };
+
+    var debug$2 = /*#__PURE__*/(() => (() => null))('pt:v4-utils-js');
+
+    function filterResultsByValue(drawResults, maxPicksPerUser) {
+      // if the user has more winning picks than max pick per user for the draw, we sort by value and remove the lowest value picks
+      if (drawResults.prizes.length > maxPicksPerUser) {
+        debug$2("user has more claims (" + drawResults.prizes.length + ") than the max picks per user (" + maxPicksPerUser + "). Sorting.."); // sort by value
+
+        var descendingSortedPrizes = drawResults.prizes.filter(function (prizeAwardable) {
+          return !prizeAwardable.amount.isZero();
+        }).sort(sortByPrizeAwardableDesc); // remove the lowest value picks up to the max picks per user
+
+        var slicedDescendingSortedPrizes = descendingSortedPrizes.slice(0, maxPicksPerUser); // sum the sorted values
+
+        var newTotalValue = slicedDescendingSortedPrizes.reduce(function (accumulator, currentValue) {
+          return accumulator.add(currentValue.amount);
+        }, BigNumber.from(0));
+        return _extends({}, drawResults, {
+          totalValue: newTotalValue,
+          prizes: slicedDescendingSortedPrizes
+        });
+      } // if not greater than max picks per user, return the whole array
+
+
+      return drawResults;
+    }
+
+    function filterUndefinedValues(ts) {
+      return ts.filter(function (t) {
+        return Boolean(t);
+      });
+    }
+
+    var debug$3 = /*#__PURE__*/(() => (() => null))('pt:v4-utils-js'); //SOLIDITY SIG: function _findBitMatchesAtIndex(uint256 word1, uint256 word2, uint256 indexOffset, uint8 _bitRangeMaskValue)
+
+
+    function findBitMatchesAtIndex(word1, word2, matchIndex, bitRangeSize) {
+      var indexOffset = matchIndex * bitRangeSize;
+      debug$3("indexOffset: ", indexOffset);
+      var word1DataHexString = word1.toHexString();
+      var word2DataHexString = word2.toHexString();
+      debug$3(word1DataHexString);
+      debug$3(word2DataHexString);
+      var bitRangeMaxInt = Math.pow(2, bitRangeSize) - 1; // debug(`Max int: `, bitRangeMaxInt.toString(16))
+
+      var mask = BigInt(bitRangeMaxInt) << BigInt(indexOffset.toString());
+      debug$3(mask.toString(16));
+      var bits1 = BigInt(word1DataHexString) & BigInt(mask.toString());
+      debug$3("bits1: ", bits1.toString(16));
+      var bits2 = BigInt(word2DataHexString) & BigInt(mask.toString());
+      debug$3("bits2: ", bits2.toString(16));
+      var match = bits1 === bits2;
+      debug$3("DrawCalculator:: matching " + bits1.toString() + " with " + bits2.toString() + ": " + match);
+      return match;
+    }
+
+    function hashUserAddress(address) {
+      return keccak256(['address'], [address]);
+    }
+
+    function isBitRangeSizeValid(bitRangeSize, matchCardinality) {
+      return bitRangeSize <= Math.floor(256 / matchCardinality);
+    }
+
+    function sumTwoBigNumbers(bn1, bn2) {
+      return BigNumber.from(bn1).add(BigNumber.from(bn2));
+    }
+    function sumBigNumbers$1(numbers) {
+      return numbers.reduce(sumTwoBigNumbers, BigNumber.from(0));
+    }
+
+    function isTiersValid(tiers) {
+      var total = sumBigNumbers$1(tiers); // @dev The tier total percentage must be less than 1e9
+      // @dev Tiers are denominated in 1e9 and represented as a percentage (e.g. 0.1 = 10%).
+
+      return !BigNumber.from(total).gt(1000000000);
+    }
+
+    function sanityCheckPrizeDistribution(prizeDistribution) {
+      var validBitRangeSize = isBitRangeSizeValid(prizeDistribution.bitRangeSize, prizeDistribution.matchCardinality);
+      if (!validBitRangeSize) return 'DrawCalc/bitRangeSize-too-large';
+      var validTiers = isTiersValid(prizeDistribution.tiers);
+      if (!validTiers) return 'DrawCalc/tiers-gt-100%';
+      return '';
+    }
+
+    var sortByBigNumberAsc = function sortByBigNumberAsc(a, b) {
+      var aSubB = a.sub(b);
+      if (aSubB.isZero()) return 0;
+      if (aSubB.isNegative()) return -1;
+      return 1;
+    };
+    var sortByBigNumberDesc = function sortByBigNumberDesc(a, b) {
+      var bSubA = b.sub(a);
+      if (bSubA.isZero()) return 0;
+      if (bSubA.isNegative()) return -1;
+      return 1;
+    };
+
+    var formatTierPercentage = function formatTierPercentage(tier) {
+      return parseUnits(tier, 9).toNumber();
+    };
+
+    var parseTierPercentage = function parseTierPercentage(tier) {
+      return parseUnits(tier, 9);
+    };
+
+    function updateDrawResultsWithWinningPicks(pickPrizes, results, picks) {
+      var _result = results;
+      pickPrizes.forEach(function (pickPrize, index) {
+        var pick = picks[index];
+        if (pickPrize.amount.eq(0)) return;
+
+        var prizeAwardable = _extends({}, pickPrize, {
+          pick: BigNumber.from(pick.index)
+        });
+
+        _result.totalValue = _result.totalValue.add(prizeAwardable.amount);
+
+        _result.prizes.push(prizeAwardable);
+      });
+      return _result;
+    }
+
+
+
+    var index$1 = {
+        __proto__: null,
+        createDrawResultsObject: createDrawResultsObject,
+        filterResultsByValue: filterResultsByValue,
+        filterUndefinedValues: filterUndefinedValues,
+        findBitMatchesAtIndex: findBitMatchesAtIndex,
+        hashUserAddress: hashUserAddress,
+        isBitRangeSizeValid: isBitRangeSizeValid,
+        isTiersValid: isTiersValid,
+        sanityCheckPrizeDistribution: sanityCheckPrizeDistribution,
+        sumBigNumbers: sumBigNumbers$1,
+        sumTwoBigNumbers: sumTwoBigNumbers,
+        sortByBigNumberDesc: sortByBigNumberDesc,
+        sortByBigNumberAsc: sortByBigNumberAsc,
+        sortByPrizeAwardableDesc: sortByPrizeAwardableDesc,
+        formatTierPercentage: formatTierPercentage,
+        parseTierPercentage: parseTierPercentage,
+        updateDrawResultsWithWinningPicks: updateDrawResultsWithWinningPicks
+    };
+
+    function calculateNumberOfMatches(pickNumber, winningRandomNumber, matchCardinality, bitRangeSize) {
+      var numberOfMatches = 0;
+
+      var _pickNumber = BigNumber.from(pickNumber);
+
+      var _winningRandomNumber = BigNumber.from(winningRandomNumber);
+
+      for (var matchIndex = 0; matchIndex < matchCardinality; matchIndex++) {
+        if (!findBitMatchesAtIndex(_pickNumber, _winningRandomNumber, matchIndex, bitRangeSize)) {
+          break;
+        }
+
+        numberOfMatches++;
+      }
+
+      return numberOfMatches;
+    }
+
+    function calculateNumberOfPrizesForTierIndex(bitRangeSize, tierIndex) {
+      if (tierIndex > 0) {
+        return (1 << bitRangeSize * tierIndex) - (1 << bitRangeSize * (tierIndex - 1));
+      } else {
+        return 1;
+      }
+    }
+
+    /**
+     * Calculates the random number for a pick for a user at a given index.
+     * @param address
+     * @param pickIndex
+     * @returns
+     */
+
+    function calculatePick(address, pickIndex) {
+      var _pickIndex = BigNumber.from(pickIndex);
+
+      var abiEncodedValue = pack(['bytes32', 'uint256'], [address, _pickIndex]);
+      var userRandomNumber = keccak256(['address'], [abiEncodedValue]);
+      return {
+        index: _pickIndex.toNumber(),
+        hash: userRandomNumber
+      };
+    }
+
+    function calculatePrizeForTierPercentage(tierIndex, tierValue, bitRangeSize, prizeAmount) {
+      var numberOfPrizes = calculateNumberOfPrizesForTierIndex(bitRangeSize, tierIndex);
+      var fractionOfPrize = calculateFractionOfPrize(numberOfPrizes, tierValue);
+      var expectedPrizeAmount = prizeAmount.mul(fractionOfPrize);
+      expectedPrizeAmount = expectedPrizeAmount.div(BigNumber.from('1000000000000000000'));
+      return expectedPrizeAmount;
+    }
+
+    function calculateTierIndexFromMatches(matchCardinality, numberOfMatches) {
+      if (numberOfMatches > matchCardinality) throw new Error('numberOfMatches cannot be greater than matchCardinality');
+      return matchCardinality - numberOfMatches;
+    }
+
+    var MAXIUMUM_TIERS_LENGTH = 16;
+
+    function computePrizeAmount(tierIndex, tierValue, bitRangeSize, prizeAmount) {
+      if (tierIndex > MAXIUMUM_TIERS_LENGTH) {
+        return {
+          amount: BigNumber.from(0),
+          tierIndex: -1
+        };
+      }
+
+      var expectedPrizeAmount = calculatePrizeForTierPercentage(tierIndex, tierValue, bitRangeSize, prizeAmount);
+      return {
+        amount: expectedPrizeAmount,
+        tierIndex: tierIndex
+      };
+    }
+
+    function computePickPrize(pickHash, winningRandomNumber, bitRangeSize, matchCardinality, prize, tiers) {
+      var numberOfMatches = calculateNumberOfMatches(pickHash, winningRandomNumber, matchCardinality, bitRangeSize);
+      var tierIndex = calculateTierIndexFromMatches(matchCardinality, numberOfMatches);
+      var pickAmount = computePrizeAmount(tierIndex, tiers[tierIndex], bitRangeSize, prize);
+      return pickAmount;
+    }
+
+    function computePicksPrizes(picks, winningRandomNumber, bitRangeSize, matchCardinality, prize, tiers) {
+      return picks.map(function (pick) {
+        return computePickPrize(pick.hash, winningRandomNumber, bitRangeSize, matchCardinality, prize, tiers);
+      });
+    }
+
+    function createCommonjsModule$2(fn, module) {
+    	return module = { exports: {} }, fn(module, module.exports), module.exports;
+    }
+
+    createCommonjsModule$2(function (module) {
+    /**
+     * Copyright (c) 2014-present, Facebook, Inc.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     */
+
+    var runtime = (function (exports) {
+
+      var Op = Object.prototype;
+      var hasOwn = Op.hasOwnProperty;
+      var undefined$1; // More compressible than void 0.
+      var $Symbol = typeof Symbol === "function" ? Symbol : {};
+      var iteratorSymbol = $Symbol.iterator || "@@iterator";
+      var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+      var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+      function define(obj, key, value) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+        return obj[key];
+      }
+      try {
+        // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+        define({}, "");
+      } catch (err) {
+        define = function(obj, key, value) {
+          return obj[key] = value;
+        };
+      }
+
+      function wrap(innerFn, outerFn, self, tryLocsList) {
+        // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+        var generator = Object.create(protoGenerator.prototype);
+        var context = new Context(tryLocsList || []);
+
+        // The ._invoke method unifies the implementations of the .next,
+        // .throw, and .return methods.
+        generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+        return generator;
+      }
+      exports.wrap = wrap;
+
+      // Try/catch helper to minimize deoptimizations. Returns a completion
+      // record like context.tryEntries[i].completion. This interface could
+      // have been (and was previously) designed to take a closure to be
+      // invoked without arguments, but in all the cases we care about we
+      // already have an existing method we want to call, so there's no need
+      // to create a new function object. We can even get away with assuming
+      // the method takes exactly one argument, since that happens to be true
+      // in every case, so we don't have to touch the arguments object. The
+      // only additional allocation required is the completion record, which
+      // has a stable shape and so hopefully should be cheap to allocate.
+      function tryCatch(fn, obj, arg) {
+        try {
+          return { type: "normal", arg: fn.call(obj, arg) };
+        } catch (err) {
+          return { type: "throw", arg: err };
+        }
+      }
+
+      var GenStateSuspendedStart = "suspendedStart";
+      var GenStateSuspendedYield = "suspendedYield";
+      var GenStateExecuting = "executing";
+      var GenStateCompleted = "completed";
+
+      // Returning this object from the innerFn has the same effect as
+      // breaking out of the dispatch switch statement.
+      var ContinueSentinel = {};
+
+      // Dummy constructor functions that we use as the .constructor and
+      // .constructor.prototype properties for functions that return Generator
+      // objects. For full spec compliance, you may wish to configure your
+      // minifier not to mangle the names of these two functions.
+      function Generator() {}
+      function GeneratorFunction() {}
+      function GeneratorFunctionPrototype() {}
+
+      // This is a polyfill for %IteratorPrototype% for environments that
+      // don't natively support it.
+      var IteratorPrototype = {};
+      define(IteratorPrototype, iteratorSymbol, function () {
+        return this;
+      });
+
+      var getProto = Object.getPrototypeOf;
+      var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+      if (NativeIteratorPrototype &&
+          NativeIteratorPrototype !== Op &&
+          hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+        // This environment has a native %IteratorPrototype%; use it instead
+        // of the polyfill.
+        IteratorPrototype = NativeIteratorPrototype;
+      }
+
+      var Gp = GeneratorFunctionPrototype.prototype =
+        Generator.prototype = Object.create(IteratorPrototype);
+      GeneratorFunction.prototype = GeneratorFunctionPrototype;
+      define(Gp, "constructor", GeneratorFunctionPrototype);
+      define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+      GeneratorFunction.displayName = define(
+        GeneratorFunctionPrototype,
+        toStringTagSymbol,
+        "GeneratorFunction"
+      );
+
+      // Helper for defining the .next, .throw, and .return methods of the
+      // Iterator interface in terms of a single ._invoke method.
+      function defineIteratorMethods(prototype) {
+        ["next", "throw", "return"].forEach(function(method) {
+          define(prototype, method, function(arg) {
+            return this._invoke(method, arg);
+          });
+        });
+      }
+
+      exports.isGeneratorFunction = function(genFun) {
+        var ctor = typeof genFun === "function" && genFun.constructor;
+        return ctor
+          ? ctor === GeneratorFunction ||
+            // For the native GeneratorFunction constructor, the best we can
+            // do is to check its .name property.
+            (ctor.displayName || ctor.name) === "GeneratorFunction"
+          : false;
+      };
+
+      exports.mark = function(genFun) {
+        if (Object.setPrototypeOf) {
+          Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+        } else {
+          genFun.__proto__ = GeneratorFunctionPrototype;
+          define(genFun, toStringTagSymbol, "GeneratorFunction");
+        }
+        genFun.prototype = Object.create(Gp);
+        return genFun;
+      };
+
+      // Within the body of any async function, `await x` is transformed to
+      // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+      // `hasOwn.call(value, "__await")` to determine if the yielded value is
+      // meant to be awaited.
+      exports.awrap = function(arg) {
+        return { __await: arg };
+      };
+
+      function AsyncIterator(generator, PromiseImpl) {
+        function invoke(method, arg, resolve, reject) {
+          var record = tryCatch(generator[method], generator, arg);
+          if (record.type === "throw") {
+            reject(record.arg);
+          } else {
+            var result = record.arg;
+            var value = result.value;
+            if (value &&
+                typeof value === "object" &&
+                hasOwn.call(value, "__await")) {
+              return PromiseImpl.resolve(value.__await).then(function(value) {
+                invoke("next", value, resolve, reject);
+              }, function(err) {
+                invoke("throw", err, resolve, reject);
+              });
+            }
+
+            return PromiseImpl.resolve(value).then(function(unwrapped) {
+              // When a yielded Promise is resolved, its final value becomes
+              // the .value of the Promise<{value,done}> result for the
+              // current iteration.
+              result.value = unwrapped;
+              resolve(result);
+            }, function(error) {
+              // If a rejected Promise was yielded, throw the rejection back
+              // into the async generator function so it can be handled there.
+              return invoke("throw", error, resolve, reject);
+            });
+          }
+        }
+
+        var previousPromise;
+
+        function enqueue(method, arg) {
+          function callInvokeWithMethodAndArg() {
+            return new PromiseImpl(function(resolve, reject) {
+              invoke(method, arg, resolve, reject);
+            });
+          }
+
+          return previousPromise =
+            // If enqueue has been called before, then we want to wait until
+            // all previous Promises have been resolved before calling invoke,
+            // so that results are always delivered in the correct order. If
+            // enqueue has not been called before, then it is important to
+            // call invoke immediately, without waiting on a callback to fire,
+            // so that the async generator function has the opportunity to do
+            // any necessary setup in a predictable way. This predictability
+            // is why the Promise constructor synchronously invokes its
+            // executor callback, and why async functions synchronously
+            // execute code before the first await. Since we implement simple
+            // async functions in terms of async generators, it is especially
+            // important to get this right, even though it requires care.
+            previousPromise ? previousPromise.then(
+              callInvokeWithMethodAndArg,
+              // Avoid propagating failures to Promises returned by later
+              // invocations of the iterator.
+              callInvokeWithMethodAndArg
+            ) : callInvokeWithMethodAndArg();
+        }
+
+        // Define the unified helper method that is used to implement .next,
+        // .throw, and .return (see defineIteratorMethods).
+        this._invoke = enqueue;
+      }
+
+      defineIteratorMethods(AsyncIterator.prototype);
+      define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+        return this;
+      });
+      exports.AsyncIterator = AsyncIterator;
+
+      // Note that simple async functions are implemented on top of
+      // AsyncIterator objects; they just return a Promise for the value of
+      // the final result produced by the iterator.
+      exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+        if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+        var iter = new AsyncIterator(
+          wrap(innerFn, outerFn, self, tryLocsList),
+          PromiseImpl
+        );
+
+        return exports.isGeneratorFunction(outerFn)
+          ? iter // If outerFn is a generator, return the full iterator.
+          : iter.next().then(function(result) {
+              return result.done ? result.value : iter.next();
+            });
+      };
+
+      function makeInvokeMethod(innerFn, self, context) {
+        var state = GenStateSuspendedStart;
+
+        return function invoke(method, arg) {
+          if (state === GenStateExecuting) {
+            throw new Error("Generator is already running");
+          }
+
+          if (state === GenStateCompleted) {
+            if (method === "throw") {
+              throw arg;
+            }
+
+            // Be forgiving, per 25.3.3.3.3 of the spec:
+            // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+            return doneResult();
+          }
+
+          context.method = method;
+          context.arg = arg;
+
+          while (true) {
+            var delegate = context.delegate;
+            if (delegate) {
+              var delegateResult = maybeInvokeDelegate(delegate, context);
+              if (delegateResult) {
+                if (delegateResult === ContinueSentinel) continue;
+                return delegateResult;
+              }
+            }
+
+            if (context.method === "next") {
+              // Setting context._sent for legacy support of Babel's
+              // function.sent implementation.
+              context.sent = context._sent = context.arg;
+
+            } else if (context.method === "throw") {
+              if (state === GenStateSuspendedStart) {
+                state = GenStateCompleted;
+                throw context.arg;
+              }
+
+              context.dispatchException(context.arg);
+
+            } else if (context.method === "return") {
+              context.abrupt("return", context.arg);
+            }
+
+            state = GenStateExecuting;
+
+            var record = tryCatch(innerFn, self, context);
+            if (record.type === "normal") {
+              // If an exception is thrown from innerFn, we leave state ===
+              // GenStateExecuting and loop back for another invocation.
+              state = context.done
+                ? GenStateCompleted
+                : GenStateSuspendedYield;
+
+              if (record.arg === ContinueSentinel) {
+                continue;
+              }
+
+              return {
+                value: record.arg,
+                done: context.done
+              };
+
+            } else if (record.type === "throw") {
+              state = GenStateCompleted;
+              // Dispatch the exception by looping back around to the
+              // context.dispatchException(context.arg) call above.
+              context.method = "throw";
+              context.arg = record.arg;
+            }
+          }
+        };
+      }
+
+      // Call delegate.iterator[context.method](context.arg) and handle the
+      // result, either by returning a { value, done } result from the
+      // delegate iterator, or by modifying context.method and context.arg,
+      // setting context.delegate to null, and returning the ContinueSentinel.
+      function maybeInvokeDelegate(delegate, context) {
+        var method = delegate.iterator[context.method];
+        if (method === undefined$1) {
+          // A .throw or .return when the delegate iterator has no .throw
+          // method always terminates the yield* loop.
+          context.delegate = null;
+
+          if (context.method === "throw") {
+            // Note: ["return"] must be used for ES3 parsing compatibility.
+            if (delegate.iterator["return"]) {
+              // If the delegate iterator has a return method, give it a
+              // chance to clean up.
+              context.method = "return";
+              context.arg = undefined$1;
+              maybeInvokeDelegate(delegate, context);
+
+              if (context.method === "throw") {
+                // If maybeInvokeDelegate(context) changed context.method from
+                // "return" to "throw", let that override the TypeError below.
+                return ContinueSentinel;
+              }
+            }
+
+            context.method = "throw";
+            context.arg = new TypeError(
+              "The iterator does not provide a 'throw' method");
+          }
+
+          return ContinueSentinel;
+        }
+
+        var record = tryCatch(method, delegate.iterator, context.arg);
+
+        if (record.type === "throw") {
+          context.method = "throw";
+          context.arg = record.arg;
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        var info = record.arg;
+
+        if (! info) {
+          context.method = "throw";
+          context.arg = new TypeError("iterator result is not an object");
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        if (info.done) {
+          // Assign the result of the finished delegate to the temporary
+          // variable specified by delegate.resultName (see delegateYield).
+          context[delegate.resultName] = info.value;
+
+          // Resume execution at the desired location (see delegateYield).
+          context.next = delegate.nextLoc;
+
+          // If context.method was "throw" but the delegate handled the
+          // exception, let the outer generator proceed normally. If
+          // context.method was "next", forget context.arg since it has been
+          // "consumed" by the delegate iterator. If context.method was
+          // "return", allow the original .return call to continue in the
+          // outer generator.
+          if (context.method !== "return") {
+            context.method = "next";
+            context.arg = undefined$1;
+          }
+
+        } else {
+          // Re-yield the result returned by the delegate method.
+          return info;
+        }
+
+        // The delegate iterator is finished, so forget it and continue with
+        // the outer generator.
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+
+      // Define Generator.prototype.{next,throw,return} in terms of the
+      // unified ._invoke helper method.
+      defineIteratorMethods(Gp);
+
+      define(Gp, toStringTagSymbol, "Generator");
+
+      // A Generator should always return itself as the iterator object when the
+      // @@iterator function is called on it. Some browsers' implementations of the
+      // iterator prototype chain incorrectly implement this, causing the Generator
+      // object to not be returned from this call. This ensures that doesn't happen.
+      // See https://github.com/facebook/regenerator/issues/274 for more details.
+      define(Gp, iteratorSymbol, function() {
+        return this;
+      });
+
+      define(Gp, "toString", function() {
+        return "[object Generator]";
+      });
+
+      function pushTryEntry(locs) {
+        var entry = { tryLoc: locs[0] };
+
+        if (1 in locs) {
+          entry.catchLoc = locs[1];
+        }
+
+        if (2 in locs) {
+          entry.finallyLoc = locs[2];
+          entry.afterLoc = locs[3];
+        }
+
+        this.tryEntries.push(entry);
+      }
+
+      function resetTryEntry(entry) {
+        var record = entry.completion || {};
+        record.type = "normal";
+        delete record.arg;
+        entry.completion = record;
+      }
+
+      function Context(tryLocsList) {
+        // The root entry object (effectively a try statement without a catch
+        // or a finally block) gives us a place to store values thrown from
+        // locations where there is no enclosing try statement.
+        this.tryEntries = [{ tryLoc: "root" }];
+        tryLocsList.forEach(pushTryEntry, this);
+        this.reset(true);
+      }
+
+      exports.keys = function(object) {
+        var keys = [];
+        for (var key in object) {
+          keys.push(key);
+        }
+        keys.reverse();
+
+        // Rather than returning an object with a next method, we keep
+        // things simple and return the next function itself.
+        return function next() {
+          while (keys.length) {
+            var key = keys.pop();
+            if (key in object) {
+              next.value = key;
+              next.done = false;
+              return next;
+            }
+          }
+
+          // To avoid creating an additional object, we just hang the .value
+          // and .done properties off the next function object itself. This
+          // also ensures that the minifier will not anonymize the function.
+          next.done = true;
+          return next;
+        };
+      };
+
+      function values(iterable) {
+        if (iterable) {
+          var iteratorMethod = iterable[iteratorSymbol];
+          if (iteratorMethod) {
+            return iteratorMethod.call(iterable);
+          }
+
+          if (typeof iterable.next === "function") {
+            return iterable;
+          }
+
+          if (!isNaN(iterable.length)) {
+            var i = -1, next = function next() {
+              while (++i < iterable.length) {
+                if (hasOwn.call(iterable, i)) {
+                  next.value = iterable[i];
+                  next.done = false;
+                  return next;
                 }
+              }
+
+              next.value = undefined$1;
+              next.done = true;
+
+              return next;
+            };
+
+            return next.next = next;
+          }
+        }
+
+        // Return an iterator with no values.
+        return { next: doneResult };
+      }
+      exports.values = values;
+
+      function doneResult() {
+        return { value: undefined$1, done: true };
+      }
+
+      Context.prototype = {
+        constructor: Context,
+
+        reset: function(skipTempReset) {
+          this.prev = 0;
+          this.next = 0;
+          // Resetting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          this.sent = this._sent = undefined$1;
+          this.done = false;
+          this.delegate = null;
+
+          this.method = "next";
+          this.arg = undefined$1;
+
+          this.tryEntries.forEach(resetTryEntry);
+
+          if (!skipTempReset) {
+            for (var name in this) {
+              // Not sure about the optimal order of these conditions:
+              if (name.charAt(0) === "t" &&
+                  hasOwn.call(this, name) &&
+                  !isNaN(+name.slice(1))) {
+                this[name] = undefined$1;
+              }
+            }
+          }
+        },
+
+        stop: function() {
+          this.done = true;
+
+          var rootEntry = this.tryEntries[0];
+          var rootRecord = rootEntry.completion;
+          if (rootRecord.type === "throw") {
+            throw rootRecord.arg;
+          }
+
+          return this.rval;
+        },
+
+        dispatchException: function(exception) {
+          if (this.done) {
+            throw exception;
+          }
+
+          var context = this;
+          function handle(loc, caught) {
+            record.type = "throw";
+            record.arg = exception;
+            context.next = loc;
+
+            if (caught) {
+              // If the dispatched exception was caught by a catch block,
+              // then let that catch block handle the exception normally.
+              context.method = "next";
+              context.arg = undefined$1;
+            }
+
+            return !! caught;
+          }
+
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            var record = entry.completion;
+
+            if (entry.tryLoc === "root") {
+              // Exception thrown outside of any try block that could handle
+              // it, so set the completion value of the entire function to
+              // throw the exception.
+              return handle("end");
+            }
+
+            if (entry.tryLoc <= this.prev) {
+              var hasCatch = hasOwn.call(entry, "catchLoc");
+              var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+              if (hasCatch && hasFinally) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                } else if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else if (hasCatch) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                }
+
+              } else if (hasFinally) {
+                if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else {
+                throw new Error("try statement without catch or finally");
+              }
+            }
+          }
+        },
+
+        abrupt: function(type, arg) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc <= this.prev &&
+                hasOwn.call(entry, "finallyLoc") &&
+                this.prev < entry.finallyLoc) {
+              var finallyEntry = entry;
+              break;
+            }
+          }
+
+          if (finallyEntry &&
+              (type === "break" ||
+               type === "continue") &&
+              finallyEntry.tryLoc <= arg &&
+              arg <= finallyEntry.finallyLoc) {
+            // Ignore the finally entry if control is not jumping to a
+            // location outside the try/catch block.
+            finallyEntry = null;
+          }
+
+          var record = finallyEntry ? finallyEntry.completion : {};
+          record.type = type;
+          record.arg = arg;
+
+          if (finallyEntry) {
+            this.method = "next";
+            this.next = finallyEntry.finallyLoc;
+            return ContinueSentinel;
+          }
+
+          return this.complete(record);
+        },
+
+        complete: function(record, afterLoc) {
+          if (record.type === "throw") {
+            throw record.arg;
+          }
+
+          if (record.type === "break" ||
+              record.type === "continue") {
+            this.next = record.arg;
+          } else if (record.type === "return") {
+            this.rval = this.arg = record.arg;
+            this.method = "return";
+            this.next = "end";
+          } else if (record.type === "normal" && afterLoc) {
+            this.next = afterLoc;
+          }
+
+          return ContinueSentinel;
+        },
+
+        finish: function(finallyLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.finallyLoc === finallyLoc) {
+              this.complete(entry.completion, entry.afterLoc);
+              resetTryEntry(entry);
+              return ContinueSentinel;
+            }
+          }
+        },
+
+        "catch": function(tryLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc === tryLoc) {
+              var record = entry.completion;
+              if (record.type === "throw") {
+                var thrown = record.arg;
+                resetTryEntry(entry);
+              }
+              return thrown;
+            }
+          }
+
+          // The context.catch method must only be called with a location
+          // argument that corresponds to a known catch block.
+          throw new Error("illegal catch attempt");
+        },
+
+        delegateYield: function(iterable, resultName, nextLoc) {
+          this.delegate = {
+            iterator: values(iterable),
+            resultName: resultName,
+            nextLoc: nextLoc
+          };
+
+          if (this.method === "next") {
+            // Deliberately forget the last sent value so that we don't
+            // accidentally pass it on to the delegate.
+            this.arg = undefined$1;
+          }
+
+          return ContinueSentinel;
+        }
+      };
+
+      // Regardless of whether this script is executing as a CommonJS module
+      // or not, return the runtime object so that we can declare the variable
+      // regeneratorRuntime in the outer scope, which allows this module to be
+      // injected easily by `bin/regenerator --include-runtime script.js`.
+      return exports;
+
+    }(
+      // If this script is executing as a CommonJS module, use module.exports
+      // as the regeneratorRuntime namespace. Otherwise create a new empty
+      // object. Either way, the resulting object will be used to initialize
+      // the regeneratorRuntime variable at the top of this file.
+       module.exports 
+    ));
+
+    try {
+      regeneratorRuntime = runtime;
+    } catch (accidentalStrictMode) {
+      // This module should not be running in strict mode, so the above
+      // assignment should always work unless something is misconfigured. Just
+      // in case runtime.js accidentally runs in strict mode, in modern engines
+      // we can explicitly access globalThis. In older engines we can escape
+      // strict mode using a global Function call. This could conceivably fail
+      // if a Content Security Policy forbids using Function, but in that case
+      // the proper solution is to fix the accidental strict mode problem. If
+      // you've misconfigured your bundler to force strict mode and applied a
+      // CSP to forbid Function, and you're not willing to fix either of those
+      // problems, please detail your unique predicament in a GitHub issue.
+      if (typeof globalThis === "object") {
+        globalThis.regeneratorRuntime = runtime;
+      } else {
+        Function("r", "regeneratorRuntime = r")(runtime);
+      }
+    }
+    });
+
+    function computeUserPicks(totalNumberOfPicks, address, normalizedBalance) {
+      var numberOfPicks = calculateNormalizeBalancePicksFromTotalPicks(totalNumberOfPicks, normalizedBalance);
+      var usersAddressHashed = hashUserAddress(address);
+      var picks = [];
+      var numberOfPicksRemaining = numberOfPicks.toNumber();
+
+      for (var pickIndex = 0; pickIndex < numberOfPicksRemaining; pickIndex++) {
+        picks.push(calculatePick(usersAddressHashed, pickIndex));
+      }
+
+      return picks;
+    }
+
+    function computeUserWinningPicksForRandomNumber(randomNumber, bitRangeSize, matchCardinality, numberOfPicks, prize, tiers, userAddress, userNormalizedBalance, drawId) {
+      var _userNormalizedBalance = BigNumber.from(userNormalizedBalance);
+
+      var _prize = BigNumber.from(prize);
+
+      var _randomNumber = BigNumber.from(randomNumber);
+
+      var userPicks = computeUserPicks(numberOfPicks, userAddress, _userNormalizedBalance);
+      var pickPrizes = computePicksPrizes(userPicks, _randomNumber, bitRangeSize, matchCardinality, _prize, tiers);
+      return updateDrawResultsWithWinningPicks(pickPrizes, createDrawResultsObject(drawId), userPicks);
+    }
+
+    function encodeWinningPicks(userAddress, drawResults) {
+      var claim = {
+        userAddress: userAddress,
+        drawIds: [],
+        winningPickIndices: [],
+        encodedWinningPickIndices: ''
+      };
+
+      if (drawResults.length === 0) {
+        return claim;
+      }
+
+      drawResults.forEach(function (drawResult) {
+        if (drawResult.totalValue.gt(BigNumber.from(0))) {
+          claim.drawIds.push(drawResult.drawId); // now add the pickIndices data
+
+          var winningPicks = [];
+
+          for (var _iterator = _createForOfIteratorHelperLoose(drawResult.prizes), _step; !(_step = _iterator()).done;) {
+            var prizeAwardable = _step.value;
+            winningPicks.push(BigNumber.from(prizeAwardable.pick));
+          }
+
+          claim.winningPickIndices.push(winningPicks);
+        }
+      });
+      claim.winningPickIndices = claim.winningPickIndices.map(function (data) {
+        return data.sort(sortByBigNumberAsc);
+      });
+      claim.encodedWinningPickIndices = defaultAbiCoder.encode(['uint256[][]'], [claim.winningPickIndices]);
+      return claim;
+    }
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics$5 = function(d, b) {
+        extendStatics$5 = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics$5(d, b);
+    };
+
+    function __extends$5(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics$5(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    function __awaiter$5(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator$5(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    exports.__awaiter = __awaiter$5;
+    exports.__extends = __extends$5;
+    exports.__generator = __generator$5;
+
+    var _tslib$1 = /*#__PURE__*/Object.freeze({
+        __proto__: null
+    });
+
+    var Call = /** @class */ (function () {
+        function Call(caller, fd, to, data, resolve, reject) {
+            this.caller = caller;
+            this.fd = fd;
+            this.to = to;
+            this.data = data;
+            this.resolve = resolve;
+            this.reject = reject;
+        }
+        return Call;
+    }());
+
+    var Call_2 = Call;
+
+    var Call_1 = /*#__PURE__*/Object.defineProperty({
+    	Call: Call_2
+    }, '__esModule', {value: true});
+
+    var _tslib = /*@__PURE__*/getAugmentedNamespace(_tslib$1);
+
+    var Context = /** @class */ (function () {
+        function Context(contract) {
+            this.contract = contract;
+            this.calls = new Array();
+        }
+        Context.prototype.call = function (to, fd, data) {
+            var resolveCb;
+            var rejectCb;
+            var promise = new Promise(function (resolve, reject) {
+                resolveCb = resolve;
+                rejectCb = reject;
+            });
+            var call = new Call_1.Call(this.contract, fd, to, data, resolveCb, rejectCb);
+            this.calls.push(call);
+            return promise;
+        };
+        Context.prototype.flush = function () {
+            var oldCalls = this.calls;
+            this.calls = new Array();
+            return oldCalls;
+        };
+        return Context;
+    }());
+    var MulticallContract = /** @class */ (function () {
+        function MulticallContract(__name, abi, __address) {
+            var _this = this;
+            this.__name = __name;
+            this.__address = __address;
+            this.__interface = new ethers.ethers.utils.Interface(abi);
+            this.__functionContext = /** @class */ (function (_super) {
+                _tslib.__extends(FunctionContext, _super);
+                function FunctionContext() {
+                    return _super !== null && _super.apply(this, arguments) || this;
+                }
+                return FunctionContext;
+            }(Context));
+            Object.keys(this.__interface.functions).forEach(function (functionName) {
+                var fd = _this.__interface.functions[functionName];
+                if (/function/i.test(fd.type)) {
+                    _this.addFunction(fd);
+                    _this.addPrototypeFunction(fd);
+                }
+            });
+        }
+        MulticallContract.prototype.addFunction = function (fd) {
+            var _this = this;
+            var that = this;
+            var callback = function () {
+                var params = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    params[_i] = arguments[_i];
+                }
+                // create a new context and return it
+                // @ts-ignore
+                var context = new _this.__functionContext(that);
+                return context[fd.name].apply(context, params);
+            };
+            this[fd.name] = callback;
+            this[fd.format()] = callback;
+        };
+        MulticallContract.prototype.addPrototypeFunction = function (fd) {
+            var that = this;
+            var callback = function () {
+                var params = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    params[_i] = arguments[_i];
+                }
+                var data = that.__interface.encodeFunctionData(fd, params);
+                this.call(this.contract.__address, fd, data);
+                return this;
+            };
+            this.__functionContext.prototype[fd.name] = callback;
+            this.__functionContext.prototype[fd.format()] = callback;
+        };
+        return MulticallContract;
+    }());
+
+    var Context_1 = Context;
+    var MulticallContract_2 = MulticallContract;
+
+    var MulticallContract_1 = /*#__PURE__*/Object.defineProperty({
+    	Context: Context_1,
+    	MulticallContract: MulticallContract_2
+    }, '__esModule', {value: true});
+
+    var MULTICALL_ADDRESSES = {
+        1: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
+        4: '0x42ad527de7d4e9d9d011ac45b31d8551f8fe9821',
+        5: '0x77dca2c955b15e9de4dbbcf1246b4b85b651e50e',
+        10: '0x142e2feac30d7fc3b61f9ee85fccad8e560154cc',
+        69: '0x91c88479F21203444D2B20Aa001f951EC8CF2F68',
+        42: '0x2cc8688c5f75e365aaeeb4ea8d6a480405a48d2a',
+        56: '0xbEDe4875F56aaAB7a6aBbF9E423e0ba9E0a90b2A',
+        100: '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a',
+        137: '0x95028E5B8a734bb7E2071F96De89BABe75be9C8E',
+        42161: '0x80C7DD17B01855a6D2347444a0FCC36136a314de',
+        43113: '0xccc75e78Dce6A20bCCa3a30deB23Cb4D23df993a',
+        43114: '0x98e2060F672FD1656a07bc12D7253b5e41bF3876',
+        42220: '0x75F59534dd892c1f8a7B172D639FA854D529ada3',
+        80001: '0x08411ADd0b5AA8ee47563b146743C13b3556c9Cc' // MULTICALL_ADDRESS_MUMBAI
+    };
+    function multicallAddressOrThrow(chainId) {
+        return _tslib.__awaiter(this, void 0, void 0, function () {
+            var address, msg;
+            return _tslib.__generator(this, function (_a) {
+                address = MULTICALL_ADDRESSES[chainId];
+                if (address === undefined) {
+                    msg = "multicall is not available on the network ".concat(chainId);
+                    console.error(msg);
+                    throw new Error(msg);
+                }
+                return [2 /*return*/, address];
+            });
+        });
+    }
+    function networkSupportsMulticall(chainId) {
+        return _tslib.__awaiter(this, void 0, void 0, function () {
+            var address;
+            return _tslib.__generator(this, function (_a) {
+                address = MULTICALL_ADDRESSES[chainId];
+                return [2 /*return*/, address !== undefined];
+            });
+        });
+    }
+
+    var MULTICALL_ADDRESSES_1 = MULTICALL_ADDRESSES;
+    var multicallAddressOrThrow_1 = multicallAddressOrThrow;
+    var networkSupportsMulticall_1 = networkSupportsMulticall;
+
+    var multicallAddresses = /*#__PURE__*/Object.defineProperty({
+    	MULTICALL_ADDRESSES: MULTICALL_ADDRESSES_1,
+    	multicallAddressOrThrow: multicallAddressOrThrow_1,
+    	networkSupportsMulticall: networkSupportsMulticall_1
+    }, '__esModule', {value: true});
+
+    var AGGREGATE_SELECTOR = '0x252dba42';
+    function prepareTransaction(chainId, data) {
+        return _tslib.__awaiter(this, void 0, void 0, function () {
+            var address, callData;
+            return _tslib.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, multicallAddresses.multicallAddressOrThrow(chainId)];
+                    case 1:
+                        address = _a.sent();
+                        callData = AGGREGATE_SELECTOR + data.substr(2);
+                        return [2 /*return*/, {
+                                to: address,
+                                data: callData
+                            }];
+                }
+            });
+        });
+    }
+
+    var AGGREGATE_SELECTOR_1 = AGGREGATE_SELECTOR;
+    var prepareTransaction_2 = prepareTransaction;
+
+    var prepareTransaction_1 = /*#__PURE__*/Object.defineProperty({
+    	AGGREGATE_SELECTOR: AGGREGATE_SELECTOR_1,
+    	prepareTransaction: prepareTransaction_2
+    }, '__esModule', {value: true});
+
+    /**
+     * Helpers.
+     */
+    var s$6 = 1000;
+    var m$4 = s$6 * 60;
+    var h$4 = m$4 * 60;
+    var d$3 = h$4 * 24;
+    var w$2 = d$3 * 7;
+    var y$4 = d$3 * 365.25;
+
+    /**
+     * Parse or format the given `val`.
+     *
+     * Options:
+     *
+     *  - `long` verbose formatting [false]
+     *
+     * @param {String|Number} val
+     * @param {Object} [options]
+     * @throws {Error} throw an error if val is not a non-empty string or a number
+     * @return {String|Number}
+     * @api public
+     */
+
+    var ms$1 = function(val, options) {
+      options = options || {};
+      var type = typeof val;
+      if (type === 'string' && val.length > 0) {
+        return parse(val);
+      } else if (type === 'number' && isFinite(val)) {
+        return options.long ? fmtLong(val) : fmtShort(val);
+      }
+      throw new Error(
+        'val is not a non-empty string or a valid number. val=' +
+          JSON.stringify(val)
+      );
+    };
+
+    /**
+     * Parse the given `str` and return milliseconds.
+     *
+     * @param {String} str
+     * @return {Number}
+     * @api private
+     */
+
+    function parse(str) {
+      str = String(str);
+      if (str.length > 100) {
+        return;
+      }
+      var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+        str
+      );
+      if (!match) {
+        return;
+      }
+      var n = parseFloat(match[1]);
+      var type = (match[2] || 'ms').toLowerCase();
+      switch (type) {
+        case 'years':
+        case 'year':
+        case 'yrs':
+        case 'yr':
+        case 'y':
+          return n * y$4;
+        case 'weeks':
+        case 'week':
+        case 'w':
+          return n * w$2;
+        case 'days':
+        case 'day':
+        case 'd':
+          return n * d$3;
+        case 'hours':
+        case 'hour':
+        case 'hrs':
+        case 'hr':
+        case 'h':
+          return n * h$4;
+        case 'minutes':
+        case 'minute':
+        case 'mins':
+        case 'min':
+        case 'm':
+          return n * m$4;
+        case 'seconds':
+        case 'second':
+        case 'secs':
+        case 'sec':
+        case 's':
+          return n * s$6;
+        case 'milliseconds':
+        case 'millisecond':
+        case 'msecs':
+        case 'msec':
+        case 'ms':
+          return n;
+        default:
+          return undefined;
+      }
+    }
+
+    /**
+     * Short format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+    function fmtShort(ms) {
+      var msAbs = Math.abs(ms);
+      if (msAbs >= d$3) {
+        return Math.round(ms / d$3) + 'd';
+      }
+      if (msAbs >= h$4) {
+        return Math.round(ms / h$4) + 'h';
+      }
+      if (msAbs >= m$4) {
+        return Math.round(ms / m$4) + 'm';
+      }
+      if (msAbs >= s$6) {
+        return Math.round(ms / s$6) + 's';
+      }
+      return ms + 'ms';
+    }
+
+    /**
+     * Long format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+    function fmtLong(ms) {
+      var msAbs = Math.abs(ms);
+      if (msAbs >= d$3) {
+        return plural(ms, msAbs, d$3, 'day');
+      }
+      if (msAbs >= h$4) {
+        return plural(ms, msAbs, h$4, 'hour');
+      }
+      if (msAbs >= m$4) {
+        return plural(ms, msAbs, m$4, 'minute');
+      }
+      if (msAbs >= s$6) {
+        return plural(ms, msAbs, s$6, 'second');
+      }
+      return ms + ' ms';
+    }
+
+    /**
+     * Pluralization helper.
+     */
+
+    function plural(ms, msAbs, n, name) {
+      var isPlural = msAbs >= n * 1.5;
+      return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+    }
+
+    /**
+     * This is the common logic for both the Node.js and web browser
+     * implementations of `debug()`.
+     */
+
+    function setup(env) {
+    	createDebug.debug = createDebug;
+    	createDebug.default = createDebug;
+    	createDebug.coerce = coerce;
+    	createDebug.disable = disable;
+    	createDebug.enable = enable;
+    	createDebug.enabled = enabled;
+    	createDebug.humanize = ms$1;
+    	createDebug.destroy = destroy;
+
+    	Object.keys(env).forEach(key => {
+    		createDebug[key] = env[key];
+    	});
+
+    	/**
+    	* The currently active debug mode names, and names to skip.
+    	*/
+
+    	createDebug.names = [];
+    	createDebug.skips = [];
+
+    	/**
+    	* Map of special "%n" handling functions, for the debug "format" argument.
+    	*
+    	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+    	*/
+    	createDebug.formatters = {};
+
+    	/**
+    	* Selects a color for a debug namespace
+    	* @param {String} namespace The namespace string for the debug instance to be colored
+    	* @return {Number|String} An ANSI color code for the given namespace
+    	* @api private
+    	*/
+    	function selectColor(namespace) {
+    		let hash = 0;
+
+    		for (let i = 0; i < namespace.length; i++) {
+    			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
+    			hash |= 0; // Convert to 32bit integer
+    		}
+
+    		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+    	}
+    	createDebug.selectColor = selectColor;
+
+    	/**
+    	* Create a debugger with the given `namespace`.
+    	*
+    	* @param {String} namespace
+    	* @return {Function}
+    	* @api public
+    	*/
+    	function createDebug(namespace) {
+    		let prevTime;
+    		let enableOverride = null;
+    		let namespacesCache;
+    		let enabledCache;
+
+    		function debug(...args) {
+    			// Disabled?
+    			if (!debug.enabled) {
+    				return;
+    			}
+
+    			const self = debug;
+
+    			// Set `diff` timestamp
+    			const curr = Number(new Date());
+    			const ms = curr - (prevTime || curr);
+    			self.diff = ms;
+    			self.prev = prevTime;
+    			self.curr = curr;
+    			prevTime = curr;
+
+    			args[0] = createDebug.coerce(args[0]);
+
+    			if (typeof args[0] !== 'string') {
+    				// Anything else let's inspect with %O
+    				args.unshift('%O');
+    			}
+
+    			// Apply any `formatters` transformations
+    			let index = 0;
+    			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+    				// If we encounter an escaped % then don't increase the array index
+    				if (match === '%%') {
+    					return '%';
+    				}
+    				index++;
+    				const formatter = createDebug.formatters[format];
+    				if (typeof formatter === 'function') {
+    					const val = args[index];
+    					match = formatter.call(self, val);
+
+    					// Now we need to remove `args[index]` since it's inlined in the `format`
+    					args.splice(index, 1);
+    					index--;
+    				}
+    				return match;
+    			});
+
+    			// Apply env-specific formatting (colors, etc.)
+    			createDebug.formatArgs.call(self, args);
+
+    			const logFn = self.log || createDebug.log;
+    			logFn.apply(self, args);
+    		}
+
+    		debug.namespace = namespace;
+    		debug.useColors = createDebug.useColors();
+    		debug.color = createDebug.selectColor(namespace);
+    		debug.extend = extend;
+    		debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+
+    		Object.defineProperty(debug, 'enabled', {
+    			enumerable: true,
+    			configurable: false,
+    			get: () => {
+    				if (enableOverride !== null) {
+    					return enableOverride;
+    				}
+    				if (namespacesCache !== createDebug.namespaces) {
+    					namespacesCache = createDebug.namespaces;
+    					enabledCache = createDebug.enabled(namespace);
+    				}
+
+    				return enabledCache;
+    			},
+    			set: v => {
+    				enableOverride = v;
+    			}
+    		});
+
+    		// Env-specific initialization logic for debug instances
+    		if (typeof createDebug.init === 'function') {
+    			createDebug.init(debug);
+    		}
+
+    		return debug;
+    	}
+
+    	function extend(namespace, delimiter) {
+    		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+    		newDebug.log = this.log;
+    		return newDebug;
+    	}
+
+    	/**
+    	* Enables a debug mode by namespaces. This can include modes
+    	* separated by a colon and wildcards.
+    	*
+    	* @param {String} namespaces
+    	* @api public
+    	*/
+    	function enable(namespaces) {
+    		createDebug.save(namespaces);
+    		createDebug.namespaces = namespaces;
+
+    		createDebug.names = [];
+    		createDebug.skips = [];
+
+    		let i;
+    		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+    		const len = split.length;
+
+    		for (i = 0; i < len; i++) {
+    			if (!split[i]) {
+    				// ignore empty strings
+    				continue;
+    			}
+
+    			namespaces = split[i].replace(/\*/g, '.*?');
+
+    			if (namespaces[0] === '-') {
+    				createDebug.skips.push(new RegExp('^' + namespaces.slice(1) + '$'));
+    			} else {
+    				createDebug.names.push(new RegExp('^' + namespaces + '$'));
+    			}
+    		}
+    	}
+
+    	/**
+    	* Disable debug output.
+    	*
+    	* @return {String} namespaces
+    	* @api public
+    	*/
+    	function disable() {
+    		const namespaces = [
+    			...createDebug.names.map(toNamespace),
+    			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
+    		].join(',');
+    		createDebug.enable('');
+    		return namespaces;
+    	}
+
+    	/**
+    	* Returns true if the given mode name is enabled, false otherwise.
+    	*
+    	* @param {String} name
+    	* @return {Boolean}
+    	* @api public
+    	*/
+    	function enabled(name) {
+    		if (name[name.length - 1] === '*') {
+    			return true;
+    		}
+
+    		let i;
+    		let len;
+
+    		for (i = 0, len = createDebug.skips.length; i < len; i++) {
+    			if (createDebug.skips[i].test(name)) {
+    				return false;
+    			}
+    		}
+
+    		for (i = 0, len = createDebug.names.length; i < len; i++) {
+    			if (createDebug.names[i].test(name)) {
+    				return true;
+    			}
+    		}
+
+    		return false;
+    	}
+
+    	/**
+    	* Convert regexp to namespace
+    	*
+    	* @param {RegExp} regxep
+    	* @return {String} namespace
+    	* @api private
+    	*/
+    	function toNamespace(regexp) {
+    		return regexp.toString()
+    			.substring(2, regexp.toString().length - 2)
+    			.replace(/\.\*\?$/, '*');
+    	}
+
+    	/**
+    	* Coerce `val`.
+    	*
+    	* @param {Mixed} val
+    	* @return {Mixed}
+    	* @api private
+    	*/
+    	function coerce(val) {
+    		if (val instanceof Error) {
+    			return val.stack || val.message;
+    		}
+    		return val;
+    	}
+
+    	/**
+    	* XXX DO NOT USE. This is a temporary stub function.
+    	* XXX It WILL be removed in the next major release.
+    	*/
+    	function destroy() {
+    		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+    	}
+
+    	createDebug.enable(createDebug.load());
+
+    	return createDebug;
+    }
+
+    var common = setup;
+
+    /* eslint-env browser */
+
+    var browser$4 = createCommonjsModule$4(function (module, exports) {
+    /**
+     * This is the web browser implementation of `debug()`.
+     */
+
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.storage = localstorage();
+    exports.destroy = (() => {
+    	let warned = false;
+
+    	return () => {
+    		if (!warned) {
+    			warned = true;
+    			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+    		}
+    	};
+    })();
+
+    /**
+     * Colors.
+     */
+
+    exports.colors = [
+    	'#0000CC',
+    	'#0000FF',
+    	'#0033CC',
+    	'#0033FF',
+    	'#0066CC',
+    	'#0066FF',
+    	'#0099CC',
+    	'#0099FF',
+    	'#00CC00',
+    	'#00CC33',
+    	'#00CC66',
+    	'#00CC99',
+    	'#00CCCC',
+    	'#00CCFF',
+    	'#3300CC',
+    	'#3300FF',
+    	'#3333CC',
+    	'#3333FF',
+    	'#3366CC',
+    	'#3366FF',
+    	'#3399CC',
+    	'#3399FF',
+    	'#33CC00',
+    	'#33CC33',
+    	'#33CC66',
+    	'#33CC99',
+    	'#33CCCC',
+    	'#33CCFF',
+    	'#6600CC',
+    	'#6600FF',
+    	'#6633CC',
+    	'#6633FF',
+    	'#66CC00',
+    	'#66CC33',
+    	'#9900CC',
+    	'#9900FF',
+    	'#9933CC',
+    	'#9933FF',
+    	'#99CC00',
+    	'#99CC33',
+    	'#CC0000',
+    	'#CC0033',
+    	'#CC0066',
+    	'#CC0099',
+    	'#CC00CC',
+    	'#CC00FF',
+    	'#CC3300',
+    	'#CC3333',
+    	'#CC3366',
+    	'#CC3399',
+    	'#CC33CC',
+    	'#CC33FF',
+    	'#CC6600',
+    	'#CC6633',
+    	'#CC9900',
+    	'#CC9933',
+    	'#CCCC00',
+    	'#CCCC33',
+    	'#FF0000',
+    	'#FF0033',
+    	'#FF0066',
+    	'#FF0099',
+    	'#FF00CC',
+    	'#FF00FF',
+    	'#FF3300',
+    	'#FF3333',
+    	'#FF3366',
+    	'#FF3399',
+    	'#FF33CC',
+    	'#FF33FF',
+    	'#FF6600',
+    	'#FF6633',
+    	'#FF9900',
+    	'#FF9933',
+    	'#FFCC00',
+    	'#FFCC33'
+    ];
+
+    /**
+     * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+     * and the Firebug extension (any Firefox version) are known
+     * to support "%c" CSS customizations.
+     *
+     * TODO: add a `localStorage` variable to explicitly enable/disable colors
+     */
+
+    // eslint-disable-next-line complexity
+    function useColors() {
+    	// NB: In an Electron preload script, document will be defined but not fully
+    	// initialized. Since we know we're in Chrome, we'll just detect this case
+    	// explicitly
+    	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+    		return true;
+    	}
+
+    	// Internet Explorer and Edge do not support colors.
+    	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+    		return false;
+    	}
+
+    	// Is webkit? http://stackoverflow.com/a/16459606/376773
+    	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+    	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+    		// Is firebug? http://stackoverflow.com/a/398120/376773
+    		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+    		// Is firefox >= v31?
+    		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+    		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+    		// Double check webkit in userAgent just in case we are in a worker
+    		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+    }
+
+    /**
+     * Colorize log arguments if enabled.
+     *
+     * @api public
+     */
+
+    function formatArgs(args) {
+    	args[0] = (this.useColors ? '%c' : '') +
+    		this.namespace +
+    		(this.useColors ? ' %c' : ' ') +
+    		args[0] +
+    		(this.useColors ? '%c ' : ' ') +
+    		'+' + module.exports.humanize(this.diff);
+
+    	if (!this.useColors) {
+    		return;
+    	}
+
+    	const c = 'color: ' + this.color;
+    	args.splice(1, 0, c, 'color: inherit');
+
+    	// The final "%c" is somewhat tricky, because there could be other
+    	// arguments passed either before or after the %c, so we need to
+    	// figure out the correct index to insert the CSS into
+    	let index = 0;
+    	let lastC = 0;
+    	args[0].replace(/%[a-zA-Z%]/g, match => {
+    		if (match === '%%') {
+    			return;
+    		}
+    		index++;
+    		if (match === '%c') {
+    			// We only are interested in the *last* %c
+    			// (the user may have provided their own)
+    			lastC = index;
+    		}
+    	});
+
+    	args.splice(lastC, 0, c);
+    }
+
+    /**
+     * Invokes `console.debug()` when available.
+     * No-op when `console.debug` is not a "function".
+     * If `console.debug` is not available, falls back
+     * to `console.log`.
+     *
+     * @api public
+     */
+    exports.log = console.debug || console.log || (() => {});
+
+    /**
+     * Save `namespaces`.
+     *
+     * @param {String} namespaces
+     * @api private
+     */
+    function save(namespaces) {
+    	try {
+    		if (namespaces) {
+    			exports.storage.setItem('debug', namespaces);
+    		} else {
+    			exports.storage.removeItem('debug');
+    		}
+    	} catch (error) {
+    		// Swallow
+    		// XXX (@Qix-) should we be logging these?
+    	}
+    }
+
+    /**
+     * Load `namespaces`.
+     *
+     * @return {String} returns the previously persisted debug modes
+     * @api private
+     */
+    function load() {
+    	let r;
+    	try {
+    		r = exports.storage.getItem('debug');
+    	} catch (error) {
+    		// Swallow
+    		// XXX (@Qix-) should we be logging these?
+    	}
+
+    	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+    	if (!r && typeof process !== 'undefined' && 'env' in process) {
+    		r = process.env.DEBUG;
+    	}
+
+    	return r;
+    }
+
+    /**
+     * Localstorage attempts to return the localstorage.
+     *
+     * This is necessary because safari throws
+     * when a user disables cookies/localstorage
+     * and you attempt to access it.
+     *
+     * @return {LocalStorage}
+     * @api private
+     */
+
+    function localstorage() {
+    	try {
+    		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+    		// The Browser also has localStorage in the global context.
+    		return localStorage;
+    	} catch (error) {
+    		// Swallow
+    		// XXX (@Qix-) should we be logging these?
+    	}
+    }
+
+    module.exports = common(exports);
+
+    const {formatters} = module.exports;
+
+    /**
+     * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+     */
+
+    formatters.j = function (v) {
+    	try {
+    		return JSON.stringify(v);
+    	} catch (error) {
+    		return '[UnexpectedJSONParseError]: ' + error.message;
+    	}
+    };
+    });
+
+    var debug$1 = browser$4('etherplex:PayloadAggregator');
+    var aggregateCalls = function () {
+        var contexts = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            contexts[_i] = arguments[_i];
+        }
+        var result = {};
+        var calls = [];
+        contexts.forEach(function (caller) {
+            result[caller.contract.__name] = {};
+            calls = calls.concat(caller.flush());
+        });
+        debug$1("Result ".concat(result, "..."));
+        debug$1("Found ".concat(calls.length, " calls..."));
+        return [result, calls];
+    };
+
+    var aggregateCalls_2 = aggregateCalls;
+
+    var aggregateCalls_1 = /*#__PURE__*/Object.defineProperty({
+    	aggregateCalls: aggregateCalls_2
+    }, '__esModule', {value: true});
+
+    function decodeCalls(returnData) {
+        var _a = ethers.ethers.utils.defaultAbiCoder.decode(['uint256', 'bytes[]'], returnData), blockNumber = _a[0], results = _a[1];
+        return [blockNumber, results];
+    }
+
+    var decodeCalls_2 = decodeCalls;
+
+    var decodeCalls_1 = /*#__PURE__*/Object.defineProperty({
+    	decodeCalls: decodeCalls_2
+    }, '__esModule', {value: true});
+
+    function decodeFunctionResults(result, calls, returnValues) {
+        for (var i = 0; i < returnValues.length; i++) {
+            var call = calls[i];
+            var decoded = call.caller.__interface.decodeFunctionResult(call.fd, returnValues[i]);
+            result[call.caller.__name][call.fd.name] = decoded;
+            result[call.caller.__name][call.fd.format()] = decoded;
+        }
+        return result;
+    }
+
+    var decodeFunctionResults_2 = decodeFunctionResults;
+
+    var decodeFunctionResults_1 = /*#__PURE__*/Object.defineProperty({
+    	decodeFunctionResults: decodeFunctionResults_2
+    }, '__esModule', {value: true});
+
+    function encodeCalls(calls) {
+        return ethers.ethers.utils.defaultAbiCoder.encode([
+            abi$2.ParamType.fromObject({
+                components: [
+                    { name: 'target', type: 'address' },
+                    { name: 'callData', type: 'bytes' }
+                ],
+                name: 'data',
+                type: 'tuple[]'
+            })
+        ], [calls.map(function (call) { return [call.to, call.data]; })]);
+    }
+
+    var encodeCalls_2 = encodeCalls;
+
+    var encodeCalls_1 = /*#__PURE__*/Object.defineProperty({
+    	encodeCalls: encodeCalls_2
+    }, '__esModule', {value: true});
+
+    var debug = browser$4('etherplex:MulticallExecutor');
+    var MulticallExecutor = /** @class */ (function () {
+        function MulticallExecutor(provider) {
+            this.provider = provider;
+        }
+        MulticallExecutor.prototype.executeCallers = function () {
+            var contexts = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                contexts[_i] = arguments[_i];
+            }
+            return _tslib.__awaiter(this, void 0, void 0, function () {
+                var _a, result, calls, _b, returnValues, decoded;
+                return _tslib.__generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            _a = aggregateCalls_1.aggregateCalls.apply(void 0, contexts), result = _a[0], calls = _a[1];
+                            return [4 /*yield*/, this.executeCalls(calls)];
+                        case 1:
+                            _b = _c.sent(), _b[0], returnValues = _b[1];
+                            decoded = decodeFunctionResults_1.decodeFunctionResults(result, calls, returnValues);
+                            return [2 /*return*/, decoded];
+                    }
+                });
+            });
+        };
+        MulticallExecutor.prototype.executeCalls = function (calls) {
+            return _tslib.__awaiter(this, void 0, void 0, function () {
+                var data, result, values;
+                var _this = this;
+                return _tslib.__generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.multicallSupported()];
+                        case 1:
+                            if (!_a.sent()) return [3 /*break*/, 3];
+                            debug("Multicall is supported");
+                            data = encodeCalls_1.encodeCalls(calls);
+                            debug("Encoded data: ".concat(data));
+                            debug(calls);
+                            return [4 /*yield*/, this.executeMulticallData(data)];
+                        case 2:
+                            result = _a.sent();
+                            return [2 /*return*/, decodeCalls_1.decodeCalls(result)];
+                        case 3: return [4 /*yield*/, Promise.all(calls.map(function (call) { return _tslib.__awaiter(_this, void 0, void 0, function () { return _tslib.__generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, this.provider.call({ to: call.to, data: call.data })];
+                                    case 1: return [2 /*return*/, _a.sent()];
+                                }
+                            }); }); }))];
+                        case 4:
+                            values = _a.sent();
+                            return [2 /*return*/, [null, values]];
+                    }
+                });
+            });
+        };
+        MulticallExecutor.prototype.multicallSupported = function () {
+            return _tslib.__awaiter(this, void 0, void 0, function () {
+                var network;
+                return _tslib.__generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.provider.getNetwork()];
+                        case 1:
+                            network = _a.sent();
+                            return [4 /*yield*/, multicallAddresses.networkSupportsMulticall(network.chainId)];
+                        case 2: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            });
+        };
+        MulticallExecutor.prototype.executeMulticallData = function (data) {
+            return _tslib.__awaiter(this, void 0, void 0, function () {
+                var network, tx, result;
+                return _tslib.__generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.provider.getNetwork()];
+                        case 1:
+                            network = _a.sent();
+                            return [4 /*yield*/, prepareTransaction_1.prepareTransaction(network.chainId, data)];
+                        case 2:
+                            tx = _a.sent();
+                            return [4 /*yield*/, this.provider.call(tx)];
+                        case 3:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        MulticallExecutor.prototype.executeRegularCalls = function (calls) {
+            return _tslib.__awaiter(this, void 0, void 0, function () {
+                var values;
+                var _this = this;
+                return _tslib.__generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, Promise.all(calls.map(function (call) { return _tslib.__awaiter(_this, void 0, void 0, function () { return _tslib.__generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, this.provider.call({ to: call.to, data: call.data })];
+                                    case 1: return [2 /*return*/, _a.sent()];
+                                }
+                            }); }); }))];
+                        case 1:
+                            values = _a.sent();
+                            return [2 /*return*/, values];
+                    }
+                });
+            });
+        };
+        return MulticallExecutor;
+    }());
+
+    var MulticallExecutor_2 = MulticallExecutor;
+
+    var MulticallExecutor_1 = /*#__PURE__*/Object.defineProperty({
+    	MulticallExecutor: MulticallExecutor_2
+    }, '__esModule', {value: true});
+
+    function batch(provider) {
+        var _a;
+        var contexts = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            contexts[_i - 1] = arguments[_i];
+        }
+        return (_a = new MulticallExecutor_1.MulticallExecutor(provider)).executeCallers.apply(_a, contexts);
+    }
+
+    var batch_2 = batch;
+
+    var batch_1$1 = /*#__PURE__*/Object.defineProperty({
+    	batch: batch_2
+    }, '__esModule', {value: true});
+
+    function contract(name, abiOrContract, address) {
+        var result;
+        if (address) {
+            result = new MulticallContract_1.MulticallContract(name, abiOrContract, address);
+        }
+        else {
+            var abi = abiOrContract.abi;
+            address = abiOrContract.address;
+            result = new MulticallContract_1.MulticallContract(name, abi, address);
+        }
+        return result;
+    }
+
+    var contract_2 = contract;
+
+    var contract_1$1 = /*#__PURE__*/Object.defineProperty({
+    	contract: contract_2
+    }, '__esModule', {value: true});
+
+    function encodeData$1() {
+        var contexts = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            contexts[_i] = arguments[_i];
+        }
+        var _a = aggregateCalls_1.aggregateCalls.apply(void 0, contexts), result = _a[0], calls = _a[1];
+        var data = encodeCalls_1.encodeCalls(calls);
+        return [result, calls, data];
+    }
+
+    var encodeData_2 = encodeData$1;
+
+    var encodeData_1 = /*#__PURE__*/Object.defineProperty({
+    	encodeData: encodeData_2
+    }, '__esModule', {value: true});
+
+    function decodeData(result, calls, callResponse) {
+        var _a = decodeCalls_1.decodeCalls(callResponse), returnValues = _a[1];
+        var decodedData = decodeFunctionResults_1.decodeFunctionResults(result, calls, returnValues);
+        return decodedData;
+    }
+
+    var decodeData_2 = decodeData;
+
+    var decodeData_1 = /*#__PURE__*/Object.defineProperty({
+    	decodeData: decodeData_2
+    }, '__esModule', {value: true});
+
+    MulticallContract_1.Context;
+    MulticallContract_1.MulticallContract;
+    multicallAddresses.MULTICALL_ADDRESSES;
+    multicallAddresses.multicallAddressOrThrow;
+    multicallAddresses.networkSupportsMulticall;
+    prepareTransaction_1.AGGREGATE_SELECTOR;
+    prepareTransaction_1.prepareTransaction;
+    MulticallExecutor_1.MulticallExecutor;
+    var batch_1 = batch_1$1.batch;
+    var contract_1 = contract_1$1.contract;
+    encodeData_1.encodeData;
+    decodeData_1.decodeData;
+
+    function createCommonjsModule$1(fn, module) {
+    	return module = { exports: {} }, fn(module, module.exports), module.exports;
+    }
+
+    createCommonjsModule$1(function (module) {
+    /**
+     * Copyright (c) 2014-present, Facebook, Inc.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     */
+
+    var runtime = (function (exports) {
+
+      var Op = Object.prototype;
+      var hasOwn = Op.hasOwnProperty;
+      var undefined$1; // More compressible than void 0.
+      var $Symbol = typeof Symbol === "function" ? Symbol : {};
+      var iteratorSymbol = $Symbol.iterator || "@@iterator";
+      var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+      var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+      function define(obj, key, value) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+        return obj[key];
+      }
+      try {
+        // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+        define({}, "");
+      } catch (err) {
+        define = function(obj, key, value) {
+          return obj[key] = value;
+        };
+      }
+
+      function wrap(innerFn, outerFn, self, tryLocsList) {
+        // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+        var generator = Object.create(protoGenerator.prototype);
+        var context = new Context(tryLocsList || []);
+
+        // The ._invoke method unifies the implementations of the .next,
+        // .throw, and .return methods.
+        generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+        return generator;
+      }
+      exports.wrap = wrap;
+
+      // Try/catch helper to minimize deoptimizations. Returns a completion
+      // record like context.tryEntries[i].completion. This interface could
+      // have been (and was previously) designed to take a closure to be
+      // invoked without arguments, but in all the cases we care about we
+      // already have an existing method we want to call, so there's no need
+      // to create a new function object. We can even get away with assuming
+      // the method takes exactly one argument, since that happens to be true
+      // in every case, so we don't have to touch the arguments object. The
+      // only additional allocation required is the completion record, which
+      // has a stable shape and so hopefully should be cheap to allocate.
+      function tryCatch(fn, obj, arg) {
+        try {
+          return { type: "normal", arg: fn.call(obj, arg) };
+        } catch (err) {
+          return { type: "throw", arg: err };
+        }
+      }
+
+      var GenStateSuspendedStart = "suspendedStart";
+      var GenStateSuspendedYield = "suspendedYield";
+      var GenStateExecuting = "executing";
+      var GenStateCompleted = "completed";
+
+      // Returning this object from the innerFn has the same effect as
+      // breaking out of the dispatch switch statement.
+      var ContinueSentinel = {};
+
+      // Dummy constructor functions that we use as the .constructor and
+      // .constructor.prototype properties for functions that return Generator
+      // objects. For full spec compliance, you may wish to configure your
+      // minifier not to mangle the names of these two functions.
+      function Generator() {}
+      function GeneratorFunction() {}
+      function GeneratorFunctionPrototype() {}
+
+      // This is a polyfill for %IteratorPrototype% for environments that
+      // don't natively support it.
+      var IteratorPrototype = {};
+      define(IteratorPrototype, iteratorSymbol, function () {
+        return this;
+      });
+
+      var getProto = Object.getPrototypeOf;
+      var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+      if (NativeIteratorPrototype &&
+          NativeIteratorPrototype !== Op &&
+          hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+        // This environment has a native %IteratorPrototype%; use it instead
+        // of the polyfill.
+        IteratorPrototype = NativeIteratorPrototype;
+      }
+
+      var Gp = GeneratorFunctionPrototype.prototype =
+        Generator.prototype = Object.create(IteratorPrototype);
+      GeneratorFunction.prototype = GeneratorFunctionPrototype;
+      define(Gp, "constructor", GeneratorFunctionPrototype);
+      define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+      GeneratorFunction.displayName = define(
+        GeneratorFunctionPrototype,
+        toStringTagSymbol,
+        "GeneratorFunction"
+      );
+
+      // Helper for defining the .next, .throw, and .return methods of the
+      // Iterator interface in terms of a single ._invoke method.
+      function defineIteratorMethods(prototype) {
+        ["next", "throw", "return"].forEach(function(method) {
+          define(prototype, method, function(arg) {
+            return this._invoke(method, arg);
+          });
+        });
+      }
+
+      exports.isGeneratorFunction = function(genFun) {
+        var ctor = typeof genFun === "function" && genFun.constructor;
+        return ctor
+          ? ctor === GeneratorFunction ||
+            // For the native GeneratorFunction constructor, the best we can
+            // do is to check its .name property.
+            (ctor.displayName || ctor.name) === "GeneratorFunction"
+          : false;
+      };
+
+      exports.mark = function(genFun) {
+        if (Object.setPrototypeOf) {
+          Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+        } else {
+          genFun.__proto__ = GeneratorFunctionPrototype;
+          define(genFun, toStringTagSymbol, "GeneratorFunction");
+        }
+        genFun.prototype = Object.create(Gp);
+        return genFun;
+      };
+
+      // Within the body of any async function, `await x` is transformed to
+      // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+      // `hasOwn.call(value, "__await")` to determine if the yielded value is
+      // meant to be awaited.
+      exports.awrap = function(arg) {
+        return { __await: arg };
+      };
+
+      function AsyncIterator(generator, PromiseImpl) {
+        function invoke(method, arg, resolve, reject) {
+          var record = tryCatch(generator[method], generator, arg);
+          if (record.type === "throw") {
+            reject(record.arg);
+          } else {
+            var result = record.arg;
+            var value = result.value;
+            if (value &&
+                typeof value === "object" &&
+                hasOwn.call(value, "__await")) {
+              return PromiseImpl.resolve(value.__await).then(function(value) {
+                invoke("next", value, resolve, reject);
+              }, function(err) {
+                invoke("throw", err, resolve, reject);
+              });
+            }
+
+            return PromiseImpl.resolve(value).then(function(unwrapped) {
+              // When a yielded Promise is resolved, its final value becomes
+              // the .value of the Promise<{value,done}> result for the
+              // current iteration.
+              result.value = unwrapped;
+              resolve(result);
+            }, function(error) {
+              // If a rejected Promise was yielded, throw the rejection back
+              // into the async generator function so it can be handled there.
+              return invoke("throw", error, resolve, reject);
+            });
+          }
+        }
+
+        var previousPromise;
+
+        function enqueue(method, arg) {
+          function callInvokeWithMethodAndArg() {
+            return new PromiseImpl(function(resolve, reject) {
+              invoke(method, arg, resolve, reject);
+            });
+          }
+
+          return previousPromise =
+            // If enqueue has been called before, then we want to wait until
+            // all previous Promises have been resolved before calling invoke,
+            // so that results are always delivered in the correct order. If
+            // enqueue has not been called before, then it is important to
+            // call invoke immediately, without waiting on a callback to fire,
+            // so that the async generator function has the opportunity to do
+            // any necessary setup in a predictable way. This predictability
+            // is why the Promise constructor synchronously invokes its
+            // executor callback, and why async functions synchronously
+            // execute code before the first await. Since we implement simple
+            // async functions in terms of async generators, it is especially
+            // important to get this right, even though it requires care.
+            previousPromise ? previousPromise.then(
+              callInvokeWithMethodAndArg,
+              // Avoid propagating failures to Promises returned by later
+              // invocations of the iterator.
+              callInvokeWithMethodAndArg
+            ) : callInvokeWithMethodAndArg();
+        }
+
+        // Define the unified helper method that is used to implement .next,
+        // .throw, and .return (see defineIteratorMethods).
+        this._invoke = enqueue;
+      }
+
+      defineIteratorMethods(AsyncIterator.prototype);
+      define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+        return this;
+      });
+      exports.AsyncIterator = AsyncIterator;
+
+      // Note that simple async functions are implemented on top of
+      // AsyncIterator objects; they just return a Promise for the value of
+      // the final result produced by the iterator.
+      exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+        if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+        var iter = new AsyncIterator(
+          wrap(innerFn, outerFn, self, tryLocsList),
+          PromiseImpl
+        );
+
+        return exports.isGeneratorFunction(outerFn)
+          ? iter // If outerFn is a generator, return the full iterator.
+          : iter.next().then(function(result) {
+              return result.done ? result.value : iter.next();
+            });
+      };
+
+      function makeInvokeMethod(innerFn, self, context) {
+        var state = GenStateSuspendedStart;
+
+        return function invoke(method, arg) {
+          if (state === GenStateExecuting) {
+            throw new Error("Generator is already running");
+          }
+
+          if (state === GenStateCompleted) {
+            if (method === "throw") {
+              throw arg;
+            }
+
+            // Be forgiving, per 25.3.3.3.3 of the spec:
+            // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+            return doneResult();
+          }
+
+          context.method = method;
+          context.arg = arg;
+
+          while (true) {
+            var delegate = context.delegate;
+            if (delegate) {
+              var delegateResult = maybeInvokeDelegate(delegate, context);
+              if (delegateResult) {
+                if (delegateResult === ContinueSentinel) continue;
+                return delegateResult;
+              }
+            }
+
+            if (context.method === "next") {
+              // Setting context._sent for legacy support of Babel's
+              // function.sent implementation.
+              context.sent = context._sent = context.arg;
+
+            } else if (context.method === "throw") {
+              if (state === GenStateSuspendedStart) {
+                state = GenStateCompleted;
+                throw context.arg;
+              }
+
+              context.dispatchException(context.arg);
+
+            } else if (context.method === "return") {
+              context.abrupt("return", context.arg);
+            }
+
+            state = GenStateExecuting;
+
+            var record = tryCatch(innerFn, self, context);
+            if (record.type === "normal") {
+              // If an exception is thrown from innerFn, we leave state ===
+              // GenStateExecuting and loop back for another invocation.
+              state = context.done
+                ? GenStateCompleted
+                : GenStateSuspendedYield;
+
+              if (record.arg === ContinueSentinel) {
+                continue;
+              }
+
+              return {
+                value: record.arg,
+                done: context.done
+              };
+
+            } else if (record.type === "throw") {
+              state = GenStateCompleted;
+              // Dispatch the exception by looping back around to the
+              // context.dispatchException(context.arg) call above.
+              context.method = "throw";
+              context.arg = record.arg;
+            }
+          }
+        };
+      }
+
+      // Call delegate.iterator[context.method](context.arg) and handle the
+      // result, either by returning a { value, done } result from the
+      // delegate iterator, or by modifying context.method and context.arg,
+      // setting context.delegate to null, and returning the ContinueSentinel.
+      function maybeInvokeDelegate(delegate, context) {
+        var method = delegate.iterator[context.method];
+        if (method === undefined$1) {
+          // A .throw or .return when the delegate iterator has no .throw
+          // method always terminates the yield* loop.
+          context.delegate = null;
+
+          if (context.method === "throw") {
+            // Note: ["return"] must be used for ES3 parsing compatibility.
+            if (delegate.iterator["return"]) {
+              // If the delegate iterator has a return method, give it a
+              // chance to clean up.
+              context.method = "return";
+              context.arg = undefined$1;
+              maybeInvokeDelegate(delegate, context);
+
+              if (context.method === "throw") {
+                // If maybeInvokeDelegate(context) changed context.method from
+                // "return" to "throw", let that override the TypeError below.
+                return ContinueSentinel;
+              }
+            }
+
+            context.method = "throw";
+            context.arg = new TypeError(
+              "The iterator does not provide a 'throw' method");
+          }
+
+          return ContinueSentinel;
+        }
+
+        var record = tryCatch(method, delegate.iterator, context.arg);
+
+        if (record.type === "throw") {
+          context.method = "throw";
+          context.arg = record.arg;
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        var info = record.arg;
+
+        if (! info) {
+          context.method = "throw";
+          context.arg = new TypeError("iterator result is not an object");
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        if (info.done) {
+          // Assign the result of the finished delegate to the temporary
+          // variable specified by delegate.resultName (see delegateYield).
+          context[delegate.resultName] = info.value;
+
+          // Resume execution at the desired location (see delegateYield).
+          context.next = delegate.nextLoc;
+
+          // If context.method was "throw" but the delegate handled the
+          // exception, let the outer generator proceed normally. If
+          // context.method was "next", forget context.arg since it has been
+          // "consumed" by the delegate iterator. If context.method was
+          // "return", allow the original .return call to continue in the
+          // outer generator.
+          if (context.method !== "return") {
+            context.method = "next";
+            context.arg = undefined$1;
+          }
+
+        } else {
+          // Re-yield the result returned by the delegate method.
+          return info;
+        }
+
+        // The delegate iterator is finished, so forget it and continue with
+        // the outer generator.
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+
+      // Define Generator.prototype.{next,throw,return} in terms of the
+      // unified ._invoke helper method.
+      defineIteratorMethods(Gp);
+
+      define(Gp, toStringTagSymbol, "Generator");
+
+      // A Generator should always return itself as the iterator object when the
+      // @@iterator function is called on it. Some browsers' implementations of the
+      // iterator prototype chain incorrectly implement this, causing the Generator
+      // object to not be returned from this call. This ensures that doesn't happen.
+      // See https://github.com/facebook/regenerator/issues/274 for more details.
+      define(Gp, iteratorSymbol, function() {
+        return this;
+      });
+
+      define(Gp, "toString", function() {
+        return "[object Generator]";
+      });
+
+      function pushTryEntry(locs) {
+        var entry = { tryLoc: locs[0] };
+
+        if (1 in locs) {
+          entry.catchLoc = locs[1];
+        }
+
+        if (2 in locs) {
+          entry.finallyLoc = locs[2];
+          entry.afterLoc = locs[3];
+        }
+
+        this.tryEntries.push(entry);
+      }
+
+      function resetTryEntry(entry) {
+        var record = entry.completion || {};
+        record.type = "normal";
+        delete record.arg;
+        entry.completion = record;
+      }
+
+      function Context(tryLocsList) {
+        // The root entry object (effectively a try statement without a catch
+        // or a finally block) gives us a place to store values thrown from
+        // locations where there is no enclosing try statement.
+        this.tryEntries = [{ tryLoc: "root" }];
+        tryLocsList.forEach(pushTryEntry, this);
+        this.reset(true);
+      }
+
+      exports.keys = function(object) {
+        var keys = [];
+        for (var key in object) {
+          keys.push(key);
+        }
+        keys.reverse();
+
+        // Rather than returning an object with a next method, we keep
+        // things simple and return the next function itself.
+        return function next() {
+          while (keys.length) {
+            var key = keys.pop();
+            if (key in object) {
+              next.value = key;
+              next.done = false;
+              return next;
+            }
+          }
+
+          // To avoid creating an additional object, we just hang the .value
+          // and .done properties off the next function object itself. This
+          // also ensures that the minifier will not anonymize the function.
+          next.done = true;
+          return next;
+        };
+      };
+
+      function values(iterable) {
+        if (iterable) {
+          var iteratorMethod = iterable[iteratorSymbol];
+          if (iteratorMethod) {
+            return iteratorMethod.call(iterable);
+          }
+
+          if (typeof iterable.next === "function") {
+            return iterable;
+          }
+
+          if (!isNaN(iterable.length)) {
+            var i = -1, next = function next() {
+              while (++i < iterable.length) {
+                if (hasOwn.call(iterable, i)) {
+                  next.value = iterable[i];
+                  next.done = false;
+                  return next;
+                }
+              }
+
+              next.value = undefined$1;
+              next.done = true;
+
+              return next;
+            };
+
+            return next.next = next;
+          }
+        }
+
+        // Return an iterator with no values.
+        return { next: doneResult };
+      }
+      exports.values = values;
+
+      function doneResult() {
+        return { value: undefined$1, done: true };
+      }
+
+      Context.prototype = {
+        constructor: Context,
+
+        reset: function(skipTempReset) {
+          this.prev = 0;
+          this.next = 0;
+          // Resetting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          this.sent = this._sent = undefined$1;
+          this.done = false;
+          this.delegate = null;
+
+          this.method = "next";
+          this.arg = undefined$1;
+
+          this.tryEntries.forEach(resetTryEntry);
+
+          if (!skipTempReset) {
+            for (var name in this) {
+              // Not sure about the optimal order of these conditions:
+              if (name.charAt(0) === "t" &&
+                  hasOwn.call(this, name) &&
+                  !isNaN(+name.slice(1))) {
+                this[name] = undefined$1;
+              }
+            }
+          }
+        },
+
+        stop: function() {
+          this.done = true;
+
+          var rootEntry = this.tryEntries[0];
+          var rootRecord = rootEntry.completion;
+          if (rootRecord.type === "throw") {
+            throw rootRecord.arg;
+          }
+
+          return this.rval;
+        },
+
+        dispatchException: function(exception) {
+          if (this.done) {
+            throw exception;
+          }
+
+          var context = this;
+          function handle(loc, caught) {
+            record.type = "throw";
+            record.arg = exception;
+            context.next = loc;
+
+            if (caught) {
+              // If the dispatched exception was caught by a catch block,
+              // then let that catch block handle the exception normally.
+              context.method = "next";
+              context.arg = undefined$1;
+            }
+
+            return !! caught;
+          }
+
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            var record = entry.completion;
+
+            if (entry.tryLoc === "root") {
+              // Exception thrown outside of any try block that could handle
+              // it, so set the completion value of the entire function to
+              // throw the exception.
+              return handle("end");
+            }
+
+            if (entry.tryLoc <= this.prev) {
+              var hasCatch = hasOwn.call(entry, "catchLoc");
+              var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+              if (hasCatch && hasFinally) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                } else if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else if (hasCatch) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                }
+
+              } else if (hasFinally) {
+                if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else {
+                throw new Error("try statement without catch or finally");
+              }
+            }
+          }
+        },
+
+        abrupt: function(type, arg) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc <= this.prev &&
+                hasOwn.call(entry, "finallyLoc") &&
+                this.prev < entry.finallyLoc) {
+              var finallyEntry = entry;
+              break;
+            }
+          }
+
+          if (finallyEntry &&
+              (type === "break" ||
+               type === "continue") &&
+              finallyEntry.tryLoc <= arg &&
+              arg <= finallyEntry.finallyLoc) {
+            // Ignore the finally entry if control is not jumping to a
+            // location outside the try/catch block.
+            finallyEntry = null;
+          }
+
+          var record = finallyEntry ? finallyEntry.completion : {};
+          record.type = type;
+          record.arg = arg;
+
+          if (finallyEntry) {
+            this.method = "next";
+            this.next = finallyEntry.finallyLoc;
+            return ContinueSentinel;
+          }
+
+          return this.complete(record);
+        },
+
+        complete: function(record, afterLoc) {
+          if (record.type === "throw") {
+            throw record.arg;
+          }
+
+          if (record.type === "break" ||
+              record.type === "continue") {
+            this.next = record.arg;
+          } else if (record.type === "return") {
+            this.rval = this.arg = record.arg;
+            this.method = "return";
+            this.next = "end";
+          } else if (record.type === "normal" && afterLoc) {
+            this.next = afterLoc;
+          }
+
+          return ContinueSentinel;
+        },
+
+        finish: function(finallyLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.finallyLoc === finallyLoc) {
+              this.complete(entry.completion, entry.afterLoc);
+              resetTryEntry(entry);
+              return ContinueSentinel;
+            }
+          }
+        },
+
+        "catch": function(tryLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc === tryLoc) {
+              var record = entry.completion;
+              if (record.type === "throw") {
+                var thrown = record.arg;
+                resetTryEntry(entry);
+              }
+              return thrown;
+            }
+          }
+
+          // The context.catch method must only be called with a location
+          // argument that corresponds to a known catch block.
+          throw new Error("illegal catch attempt");
+        },
+
+        delegateYield: function(iterable, resultName, nextLoc) {
+          this.delegate = {
+            iterator: values(iterable),
+            resultName: resultName,
+            nextLoc: nextLoc
+          };
+
+          if (this.method === "next") {
+            // Deliberately forget the last sent value so that we don't
+            // accidentally pass it on to the delegate.
+            this.arg = undefined$1;
+          }
+
+          return ContinueSentinel;
+        }
+      };
+
+      // Regardless of whether this script is executing as a CommonJS module
+      // or not, return the runtime object so that we can declare the variable
+      // regeneratorRuntime in the outer scope, which allows this module to be
+      // injected easily by `bin/regenerator --include-runtime script.js`.
+      return exports;
+
+    }(
+      // If this script is executing as a CommonJS module, use module.exports
+      // as the regeneratorRuntime namespace. Otherwise create a new empty
+      // object. Either way, the resulting object will be used to initialize
+      // the regeneratorRuntime variable at the top of this file.
+       module.exports 
+    ));
+
+    try {
+      regeneratorRuntime = runtime;
+    } catch (accidentalStrictMode) {
+      // This module should not be running in strict mode, so the above
+      // assignment should always work unless something is misconfigured. Just
+      // in case runtime.js accidentally runs in strict mode, in modern engines
+      // we can explicitly access globalThis. In older engines we can escape
+      // strict mode using a global Function call. This could conceivably fail
+      // if a Content Security Policy forbids using Function, but in that case
+      // the proper solution is to fix the accidental strict mode problem. If
+      // you've misconfigured your bundler to force strict mode and applied a
+      // CSP to forbid Function, and you're not willing to fix either of those
+      // problems, please detail your unique predicament in a GitHub issue.
+      if (typeof globalThis === "object") {
+        globalThis.regeneratorRuntime = runtime;
+      } else {
+        Function("r", "regeneratorRuntime = r")(runtime);
+      }
+    }
+    });
+
+    /**
+     * Constant for chain ids
+     */
+    var NETWORK = /*#__PURE__*/Object.freeze({
+      'mainnet': 1,
+      'homestead': 1,
+      'ropsten': 3,
+      'rinkeby': 4,
+      'goerli': 5,
+      'kovan': 42,
+      'bsc': 56,
+      'poa-sokol': 77,
+      'bsc-testnet': 97,
+      'poa': 99,
+      'xdai': 100,
+      'polygon': 137,
+      'matic': 137,
+      'mumbai': 80001,
+      'optimism': 10,
+      'optimism-goerli': 420,
+      'avalanche': 43114,
+      'fuji': 43113,
+      'celo': 42220,
+      'celo-testnet': 44787,
+      'arbitrum': 42161,
+      'arbitrum-goerli': 421613
+    });
+    /**
+     * Ethereum networks
+     */
+
+    /*#__PURE__*/Object.freeze([NETWORK.mainnet, NETWORK.goerli]);
+    /*#__PURE__*/Object.freeze([NETWORK.polygon, NETWORK.mumbai]);
+    /*#__PURE__*/Object.freeze([NETWORK.avalanche, NETWORK.fuji]);
+    /*#__PURE__*/Object.freeze([NETWORK.celo, NETWORK['celo-testnet']]);
+    /*#__PURE__*/Object.freeze([NETWORK.optimism, NETWORK['optimism-goerli']]);
+    /*#__PURE__*/Object.freeze([NETWORK.arbitrum, NETWORK['arbitrum-goerli']]);
+
+    var _GOVERNANCE_CONTRACT_, _Object$freeze;
+    (_GOVERNANCE_CONTRACT_ = {}, _GOVERNANCE_CONTRACT_[NETWORK.mainnet] = {
+      GovernorAlpha: '0xB3a87172F555ae2a2AB79Be60B336D2F7D0187f0',
+      GovernanceToken: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
+      GovernanceReserve: '0xdb8E47BEFe4646fCc62BE61EEE5DF350404c124F',
+      MerkleDistributor: '0xBE1a33519F586A4c8AA37525163Df8d67997016f'
+    }, _GOVERNANCE_CONTRACT_[NETWORK.rinkeby] = {
+      GovernorAlpha: '0x9B63243CD27102fbEc9FAf67CA1a858dcC16Ee01',
+      GovernanceToken: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A',
+      GovernanceReserve: '0xA5224da01a5A792946E4270a02457EB75412c84c',
+      MerkleDistributor: '0x93a6540DcE05a4A5E5B906eB97bBCBb723768F2D'
+    }, _GOVERNANCE_CONTRACT_[NETWORK.polygon] = {
+      GovernanceToken: '0x25788a1a171ec66Da6502f9975a15B609fF54CF6'
+    }, _GOVERNANCE_CONTRACT_);
+    /*#__PURE__*/Object.freeze((_Object$freeze = {}, _Object$freeze[NETWORK.mainnet] = {
+      pool: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
+      ppool: '0x27d22a7648e955e510a40bdb058333e9190d12d4'
+    }, _Object$freeze[NETWORK.rinkeby] = {
+      pool: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A'
+    }, _Object$freeze[NETWORK.polygon] = {
+      polygon_bridge: '0x25788a1a171ec66Da6502f9975a15B609fF54CF6',
+      ppool: '0xd80eaa761ccfdc8698999d73c96cec39fbb1fc48'
+    }, _Object$freeze[NETWORK.optimism] = {
+      pool: '0x395ae52bb17aef68c2888d941736a71dc6d4e125'
+    }, _Object$freeze));
+    var CURRENCIES;
+
+    (function (CURRENCIES) {
+      CURRENCIES["USD"] = "USD";
+      CURRENCIES["CAD"] = "CAD";
+      CURRENCIES["EUR"] = "EUR";
+    })(CURRENCIES || (CURRENCIES = {}));
+
+    /**
+     * Recursively looks through an object, converting all big numbers into actual BigNumbers
+     * @param {any} data json blob
+     * @returns
+     */
+
+    var deserializeBigNumbers = function deserializeBigNumbers(data) {
+      try {
+        if (Array.isArray(data)) {
+          data.forEach(deserializeBigNumbers);
+        } else if (typeof data === 'object' && data !== null) {
+          Object.keys(data).forEach(function (key) {
+            if (Array.isArray(data[key])) {
+              data[key].forEach(deserializeBigNumbers);
+            } else if (typeof data[key] === 'object' && data[key] !== null) {
+              var _data$key;
+
+              if (((_data$key = data[key]) == null ? void 0 : _data$key.type) === 'BigNumber') {
+                data[key] = BigNumber.from(data[key]);
+              } else {
+                deserializeBigNumbers(data[key]);
+              }
+            }
+          });
+        }
+
+        return data;
+      } catch (e) {
+        return data;
+      }
+    };
+
+    var _PRIZE_POOL_ADDRESSES, _POD_ADDRESSES, _LP_PRIZE_POOL_METADA, _POOL_PRIZE_POOL_ADDR;
+    var DEXES;
+
+    (function (DEXES) {
+      DEXES["UniSwap"] = "UniSwap";
+      DEXES["SushiSwap"] = "SushiSwap";
+    })(DEXES || (DEXES = {})); // V3 contract addresses to maintain support for.
+
+
+    /*#__PURE__*/Object.freeze({
+      CHAIN_IDS: {
+        mainnets: [NETWORK.mainnet, NETWORK.polygon, NETWORK.bsc, NETWORK.celo],
+        testnets: [NETWORK.rinkeby]
+      },
+      PRIZE_POOL_ADDRESSES: (_PRIZE_POOL_ADDRESSES = {}, _PRIZE_POOL_ADDRESSES[NETWORK.mainnet] = [{
+        prizePool: '0xebfb47a7ad0fd6e57323c8a42b2e5a6a4f68fc1a',
+        symbol: 'PT-cDAI',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0xf362ce295f2a4eae4348ffc8cdbce8d729ccb8eb']
+      }, {
+        prizePool: '0x0650d780292142835f6ac58dd8e2a336e87b4393',
+        symbol: 'PT-cUNI',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0xa5dddefd30e234be2ac6fc1a0364cfd337aa0f61']
+      }, {
+        prizePool: '0xde9ec95d7708b8319ccca4b8bc92c0a3b70bf416',
+        symbol: 'PT-cUSDC',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0xbd537257fad96e977b9e545be583bbf7028f30b9']
+      }, {
+        prizePool: '0x396b4489da692788e327e2e4b2b0459a5ef26791',
+        symbol: 'PT-stPOOL',
+        subgraphVersion: '3.3.2',
+        tokenFaucets: ['0x30430419b86e9512e6d93fc2b0791d98dbeb637b']
+      }, {
+        prizePool: '0xbc82221e131c082336cf698f0ca3ebd18afd4ce7',
+        symbol: 'PT-cCOMP',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0x72f06a78bbaac0489067a1973b0cef61841d58bc']
+      }, {
+        prizePool: '0xc2a7dfb76e93d12a1bb1fa151b9900158090395d',
+        symbol: 'PT-stBADGER',
+        subgraphVersion: '3.3.2',
+        tokenFaucets: ['0x40f76363129118b34cc2af44963192c3e8690ba6']
+      }, {
+        prizePool: '0xc32a0f9dfe2d93e8a60ba0200e033a59aec91559',
+        symbol: 'PT-xSUSHI',
+        subgraphVersion: '3.3.8',
+        tokenFaucets: ['0xddcf915656471b7c44217fb8c51f9888701e759a', '0xd186302304fd367488b5087af5b12cb9b7cf7540']
+      }, {
+        prizePool: '0x3af7072d29adde20fc7e173a7cb9e45307d2fb0a',
+        symbol: 'POOL-ETH-UNI-V2-LP',
+        subgraphVersion: '3.3.8',
+        tokenFaucets: ['0x9a29401ef1856b669f55ae5b24505b3b6faeb370']
+      }, {
+        prizePool: '0x65c8827229fbd63f9de9fdfd400c9d264066a336',
+        symbol: 'gUSD-0x65C882',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x103a8ed831bec3b33a0018a16337fbfd604bbba9',
+        symbol: 'RAI-0x103a8e',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x5b746a07d36a9c8583313983d83d2fc029dcf7bf',
+        symbol: 'sUSD-0x5b746a',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x244d223c0ad484aa27691c4efd2218a71b240c8c',
+        symbol: 'bUSD-0x244D22',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x639d4140a1f7723b7cefef7505d1d7be11a43de0',
+        symbol: 'UNI-V2-0x639d41',
+        subgraphVersion: '3.1.0'
+      }, {
+        prizePool: '0xc7d56c06F136EFff93e349C7BF8cc46bBF5D902c',
+        symbol: 'USDT-0xc7d56c',
+        subgraphVersion: '3.3.8'
+      }], _PRIZE_POOL_ADDRESSES[NETWORK.rinkeby] = [{
+        prizePool: '0x4706856fa8bb747d50b4ef8547fe51ab5edc4ac2',
+        symbol: 'PT-cDAI',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0x5d5af77cf99f7015e615f9b3286a27c5b6090707']
+      }, {
+        prizePool: '0xab068f220e10eed899b54f1113de7e354c9a8eb7',
+        symbol: 'PT-cBAT',
+        subgraphVersion: '3.1.0',
+        tokenFaucets: ['0x97b99693613aaa74a3fa0b2f05378b8f6a74a893']
+      }, {
+        prizePool: '0x95bca36b53ab0c54b162672454fe4be869a6f9ca',
+        symbol: 'USDC-0x95bca3',
+        subgraphVersion: '3.3.2'
+      }, {
+        prizePool: '0xc8e1ea1afb7361cd647ad1a54a6c074f1174eb6e',
+        symbol: 'BAT-0xc8e1ea',
+        subgraphVersion: '3.3.2'
+      }, {
+        prizePool: '0x84ed0f89c033fe7dadfc4d5f2a516ebd9dc15644',
+        symbol: 'DAI-0x84ed0f',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0xe19b8887677432707ae4dd1ce6b50ef9abd44bb6',
+        symbol: 'USDC-0xe19b88',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x7355f97fBA5237aEdFE2CdAad50A4eA3cF070A98',
+        symbol: 'FAST-DAI-0x7355f9',
+        subgraphVersion: '3.3.8'
+      }, {
+        prizePool: '0x8A358f613ddCca865D005414c1690920E4e9b132',
+        symbol: 'LP',
+        subgraphVersion: '',
+        tokenFaucets: ['0x97B99693613aaA74A3fa0B2f05378b8F6A74a893']
+      }], _PRIZE_POOL_ADDRESSES[NETWORK.bsc] = [{
+        prizePool: '0x06D75Eb5cA4Da7F7C7A043714172CF109D07a5F8',
+        symbol: 'CAKE-0x06D75E',
+        subgraphVersion: '3.4.3'
+      }, {
+        prizePool: '0x2f4Fc07E4Bd097C68774E5bdAbA98d948219F827',
+        symbol: 'WBNB-0x2f4Fc0',
+        subgraphVersion: '3.4.3'
+      }], _PRIZE_POOL_ADDRESSES[NETWORK.polygon] = [{
+        prizePool: '0x887e17d791dcb44bfdda3023d26f7a04ca9c7ef4',
+        symbol: 'USDT-0x887E17',
+        subgraphVersion: '3.3.8',
+        tokenFaucets: ['0x90a8d8ee6fdb1875028c6537877e6704b2646c51', '0x951A969324127Fcc19D3498d6954A296E3B9C33c', '0x12533c9fe479ab8c27e55c1b7697e0647fadb153']
+      }, {
+        prizePool: '0xee06abe9e2af61cabcb13170e01266af2defa946',
+        symbol: 'USDC-0xee06ab',
+        subgraphVersion: '3.4.3',
+        tokenFaucets: ['0x6cbc003fe015d753180f072d904ba841b2415498']
+      }, {
+        prizePool: '0x2aC049f07d56Ed04F84Ff80022A71a1A2d8cE19b',
+        symbol: 'POOL-0x2aC049',
+        subgraphVersion: ''
+      }], _PRIZE_POOL_ADDRESSES[NETWORK.celo] = [{
+        prizePool: '0x6F634F531ED0043B94527F68EC7861B4B1Ab110d',
+        symbol: 'CELO-cUSD',
+        subgraphVersion: '3.4.5',
+        tokenFaucets: ['0xc777e1db58c386b8827bc1321fc2fef03ee5a7b7']
+      }, {
+        prizePool: '0xbe55435BdA8f0A2A20D2Ce98cC21B0AF5bfB7c83',
+        symbol: 'CELO-cEUR',
+        subgraphVersion: '3.4.5',
+        tokenFaucets: ['0xd7bb81038d60e3530b9d550cd17de605bd27b937']
+      }], _PRIZE_POOL_ADDRESSES),
+      POD_ADDRESSES: (_POD_ADDRESSES = {}, _POD_ADDRESSES[NETWORK.mainnet] = [{
+        // DAI Pod
+        pod: '0x2f994e2E4F3395649eeE8A89092e63Ca526dA829',
+        prizePool: '0xEBfb47A7ad0FD6e57323C8A42B2E5A6a4F68fc1a'
+      }, {
+        // USDC Pod
+        pod: '0x386EB78f2eE79AddE8Bdb0a0e27292755ebFea58',
+        prizePool: '0xde9ec95d7708B8319CCca4b8BC92c0a3B70bf416'
+      }], _POD_ADDRESSES[NETWORK.rinkeby] = [{
+        // DAI Pod
+        pod: '0x4A26b34A902045CFb573aCb681550ba30AA79783',
+        prizePool: '0x4706856FA8Bb747D50b4EF8547FE51Ab5Edc4Ac2'
+      }], _POD_ADDRESSES),
+      LP_PRIZE_POOL_METADATA: (_LP_PRIZE_POOL_METADA = {}, _LP_PRIZE_POOL_METADA[NETWORK.mainnet] = [{
+        prizePool: '0x3af7072d29adde20fc7e173a7cb9e45307d2fb0a',
+        tokens: {
+          ticket: {
+            address: '0xeb8928ee92efb06c44d072a24c2bcb993b61e543',
+            name: 'PT UNI-V2 LP Ticket',
+            symbol: 'PTUNI POOL-ETH'
+          },
+          underlyingToken: {
+            address: '0x85cb0bab616fe88a89a35080516a8928f38b518b',
+            dex: DEXES.UniSwap,
+            name: 'Uniswap POOL/ETH LP',
+            pair: 'POOL/ETH',
+            symbol: 'UNI-V2 LP',
+            token1: {
+              symbol: 'POOL',
+              address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e'
+            },
+            token2: {
+              symbol: 'ETH',
+              address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' // WETH
+
+            }
+          },
+          tokenFaucetDripToken: {
+            address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
+            symbol: 'POOL'
+          }
+        },
+        tokenFaucets: ['0x9a29401ef1856b669f55ae5b24505b3b6faeb370']
+      }], _LP_PRIZE_POOL_METADA[NETWORK.rinkeby] = [{
+        prizePool: '0x8A358f613ddCca865D005414c1690920E4e9b132',
+        tokens: {
+          ticket: {
+            address: '0x9b8c6fd165e0bffb93e6f2cf564d2cc7271e120f',
+            name: 'PT UNI-V2 LP Ticket',
+            symbol: 'PTUNI POOL-ETH'
+          },
+          underlyingToken: {
+            address: '0x91A590A2D78c71775318524c198a0f2000112108',
+            dex: DEXES.UniSwap,
+            name: 'Uniswap POOL/ETH LP Rinkeby',
+            pair: 'POOL/ETH',
+            symbol: 'UNI-V2 LP',
+            token1: {
+              symbol: 'POOL',
+              address: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A'
+            },
+            token2: {
+              symbol: 'ETH',
+              address: '0xc778417e063141139fce010982780140aa0cd5ab'
+            }
+          },
+          tokenFaucetDripToken: {
+            address: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A',
+            symbol: 'POOL'
+          }
+        },
+        tokenFaucets: ['0x97B99693613aaA74A3fa0B2f05378b8F6A74a893']
+      }], _LP_PRIZE_POOL_METADA),
+      POOL_PRIZE_POOL_ADDRESSES: (_POOL_PRIZE_POOL_ADDR = {}, _POOL_PRIZE_POOL_ADDR[NETWORK.mainnet] = ['0x396b4489da692788e327e2e4b2b0459a5ef26791'], _POOL_PRIZE_POOL_ADDR[NETWORK.polygon] = ['0x2aC049f07d56Ed04F84Ff80022A71a1A2d8cE19b'], _POOL_PRIZE_POOL_ADDR[NETWORK.rinkeby] = ['0x4706856fa8bb747d50b4ef8547fe51ab5edc4ac2'], _POOL_PRIZE_POOL_ADDR)
+    });
+
+    /**
+     * A shortlist of PoolTogether v4 contract names that are used by the classes in this repo.
+     */
+
+    var ContractType;
+
+    (function (ContractType) {
+      ContractType["YieldSourcePrizePool"] = "YieldSourcePrizePool";
+      ContractType["Ticket"] = "Ticket";
+      ContractType["Token"] = "Token";
+      ContractType["PrizeDistributor"] = "PrizeDistributor";
+      ContractType["DrawBuffer"] = "DrawBuffer";
+      ContractType["DrawBeacon"] = "DrawBeacon";
+      ContractType["DrawCalculator"] = "DrawCalculator";
+      ContractType["DrawCalculatorTimelock"] = "DrawCalculatorTimelock";
+      ContractType["PrizeDistributionBuffer"] = "PrizeDistributionBuffer";
+      ContractType["PrizeDistributionFactory"] = "PrizeDistributionFactory";
+      ContractType["PrizeTierHistory"] = "PrizeTierHistory"; // ... more contract types
+    })(ContractType || (ContractType = {}));
+
+    var PrizeApiStatus;
+
+    (function (PrizeApiStatus) {
+      PrizeApiStatus["loading"] = "LOADING";
+      PrizeApiStatus["success"] = "SUCCESS";
+      PrizeApiStatus["failure"] = "FAILURE";
+    })(PrizeApiStatus || (PrizeApiStatus = {}));
+
+    var createContract = function createContract(address, contractInterface, provider) {
+      return new Contract(address, contractInterface, provider);
+    };
+
+    function createInterface(abi) {
+      return new Interface(abi);
+    }
+
+    function getContractsByType(contracts, type) {
+      return contracts.filter(function (contract) {
+        return contract.type === type;
+      });
+    }
+
+    /**
+     * Reads the contract list and pulls out connected contracts based on the
+     * children extension.
+     *
+     * NOTE: This extension is added in the intialize functions for creating the instances of
+     * PrizePoolNetwork and PrizeDistributors
+     */
+
+    function sortContractsByContractTypeAndChildren(contracts, contractType) {
+      var prizePoolContracts = getContractsByType(contracts, contractType);
+      return prizePoolContracts.map(function (prizePoolContract) {
+        return [prizePoolContract].concat(findChildContracts(prizePoolContract, contracts));
+      });
+    }
+
+    function findChildContracts(parentContract, contracts) {
+      var _parentContract$exten;
+
+      var children = (_parentContract$exten = parentContract.extensions) == null ? void 0 : _parentContract$exten.children;
+      if (!children) return [];
+      if (!Array.isArray(children)) throw new Error('Invalid children extension');
+      var childContracts = [];
+      children.forEach(function (childIdentifier) {
+        var childContract = contracts.find(function (contract) {
+          return isMatchingContractIdentifier(childIdentifier, contract);
+        });
+        if (childContract) childContracts.push(childContract);
+      });
+      return childContracts;
+    }
+
+    function isMatchingContractIdentifier(contractIdentifier, contract) {
+      return contractIdentifier.address === contract.address && contractIdentifier.chainId === contract.chainId;
+    }
+
+    function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+      try {
+        var info = gen[key](arg);
+        var value = info.value;
+      } catch (error) {
+        reject(error);
+        return;
+      }
+
+      if (info.done) {
+        resolve(value);
+      } else {
+        Promise.resolve(value).then(_next, _throw);
+      }
+    }
+
+    function _asyncToGenerator(fn) {
+      return function () {
+        var self = this,
+            args = arguments;
+        return new Promise(function (resolve, reject) {
+          var gen = fn.apply(self, args);
+
+          function _next(value) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+          }
+
+          function _throw(err) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+          }
+
+          _next(undefined);
+        });
+      };
+    }
+
+    function createCommonjsModule(fn, module) {
+    	return module = { exports: {} }, fn(module, module.exports), module.exports;
+    }
+
+    var runtime_1 = createCommonjsModule(function (module) {
+    /**
+     * Copyright (c) 2014-present, Facebook, Inc.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     */
+
+    var runtime = (function (exports) {
+
+      var Op = Object.prototype;
+      var hasOwn = Op.hasOwnProperty;
+      var undefined$1; // More compressible than void 0.
+      var $Symbol = typeof Symbol === "function" ? Symbol : {};
+      var iteratorSymbol = $Symbol.iterator || "@@iterator";
+      var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+      var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+      function define(obj, key, value) {
+        Object.defineProperty(obj, key, {
+          value: value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+        return obj[key];
+      }
+      try {
+        // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+        define({}, "");
+      } catch (err) {
+        define = function(obj, key, value) {
+          return obj[key] = value;
+        };
+      }
+
+      function wrap(innerFn, outerFn, self, tryLocsList) {
+        // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+        var generator = Object.create(protoGenerator.prototype);
+        var context = new Context(tryLocsList || []);
+
+        // The ._invoke method unifies the implementations of the .next,
+        // .throw, and .return methods.
+        generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+        return generator;
+      }
+      exports.wrap = wrap;
+
+      // Try/catch helper to minimize deoptimizations. Returns a completion
+      // record like context.tryEntries[i].completion. This interface could
+      // have been (and was previously) designed to take a closure to be
+      // invoked without arguments, but in all the cases we care about we
+      // already have an existing method we want to call, so there's no need
+      // to create a new function object. We can even get away with assuming
+      // the method takes exactly one argument, since that happens to be true
+      // in every case, so we don't have to touch the arguments object. The
+      // only additional allocation required is the completion record, which
+      // has a stable shape and so hopefully should be cheap to allocate.
+      function tryCatch(fn, obj, arg) {
+        try {
+          return { type: "normal", arg: fn.call(obj, arg) };
+        } catch (err) {
+          return { type: "throw", arg: err };
+        }
+      }
+
+      var GenStateSuspendedStart = "suspendedStart";
+      var GenStateSuspendedYield = "suspendedYield";
+      var GenStateExecuting = "executing";
+      var GenStateCompleted = "completed";
+
+      // Returning this object from the innerFn has the same effect as
+      // breaking out of the dispatch switch statement.
+      var ContinueSentinel = {};
+
+      // Dummy constructor functions that we use as the .constructor and
+      // .constructor.prototype properties for functions that return Generator
+      // objects. For full spec compliance, you may wish to configure your
+      // minifier not to mangle the names of these two functions.
+      function Generator() {}
+      function GeneratorFunction() {}
+      function GeneratorFunctionPrototype() {}
+
+      // This is a polyfill for %IteratorPrototype% for environments that
+      // don't natively support it.
+      var IteratorPrototype = {};
+      define(IteratorPrototype, iteratorSymbol, function () {
+        return this;
+      });
+
+      var getProto = Object.getPrototypeOf;
+      var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+      if (NativeIteratorPrototype &&
+          NativeIteratorPrototype !== Op &&
+          hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+        // This environment has a native %IteratorPrototype%; use it instead
+        // of the polyfill.
+        IteratorPrototype = NativeIteratorPrototype;
+      }
+
+      var Gp = GeneratorFunctionPrototype.prototype =
+        Generator.prototype = Object.create(IteratorPrototype);
+      GeneratorFunction.prototype = GeneratorFunctionPrototype;
+      define(Gp, "constructor", GeneratorFunctionPrototype);
+      define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+      GeneratorFunction.displayName = define(
+        GeneratorFunctionPrototype,
+        toStringTagSymbol,
+        "GeneratorFunction"
+      );
+
+      // Helper for defining the .next, .throw, and .return methods of the
+      // Iterator interface in terms of a single ._invoke method.
+      function defineIteratorMethods(prototype) {
+        ["next", "throw", "return"].forEach(function(method) {
+          define(prototype, method, function(arg) {
+            return this._invoke(method, arg);
+          });
+        });
+      }
+
+      exports.isGeneratorFunction = function(genFun) {
+        var ctor = typeof genFun === "function" && genFun.constructor;
+        return ctor
+          ? ctor === GeneratorFunction ||
+            // For the native GeneratorFunction constructor, the best we can
+            // do is to check its .name property.
+            (ctor.displayName || ctor.name) === "GeneratorFunction"
+          : false;
+      };
+
+      exports.mark = function(genFun) {
+        if (Object.setPrototypeOf) {
+          Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+        } else {
+          genFun.__proto__ = GeneratorFunctionPrototype;
+          define(genFun, toStringTagSymbol, "GeneratorFunction");
+        }
+        genFun.prototype = Object.create(Gp);
+        return genFun;
+      };
+
+      // Within the body of any async function, `await x` is transformed to
+      // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+      // `hasOwn.call(value, "__await")` to determine if the yielded value is
+      // meant to be awaited.
+      exports.awrap = function(arg) {
+        return { __await: arg };
+      };
+
+      function AsyncIterator(generator, PromiseImpl) {
+        function invoke(method, arg, resolve, reject) {
+          var record = tryCatch(generator[method], generator, arg);
+          if (record.type === "throw") {
+            reject(record.arg);
+          } else {
+            var result = record.arg;
+            var value = result.value;
+            if (value &&
+                typeof value === "object" &&
+                hasOwn.call(value, "__await")) {
+              return PromiseImpl.resolve(value.__await).then(function(value) {
+                invoke("next", value, resolve, reject);
+              }, function(err) {
+                invoke("throw", err, resolve, reject);
+              });
+            }
+
+            return PromiseImpl.resolve(value).then(function(unwrapped) {
+              // When a yielded Promise is resolved, its final value becomes
+              // the .value of the Promise<{value,done}> result for the
+              // current iteration.
+              result.value = unwrapped;
+              resolve(result);
+            }, function(error) {
+              // If a rejected Promise was yielded, throw the rejection back
+              // into the async generator function so it can be handled there.
+              return invoke("throw", error, resolve, reject);
+            });
+          }
+        }
+
+        var previousPromise;
+
+        function enqueue(method, arg) {
+          function callInvokeWithMethodAndArg() {
+            return new PromiseImpl(function(resolve, reject) {
+              invoke(method, arg, resolve, reject);
+            });
+          }
+
+          return previousPromise =
+            // If enqueue has been called before, then we want to wait until
+            // all previous Promises have been resolved before calling invoke,
+            // so that results are always delivered in the correct order. If
+            // enqueue has not been called before, then it is important to
+            // call invoke immediately, without waiting on a callback to fire,
+            // so that the async generator function has the opportunity to do
+            // any necessary setup in a predictable way. This predictability
+            // is why the Promise constructor synchronously invokes its
+            // executor callback, and why async functions synchronously
+            // execute code before the first await. Since we implement simple
+            // async functions in terms of async generators, it is especially
+            // important to get this right, even though it requires care.
+            previousPromise ? previousPromise.then(
+              callInvokeWithMethodAndArg,
+              // Avoid propagating failures to Promises returned by later
+              // invocations of the iterator.
+              callInvokeWithMethodAndArg
+            ) : callInvokeWithMethodAndArg();
+        }
+
+        // Define the unified helper method that is used to implement .next,
+        // .throw, and .return (see defineIteratorMethods).
+        this._invoke = enqueue;
+      }
+
+      defineIteratorMethods(AsyncIterator.prototype);
+      define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+        return this;
+      });
+      exports.AsyncIterator = AsyncIterator;
+
+      // Note that simple async functions are implemented on top of
+      // AsyncIterator objects; they just return a Promise for the value of
+      // the final result produced by the iterator.
+      exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+        if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+        var iter = new AsyncIterator(
+          wrap(innerFn, outerFn, self, tryLocsList),
+          PromiseImpl
+        );
+
+        return exports.isGeneratorFunction(outerFn)
+          ? iter // If outerFn is a generator, return the full iterator.
+          : iter.next().then(function(result) {
+              return result.done ? result.value : iter.next();
+            });
+      };
+
+      function makeInvokeMethod(innerFn, self, context) {
+        var state = GenStateSuspendedStart;
+
+        return function invoke(method, arg) {
+          if (state === GenStateExecuting) {
+            throw new Error("Generator is already running");
+          }
+
+          if (state === GenStateCompleted) {
+            if (method === "throw") {
+              throw arg;
+            }
+
+            // Be forgiving, per 25.3.3.3.3 of the spec:
+            // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+            return doneResult();
+          }
+
+          context.method = method;
+          context.arg = arg;
+
+          while (true) {
+            var delegate = context.delegate;
+            if (delegate) {
+              var delegateResult = maybeInvokeDelegate(delegate, context);
+              if (delegateResult) {
+                if (delegateResult === ContinueSentinel) continue;
+                return delegateResult;
+              }
+            }
+
+            if (context.method === "next") {
+              // Setting context._sent for legacy support of Babel's
+              // function.sent implementation.
+              context.sent = context._sent = context.arg;
+
+            } else if (context.method === "throw") {
+              if (state === GenStateSuspendedStart) {
+                state = GenStateCompleted;
+                throw context.arg;
+              }
+
+              context.dispatchException(context.arg);
+
+            } else if (context.method === "return") {
+              context.abrupt("return", context.arg);
+            }
+
+            state = GenStateExecuting;
+
+            var record = tryCatch(innerFn, self, context);
+            if (record.type === "normal") {
+              // If an exception is thrown from innerFn, we leave state ===
+              // GenStateExecuting and loop back for another invocation.
+              state = context.done
+                ? GenStateCompleted
+                : GenStateSuspendedYield;
+
+              if (record.arg === ContinueSentinel) {
+                continue;
+              }
+
+              return {
+                value: record.arg,
+                done: context.done
+              };
+
+            } else if (record.type === "throw") {
+              state = GenStateCompleted;
+              // Dispatch the exception by looping back around to the
+              // context.dispatchException(context.arg) call above.
+              context.method = "throw";
+              context.arg = record.arg;
+            }
+          }
+        };
+      }
+
+      // Call delegate.iterator[context.method](context.arg) and handle the
+      // result, either by returning a { value, done } result from the
+      // delegate iterator, or by modifying context.method and context.arg,
+      // setting context.delegate to null, and returning the ContinueSentinel.
+      function maybeInvokeDelegate(delegate, context) {
+        var method = delegate.iterator[context.method];
+        if (method === undefined$1) {
+          // A .throw or .return when the delegate iterator has no .throw
+          // method always terminates the yield* loop.
+          context.delegate = null;
+
+          if (context.method === "throw") {
+            // Note: ["return"] must be used for ES3 parsing compatibility.
+            if (delegate.iterator["return"]) {
+              // If the delegate iterator has a return method, give it a
+              // chance to clean up.
+              context.method = "return";
+              context.arg = undefined$1;
+              maybeInvokeDelegate(delegate, context);
+
+              if (context.method === "throw") {
+                // If maybeInvokeDelegate(context) changed context.method from
+                // "return" to "throw", let that override the TypeError below.
+                return ContinueSentinel;
+              }
+            }
+
+            context.method = "throw";
+            context.arg = new TypeError(
+              "The iterator does not provide a 'throw' method");
+          }
+
+          return ContinueSentinel;
+        }
+
+        var record = tryCatch(method, delegate.iterator, context.arg);
+
+        if (record.type === "throw") {
+          context.method = "throw";
+          context.arg = record.arg;
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        var info = record.arg;
+
+        if (! info) {
+          context.method = "throw";
+          context.arg = new TypeError("iterator result is not an object");
+          context.delegate = null;
+          return ContinueSentinel;
+        }
+
+        if (info.done) {
+          // Assign the result of the finished delegate to the temporary
+          // variable specified by delegate.resultName (see delegateYield).
+          context[delegate.resultName] = info.value;
+
+          // Resume execution at the desired location (see delegateYield).
+          context.next = delegate.nextLoc;
+
+          // If context.method was "throw" but the delegate handled the
+          // exception, let the outer generator proceed normally. If
+          // context.method was "next", forget context.arg since it has been
+          // "consumed" by the delegate iterator. If context.method was
+          // "return", allow the original .return call to continue in the
+          // outer generator.
+          if (context.method !== "return") {
+            context.method = "next";
+            context.arg = undefined$1;
+          }
+
+        } else {
+          // Re-yield the result returned by the delegate method.
+          return info;
+        }
+
+        // The delegate iterator is finished, so forget it and continue with
+        // the outer generator.
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+
+      // Define Generator.prototype.{next,throw,return} in terms of the
+      // unified ._invoke helper method.
+      defineIteratorMethods(Gp);
+
+      define(Gp, toStringTagSymbol, "Generator");
+
+      // A Generator should always return itself as the iterator object when the
+      // @@iterator function is called on it. Some browsers' implementations of the
+      // iterator prototype chain incorrectly implement this, causing the Generator
+      // object to not be returned from this call. This ensures that doesn't happen.
+      // See https://github.com/facebook/regenerator/issues/274 for more details.
+      define(Gp, iteratorSymbol, function() {
+        return this;
+      });
+
+      define(Gp, "toString", function() {
+        return "[object Generator]";
+      });
+
+      function pushTryEntry(locs) {
+        var entry = { tryLoc: locs[0] };
+
+        if (1 in locs) {
+          entry.catchLoc = locs[1];
+        }
+
+        if (2 in locs) {
+          entry.finallyLoc = locs[2];
+          entry.afterLoc = locs[3];
+        }
+
+        this.tryEntries.push(entry);
+      }
+
+      function resetTryEntry(entry) {
+        var record = entry.completion || {};
+        record.type = "normal";
+        delete record.arg;
+        entry.completion = record;
+      }
+
+      function Context(tryLocsList) {
+        // The root entry object (effectively a try statement without a catch
+        // or a finally block) gives us a place to store values thrown from
+        // locations where there is no enclosing try statement.
+        this.tryEntries = [{ tryLoc: "root" }];
+        tryLocsList.forEach(pushTryEntry, this);
+        this.reset(true);
+      }
+
+      exports.keys = function(object) {
+        var keys = [];
+        for (var key in object) {
+          keys.push(key);
+        }
+        keys.reverse();
+
+        // Rather than returning an object with a next method, we keep
+        // things simple and return the next function itself.
+        return function next() {
+          while (keys.length) {
+            var key = keys.pop();
+            if (key in object) {
+              next.value = key;
+              next.done = false;
+              return next;
+            }
+          }
+
+          // To avoid creating an additional object, we just hang the .value
+          // and .done properties off the next function object itself. This
+          // also ensures that the minifier will not anonymize the function.
+          next.done = true;
+          return next;
+        };
+      };
+
+      function values(iterable) {
+        if (iterable) {
+          var iteratorMethod = iterable[iteratorSymbol];
+          if (iteratorMethod) {
+            return iteratorMethod.call(iterable);
+          }
+
+          if (typeof iterable.next === "function") {
+            return iterable;
+          }
+
+          if (!isNaN(iterable.length)) {
+            var i = -1, next = function next() {
+              while (++i < iterable.length) {
+                if (hasOwn.call(iterable, i)) {
+                  next.value = iterable[i];
+                  next.done = false;
+                  return next;
+                }
+              }
+
+              next.value = undefined$1;
+              next.done = true;
+
+              return next;
+            };
+
+            return next.next = next;
+          }
+        }
+
+        // Return an iterator with no values.
+        return { next: doneResult };
+      }
+      exports.values = values;
+
+      function doneResult() {
+        return { value: undefined$1, done: true };
+      }
+
+      Context.prototype = {
+        constructor: Context,
+
+        reset: function(skipTempReset) {
+          this.prev = 0;
+          this.next = 0;
+          // Resetting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          this.sent = this._sent = undefined$1;
+          this.done = false;
+          this.delegate = null;
+
+          this.method = "next";
+          this.arg = undefined$1;
+
+          this.tryEntries.forEach(resetTryEntry);
+
+          if (!skipTempReset) {
+            for (var name in this) {
+              // Not sure about the optimal order of these conditions:
+              if (name.charAt(0) === "t" &&
+                  hasOwn.call(this, name) &&
+                  !isNaN(+name.slice(1))) {
+                this[name] = undefined$1;
+              }
+            }
+          }
+        },
+
+        stop: function() {
+          this.done = true;
+
+          var rootEntry = this.tryEntries[0];
+          var rootRecord = rootEntry.completion;
+          if (rootRecord.type === "throw") {
+            throw rootRecord.arg;
+          }
+
+          return this.rval;
+        },
+
+        dispatchException: function(exception) {
+          if (this.done) {
+            throw exception;
+          }
+
+          var context = this;
+          function handle(loc, caught) {
+            record.type = "throw";
+            record.arg = exception;
+            context.next = loc;
+
+            if (caught) {
+              // If the dispatched exception was caught by a catch block,
+              // then let that catch block handle the exception normally.
+              context.method = "next";
+              context.arg = undefined$1;
+            }
+
+            return !! caught;
+          }
+
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            var record = entry.completion;
+
+            if (entry.tryLoc === "root") {
+              // Exception thrown outside of any try block that could handle
+              // it, so set the completion value of the entire function to
+              // throw the exception.
+              return handle("end");
+            }
+
+            if (entry.tryLoc <= this.prev) {
+              var hasCatch = hasOwn.call(entry, "catchLoc");
+              var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+              if (hasCatch && hasFinally) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                } else if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else if (hasCatch) {
+                if (this.prev < entry.catchLoc) {
+                  return handle(entry.catchLoc, true);
+                }
+
+              } else if (hasFinally) {
+                if (this.prev < entry.finallyLoc) {
+                  return handle(entry.finallyLoc);
+                }
+
+              } else {
+                throw new Error("try statement without catch or finally");
+              }
+            }
+          }
+        },
+
+        abrupt: function(type, arg) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc <= this.prev &&
+                hasOwn.call(entry, "finallyLoc") &&
+                this.prev < entry.finallyLoc) {
+              var finallyEntry = entry;
+              break;
+            }
+          }
+
+          if (finallyEntry &&
+              (type === "break" ||
+               type === "continue") &&
+              finallyEntry.tryLoc <= arg &&
+              arg <= finallyEntry.finallyLoc) {
+            // Ignore the finally entry if control is not jumping to a
+            // location outside the try/catch block.
+            finallyEntry = null;
+          }
+
+          var record = finallyEntry ? finallyEntry.completion : {};
+          record.type = type;
+          record.arg = arg;
+
+          if (finallyEntry) {
+            this.method = "next";
+            this.next = finallyEntry.finallyLoc;
+            return ContinueSentinel;
+          }
+
+          return this.complete(record);
+        },
+
+        complete: function(record, afterLoc) {
+          if (record.type === "throw") {
+            throw record.arg;
+          }
+
+          if (record.type === "break" ||
+              record.type === "continue") {
+            this.next = record.arg;
+          } else if (record.type === "return") {
+            this.rval = this.arg = record.arg;
+            this.method = "return";
+            this.next = "end";
+          } else if (record.type === "normal" && afterLoc) {
+            this.next = afterLoc;
+          }
+
+          return ContinueSentinel;
+        },
+
+        finish: function(finallyLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.finallyLoc === finallyLoc) {
+              this.complete(entry.completion, entry.afterLoc);
+              resetTryEntry(entry);
+              return ContinueSentinel;
+            }
+          }
+        },
+
+        "catch": function(tryLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc === tryLoc) {
+              var record = entry.completion;
+              if (record.type === "throw") {
+                var thrown = record.arg;
+                resetTryEntry(entry);
+              }
+              return thrown;
+            }
+          }
+
+          // The context.catch method must only be called with a location
+          // argument that corresponds to a known catch block.
+          throw new Error("illegal catch attempt");
+        },
+
+        delegateYield: function(iterable, resultName, nextLoc) {
+          this.delegate = {
+            iterator: values(iterable),
+            resultName: resultName,
+            nextLoc: nextLoc
+          };
+
+          if (this.method === "next") {
+            // Deliberately forget the last sent value so that we don't
+            // accidentally pass it on to the delegate.
+            this.arg = undefined$1;
+          }
+
+          return ContinueSentinel;
+        }
+      };
+
+      // Regardless of whether this script is executing as a CommonJS module
+      // or not, return the runtime object so that we can declare the variable
+      // regeneratorRuntime in the outer scope, which allows this module to be
+      // injected easily by `bin/regenerator --include-runtime script.js`.
+      return exports;
+
+    }(
+      // If this script is executing as a CommonJS module, use module.exports
+      // as the regeneratorRuntime namespace. Otherwise create a new empty
+      // object. Either way, the resulting object will be used to initialize
+      // the regeneratorRuntime variable at the top of this file.
+       module.exports 
+    ));
+
+    try {
+      regeneratorRuntime = runtime;
+    } catch (accidentalStrictMode) {
+      // This module should not be running in strict mode, so the above
+      // assignment should always work unless something is misconfigured. Just
+      // in case runtime.js accidentally runs in strict mode, in modern engines
+      // we can explicitly access globalThis. In older engines we can escape
+      // strict mode using a global Function call. This could conceivably fail
+      // if a Content Security Policy forbids using Function, but in that case
+      // the proper solution is to fix the accidental strict mode problem. If
+      // you've misconfigured your bundler to force strict mode and applied a
+      // CSP to forbid Function, and you're not willing to fix either of those
+      // problems, please detail your unique predicament in a GitHub issue.
+      if (typeof globalThis === "object") {
+        globalThis.regeneratorRuntime = runtime;
+      } else {
+        Function("r", "regeneratorRuntime = r")(runtime);
+      }
+    }
+    });
+
+    function getTokenData(_x) {
+      return _getTokenData.apply(this, arguments);
+    }
+
+    function _getTokenData() {
+      _getTokenData = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(tokenContract) {
+        var namePromise, symbolPromise, decimalsPromise, results;
+        return runtime_1.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                namePromise = tokenContract.functions.name();
+                symbolPromise = tokenContract.functions.symbol();
+                decimalsPromise = tokenContract.functions.decimals();
+                _context.next = 5;
+                return Promise.all([namePromise, symbolPromise, decimalsPromise]);
+
+              case 5:
+                results = _context.sent;
+                return _context.abrupt("return", {
+                  name: results[0][0],
+                  symbol: results[1][0],
+                  decimals: results[2][0]
+                });
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _getTokenData.apply(this, arguments);
+    }
+
+    function getUsersERC20Balance(_x2, _x3) {
+      return _getUsersERC20Balance.apply(this, arguments);
+    }
+
+    function _getUsersERC20Balance() {
+      _getUsersERC20Balance = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(usersAddress, tokenContract) {
+        var result;
+        return runtime_1.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return tokenContract.functions.balanceOf(usersAddress);
+
+              case 2:
+                result = _context2.sent;
+                return _context2.abrupt("return", result[0]);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+      return _getUsersERC20Balance.apply(this, arguments);
+    }
+
+    /**
+     * Throws an error if the provided address is invalid.
+     * @param errorPrefix the class and function name of where the error occurred
+     * @param address the address to validate
+     */
+
+    function validateAddress(errorPrefix, address) {
+      var isValidAddress = isAddress(address);
+
+      if (!isValidAddress) {
+        throw new Error(errorPrefix + (" | Invalid address: '" + address + "'"));
+      }
+    }
+    /**
+     * Throws an error if the Signer provided is not on the chain id provided.
+     * @param errorPrefix the class and function name of where the error occurred
+     * @param signer a Signer to validate
+     * @param chainId the network to check for
+     */
+
+    function validateSignerNetwork(_x, _x2, _x3) {
+      return _validateSignerNetwork.apply(this, arguments);
+    }
+    /**
+     * Throws an error if the signerOrProvider is not a Signer
+     * @param errorPrefix the class and function name of where the error occurred
+     * @param signerOrProvider a Signer or Provider to check
+     */
+
+    function _validateSignerNetwork() {
+      _validateSignerNetwork = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(errorPrefix, signer, chainId) {
+        var signerChainId;
+        return runtime_1.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return signer.getChainId();
+
+              case 2:
+                signerChainId = _context.sent;
+
+                if (!(signerChainId !== chainId)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                throw new Error(errorPrefix + (" | Signer is on network " + signerChainId + ". Expected network " + chainId));
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _validateSignerNetwork.apply(this, arguments);
+    }
+
+    function validateIsSigner(errorPrefix, signerOrProvider) {
+      if (!Signer.isSigner(signerOrProvider)) {
+        throw new Error(errorPrefix + ' | signerOrProvider is not a signer');
+      }
+    }
+    /**
+     * Throws and error if the Signer or Provider is not on the chain id provided.
+     * @param errorPrefix the class and function name of where the error occurred
+     * @param signerOrProvider a Signer or Provider to check
+     * @param chainId the network to check for
+     */
+
+    function validateSignerOrProviderNetwork(_x4, _x5, _x6) {
+      return _validateSignerOrProviderNetwork.apply(this, arguments);
+    }
+
+    function _validateSignerOrProviderNetwork() {
+      _validateSignerOrProviderNetwork = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(errorPrefix, signerOrProvider, chainId) {
+        var signerOrProviderChainId, _yield$signerOrProvid, providerChainId;
+
+        return runtime_1.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!Provider.isProvider(signerOrProvider)) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                _context2.next = 3;
+                return signerOrProvider.getNetwork();
+
+              case 3:
+                _yield$signerOrProvid = _context2.sent;
+                providerChainId = _yield$signerOrProvid.chainId;
+                signerOrProviderChainId = providerChainId;
+                _context2.next = 12;
+                break;
+
+              case 8:
+                if (!Signer.isSigner(signerOrProvider)) {
+                  _context2.next = 12;
+                  break;
+                }
+
+                _context2.next = 11;
+                return signerOrProvider.getChainId();
+
+              case 11:
+                signerOrProviderChainId = _context2.sent;
+
+              case 12:
+                if (signerOrProviderChainId) {
+                  _context2.next = 16;
+                  break;
+                }
+
+                throw new Error(errorPrefix + " | Invalid value for signerOrProvider");
+
+              case 16:
+                if (!(signerOrProviderChainId !== chainId)) {
+                  _context2.next = 18;
+                  break;
+                }
+
+                throw new Error(errorPrefix + (" | Provider is on network " + signerOrProviderChainId + ". Expected network " + chainId));
+
+              case 18:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+      return _validateSignerOrProviderNetwork.apply(this, arguments);
+    }
+
+    /**
+     * Finds a specific contract in the contract list and returns the metadata and ethers Contract.
+     * If an addressOverride is supplied, it will be used to look up the contract in the metadata list. If it is not found, the first contract found in the list of that type regardless of version will be used.
+     * @param chainId
+     * @param signerOrProvider
+     * @param contractType
+     * @param contractMetadataList
+     * @param addressOverride
+     * @returns
+     */
+
+    function getMetadataAndContract(chainId, signerOrProvider, contractType, contractMetadataList, addressOverride) {
+      var contractMetadata;
+
+      if (!!addressOverride) {
+        contractMetadata = contractMetadataList.find(function (contract) {
+          return contract.type === contractType && contract.chainId === chainId && contract.address === addressOverride;
+        });
+      } // Fallback for no addressOverride provided or found
+
+
+      if (!contractMetadata) {
+        contractMetadata = contractMetadataList.find(function (contract) {
+          return contract.type === contractType && contract.chainId === chainId;
+        });
+      }
+
+      if (!contractMetadata) {
+        throw new Error("Invalid contract list. Missing " + contractType + ".");
+      }
+
+      var contract = createContract(addressOverride || contractMetadata.address, createInterface(contractMetadata.abi), signerOrProvider);
+      return {
+        contractMetadata: contractMetadata,
+        contract: contract
+      };
+    }
+
+    function createContractMetadata(chainId, address, type, abi, version, tags, extensions) {
+      if (version === void 0) {
+        version = {
+          major: 1,
+          minor: 0,
+          patch: 0
+        };
+      }
+
+      if (tags === void 0) {
+        tags = [];
+      }
+
+      if (extensions === void 0) {
+        extensions = {};
+      }
+
+      return {
+        chainId: chainId,
+        address: address,
+        version: version,
+        type: type,
+        abi: abi,
+        tags: tags,
+        extensions: extensions
+      };
+    }
+
+    var ERC20Abi = [{
+      constant: true,
+      inputs: [],
+      name: 'name',
+      outputs: [{
+        name: '',
+        type: 'string'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'spender',
+        type: 'address'
+      }, {
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'approve',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [],
+      name: 'totalSupply',
+      outputs: [{
+        name: '',
+        type: 'uint256'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'from',
+        type: 'address'
+      }, {
+        name: 'to',
+        type: 'address'
+      }, {
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'transferFrom',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [],
+      name: 'decimals',
+      outputs: [{
+        name: '',
+        type: 'uint8'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'spender',
+        type: 'address'
+      }, {
+        name: 'addedValue',
+        type: 'uint256'
+      }],
+      name: 'increaseAllowance',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'to',
+        type: 'address'
+      }, {
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'mint',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [{
+        name: 'owner',
+        type: 'address'
+      }],
+      name: 'balanceOf',
+      outputs: [{
+        name: '',
+        type: 'uint256'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [],
+      name: 'symbol',
+      outputs: [{
+        name: '',
+        type: 'string'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'account',
+        type: 'address'
+      }],
+      name: 'addMinter',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [],
+      name: 'renounceMinter',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'spender',
+        type: 'address'
+      }, {
+        name: 'subtractedValue',
+        type: 'uint256'
+      }],
+      name: 'decreaseAllowance',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'to',
+        type: 'address'
+      }, {
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'transfer',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [{
+        name: 'account',
+        type: 'address'
+      }],
+      name: 'isMinter',
+      outputs: [{
+        name: '',
+        type: 'bool'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      constant: false,
+      inputs: [{
+        name: 'sender',
+        type: 'address'
+      }],
+      name: 'initialize',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function'
+    }, {
+      constant: true,
+      inputs: [{
+        name: 'owner',
+        type: 'address'
+      }, {
+        name: 'spender',
+        type: 'address'
+      }],
+      name: 'allowance',
+      outputs: [{
+        name: '',
+        type: 'uint256'
+      }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      anonymous: false,
+      inputs: [{
+        indexed: true,
+        name: 'account',
+        type: 'address'
+      }],
+      name: 'MinterAdded',
+      type: 'event'
+    }, {
+      anonymous: false,
+      inputs: [{
+        indexed: true,
+        name: 'account',
+        type: 'address'
+      }],
+      name: 'MinterRemoved',
+      type: 'event'
+    }, {
+      anonymous: false,
+      inputs: [{
+        indexed: true,
+        name: 'from',
+        type: 'address'
+      }, {
+        indexed: true,
+        name: 'to',
+        type: 'address'
+      }, {
+        indexed: false,
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'Transfer',
+      type: 'event'
+    }, {
+      anonymous: false,
+      inputs: [{
+        indexed: true,
+        name: 'owner',
+        type: 'address'
+      }, {
+        indexed: true,
+        name: 'spender',
+        type: 'address'
+      }, {
+        indexed: false,
+        name: 'value',
+        type: 'uint256'
+      }],
+      name: 'Approval',
+      type: 'event'
+    }];
+
+    var createEmptyDrawResult = function createEmptyDrawResult(drawId) {
+      return {
+        drawId: drawId,
+        totalValue: BigNumber.from(0),
+        prizes: []
+      };
+    };
+
+    var formatDrawResultsFromLegacyDrawResults = function formatDrawResultsFromLegacyDrawResults(LEGACY_drawResult) {
+      var _prizes = LEGACY_drawResult.prizes;
+
+      var prizes = _prizes.map(function (prize) {
+        return {
+          amount: BigNumber.from(prize.amount),
+          tierIndex: 'distributionIndex' in prize ? prize.distributionIndex : prize.tierIndex,
+          pick: BigNumber.from(prize.pick)
+        };
+      });
+
+      var drawResults = {
+        drawId: LEGACY_drawResult.drawId,
+        totalValue: LEGACY_drawResult.totalValue,
+        prizes: prizes
+      };
+      return drawResults;
+    };
+
+    var sumBigNumbers = function sumBigNumbers(values) {
+      return values.reduce(function (sum, value) {
+        return sum.add(value);
+      }, BigNumber.from(0));
+    };
+
+    var formatDrawResultsFromPrizes = function formatDrawResultsFromPrizes(drawId, _allPrizes, maxPicksPerUser) {
+      var prizes = _allPrizes.map(function (prize) {
+        return {
+          amount: BigNumber.from(prize.amount),
+          tierIndex: prize.tier,
+          pick: BigNumber.from(prize.pick)
+        };
+      });
+
+      var totalValue = sumBigNumbers(prizes.map(function (prize) {
+        return prize.amount;
+      }));
+      var drawResults = index$1.filterResultsByValue({
+        drawId: drawId,
+        totalValue: totalValue,
+        prizes: prizes
+      }, maxPicksPerUser);
+      return drawResults;
+    };
+
+    /**
+     * Currently the Prize API is only running for a select group of networks.
+     */
+
+    var PRIZE_API_SUPPORTED_NETWORKS = /*#__PURE__*/Object.freeze([NETWORK.avalanche, NETWORK.mainnet, NETWORK.polygon, NETWORK.optimism, NETWORK['goerli'], NETWORK['optimism-goerli']]);
+    /**
+     * PoolTogether Prize API.
+     * Provides easy access to PoolTogether Prize APIs.
+     */
+
+    var PrizeApi = /*#__PURE__*/function () {
+      function PrizeApi() {}
+
+      /**
+       * Fetches a users DrawResults for the provided draw id
+       * @param chainId the chain id the PrizeDistributor is deployed on
+       * @param usersAddress the address of the user to fetch draw results for
+       * @param prizeDistributorAddress the address of the PrizeDistributor to fetch prizes for
+       * @param drawId the id of the draw to check
+       * @param maxPicksPerUser the maximum number of picks per user
+       */
+      PrizeApi.getUsersDrawResultsByDraw =
+      /*#__PURE__*/
+      function () {
+        var _getUsersDrawResultsByDraw = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(chainId, usersAddress, prizeDistributorAddress, drawId, maxPicksPerUser) {
+          var drawResults;
+          return runtime_1.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return this.getUsersDrawResultsByDraws(chainId, usersAddress, prizeDistributorAddress, [drawId], [maxPicksPerUser]);
+
+                case 2:
+                  drawResults = _context.sent;
+                  return _context.abrupt("return", drawResults[drawId]);
+
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        function getUsersDrawResultsByDraw(_x, _x2, _x3, _x4, _x5) {
+          return _getUsersDrawResultsByDraw.apply(this, arguments);
+        }
+
+        return getUsersDrawResultsByDraw;
+      }()
+      /**
+       * Fetches a users DrawResults for the provided draw ids.
+       * Checks the status of the Prize API, falls back to the CloudFlare worker if Prize API status is invalid.
+       * @param chainId the chain id the PrizeDistributor is deployed on
+       * @param usersAddress the address of the user to fetch draw results for
+       * @param prizeDistributorAddress the address of the PrizeDistributor to fetch prizes for
+       * @param drawIds a list of draw ids to check for prizes
+       * @param maxPicksPerUserPerDraw the maximum number of picks per user for each drwa
+       */
+      ;
+
+      PrizeApi.getUsersDrawResultsByDraws =
+      /*#__PURE__*/
+      function () {
+        var _getUsersDrawResultsByDraws = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3(chainId, usersAddress, prizeDistributorAddress, drawIds, maxPicksPerUserPerDraw) {
+          var _this = this;
+
+          var drawResults, drawResultsPromises;
+          return runtime_1.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  drawResults = {};
+                  drawResultsPromises = drawIds.map( /*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(drawId, index) {
+                      var drawResult, apiStatus, _drawResult, _drawResult2, error;
+
+                      return runtime_1.wrap(function _callee2$(_context2) {
+                        while (1) {
+                          switch (_context2.prev = _context2.next) {
+                            case 0:
+                              _context2.prev = 0;
+
+                              if (PRIZE_API_SUPPORTED_NETWORKS.includes(chainId)) {
+                                _context2.next = 9;
+                                break;
+                              }
+
+                              console.warn("Prize API only supports networks: " + PRIZE_API_SUPPORTED_NETWORKS.join(', ') + ".");
+                              _context2.next = 5;
+                              return _this.computeDrawResultsOnCloudFlareWorker(chainId, usersAddress, prizeDistributorAddress, drawId);
+
+                            case 5:
+                              drawResult = _context2.sent;
+                              drawResults[drawId] = drawResult;
+                              _context2.next = 23;
+                              break;
+
+                            case 9:
+                              _context2.next = 11;
+                              return _this.checkPrizeApiStatus(chainId, prizeDistributorAddress, drawId);
+
+                            case 11:
+                              apiStatus = _context2.sent;
+
+                              if (!apiStatus) {
+                                _context2.next = 19;
+                                break;
+                              }
+
+                              _context2.next = 15;
+                              return _this.getDrawResultsFromPrizeApi(chainId, usersAddress, prizeDistributorAddress, drawId, maxPicksPerUserPerDraw[index]);
+
+                            case 15:
+                              _drawResult = _context2.sent;
+                              drawResults[drawId] = _drawResult;
+                              _context2.next = 23;
+                              break;
+
+                            case 19:
+                              _context2.next = 21;
+                              return _this.computeDrawResultsOnCloudFlareWorker(chainId, usersAddress, prizeDistributorAddress, drawId);
+
+                            case 21:
+                              _drawResult2 = _context2.sent;
+                              drawResults[drawId] = _drawResult2;
+
+                            case 23:
+                              _context2.next = 30;
+                              break;
+
+                            case 25:
+                              _context2.prev = 25;
+                              _context2.t0 = _context2["catch"](0);
+                              error = _context2.t0;
+                              console.error(error.message);
+                              throw error;
+
+                            case 30:
+                            case "end":
+                              return _context2.stop();
+                          }
+                        }
+                      }, _callee2, null, [[0, 25]]);
+                    }));
+
+                    return function (_x11, _x12) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }());
+                  _context3.next = 4;
+                  return Promise.all(drawResultsPromises);
+
+                case 4:
+                  return _context3.abrupt("return", drawResults);
+
+                case 5:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }));
+
+        function getUsersDrawResultsByDraws(_x6, _x7, _x8, _x9, _x10) {
+          return _getUsersDrawResultsByDraws.apply(this, arguments);
+        }
+
+        return getUsersDrawResultsByDraws;
+      }()
+      /**
+       * Fetches precomputed prizes from the Prize API.
+       * The Prize API only supports a limited set of networks, see https://dev.pooltogether.com/protocol/api/prize-api for more info.
+       * @param chainId
+       * @param usersAddress
+       * @param prizeDistributorAddress
+       * @param drawId
+       * @param maxPicksPerUser
+       * @returns
+       */
+      ;
+
+      PrizeApi.getDrawResultsFromPrizeApi =
+      /*#__PURE__*/
+      function () {
+        var _getDrawResultsFromPrizeApi = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4(chainId, usersAddress, prizeDistributorAddress, drawId, maxPicksPerUser) {
+          var url, response, prizesJson, prizes, drawResult;
+          return runtime_1.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  if (PRIZE_API_SUPPORTED_NETWORKS.includes(chainId)) {
+                    _context4.next = 2;
+                    break;
+                  }
+
+                  throw new Error("PrizeApi | Prize API only supports networks: " + PRIZE_API_SUPPORTED_NETWORKS.join(', ') + ".");
+
+                case 2:
+                  url = this.getDrawResultsUrl(chainId, prizeDistributorAddress, usersAddress, drawId);
+                  _context4.next = 5;
+                  return fetch(url);
+
+                case 5:
+                  response = _context4.sent;
+
+                  if (!(response.status === 404)) {
+                    _context4.next = 8;
+                    break;
+                  }
+
+                  return _context4.abrupt("return", createEmptyDrawResult(drawId));
+
+                case 8:
+                  _context4.next = 10;
+                  return response.json();
+
+                case 10:
+                  prizesJson = _context4.sent;
+                  prizes = deserializeBigNumbers(prizesJson);
+                  drawResult = formatDrawResultsFromPrizes(drawId, prizes, maxPicksPerUser);
+                  return _context4.abrupt("return", drawResult);
+
+                case 14:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, this);
+        }));
+
+        function getDrawResultsFromPrizeApi(_x13, _x14, _x15, _x16, _x17) {
+          return _getDrawResultsFromPrizeApi.apply(this, arguments);
+        }
+
+        return getDrawResultsFromPrizeApi;
+      }()
+      /**
+       * Computes the users prizes in a CloudFlare worker.
+       * @param chainId
+       * @param usersAddress
+       * @param prizeDistributorAddress
+       * @param drawId
+       */
+      ;
+
+      PrizeApi.computeDrawResultsOnCloudFlareWorker =
+      /*#__PURE__*/
+      function () {
+        var _computeDrawResultsOnCloudFlareWorker = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5(chainId, usersAddress, prizeDistributorAddress, drawId) {
+          var url, response, drawResultsJson, LEGACY_drawResult, drawResult;
+          return runtime_1.wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  url = this.getCloudFlareDrawResultsUrl(chainId, prizeDistributorAddress, usersAddress, drawId);
+                  _context5.next = 3;
+                  return fetch(url);
+
+                case 3:
+                  response = _context5.sent;
+                  _context5.next = 6;
+                  return response.json();
+
+                case 6:
+                  drawResultsJson = _context5.sent;
+                  LEGACY_drawResult = deserializeBigNumbers(drawResultsJson);
+                  drawResult = formatDrawResultsFromLegacyDrawResults(LEGACY_drawResult);
+                  return _context5.abrupt("return", drawResult);
+
+                case 10:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5, this);
+        }));
+
+        function computeDrawResultsOnCloudFlareWorker(_x18, _x19, _x20, _x21) {
+          return _computeDrawResultsOnCloudFlareWorker.apply(this, arguments);
+        }
+
+        return computeDrawResultsOnCloudFlareWorker;
+      }()
+      /**
+       * Computes the users prizes locally.
+       * NOTE: This is a heavy calculation and not recommended on users devices.
+       * @param usersAddress
+       * @param prizeDistributorAddress
+       * @param drawId
+       * @param provider
+       */
+      ;
+
+      PrizeApi.computeDrawResults =
+      /*#__PURE__*/
+      function () {
+        var _computeDrawResults = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee6(usersAddress, prizeDistributorAddress, drawId, provider) {
+          var prizeDistributorContract, response, drawCalculatorTimelockAddress, drawCalculatorTimelockContract, drawCalculatorAddress, drawCalculatorContract, drawBufferAddress, prizeDistributionBufferAddress, normalizedBalance, drawBufferContract, prizeDistributionBufferContract, draw, prizeDistribution, drawResults;
+          return runtime_1.wrap(function _callee6$(_context6) {
+            while (1) {
+              switch (_context6.prev = _context6.next) {
+                case 0:
+                  // Get Draw Calculator Timelock address
+                  prizeDistributorContract = contract_1(prizeDistributorAddress, PartialPrizeDistributorAbi, prizeDistributorAddress); // @ts-ignore
+
+                  _context6.next = 3;
+                  return batch_1(provider, prizeDistributorContract.getDrawCalculator());
+
+                case 3:
+                  response = _context6.sent;
+                  drawCalculatorTimelockAddress = response[prizeDistributorAddress].getDrawCalculator[0]; // Get Draw Calculator address
+                  // It's assumed that the PristDistributor has a DrawCalculatorTimelock set up, if it does not, this second getDrawCalculator call will fail. That means the contract is not a DrawCalculatorTimelock and just a DrawCalculator.
+
+                  drawCalculatorTimelockContract = contract_1(drawCalculatorTimelockAddress, PartialDrawCalculatorTimelockAbi, drawCalculatorTimelockAddress);
+                  _context6.prev = 6;
+                  _context6.next = 9;
+                  return batch_1(provider, drawCalculatorTimelockContract.getDrawCalculator());
+
+                case 9:
+                  response = _context6.sent;
+                  drawCalculatorAddress = response[drawCalculatorTimelockAddress].getDrawCalculator[0];
+                  _context6.next = 17;
+                  break;
+
+                case 13:
+                  _context6.prev = 13;
+                  _context6.t0 = _context6["catch"](6);
+                  console.warn("Prize Distributor at " + prizeDistributorAddress + " is not using a DrawCalculatorTimelock");
+                  drawCalculatorAddress = drawCalculatorTimelockAddress;
+
+                case 17:
+                  // Get Draw Buffer & Prize Distribution Buffer addresses and the users normalized balance
+                  drawCalculatorContract = contract_1(drawCalculatorAddress, PartialDrawCalculatorAbi, drawCalculatorAddress);
+                  _context6.next = 20;
+                  return batch_1(provider, drawCalculatorContract // @ts-ignore
+                  .getDrawBuffer().getPrizeDistributionBuffer().getNormalizedBalancesForDrawIds(usersAddress, [drawId]));
+
+                case 20:
+                  response = _context6.sent;
+                  drawBufferAddress = response[drawCalculatorAddress].getDrawBuffer[0];
+                  prizeDistributionBufferAddress = response[drawCalculatorAddress].getPrizeDistributionBuffer[0];
+                  normalizedBalance = response[drawCalculatorAddress].getNormalizedBalancesForDrawIds[0][0]; // If user had no balance, short circuit
+
+                  if (!normalizedBalance.isZero()) {
+                    _context6.next = 26;
+                    break;
+                  }
+
+                  return _context6.abrupt("return", createEmptyDrawResult(drawId));
+
+                case 26:
+                  // Get the draw and prize distribution
+                  drawBufferContract = contract_1(drawBufferAddress, PartialDrawBufferAbi, drawBufferAddress);
+                  prizeDistributionBufferContract = contract_1(prizeDistributionBufferAddress, PartialPrizeDistributionBufferAbi, prizeDistributionBufferAddress);
+                  _context6.next = 30;
+                  return batch_1(provider, // @ts-ignore
+                  drawBufferContract.getDraw(drawId), // @ts-ignore
+                  prizeDistributionBufferContract.getPrizeDistribution(drawId));
+
+                case 30:
+                  response = _context6.sent;
+                  draw = response[drawBufferAddress].getDraw[0];
+                  prizeDistribution = response[prizeDistributionBufferAddress].getPrizeDistribution[0];
+                  drawResults = computeUserWinningPicksForRandomNumber(draw.winningRandomNumber, prizeDistribution.bitRangeSize, prizeDistribution.matchCardinality, prizeDistribution.numberOfPicks, prizeDistribution.prize, prizeDistribution.tiers, usersAddress, normalizedBalance, draw.drawId);
+                  return _context6.abrupt("return", index$1.filterResultsByValue(drawResults, prizeDistribution.maxPicksPerUser));
+
+                case 35:
+                case "end":
+                  return _context6.stop();
+              }
+            }
+          }, _callee6, null, [[6, 13]]);
+        }));
+
+        function computeDrawResults(_x22, _x23, _x24, _x25) {
+          return _computeDrawResults.apply(this, arguments);
+        }
+
+        return computeDrawResults;
+      }()
+      /**
+       * Checks the status of a particular draw and returns true if the data is available for the requested draw.
+       * @param chainId
+       * @param prizeDistributorAddress
+       * @param drawId
+       * @returns
+       */
+      ;
+
+      PrizeApi.checkPrizeApiStatus =
+      /*#__PURE__*/
+      function () {
+        var _checkPrizeApiStatus = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee7(chainId, prizeDistributorAddress, drawId) {
+          var response, requestStatus, drawResultsStatusJson;
+          return runtime_1.wrap(function _callee7$(_context7) {
+            while (1) {
+              switch (_context7.prev = _context7.next) {
+                case 0:
+                  _context7.next = 2;
+                  return fetch(this.getDrawResultsStatusUrl(chainId, prizeDistributorAddress, drawId));
+
+                case 2:
+                  response = _context7.sent;
+                  requestStatus = response.status;
+
+                  if (!(requestStatus !== 200)) {
+                    _context7.next = 6;
+                    break;
+                  }
+
+                  throw new Error("PrizeApi | Draw " + drawId + " for Prize Distributor " + prizeDistributorAddress + " on " + chainId + " calculation status not found.");
+
+                case 6:
+                  _context7.next = 8;
+                  return response.json();
+
+                case 8:
+                  drawResultsStatusJson = _context7.sent;
+
+                  if (!(drawResultsStatusJson.cliStatus !== undefined)) {
+                    _context7.next = 11;
+                    break;
+                  }
+
+                  return _context7.abrupt("return", drawResultsStatusJson.cliStatus === 'ok');
+
+                case 11:
+                  return _context7.abrupt("return", drawResultsStatusJson.status === PrizeApiStatus.success);
+
+                case 12:
+                case "end":
+                  return _context7.stop();
+              }
+            }
+          }, _callee7, this);
+        }));
+
+        function checkPrizeApiStatus(_x26, _x27, _x28) {
+          return _checkPrizeApiStatus.apply(this, arguments);
+        }
+
+        return checkPrizeApiStatus;
+      }() // URLs
+
+      /**
+       * Returns the URL for pre-calculated prizes from the Prize API
+       * TODO: Fix the casing functions once Kames fixes the bug
+       * @param chainId
+       * @param prizeDistributorAddress
+       * @param usersAddress
+       * @param drawId
+       * @returns
+       */
+      ;
+
+      PrizeApi.getDrawResultsUrl = function getDrawResultsUrl(chainId, prizeDistributorAddress, usersAddress, drawId) {
+        return "https://api.pooltogether.com/prizes/" + chainId + "/" + prizeDistributorAddress.toLowerCase() + "/draw/" + drawId + "/" + usersAddress.toLowerCase() + ".json";
+      }
+      /**
+       * Returns the URL for the status of the calculations for the draw requested from the Prize API
+       * @param chainId
+       * @param prizeDistributorAddress
+       * @param usersAddress
+       * @param drawId
+       * @returns
+       */
+      ;
+
+      PrizeApi.getDrawResultsStatusUrl = function getDrawResultsStatusUrl(chainId, prizeDistributorAddress, drawId) {
+        return "https://api.pooltogether.com/prizes/" + chainId + "/" + prizeDistributorAddress.toLowerCase() + "/draw/" + drawId + "/status.json";
+      }
+      /**
+       * Returns the URL for the status of the calculations for the draw requested from the Prize API
+       * @param chainId
+       * @param prizeDistributorAddress
+       * @param usersAddress
+       * @param drawId
+       * @returns
+       */
+      ;
+
+      PrizeApi.getAllPrizesUrl = function getAllPrizesUrl(chainId, prizeDistributorAddress, drawId) {
+        return "https://api.pooltogether.com/prizes/" + chainId + "/" + prizeDistributorAddress.toLowerCase() + "/draw/" + drawId + "/prizes.json";
+      }
+      /**
+       * Returns the URL that the prizes can be calculated at on CloudFlare
+       * @param chainId
+       * @param prizeDistributorAddress
+       * @param usersAddress
+       * @param drawId
+       * @returns
+       */
+      ;
+
+      PrizeApi.getCloudFlareDrawResultsUrl = function getCloudFlareDrawResultsUrl(chainId, prizeDistributorAddress, usersAddress, drawId) {
+        return "https://tsunami-prizes-production.pooltogether-api.workers.dev/" + chainId + "/" + prizeDistributorAddress + "/prizes/" + usersAddress + "/" + drawId + "/";
+      };
+
+      return PrizeApi;
+    }(); // Partial ABIs with the minimal interfaces to fetch the required data for computing prizes
+
+    var PartialPrizeDistributorAbi = [{
+      inputs: [],
+      name: 'getDrawCalculator',
+      outputs: [{
+        internalType: 'contract IDrawCalculator',
+        name: '',
+        type: 'address'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }];
+    var PartialDrawCalculatorTimelockAbi = [{
+      inputs: [],
+      name: 'getDrawCalculator',
+      outputs: [{
+        internalType: 'contract IDrawCalculator',
+        name: '',
+        type: 'address'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }];
+    var PartialDrawCalculatorAbi = [{
+      inputs: [{
+        internalType: 'address',
+        name: '_user',
+        type: 'address'
+      }, {
+        internalType: 'uint32[]',
+        name: '_drawIds',
+        type: 'uint32[]'
+      }],
+      name: 'getNormalizedBalancesForDrawIds',
+      outputs: [{
+        internalType: 'uint256[]',
+        name: '',
+        type: 'uint256[]'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      inputs: [],
+      name: 'getPrizeDistributionBuffer',
+      outputs: [{
+        internalType: 'contract IPrizeDistributionBuffer',
+        name: '',
+        type: 'address'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }, {
+      inputs: [],
+      name: 'getDrawBuffer',
+      outputs: [{
+        internalType: 'contract IDrawBuffer',
+        name: '',
+        type: 'address'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }];
+    var PartialDrawBufferAbi = [{
+      inputs: [{
+        internalType: 'uint32',
+        name: 'drawId',
+        type: 'uint32'
+      }],
+      name: 'getDraw',
+      outputs: [{
+        components: [{
+          internalType: 'uint256',
+          name: 'winningRandomNumber',
+          type: 'uint256'
+        }, {
+          internalType: 'uint32',
+          name: 'drawId',
+          type: 'uint32'
+        }, {
+          internalType: 'uint64',
+          name: 'timestamp',
+          type: 'uint64'
+        }, {
+          internalType: 'uint64',
+          name: 'beaconPeriodStartedAt',
+          type: 'uint64'
+        }, {
+          internalType: 'uint32',
+          name: 'beaconPeriodSeconds',
+          type: 'uint32'
+        }],
+        internalType: 'struct IDrawBeacon.Draw',
+        name: '',
+        type: 'tuple'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }];
+    var PartialPrizeDistributionBufferAbi = [{
+      inputs: [{
+        internalType: 'uint32',
+        name: '_drawId',
+        type: 'uint32'
+      }],
+      name: 'getPrizeDistribution',
+      outputs: [{
+        components: [{
+          internalType: 'uint8',
+          name: 'bitRangeSize',
+          type: 'uint8'
+        }, {
+          internalType: 'uint8',
+          name: 'matchCardinality',
+          type: 'uint8'
+        }, {
+          internalType: 'uint32',
+          name: 'startTimestampOffset',
+          type: 'uint32'
+        }, {
+          internalType: 'uint32',
+          name: 'endTimestampOffset',
+          type: 'uint32'
+        }, {
+          internalType: 'uint32',
+          name: 'maxPicksPerUser',
+          type: 'uint32'
+        }, {
+          internalType: 'uint32',
+          name: 'expiryDuration',
+          type: 'uint32'
+        }, {
+          internalType: 'uint104',
+          name: 'numberOfPicks',
+          type: 'uint104'
+        }, {
+          internalType: 'uint32[16]',
+          name: 'tiers',
+          type: 'uint32[16]'
+        }, {
+          internalType: 'uint256',
+          name: 'prize',
+          type: 'uint256'
+        }],
+        internalType: 'struct IPrizeDistributionBuffer.PrizeDistribution',
+        name: '',
+        type: 'tuple'
+      }],
+      stateMutability: 'view',
+      type: 'function'
+    }];
+
+    /**
+     * A Prize Distributor.
+     * Provides access to the contracts for viewing expiration times on draws, timelock timers and checking/claiming prizes for a user. Can be instantiated with an ethers Signer or Provider. Use a Signer if you want to claim transactions for a user. If a provider is provided, only read methods are available.
+     */
+
+    var PrizeDistributor = /*#__PURE__*/function () {
+      /**
+       * Create an instance of a PrizeDistributor by providing the metadata of the PrizeDistributor contract, an ethers Provider or Signer for the network the PrizeDistributor contract is deployed on and a list of contract metadata for the other contracts that make up the PrizeDistributor.
+       * @param prizeDistributorMetadata
+       * @param signerOrProvider
+       * @param contractMetadataList
+       */
+      function PrizeDistributor(prizeDistributorMetadata, signerOrProvider, contractMetadataList) {
+        // Get contract metadata & ethers contracts
+        var _getMetadataAndContra = getMetadataAndContract(prizeDistributorMetadata.chainId, signerOrProvider, ContractType.DrawCalculatorTimelock, contractMetadataList),
+            drawCalculatorTimelockMetadata = _getMetadataAndContra.contractMetadata,
+            drawCalculatorTimelockContract = _getMetadataAndContra.contract;
+
+        var prizeDistributorContract = new Contract(prizeDistributorMetadata.address, prizeDistributorMetadata.abi, signerOrProvider); // Set data
+
+        this.signerOrProvider = signerOrProvider;
+        this.contractMetadataList = contractMetadataList;
+        this.chainId = prizeDistributorMetadata.chainId;
+        this.address = prizeDistributorMetadata.address; // Set metadata
+
+        this.prizeDistributorMetadata = prizeDistributorMetadata;
+        this.drawCalculatorTimelockMetadata = drawCalculatorTimelockMetadata; // Set ethers contracts
+
+        this.prizeDistributorContract = prizeDistributorContract;
+        this.drawCalculatorTimelockContract = drawCalculatorTimelockContract; // Initialized later - requires a fetch
+
+        this.drawCalculatorMetadata = undefined;
+        this.drawCalculatorContract = undefined;
+        this.drawBufferMetadata = undefined;
+        this.drawBufferContract = undefined;
+        this.prizeDistributionsBufferMetadata = undefined;
+        this.prizeDistributionsBufferContract = undefined;
+        this.prizeTierHistoryMetadata = undefined;
+        this.prizeTierHistoryContract = undefined;
+      }
+      /**
+       * Returns a unique id string for this PrizeDistributor.
+       * @returns a unique id for the PrizeDistributor
+       */
+
+
+      var _proto = PrizeDistributor.prototype;
+
+      _proto.id = function id() {
+        return this.prizeDistributorMetadata.address + "-" + this.prizeDistributorMetadata.chainId;
+      } //////////////////////////// Ethers write functions ////////////////////////////
+
+      /**
+       * Fetches a users prizes for the provided draw and submits a transaction to claim them to the Signer.
+       * PrizeDistributor must be initialized with a Signer.
+       * @param drawId the draw id to claim prizes for
+       * @param maxPicksPerUser the maximum picks per user from the PrizeDistribution for the provided draw id
+       * @param overrides optional overrides for the transaction creation
+       * @returns the transaction response
+       */
+      ;
+
+      _proto.claimPrizesByDraw =
+      /*#__PURE__*/
+      function () {
+        var _claimPrizesByDraw = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(drawId, maxPicksPerUser, overrides) {
+          var errorPrefix, usersAddress, drawResults;
+          return runtime_1.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  errorPrefix = 'PrizeDistributors [claim] | ';
+                  _context.next = 3;
+                  return this.getUsersAddress(errorPrefix);
+
+                case 3:
+                  usersAddress = _context.sent;
+                  _context.next = 6;
+                  return this.getUsersDrawResultsForDrawId(usersAddress, drawId, maxPicksPerUser);
+
+                case 6:
+                  drawResults = _context.sent;
+                  return _context.abrupt("return", this.claimPrizesByDrawResults(drawResults, overrides));
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        function claimPrizesByDraw(_x, _x2, _x3) {
+          return _claimPrizesByDraw.apply(this, arguments);
+        }
+
+        return claimPrizesByDraw;
+      }()
+      /**
+       * Submits a transaction to claim a users prizes
+       * PrizeDistributor must be initialized with a Signer.
+       * @param drawResults the prize results for a user for a specific draw
+       * @param overrides optional overrides for the transaction creation
+       * @returns the transaction response
+       */
+      ;
+
+      _proto.claimPrizesByDrawResults =
+      /*#__PURE__*/
+      function () {
+        var _claimPrizesByDrawResults = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(drawResults, overrides) {
+          var errorPrefix, usersAddress, claim;
+          return runtime_1.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  errorPrefix = 'PrizeDistributors [claimPrizes] | ';
+                  _context2.next = 3;
+                  return this.getUsersAddress(errorPrefix);
+
+                case 3:
+                  usersAddress = _context2.sent;
+                  _context2.next = 6;
+                  return this.validateSignerNetwork(errorPrefix);
+
+                case 6:
+                  if (!drawResults.totalValue.isZero()) {
+                    _context2.next = 8;
+                    break;
+                  }
+
+                  throw new Error(errorPrefix + 'No prizes to claim.');
+
+                case 8:
+                  claim = encodeWinningPicks(usersAddress, [drawResults]);
+
+                  if (!Boolean(overrides)) {
+                    _context2.next = 13;
+                    break;
+                  }
+
+                  return _context2.abrupt("return", this.prizeDistributorContract.claim(claim.userAddress, claim.drawIds, claim.encodedWinningPickIndices, overrides));
+
+                case 13:
+                  return _context2.abrupt("return", this.prizeDistributorContract.claim(claim.userAddress, claim.drawIds, claim.encodedWinningPickIndices));
+
+                case 14:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        function claimPrizesByDrawResults(_x4, _x5) {
+          return _claimPrizesByDrawResults.apply(this, arguments);
+        }
+
+        return claimPrizesByDrawResults;
+      }()
+      /**
+       * Submits a transaction to claim a users prizes across multiple draws
+       * PrizeDistributor must be initialized with a Signer.
+       * @param drawResults an object of the users draw results to claim keyed by draw ids
+       * @param overrides optional overrides for the transaction creation
+       * @returns the transaction response
+       */
+      ;
+
+      _proto.claimPrizesAcrossMultipleDrawsByDrawResults =
+      /*#__PURE__*/
+      function () {
+        var _claimPrizesAcrossMultipleDrawsByDrawResults = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3(drawResults, overrides) {
+          var errorPrefix, usersAddress, drawResultsList, totalValueToClaim, claim;
+          return runtime_1.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  errorPrefix = 'PrizeDistributors [claimPrizes] | ';
+                  _context3.next = 3;
+                  return this.getUsersAddress(errorPrefix);
+
+                case 3:
+                  usersAddress = _context3.sent;
+                  _context3.next = 6;
+                  return this.validateSignerNetwork(errorPrefix);
+
+                case 6:
+                  drawResultsList = Object.values(drawResults);
+                  totalValueToClaim = drawResultsList.reduce(function (total, drawResult) {
+                    return total.add(drawResult.totalValue);
+                  }, BigNumber.from(0));
+
+                  if (!totalValueToClaim.isZero()) {
+                    _context3.next = 10;
+                    break;
+                  }
+
+                  throw new Error(errorPrefix + 'No prizes to claim.');
+
+                case 10:
+                  claim = encodeWinningPicks(usersAddress, drawResultsList);
+
+                  if (!Boolean(overrides)) {
+                    _context3.next = 15;
+                    break;
+                  }
+
+                  return _context3.abrupt("return", this.prizeDistributorContract.claim(claim.userAddress, claim.drawIds, claim.encodedWinningPickIndices, overrides));
+
+                case 15:
+                  return _context3.abrupt("return", this.prizeDistributorContract.claim(claim.userAddress, claim.drawIds, claim.encodedWinningPickIndices));
+
+                case 16:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function claimPrizesAcrossMultipleDrawsByDrawResults(_x6, _x7) {
+          return _claimPrizesAcrossMultipleDrawsByDrawResults.apply(this, arguments);
+        }
+
+        return claimPrizesAcrossMultipleDrawsByDrawResults;
+      }() //////////////////////////// Ethers read functions ////////////////////////////
+
+      /**
+       * Fetches the upcoming prize tier data from the prize tier history contract. This data is used for the next prize distribution that will be added to the Prize Distribution Buffer for the beacon Prize Pool.
+       * @returns the upcoming prize tier
+       */
+      ;
+
+      _proto.getUpcomingPrizeTier =
+      /*#__PURE__*/
+      function () {
+        var _getUpcomingPrizeTier = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
+          var prizeTierHistoryContract, _yield$prizeTierHisto, drawId, result, prizeTier;
+
+          return runtime_1.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.next = 2;
+                  return this.getPrizeTierHistoryContract();
+
+                case 2:
+                  prizeTierHistoryContract = _context4.sent;
+                  _context4.next = 5;
+                  return prizeTierHistoryContract.functions.getNewestDrawId();
+
+                case 5:
+                  _yield$prizeTierHisto = _context4.sent;
+                  drawId = _yield$prizeTierHisto[0];
+                  _context4.next = 9;
+                  return prizeTierHistoryContract.functions.getPrizeTier(drawId);
+
+                case 9:
+                  result = _context4.sent;
+                  prizeTier = {
+                    bitRangeSize: result[0].bitRangeSize,
+                    expiryDuration: result[0].expiryDuration,
+                    maxPicksPerUser: result[0].maxPicksPerUser,
+                    prize: result[0].prize,
+                    tiers: result[0].tiers,
+                    endTimestampOffset: result[0].endTimestampOffset,
+                    drawId: result[0].drawId,
+                    dpr: result[0].dpr
+                  };
+                  return _context4.abrupt("return", prizeTier);
+
+                case 12:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, this);
+        }));
+
+        function getUpcomingPrizeTier() {
+          return _getUpcomingPrizeTier.apply(this, arguments);
+        }
+
+        return getUpcomingPrizeTier;
+      }()
+      /**
+       * Fetches decimals, name and symbol for the Token that will be distributed.
+       * @returns the decimals, name and symbol for the token
+       */
+      ;
+
+      _proto.getTokenData =
+      /*#__PURE__*/
+      function () {
+        var _getTokenData2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5() {
+          var tokenContract;
+          return runtime_1.wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.next = 2;
+                  return this.getTokenContract();
+
+                case 2:
+                  tokenContract = _context5.sent;
+                  return _context5.abrupt("return", getTokenData(tokenContract));
+
+                case 4:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5, this);
+        }));
+
+        function getTokenData$1() {
+          return _getTokenData2.apply(this, arguments);
+        }
+
+        return getTokenData$1;
+      }()
+      /**
+       * Fetches the newest Draw in the DrawBuffer related to the PrizeDistributor.
+       * NOTE: Will throw an error if the buffer is empty.
+       * @returns the newest draw in the draw buffer
+       */
+      ;
+
+      _proto.getNewestDraw =
+      /*#__PURE__*/
+      function () {
+        var _getNewestDraw = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee6() {
+          var drawBufferContract, result, draw;
+          return runtime_1.wrap(function _callee6$(_context6) {
+            while (1) {
+              switch (_context6.prev = _context6.next) {
+                case 0:
+                  _context6.next = 2;
+                  return this.getDrawBufferContract();
+
+                case 2:
+                  drawBufferContract = _context6.sent;
+                  _context6.next = 5;
+                  return drawBufferContract.functions.getNewestDraw();
+
+                case 5:
+                  result = _context6.sent;
+                  draw = result[0];
+                  return _context6.abrupt("return", {
+                    drawId: draw.drawId,
+                    timestamp: draw.timestamp,
+                    winningRandomNumber: draw.winningRandomNumber,
+                    beaconPeriodStartedAt: draw.beaconPeriodStartedAt,
+                    beaconPeriodSeconds: draw.beaconPeriodSeconds
+                  });
+
+                case 8:
+                case "end":
+                  return _context6.stop();
+              }
+            }
+          }, _callee6, this);
+        }));
+
+        function getNewestDraw() {
+          return _getNewestDraw.apply(this, arguments);
+        }
+
+        return getNewestDraw;
+      }()
+      /**
+       * Fetches the oldest Draw in the DrawBuffer related to the PrizeDistributor.
+       * @returns the oldest draw in the draw buffer
+       */
+      ;
+
+      _proto.getOldestDraw =
+      /*#__PURE__*/
+      function () {
+        var _getOldestDraw = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee7() {
+          var drawBufferContract, result, draw;
+          return runtime_1.wrap(function _callee7$(_context7) {
+            while (1) {
+              switch (_context7.prev = _context7.next) {
+                case 0:
+                  _context7.next = 2;
+                  return this.getDrawBufferContract();
+
+                case 2:
+                  drawBufferContract = _context7.sent;
+                  _context7.next = 5;
+                  return drawBufferContract.functions.getOldestDraw();
+
+                case 5:
+                  result = _context7.sent;
+                  draw = result[0];
+                  return _context7.abrupt("return", {
+                    drawId: draw.drawId,
+                    timestamp: draw.timestamp,
+                    winningRandomNumber: draw.winningRandomNumber,
+                    beaconPeriodStartedAt: draw.beaconPeriodStartedAt,
+                    beaconPeriodSeconds: draw.beaconPeriodSeconds
+                  });
+
+                case 8:
+                case "end":
+                  return _context7.stop();
+              }
+            }
+          }, _callee7, this);
+        }));
+
+        function getOldestDraw() {
+          return _getOldestDraw.apply(this, arguments);
+        }
+
+        return getOldestDraw;
+      }()
+      /**
+       * Fetches the newest PrizeDistribution in the PrizeDistributionBuffer related to the PrizeDistributor.
+       * NOTE: Will throw an error if the buffer is empty.
+       * @returns the newest prize distribution in the prize distribution buffer
+       */
+      ;
+
+      _proto.getNewestPrizeDistribution =
+      /*#__PURE__*/
+      function () {
+        var _getNewestPrizeDistribution = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee8() {
+          var prizeDistributionBufferContract, result, prizeDistribution, drawId;
+          return runtime_1.wrap(function _callee8$(_context8) {
+            while (1) {
+              switch (_context8.prev = _context8.next) {
+                case 0:
+                  _context8.next = 2;
+                  return this.getPrizeDistributionsBufferContract();
+
+                case 2:
+                  prizeDistributionBufferContract = _context8.sent;
+                  _context8.next = 5;
+                  return prizeDistributionBufferContract.functions.getNewestPrizeDistribution();
+
+                case 5:
+                  result = _context8.sent;
+                  prizeDistribution = result[0];
+                  drawId = result[1];
+                  return _context8.abrupt("return", {
+                    prizeDistribution: {
+                      matchCardinality: prizeDistribution.matchCardinality,
+                      numberOfPicks: prizeDistribution.numberOfPicks,
+                      tiers: prizeDistribution.tiers,
+                      bitRangeSize: prizeDistribution.bitRangeSize,
+                      prize: prizeDistribution.prize,
+                      startTimestampOffset: prizeDistribution.drawStartTimestampOffset,
+                      endTimestampOffset: prizeDistribution.drawEndTimestampOffset,
+                      maxPicksPerUser: prizeDistribution.maxPicksPerUser
+                    },
+                    drawId: drawId
+                  });
+
+                case 9:
+                case "end":
+                  return _context8.stop();
+              }
+            }
+          }, _callee8, this);
+        }));
+
+        function getNewestPrizeDistribution() {
+          return _getNewestPrizeDistribution.apply(this, arguments);
+        }
+
+        return getNewestPrizeDistribution;
+      }()
+      /**
+       * Fetches the oldest PrizeDistribution in the PrizeDistributionBuffer related to the PrizeDistributor.
+       * @returns the oldest prize distribution in the prize distribution buffer
+       */
+      ;
+
+      _proto.getOldestPrizeDistribution =
+      /*#__PURE__*/
+      function () {
+        var _getOldestPrizeDistribution = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee9() {
+          var prizeDistributionBufferContract, result, prizeDistribution, drawId;
+          return runtime_1.wrap(function _callee9$(_context9) {
+            while (1) {
+              switch (_context9.prev = _context9.next) {
+                case 0:
+                  _context9.next = 2;
+                  return this.getPrizeDistributionsBufferContract();
+
+                case 2:
+                  prizeDistributionBufferContract = _context9.sent;
+                  _context9.next = 5;
+                  return prizeDistributionBufferContract.functions.getOldestPrizeDistribution();
+
+                case 5:
+                  result = _context9.sent;
+                  prizeDistribution = result[0];
+                  drawId = result[1];
+                  return _context9.abrupt("return", {
+                    prizeDistribution: {
+                      matchCardinality: prizeDistribution.matchCardinality,
+                      numberOfPicks: prizeDistribution.numberOfPicks,
+                      tiers: prizeDistribution.tiers,
+                      bitRangeSize: prizeDistribution.bitRangeSize,
+                      prize: prizeDistribution.prize,
+                      startTimestampOffset: prizeDistribution.drawStartTimestampOffset,
+                      endTimestampOffset: prizeDistribution.drawEndTimestampOffset,
+                      maxPicksPerUser: prizeDistribution.maxPicksPerUser
+                    },
+                    drawId: drawId
+                  });
+
+                case 9:
+                case "end":
+                  return _context9.stop();
+              }
+            }
+          }, _callee9, this);
+        }));
+
+        function getOldestPrizeDistribution() {
+          return _getOldestPrizeDistribution.apply(this, arguments);
+        }
+
+        return getOldestPrizeDistribution;
+      }()
+      /**
+       * Fetches the id and end time stamp of the draw that is currently in the DrawCalcluatorTimelock.
+       * @returns the draw id and the end time as a unix time stamp in seconds
+       */
+      ;
+
+      _proto.getTimelockDrawId =
+      /*#__PURE__*/
+      function () {
+        var _getTimelockDrawId = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee10() {
+          var drawCalculatorTimelockContract, timelockResult, _timelockResult$, endTimeSeconds, drawId;
+
+          return runtime_1.wrap(function _callee10$(_context10) {
+            while (1) {
+              switch (_context10.prev = _context10.next) {
+                case 0:
+                  _context10.next = 2;
+                  return this.getDrawCalculatorTimelockContract();
+
+                case 2:
+                  drawCalculatorTimelockContract = _context10.sent;
+
+                  if (drawCalculatorTimelockContract) {
+                    _context10.next = 5;
+                    break;
+                  }
+
+                  return _context10.abrupt("return", null);
+
+                case 5:
+                  _context10.next = 7;
+                  return drawCalculatorTimelockContract.functions.getTimelock();
+
+                case 7:
+                  timelockResult = _context10.sent;
+                  _timelockResult$ = timelockResult[0], endTimeSeconds = _timelockResult$[0], drawId = _timelockResult$[1];
+                  return _context10.abrupt("return", {
+                    drawId: drawId,
+                    endTimeSeconds: endTimeSeconds
+                  });
+
+                case 10:
+                case "end":
+                  return _context10.stop();
+              }
+            }
+          }, _callee10, this);
+        }));
+
+        function getTimelockDrawId() {
+          return _getTimelockDrawId.apply(this, arguments);
+        }
+
+        return getTimelockDrawId;
+      }()
+      /**
+       * Fetches the range of draw ids that are available in the DrawBuffer.
+       * @returns a list of draw ids in the buffer
+       */
+      ;
+
+      _proto.getDrawIdsFromDrawBuffer =
+      /*#__PURE__*/
+      function () {
+        var _getDrawIdsFromDrawBuffer = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee11() {
+          var _yield$Promise$allSet, oldestDrawResponse, newestDrawResponse, oldestId, newestId, drawIds, i;
+
+          return runtime_1.wrap(function _callee11$(_context11) {
+            while (1) {
+              switch (_context11.prev = _context11.next) {
+                case 0:
+                  _context11.next = 2;
+                  return Promise.allSettled([this.getOldestDraw(), this.getNewestDraw()]);
+
+                case 2:
+                  _yield$Promise$allSet = _context11.sent;
+                  oldestDrawResponse = _yield$Promise$allSet[0];
+                  newestDrawResponse = _yield$Promise$allSet[1];
+
+                  if (!(newestDrawResponse.status === 'rejected' || oldestDrawResponse.status === 'rejected')) {
+                    _context11.next = 7;
+                    break;
+                  }
+
+                  return _context11.abrupt("return", []);
+
+                case 7:
+                  oldestId = oldestDrawResponse.value.drawId;
+                  newestId = newestDrawResponse.value.drawId;
+                  drawIds = [];
+
+                  for (i = oldestId; i <= newestId; i++) {
+                    drawIds.push(i);
+                  }
+
+                  return _context11.abrupt("return", drawIds);
+
+                case 12:
+                case "end":
+                  return _context11.stop();
+              }
+            }
+          }, _callee11, this);
+        }));
+
+        function getDrawIdsFromDrawBuffer() {
+          return _getDrawIdsFromDrawBuffer.apply(this, arguments);
+        }
+
+        return getDrawIdsFromDrawBuffer;
+      }()
+      /**
+       * Fetches the range of draw ids for the prize distributions that are available in the PrizeDistributionBuffer.
+       * @returns a list of draw ids in the buffer
+       */
+      ;
+
+      _proto.getDrawIdsFromPrizeDistributionBuffer =
+      /*#__PURE__*/
+      function () {
+        var _getDrawIdsFromPrizeDistributionBuffer = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee12() {
+          var _yield$Promise$allSet2, oldestPrizeDistributionResponse, newestPrizeDistributionResponse, oldestId, newestId, drawIds, i;
+
+          return runtime_1.wrap(function _callee12$(_context12) {
+            while (1) {
+              switch (_context12.prev = _context12.next) {
+                case 0:
+                  _context12.next = 2;
+                  return Promise.allSettled([this.getOldestPrizeDistribution(), this.getNewestPrizeDistribution()]);
+
+                case 2:
+                  _yield$Promise$allSet2 = _context12.sent;
+                  oldestPrizeDistributionResponse = _yield$Promise$allSet2[0];
+                  newestPrizeDistributionResponse = _yield$Promise$allSet2[1];
+
+                  if (!(newestPrizeDistributionResponse.status === 'rejected' || oldestPrizeDistributionResponse.status === 'rejected')) {
+                    _context12.next = 7;
+                    break;
+                  }
+
+                  return _context12.abrupt("return", []);
+
+                case 7:
+                  oldestId = oldestPrizeDistributionResponse.value.drawId;
+                  newestId = newestPrizeDistributionResponse.value.drawId;
+                  drawIds = [];
+
+                  for (i = oldestId; i <= newestId; i++) {
+                    drawIds.push(i);
+                  }
+
+                  return _context12.abrupt("return", drawIds);
+
+                case 12:
+                case "end":
+                  return _context12.stop();
+              }
+            }
+          }, _callee12, this);
+        }));
+
+        function getDrawIdsFromPrizeDistributionBuffer() {
+          return _getDrawIdsFromPrizeDistributionBuffer.apply(this, arguments);
+        }
+
+        return getDrawIdsFromPrizeDistributionBuffer;
+      }()
+      /**
+       * Gets the list of draw ids of draws that have are available in both the DrawBuffer and PrizeDistributionBuffer.
+       * @returns a list of draw ids in both buffers
+       */
+      ;
+
+      _proto.getValidDrawIds =
+      /*#__PURE__*/
+      function () {
+        var _getValidDrawIds = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee13() {
+          var _yield$Promise$allSet3, oldestPrizeDistributionResponse, newestPrizeDistributionResponse, oldestDrawResponse, newestDrawResponse, oldestPrizeDistributionId, newestPrizeDistributionId, oldestDrawId, newestDrawId, newestIds, oldestId, newestId, validIds, i;
+
+          return runtime_1.wrap(function _callee13$(_context13) {
+            while (1) {
+              switch (_context13.prev = _context13.next) {
+                case 0:
+                  _context13.next = 2;
+                  return Promise.allSettled([this.getOldestPrizeDistribution(), this.getNewestPrizeDistribution(), this.getOldestDraw(), this.getNewestDraw()]);
+
+                case 2:
+                  _yield$Promise$allSet3 = _context13.sent;
+                  oldestPrizeDistributionResponse = _yield$Promise$allSet3[0];
+                  newestPrizeDistributionResponse = _yield$Promise$allSet3[1];
+                  oldestDrawResponse = _yield$Promise$allSet3[2];
+                  newestDrawResponse = _yield$Promise$allSet3[3];
+
+                  if (!(oldestPrizeDistributionResponse.status === 'rejected' || newestPrizeDistributionResponse.status === 'rejected' || newestDrawResponse.status === 'rejected' || oldestDrawResponse.status === 'rejected')) {
+                    _context13.next = 9;
+                    break;
+                  }
+
+                  return _context13.abrupt("return", []);
+
+                case 9:
+                  oldestPrizeDistributionId = oldestPrizeDistributionResponse.value.drawId;
+                  newestPrizeDistributionId = newestPrizeDistributionResponse.value.drawId;
+                  oldestDrawId = oldestDrawResponse.value.drawId;
+                  newestDrawId = newestDrawResponse.value.drawId;
+                  newestIds = [newestDrawId, newestPrizeDistributionId];
+                  oldestId = Math.max(oldestPrizeDistributionId, oldestDrawId);
+                  newestId = Math.min.apply(Math, newestIds);
+
+                  if (!(newestId < oldestId)) {
+                    _context13.next = 18;
+                    break;
+                  }
+
+                  return _context13.abrupt("return", []);
+
+                case 18:
+                  validIds = [];
+
+                  for (i = oldestId; i <= newestId; i++) {
+                    validIds.push(i);
+                  }
+
+                  return _context13.abrupt("return", validIds);
+
+                case 21:
+                case "end":
+                  return _context13.stop();
+              }
+            }
+          }, _callee13, this);
+        }));
+
+        function getValidDrawIds() {
+          return _getValidDrawIds.apply(this, arguments);
+        }
+
+        return getValidDrawIds;
+      }()
+      /**
+       * Fetches Draws and PrizeDistributions from their respective buffers for the provided list of draw ids.
+       * @param drawIds the list of draw ids to fetch Draws and PrizeDistributions for
+       * @returns an object full of Draws and PrizeDistributions keyed by their draw id
+       */
+      ;
+
+      _proto.getDrawsAndPrizeDistributions =
+      /*#__PURE__*/
+      function () {
+        var _getDrawsAndPrizeDistributions = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee14(drawIds) {
+          var _yield$Promise$allSet4, drawsResponse, prizeDistributionsResponse, drawsAndPrizeDistributions;
+
+          return runtime_1.wrap(function _callee14$(_context14) {
+            while (1) {
+              switch (_context14.prev = _context14.next) {
+                case 0:
+                  _context14.next = 2;
+                  return Promise.allSettled([this.getDraws(drawIds), this.getPrizeDistributions(drawIds)]);
+
+                case 2:
+                  _yield$Promise$allSet4 = _context14.sent;
+                  drawsResponse = _yield$Promise$allSet4[0];
+                  prizeDistributionsResponse = _yield$Promise$allSet4[1];
+
+                  if (!(drawsResponse.status === 'rejected' || prizeDistributionsResponse.status === 'rejected')) {
+                    _context14.next = 7;
+                    break;
+                  }
+
+                  return _context14.abrupt("return", this.getDrawsAndPrizeDistributions(drawIds.sort(function (a, b) {
+                    return a - b;
+                  }).slice(0, drawIds.length - 1)));
+
+                case 7:
+                  drawsAndPrizeDistributions = {};
+                  Object.values(drawsResponse.value).forEach(function (draw, index) {
+                    drawsAndPrizeDistributions[draw.drawId] = {
+                      draw: draw,
+                      prizeDistribution: prizeDistributionsResponse.value[index]
+                    };
+                  });
+                  return _context14.abrupt("return", drawsAndPrizeDistributions);
+
+                case 10:
+                case "end":
+                  return _context14.stop();
+              }
+            }
+          }, _callee14, this);
+        }));
+
+        function getDrawsAndPrizeDistributions(_x8) {
+          return _getDrawsAndPrizeDistributions.apply(this, arguments);
+        }
+
+        return getDrawsAndPrizeDistributions;
+      }()
+      /**
+       * Fetches a Draw from the DrawBuffer.
+       * @param drawId the draw id of the Draw to fetch
+       * @returns the Draw
+       */
+      ;
+
+      _proto.getDraw =
+      /*#__PURE__*/
+      function () {
+        var _getDraw = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee15(drawId) {
+          var drawBufferContract, response;
+          return runtime_1.wrap(function _callee15$(_context15) {
+            while (1) {
+              switch (_context15.prev = _context15.next) {
+                case 0:
+                  _context15.next = 2;
+                  return this.getDrawBufferContract();
+
+                case 2:
+                  drawBufferContract = _context15.sent;
+                  _context15.next = 5;
+                  return drawBufferContract.functions.getDraw(drawId);
+
+                case 5:
+                  response = _context15.sent;
+                  return _context15.abrupt("return", {
+                    drawId: response[0].drawId,
+                    timestamp: response[0].timestamp,
+                    winningRandomNumber: response[0].winningRandomNumber,
+                    beaconPeriodStartedAt: response[0].beaconPeriodStartedAt,
+                    beaconPeriodSeconds: response[0].beaconPeriodSeconds
+                  });
+
+                case 7:
+                case "end":
+                  return _context15.stop();
+              }
+            }
+          }, _callee15, this);
+        }));
+
+        function getDraw(_x9) {
+          return _getDraw.apply(this, arguments);
+        }
+
+        return getDraw;
+      }()
+      /**
+       * Fetches multiple Draws from the DrawBuffer.
+       * @param drawIds a list of draw ids to fetch
+       * @returns an object with Draws keyed by their draw ids
+       */
+      ;
+
+      _proto.getDraws =
+      /*#__PURE__*/
+      function () {
+        var _getDraws = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee16(drawIds) {
+          var draws, drawBufferContract, response;
+          return runtime_1.wrap(function _callee16$(_context16) {
+            while (1) {
+              switch (_context16.prev = _context16.next) {
+                case 0:
+                  draws = {};
+
+                  if (!(!drawIds || drawIds.length === 0)) {
+                    _context16.next = 3;
+                    break;
+                  }
+
+                  return _context16.abrupt("return", draws);
+
+                case 3:
+                  _context16.next = 5;
+                  return this.getDrawBufferContract();
+
+                case 5:
+                  drawBufferContract = _context16.sent;
+                  _context16.next = 8;
+                  return drawBufferContract.functions.getDraws(drawIds);
+
+                case 8:
+                  response = _context16.sent;
+                  response[0].forEach(function (draw) {
+                    draws[draw.drawId] = {
+                      drawId: draw.drawId,
+                      timestamp: draw.timestamp,
+                      winningRandomNumber: draw.winningRandomNumber,
+                      beaconPeriodStartedAt: draw.beaconPeriodStartedAt,
+                      beaconPeriodSeconds: draw.beaconPeriodSeconds
+                    };
+                  });
+                  return _context16.abrupt("return", draws);
+
+                case 11:
+                case "end":
+                  return _context16.stop();
+              }
+            }
+          }, _callee16, this);
+        }));
+
+        function getDraws(_x10) {
+          return _getDraws.apply(this, arguments);
+        }
+
+        return getDraws;
+      }()
+      /**
+       * Fetches a PrizeDistribution from the PrizeDistributionBuffer.
+       * @param drawId the draw id for the PrizeDistribution to fetch
+       * @returns the PrizeDistribution
+       */
+      ;
+
+      _proto.getPrizeDistribution =
+      /*#__PURE__*/
+      function () {
+        var _getPrizeDistribution = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee17(drawId) {
+          var prizeDistributionsBufferContract, result;
+          return runtime_1.wrap(function _callee17$(_context17) {
+            while (1) {
+              switch (_context17.prev = _context17.next) {
+                case 0:
+                  _context17.next = 2;
+                  return this.getPrizeDistributionsBufferContract();
+
+                case 2:
+                  prizeDistributionsBufferContract = _context17.sent;
+                  _context17.next = 5;
+                  return prizeDistributionsBufferContract.functions.getPrizeDistribution(drawId);
+
+                case 5:
+                  result = _context17.sent;
+                  return _context17.abrupt("return", {
+                    matchCardinality: result[0].matchCardinality,
+                    tiers: result[0].tiers,
+                    bitRangeSize: result[0].bitRangeSize,
+                    maxPicksPerUser: result[0].maxPicksPerUser,
+                    numberOfPicks: result[0].numberOfPicks,
+                    expiryDuration: result[0].expiryDuration,
+                    prize: result[0].prize,
+                    startTimestampOffset: result[0].startTimestampOffset,
+                    endTimestampOffset: result[0].endTimestampOffset
+                  });
+
+                case 7:
+                case "end":
+                  return _context17.stop();
+              }
+            }
+          }, _callee17, this);
+        }));
+
+        function getPrizeDistribution(_x11) {
+          return _getPrizeDistribution.apply(this, arguments);
+        }
+
+        return getPrizeDistribution;
+      }()
+      /**
+       * Fetches multiple PrizeDistributions from the PrizeDistributionBuffer.
+       * @param drawIds a list of draw ids to fetch PrizeDistributions for
+       * @returns an object with PrizeDistributions keyed by draw ids
+       */
+      ;
+
+      _proto.getPrizeDistributions =
+      /*#__PURE__*/
+      function () {
+        var _getPrizeDistributions = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee18(drawIds) {
+          var prizeDistributionsBufferContract, prizeDistributionsResults, prizeDistributions;
+          return runtime_1.wrap(function _callee18$(_context18) {
+            while (1) {
+              switch (_context18.prev = _context18.next) {
+                case 0:
+                  if (!(!drawIds || drawIds.length === 0)) {
+                    _context18.next = 2;
+                    break;
+                  }
+
+                  return _context18.abrupt("return", {});
+
+                case 2:
+                  _context18.next = 4;
+                  return this.getPrizeDistributionsBufferContract();
+
+                case 4:
+                  prizeDistributionsBufferContract = _context18.sent;
+                  _context18.next = 7;
+                  return prizeDistributionsBufferContract.functions.getPrizeDistributions(drawIds);
+
+                case 7:
+                  prizeDistributionsResults = _context18.sent;
+                  prizeDistributions = {};
+                  prizeDistributionsResults[0].forEach(function (result, index) {
+                    prizeDistributions[drawIds[index]] = {
+                      matchCardinality: result.matchCardinality,
+                      tiers: result.tiers,
+                      bitRangeSize: result.bitRangeSize,
+                      maxPicksPerUser: result.maxPicksPerUser,
+                      numberOfPicks: result.numberOfPicks,
+                      prize: result.prize,
+                      expiryDuration: result.expiryDuration,
+                      startTimestampOffset: result.startTimestampOffset,
+                      endTimestampOffset: result.endTimestampOffset
+                    };
+                  });
+                  return _context18.abrupt("return", prizeDistributions);
+
+                case 11:
+                case "end":
+                  return _context18.stop();
+              }
+            }
+          }, _callee18, this);
+        }));
+
+        function getPrizeDistributions(_x12) {
+          return _getPrizeDistributions.apply(this, arguments);
+        }
+
+        return getPrizeDistributions;
+      }()
+      /**
+       * Fetches the amount of tokens a user claimed for a draw.
+       * @param usersAddress the address of the user to check
+       * @param drawId the draw id to check
+       * @returns the amount a user claimed
+       */
+      ;
+
+      _proto.getUsersClaimedAmount =
+      /*#__PURE__*/
+      function () {
+        var _getUsersClaimedAmount = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee19(usersAddress, drawId) {
+          var errorPrefix, result;
+          return runtime_1.wrap(function _callee19$(_context19) {
+            while (1) {
+              switch (_context19.prev = _context19.next) {
+                case 0:
+                  errorPrefix = 'PrizeDistributors [getUsersClaimedAmount] |';
+                  _context19.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context19.next = 5;
+                  return this.prizeDistributorContract.functions.getDrawPayoutBalanceOf(usersAddress, drawId);
+
+                case 5:
+                  result = _context19.sent;
+                  return _context19.abrupt("return", result[0]);
+
+                case 7:
+                case "end":
+                  return _context19.stop();
+              }
+            }
+          }, _callee19, this);
+        }));
+
+        function getUsersClaimedAmount(_x13, _x14) {
+          return _getUsersClaimedAmount.apply(this, arguments);
+        }
+
+        return getUsersClaimedAmount;
+      }()
+      /**
+       * Fetches the amount of tokens a user claimed for multiple draws.
+       * @param usersAddress the address of the user to check
+       * @param drawIds a list of draw ids to check
+       * @returns an object of claimed amounts keyed by the draw ids
+       */
+      ;
+
+      _proto.getUsersClaimedAmounts =
+      /*#__PURE__*/
+      function () {
+        var _getUsersClaimedAmounts = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee20(usersAddress, drawIds) {
+          var _this = this;
+
+          var claimedAmounts;
+          return runtime_1.wrap(function _callee20$(_context20) {
+            while (1) {
+              switch (_context20.prev = _context20.next) {
+                case 0:
+                  claimedAmounts = {};
+                  _context20.next = 3;
+                  return Promise.all(drawIds.map(function (drawId) {
+                    return _this.getUsersClaimedAmount(usersAddress, drawId).then(function (claimedAmount) {
+                      claimedAmounts[drawId] = claimedAmount;
+                    });
+                  }));
+
+                case 3:
+                  return _context20.abrupt("return", claimedAmounts);
+
+                case 4:
+                case "end":
+                  return _context20.stop();
+              }
+            }
+          }, _callee20);
+        }));
+
+        function getUsersClaimedAmounts(_x15, _x16) {
+          return _getUsersClaimedAmounts.apply(this, arguments);
+        }
+
+        return getUsersClaimedAmounts;
+      }()
+      /**
+       * Fetches a users normalized balance for several draw ids.
+       * @param usersAddress the address of a user to fetch normalized balances for
+       * @param drawIds a list of draw ids to fetch normalized balances for
+       * @returns an object of normalized balances keyed by draw ids
+       */
+      ;
+
+      _proto.getUsersNormalizedBalancesForDrawIds =
+      /*#__PURE__*/
+      function () {
+        var _getUsersNormalizedBalancesForDrawIds = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee21(usersAddress, drawIds) {
+          var errorPrefix, drawCalculatorContract, result;
+          return runtime_1.wrap(function _callee21$(_context21) {
+            while (1) {
+              switch (_context21.prev = _context21.next) {
+                case 0:
+                  errorPrefix = 'PrizeDistributors [getUsersNormalizedBalancesForDrawIds] |';
+                  _context21.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context21.next = 5;
+                  return this.getDrawCalculatorContract();
+
+                case 5:
+                  drawCalculatorContract = _context21.sent;
+                  _context21.next = 8;
+                  return drawCalculatorContract.functions.getNormalizedBalancesForDrawIds(usersAddress, drawIds);
+
+                case 8:
+                  result = _context21.sent;
+                  return _context21.abrupt("return", result[0]);
+
+                case 10:
+                case "end":
+                  return _context21.stop();
+              }
+            }
+          }, _callee21, this);
+        }));
+
+        function getUsersNormalizedBalancesForDrawIds(_x17, _x18) {
+          return _getUsersNormalizedBalancesForDrawIds.apply(this, arguments);
+        }
+
+        return getUsersNormalizedBalancesForDrawIds;
+      }()
+      /**
+       * Fetches the claimable prizes a user won for a specific Draw.
+       * @param usersAddress the users address to fetch prizes for
+       * @param drawId the draw id to fetch prizes for
+       * @param maxPicksPerUser the maximum number of picks per user from the matching prize distribution
+       * @returns the results for user for the provided draw
+       */
+      ;
+
+      _proto.getUsersDrawResultsForDrawId =
+      /*#__PURE__*/
+      function () {
+        var _getUsersDrawResultsForDrawId = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee22(usersAddress, drawId, maxPicksPerUser) {
+          return runtime_1.wrap(function _callee22$(_context22) {
+            while (1) {
+              switch (_context22.prev = _context22.next) {
+                case 0:
+                  return _context22.abrupt("return", PrizeApi.getUsersDrawResultsByDraw(this.chainId, usersAddress, this.prizeDistributorMetadata.address, drawId, maxPicksPerUser));
+
+                case 1:
+                case "end":
+                  return _context22.stop();
+              }
+            }
+          }, _callee22, this);
+        }));
+
+        function getUsersDrawResultsForDrawId(_x19, _x20, _x21) {
+          return _getUsersDrawResultsForDrawId.apply(this, arguments);
+        }
+
+        return getUsersDrawResultsForDrawId;
+      }()
+      /**
+       * Fetches the claimable prizes a user won for multiple Draws.
+       * @param usersAddress the users address to fetch prizes for
+       * @param drawIds the draw ids to fetch prizes for
+       * @param maxPicksPerUserPerDraw the maximum number of picks per user from the matching prize distribution for each draw
+       * @returns the results for user for the provided draw
+       */
+      ;
+
+      _proto.getUsersDrawResultsForDrawIds =
+      /*#__PURE__*/
+      function () {
+        var _getUsersDrawResultsForDrawIds = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee23(usersAddress, drawIds, maxPicksPerUserPerDraw) {
+          return runtime_1.wrap(function _callee23$(_context23) {
+            while (1) {
+              switch (_context23.prev = _context23.next) {
+                case 0:
+                  return _context23.abrupt("return", PrizeApi.getUsersDrawResultsByDraws(this.chainId, usersAddress, this.prizeDistributorMetadata.address, drawIds, maxPicksPerUserPerDraw));
+
+                case 1:
+                case "end":
+                  return _context23.stop();
+              }
+            }
+          }, _callee23, this);
+        }));
+
+        function getUsersDrawResultsForDrawIds(_x22, _x23, _x24) {
+          return _getUsersDrawResultsForDrawIds.apply(this, arguments);
+        }
+
+        return getUsersDrawResultsForDrawIds;
+      }() // NOTE: Claimed event functions commented out as events on networks other than Ethereum mainnet are unreliable.
+
+      /**
+       *
+       * @param usersAddress
+       * @returns
+       */
+      // async getUsersClaimedEvents(usersAddress: string) {
+      //   const errorPrefix = 'PrizeDistributors [getUsersClaimedEvents] |'
+      //   await validateAddress(errorPrefix, usersAddress)
+      //   const eventFilter = this.prizeDistributorContract.filters.ClaimedDraw(usersAddress)
+      //   return await this.prizeDistributorContract.queryFilter(eventFilter)
+      // }
+
+      /**
+       *
+       * @param usersAddress
+       * @param draw
+       * @returns
+       */
+      // async getUsersClaimedEvent(usersAddress: string, draw: Draw): Promise<Event> {
+      //   const eventFilter = this.prizeDistributorContract.filters.ClaimedDraw(usersAddress, draw.drawId)
+      //   const events = await this.prizeDistributorContract.queryFilter(eventFilter)
+      //   return events[0]
+      // }
+      //////////////////////////// Ethers Contracts Initializers ////////////////////////////
+
+      /**
+       * Fetches a contract address, finds the relevant metadata in the ContractList and creates an ethers Contract for that contract. The ethers Contract is cached on the instance of the PrizeDistributor and is returned immediately if already stored.
+       * @param key the key for the requested contract to be stored on the PrizeDistributor
+       * @param contractType the contract name
+       * @param getContractAddress a function to fetch the contract address
+       * @returns an ethers Contract for the provided address and contract type
+       */
+      ;
+
+      _proto.getAndSetEthersContract =
+      /*#__PURE__*/
+      function () {
+        var _getAndSetEthersContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee24(key, contractType, getContractAddress) {
+          var contractKey, metadataKey, contractAddress, _getMetadataAndContra2, contractMetadata, contract;
+
+          return runtime_1.wrap(function _callee24$(_context24) {
+            while (1) {
+              switch (_context24.prev = _context24.next) {
+                case 0:
+                  contractKey = key + "Contract";
+                  metadataKey = key + "Metadata"; // @ts-ignore
+
+                  if (!(this[contractKey] !== undefined)) {
+                    _context24.next = 4;
+                    break;
+                  }
+
+                  return _context24.abrupt("return", this[contractKey]);
+
+                case 4:
+                  _context24.next = 6;
+                  return getContractAddress();
+
+                case 6:
+                  contractAddress = _context24.sent;
+                  _getMetadataAndContra2 = getMetadataAndContract(this.chainId, this.signerOrProvider, contractType, this.contractMetadataList, contractAddress), contractMetadata = _getMetadataAndContra2.contractMetadata, contract = _getMetadataAndContra2.contract; // @ts-ignore
+
+                  this[metadataKey] = contractMetadata; // @ts-ignore
+
+                  this[contractKey] = contract;
+                  return _context24.abrupt("return", contract);
+
+                case 11:
+                case "end":
+                  return _context24.stop();
+              }
+            }
+          }, _callee24, this);
+        }));
+
+        function getAndSetEthersContract(_x25, _x26, _x27) {
+          return _getAndSetEthersContract.apply(this, arguments);
+        }
+
+        return getAndSetEthersContract;
+      }()
+      /**
+       * Fetches the address of the DrawCalculator and caches the ethers Contract for the DrawCalculator
+       * @returns an ethers Contract for the DrawCalculator related to this PrizeDistributor
+       */
+      ;
+
+      _proto.getDrawCalculatorContract =
+      /*#__PURE__*/
+      function () {
+        var _getDrawCalculatorContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee26() {
+          var _this2 = this;
+
+          var getAddress;
+          return runtime_1.wrap(function _callee26$(_context26) {
+            while (1) {
+              switch (_context26.prev = _context26.next) {
+                case 0:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee25() {
+                      var result, address, contractMetadata, drawCalculatorTimelockContract;
+                      return runtime_1.wrap(function _callee25$(_context25) {
+                        while (1) {
+                          switch (_context25.prev = _context25.next) {
+                            case 0:
+                              _context25.next = 2;
+                              return _this2.prizeDistributorContract.functions.getDrawCalculator();
+
+                            case 2:
+                              result = _context25.sent;
+                              address = result[0];
+                              contractMetadata = _this2.contractMetadataList.find(function (contractMetadata) {
+                                return contractMetadata.chainId === _this2.chainId && contractMetadata.address === address;
+                              });
+
+                              if (!((contractMetadata == null ? void 0 : contractMetadata.type) === ContractType.DrawCalculatorTimelock)) {
+                                _context25.next = 14;
+                                break;
+                              }
+
+                              drawCalculatorTimelockContract = new Contract(address, contractMetadata.abi, _this2.signerOrProvider);
+                              _context25.next = 9;
+                              return drawCalculatorTimelockContract.functions.getDrawCalculator();
+
+                            case 9:
+                              result = _context25.sent;
+                              address = result[0];
+                              return _context25.abrupt("return", address);
+
+                            case 14:
+                              return _context25.abrupt("return", address);
+
+                            case 15:
+                            case "end":
+                              return _context25.stop();
+                          }
+                        }
+                      }, _callee25);
+                    }));
+
+                    return function getAddress() {
+                      return _ref.apply(this, arguments);
+                    };
+                  }();
+
+                  return _context26.abrupt("return", this.getAndSetEthersContract('drawCalculator', ContractType.DrawCalculator, getAddress));
+
+                case 2:
+                case "end":
+                  return _context26.stop();
+              }
+            }
+          }, _callee26, this);
+        }));
+
+        function getDrawCalculatorContract() {
+          return _getDrawCalculatorContract.apply(this, arguments);
+        }
+
+        return getDrawCalculatorContract;
+      }()
+      /**
+       * Fetches the address of the DrawBuffer and caches the ethers Contract for the DrawBuffer.
+       * @returns an ethers Contract for the DrawBuffer related to this PrizeDistributor
+       */
+      ;
+
+      _proto.getDrawBufferContract =
+      /*#__PURE__*/
+      function () {
+        var _getDrawBufferContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee28() {
+          var _this3 = this;
+
+          var getAddress;
+          return runtime_1.wrap(function _callee28$(_context28) {
+            while (1) {
+              switch (_context28.prev = _context28.next) {
+                case 0:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref2 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee27() {
+                      var drawCalculatorContract, result;
+                      return runtime_1.wrap(function _callee27$(_context27) {
+                        while (1) {
+                          switch (_context27.prev = _context27.next) {
+                            case 0:
+                              _context27.next = 2;
+                              return _this3.getDrawCalculatorContract();
+
+                            case 2:
+                              drawCalculatorContract = _context27.sent;
+                              _context27.next = 5;
+                              return drawCalculatorContract.functions.getDrawBuffer();
+
+                            case 5:
+                              result = _context27.sent;
+                              return _context27.abrupt("return", result[0]);
+
+                            case 7:
+                            case "end":
+                              return _context27.stop();
+                          }
+                        }
+                      }, _callee27);
+                    }));
+
+                    return function getAddress() {
+                      return _ref2.apply(this, arguments);
+                    };
+                  }();
+
+                  return _context28.abrupt("return", this.getAndSetEthersContract('drawBuffer', ContractType.DrawBuffer, getAddress));
+
+                case 2:
+                case "end":
+                  return _context28.stop();
+              }
+            }
+          }, _callee28, this);
+        }));
+
+        function getDrawBufferContract() {
+          return _getDrawBufferContract.apply(this, arguments);
+        }
+
+        return getDrawBufferContract;
+      }()
+      /**
+       * Fetches the address of the PrizeDistributionsBuffer and caches the ethers Contract for the PrizeDistributionsBuffer.
+       * @returns an ethers Contract for the PrizeDistributionsBuffer related to this PrizeDistributor
+       */
+      ;
+
+      _proto.getPrizeDistributionsBufferContract =
+      /*#__PURE__*/
+      function () {
+        var _getPrizeDistributionsBufferContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee30() {
+          var _this4 = this;
+
+          var getAddress;
+          return runtime_1.wrap(function _callee30$(_context30) {
+            while (1) {
+              switch (_context30.prev = _context30.next) {
+                case 0:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee29() {
+                      var drawCalculatorContract, result;
+                      return runtime_1.wrap(function _callee29$(_context29) {
+                        while (1) {
+                          switch (_context29.prev = _context29.next) {
+                            case 0:
+                              _context29.next = 2;
+                              return _this4.getDrawCalculatorContract();
+
+                            case 2:
+                              drawCalculatorContract = _context29.sent;
+                              _context29.next = 5;
+                              return drawCalculatorContract.functions.getPrizeDistributionBuffer();
+
+                            case 5:
+                              result = _context29.sent;
+                              return _context29.abrupt("return", result[0]);
+
+                            case 7:
+                            case "end":
+                              return _context29.stop();
+                          }
+                        }
+                      }, _callee29);
+                    }));
+
+                    return function getAddress() {
+                      return _ref3.apply(this, arguments);
+                    };
+                  }();
+
+                  return _context30.abrupt("return", this.getAndSetEthersContract('prizeDistributionsBuffer', ContractType.PrizeDistributionBuffer, getAddress));
+
+                case 2:
+                case "end":
+                  return _context30.stop();
+              }
+            }
+          }, _callee30, this);
+        }));
+
+        function getPrizeDistributionsBufferContract() {
+          return _getPrizeDistributionsBufferContract.apply(this, arguments);
+        }
+
+        return getPrizeDistributionsBufferContract;
+      }()
+      /**
+       * Fetches the address of the Token that is distributed by this PrizeDistributor and caches the ethers Contract for the ERC20 Token.
+       * @returns an ethers Contract for the ERC20 Token related to this PrizeDistributor
+       */
+      ;
+
+      _proto.getTokenContract =
+      /*#__PURE__*/
+      function () {
+        var _getTokenContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee32() {
+          var _this5 = this;
+
+          var getAddress, tokenAddress, tokenMetadata, tokenContract;
+          return runtime_1.wrap(function _callee32$(_context32) {
+            while (1) {
+              switch (_context32.prev = _context32.next) {
+                case 0:
+                  if (!(this.tokenContract !== undefined)) {
+                    _context32.next = 2;
+                    break;
+                  }
+
+                  return _context32.abrupt("return", this.tokenContract);
+
+                case 2:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee31() {
+                      var result;
+                      return runtime_1.wrap(function _callee31$(_context31) {
+                        while (1) {
+                          switch (_context31.prev = _context31.next) {
+                            case 0:
+                              _context31.next = 2;
+                              return _this5.prizeDistributorContract.functions.getToken();
+
+                            case 2:
+                              result = _context31.sent;
+                              return _context31.abrupt("return", result[0]);
+
+                            case 4:
+                            case "end":
+                              return _context31.stop();
+                          }
+                        }
+                      }, _callee31);
+                    }));
+
+                    return function getAddress() {
+                      return _ref4.apply(this, arguments);
+                    };
+                  }();
+
+                  _context32.next = 5;
+                  return getAddress();
+
+                case 5:
+                  tokenAddress = _context32.sent;
+                  tokenMetadata = createContractMetadata(this.chainId, tokenAddress, ContractType.Token, ERC20Abi);
+                  tokenContract = new Contract(tokenMetadata.address, tokenMetadata.abi, this.signerOrProvider);
+                  this.tokenMetadata = tokenMetadata;
+                  this.tokenContract = tokenContract;
+                  return _context32.abrupt("return", tokenContract);
+
+                case 11:
+                case "end":
+                  return _context32.stop();
+              }
+            }
+          }, _callee32, this);
+        }));
+
+        function getTokenContract() {
+          return _getTokenContract.apply(this, arguments);
+        }
+
+        return getTokenContract;
+      }();
+
+      _proto.getPrizeDistributionFactoryContract = /*#__PURE__*/function () {
+        var _getPrizeDistributionFactoryContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee34() {
+          var _this6 = this;
+
+          var getAddress;
+          return runtime_1.wrap(function _callee34$(_context34) {
+            while (1) {
+              switch (_context34.prev = _context34.next) {
+                case 0:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee33() {
+                      var prizeDistributionBufferContract, result;
+                      return runtime_1.wrap(function _callee33$(_context33) {
+                        while (1) {
+                          switch (_context33.prev = _context33.next) {
+                            case 0:
+                              _context33.next = 2;
+                              return _this6.getPrizeDistributionsBufferContract();
+
+                            case 2:
+                              prizeDistributionBufferContract = _context33.sent;
+                              _context33.next = 5;
+                              return prizeDistributionBufferContract.functions.manager();
+
+                            case 5:
+                              result = _context33.sent;
+                              return _context33.abrupt("return", result[0]);
+
+                            case 7:
+                            case "end":
+                              return _context33.stop();
+                          }
+                        }
+                      }, _callee33);
+                    }));
+
+                    return function getAddress() {
+                      return _ref5.apply(this, arguments);
+                    };
+                  }();
+
+                  return _context34.abrupt("return", this.getAndSetEthersContract('prizeDistributionFactory', ContractType.PrizeDistributionFactory, getAddress));
+
+                case 2:
+                case "end":
+                  return _context34.stop();
+              }
+            }
+          }, _callee34, this);
+        }));
+
+        function getPrizeDistributionFactoryContract() {
+          return _getPrizeDistributionFactoryContract.apply(this, arguments);
+        }
+
+        return getPrizeDistributionFactoryContract;
+      }();
+
+      _proto.getPrizeTierHistoryContract = /*#__PURE__*/function () {
+        var _getPrizeTierHistoryContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee36() {
+          var _this7 = this;
+
+          var getAddress;
+          return runtime_1.wrap(function _callee36$(_context36) {
+            while (1) {
+              switch (_context36.prev = _context36.next) {
+                case 0:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref6 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee35() {
+                      var prizeDistributionFactoryContract, result;
+                      return runtime_1.wrap(function _callee35$(_context35) {
+                        while (1) {
+                          switch (_context35.prev = _context35.next) {
+                            case 0:
+                              _context35.next = 2;
+                              return _this7.getPrizeDistributionFactoryContract();
+
+                            case 2:
+                              prizeDistributionFactoryContract = _context35.sent;
+                              _context35.next = 5;
+                              return prizeDistributionFactoryContract.functions.prizeTierHistory();
+
+                            case 5:
+                              result = _context35.sent;
+                              return _context35.abrupt("return", result[0]);
+
+                            case 7:
+                            case "end":
+                              return _context35.stop();
+                          }
+                        }
+                      }, _callee35);
+                    }));
+
+                    return function getAddress() {
+                      return _ref6.apply(this, arguments);
+                    };
+                  }();
+
+                  return _context36.abrupt("return", this.getAndSetEthersContract('prizeTierHistory', ContractType.PrizeTierHistory, getAddress));
+
+                case 2:
+                case "end":
+                  return _context36.stop();
+              }
+            }
+          }, _callee36, this);
+        }));
+
+        function getPrizeTierHistoryContract() {
+          return _getPrizeTierHistoryContract.apply(this, arguments);
+        }
+
+        return getPrizeTierHistoryContract;
+      }()
+      /*
+       * Fetches the address of the set DrawCalculator on the PrizeDistributor and checks if it is a DrawCalculatorTimelock
+       * @returns an ethers Contract for the DrawCalculator related to this PrizeDistributor
+       */
+      ;
+
+      _proto.getDrawCalculatorTimelockContract =
+      /*#__PURE__*/
+      function () {
+        var _getDrawCalculatorTimelockContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee38() {
+          var _this8 = this;
+
+          var getAddress, contractAddress, _getMetadataAndContra3, contractMetadata, contract;
+
+          return runtime_1.wrap(function _callee38$(_context38) {
+            while (1) {
+              switch (_context38.prev = _context38.next) {
+                case 0:
+                  if (!this.drawCalculatorContract) {
+                    _context38.next = 2;
+                    break;
+                  }
+
+                  return _context38.abrupt("return", this.drawCalculatorContract);
+
+                case 2:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref7 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee37() {
+                      var result, address, contractMetadata;
+                      return runtime_1.wrap(function _callee37$(_context37) {
+                        while (1) {
+                          switch (_context37.prev = _context37.next) {
+                            case 0:
+                              _context37.next = 2;
+                              return _this8.prizeDistributorContract.functions.getDrawCalculator();
+
+                            case 2:
+                              result = _context37.sent;
+                              address = result[0];
+                              contractMetadata = _this8.contractMetadataList.find(function (contractMetadata) {
+                                return contractMetadata.chainId === _this8.chainId && contractMetadata.address === address;
+                              });
+
+                              if (!((contractMetadata == null ? void 0 : contractMetadata.type) === ContractType.DrawCalculatorTimelock)) {
+                                _context37.next = 9;
+                                break;
+                              }
+
+                              return _context37.abrupt("return", address);
+
+                            case 9:
+                              return _context37.abrupt("return", undefined);
+
+                            case 10:
+                            case "end":
+                              return _context37.stop();
+                          }
+                        }
+                      }, _callee37);
+                    }));
+
+                    return function getAddress() {
+                      return _ref7.apply(this, arguments);
+                    };
+                  }();
+
+                  _context38.next = 5;
+                  return getAddress();
+
+                case 5:
+                  contractAddress = _context38.sent;
+
+                  if (contractAddress) {
+                    _context38.next = 8;
+                    break;
+                  }
+
+                  return _context38.abrupt("return", null);
+
+                case 8:
+                  _getMetadataAndContra3 = getMetadataAndContract(this.chainId, this.signerOrProvider, ContractType.DrawCalculatorTimelock, this.contractMetadataList, contractAddress), contractMetadata = _getMetadataAndContra3.contractMetadata, contract = _getMetadataAndContra3.contract;
+                  this.drawCalculatorTimelockMetadata = contractMetadata;
+                  this.drawCalculatorContract = contract;
+                  return _context38.abrupt("return", contract);
+
+                case 12:
+                case "end":
+                  return _context38.stop();
+              }
+            }
+          }, _callee38, this);
+        }));
+
+        function getDrawCalculatorTimelockContract() {
+          return _getDrawCalculatorTimelockContract.apply(this, arguments);
+        }
+
+        return getDrawCalculatorTimelockContract;
+      }() //////////////////////////// Methods ////////////////////////////
+
+      /**
+       * Returns the users address of the provided Signer.
+       * PrizeDistributor must be initialized with a Signer.
+       * @param errorPrefix the class and function name of where the error occurred
+       * @returns the address of the user
+       */
+      ;
+
+      _proto.getUsersAddress =
+      /*#__PURE__*/
+      function () {
+        var _getUsersAddress = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee39(errorPrefix) {
+          return runtime_1.wrap(function _callee39$(_context39) {
+            while (1) {
+              switch (_context39.prev = _context39.next) {
+                case 0:
+                  if (errorPrefix === void 0) {
+                    errorPrefix = 'PrizeDistributors [getUsersAddress] |';
+                  }
+
+                  _context39.next = 3;
+                  return this.validateIsSigner(errorPrefix);
+
+                case 3:
+                  _context39.next = 5;
+                  return this.signerOrProvider.getAddress();
+
+                case 5:
+                  return _context39.abrupt("return", _context39.sent);
+
+                case 6:
+                case "end":
+                  return _context39.stop();
+              }
+            }
+          }, _callee39, this);
+        }));
+
+        function getUsersAddress(_x28) {
+          return _getUsersAddress.apply(this, arguments);
+        }
+
+        return getUsersAddress;
+      }() //////////////////////////// Validation methods ////////////////////////////
+
+      /**
+       * Validates that a Signer is on the network the PrizeDistributor is deployed on.
+       * @param errorPrefix the class and function name of where the error occurred
+       */
+      ;
+
+      _proto.validateSignerNetwork =
+      /*#__PURE__*/
+      function () {
+        var _validateSignerNetwork2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee40(errorPrefix) {
+          return runtime_1.wrap(function _callee40$(_context40) {
+            while (1) {
+              switch (_context40.prev = _context40.next) {
+                case 0:
+                  validateSignerNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 1:
+                case "end":
+                  return _context40.stop();
+              }
+            }
+          }, _callee40, this);
+        }));
+
+        function validateSignerNetwork$1(_x29) {
+          return _validateSignerNetwork2.apply(this, arguments);
+        }
+
+        return validateSignerNetwork$1;
+      }()
+      /**
+       * Validates that the data provided for providerOrSigner is a Signer.
+       * @param errorPrefix the class and function name of where the error occurred
+       */
+      ;
+
+      _proto.validateIsSigner =
+      /*#__PURE__*/
+      function () {
+        var _validateIsSigner2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee41(errorPrefix) {
+          return runtime_1.wrap(function _callee41$(_context41) {
+            while (1) {
+              switch (_context41.prev = _context41.next) {
+                case 0:
+                  validateIsSigner(errorPrefix, this.signerOrProvider);
+
+                case 1:
+                case "end":
+                  return _context41.stop();
+              }
+            }
+          }, _callee41, this);
+        }));
+
+        function validateIsSigner$1(_x30) {
+          return _validateIsSigner2.apply(this, arguments);
+        }
+
+        return validateIsSigner$1;
+      }();
+
+      return PrizeDistributor;
+    }();
+    /**
+     * Utility function to create several PrizeDistributors from a contract list.
+     * @param contractList a list of all of the relevant contract metadata for all of the PrizeDistributors to create
+     * @param signersOrProviders signers or providers for all of the networks the PrizeDistributors are deployed on keyed by the chain id
+     * @returns a list of PrizeDistributors
+     */
+
+    function initializePrizeDistributors(contractList, signersOrProviders) {
+      var prizeDistributorContracts = contractList.contracts.filter(function (contract) {
+        return contract.type === ContractType.PrizeDistributor;
+      });
+      return prizeDistributorContracts.map(function (prizeDistributorContract) {
+        return new PrizeDistributor(prizeDistributorContract, signersOrProviders[prizeDistributorContract.chainId], contractList.contracts);
+      });
+    }
+
+    /**
+     * A Prize Pool.
+     * Provides read only functions for the contracts that make up the deployment of this Prize Pool.
+     */
+
+    var PrizePool = /*#__PURE__*/function () {
+      /**
+       * Create an instance of a PrizePool by providing the metadata for the YieldSourcePrizePool contract, an ethers Provider or Signer for the network the Prize Pool is deployed on and a list of contract metadata for the other contracts that make up the Prize Pool.
+       * @constructor
+       * @param prizePoolMetadata the metadata for the YieldSourcePrizePool contract in the Prize Pool
+       * @param signerOrProvider a Provider or Signer for the network the Prize Pool deployment is on
+       * @param contractMetadataList an array of metadata for the Prize Pool
+       */
+      function PrizePool(prizePoolMetadata, signerOrProvider, contractMetadataList) {
+        // Get contract metadata & ethers contracts
+        var prizePoolContract = new Contract(prizePoolMetadata.address, prizePoolMetadata.abi, signerOrProvider); // Set data
+
+        this.contractMetadataList = contractMetadataList;
+        this.signerOrProvider = signerOrProvider;
+        this.chainId = prizePoolMetadata.chainId;
+        this.address = prizePoolMetadata.address; // Set metadata
+
+        this.prizePoolMetadata = prizePoolMetadata;
+        this.ticketMetadata = undefined;
+        this.tokenMetadata = undefined; // Set ethers contracts
+
+        this.prizePoolContract = prizePoolContract;
+        this.ticketContract = undefined;
+        this.tokenContract = undefined;
+      }
+      /**
+       * Returns a unique id string for this Prize Pool.
+       * @returns a unique id for the Prize Pool
+       */
+
+
+      var _proto = PrizePool.prototype;
+
+      _proto.id = function id() {
+        return this.prizePoolMetadata.address + "-" + this.prizePoolMetadata.chainId;
+      } //////////////////////////// Ethers read functions ////////////////////////////
+
+      /**
+       * Fetches a users balances for the Prize Pool underlying Token and Ticket.
+       * @param usersAddress the users address to fetch balances for
+       * @returns the users balances for the underlying deposit token and the ticket token
+       */
+      ;
+
+      _proto.getUsersPrizePoolBalances =
+      /*#__PURE__*/
+      function () {
+        var _getUsersPrizePoolBalances = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(usersAddress) {
+          var errorPrefix, tokenContract, ticketContract, tokenBalancePromise, ticketBalancePromise, _yield$Promise$all, token, ticket;
+
+          return runtime_1.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersPrizePoolBalances] | ';
+                  _context.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context.next = 7;
+                  return this.getTokenContract();
+
+                case 7:
+                  tokenContract = _context.sent;
+                  _context.next = 10;
+                  return this.getTicketContract();
+
+                case 10:
+                  ticketContract = _context.sent;
+                  tokenBalancePromise = getUsersERC20Balance(usersAddress, tokenContract);
+                  ticketBalancePromise = getUsersERC20Balance(usersAddress, ticketContract);
+                  _context.next = 15;
+                  return Promise.all([tokenBalancePromise, ticketBalancePromise]);
+
+                case 15:
+                  _yield$Promise$all = _context.sent;
+                  token = _yield$Promise$all[0];
+                  ticket = _yield$Promise$all[1];
+                  return _context.abrupt("return", {
+                    token: token,
+                    ticket: ticket
+                  });
+
+                case 19:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        function getUsersPrizePoolBalances(_x) {
+          return _getUsersPrizePoolBalances.apply(this, arguments);
+        }
+
+        return getUsersPrizePoolBalances;
+      }()
+      /**
+       * Fetches a users balance for the Prize Pools Ticket.
+       * @param usersAddress the address to fetch the balance for
+       * @returns the users ticket balance
+       */
+      ;
+
+      _proto.getUsersTicketBalance =
+      /*#__PURE__*/
+      function () {
+        var _getUsersTicketBalance = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(usersAddress) {
+          var errorPrefix, ticketContract;
+          return runtime_1.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersTicketBalance] | ';
+                  _context2.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context2.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context2.next = 7;
+                  return this.getTicketContract();
+
+                case 7:
+                  ticketContract = _context2.sent;
+                  return _context2.abrupt("return", getUsersERC20Balance(usersAddress, ticketContract));
+
+                case 9:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        function getUsersTicketBalance(_x2) {
+          return _getUsersTicketBalance.apply(this, arguments);
+        }
+
+        return getUsersTicketBalance;
+      }()
+      /**
+       * Fetches a users Ticket TWAB at a specific unix timestamp.
+       * @param usersAddress the address to fetch the ticket TWAB for
+       * @param startTimestamp the start timestamp to fetch in seconds
+       * @param endTimestamp the end timestamp to fetch in seconds
+       * @returns the users TWAB between the requested times
+       */
+      ;
+
+      _proto.getUsersAverageBalanceBetween =
+      /*#__PURE__*/
+      function () {
+        var _getUsersAverageBalanceBetween = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3(usersAddress, startTimestamp, endTimestamp) {
+          var errorPrefix, ticketContract, result, twab;
+          return runtime_1.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersAverageBalanceBetween] | ';
+                  _context3.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context3.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context3.next = 7;
+                  return this.getTicketContract();
+
+                case 7:
+                  ticketContract = _context3.sent;
+                  _context3.next = 10;
+                  return ticketContract.functions.getAverageBalanceBetween(usersAddress, startTimestamp, endTimestamp);
+
+                case 10:
+                  result = _context3.sent;
+                  twab = result[0];
+                  return _context3.abrupt("return", twab);
+
+                case 13:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function getUsersAverageBalanceBetween(_x3, _x4, _x5) {
+          return _getUsersAverageBalanceBetween.apply(this, arguments);
+        }
+
+        return getUsersAverageBalanceBetween;
+      }()
+      /**
+       * Fetches a users Ticket TWAB at a specific unix timestamp.
+       * @param usersAddress the address to fetch the ticket TWAB for
+       * @param unixTimestamp the unix timestamp to fetch in seconds
+       * @returns the users TWAB at the requested time
+       */
+      ;
+
+      _proto.getUsersTicketTwabAt =
+      /*#__PURE__*/
+      function () {
+        var _getUsersTicketTwabAt = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4(usersAddress, unixTimestamp) {
+          var errorPrefix, ticketContract, result, twab;
+          return runtime_1.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersTicketBalance] | ';
+                  _context4.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context4.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context4.next = 7;
+                  return this.getTicketContract();
+
+                case 7:
+                  ticketContract = _context4.sent;
+                  _context4.next = 10;
+                  return ticketContract.functions.getBalanceAt(usersAddress, unixTimestamp);
+
+                case 10:
+                  result = _context4.sent;
+                  twab = result[0];
+                  return _context4.abrupt("return", twab);
+
+                case 13:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, this);
+        }));
+
+        function getUsersTicketTwabAt(_x6, _x7) {
+          return _getUsersTicketTwabAt.apply(this, arguments);
+        }
+
+        return getUsersTicketTwabAt;
+      }()
+      /**
+       * Fetches a users balance for the Prize Pools underlying Token.
+       * @param usersAddress the address to fetch the balance for
+       * @returns the users token balance
+       */
+      ;
+
+      _proto.getUsersTokenBalance =
+      /*#__PURE__*/
+      function () {
+        var _getUsersTokenBalance = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5(usersAddress) {
+          var errorPrefix, tokenContract;
+          return runtime_1.wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersTokenBalance] | ';
+                  _context5.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context5.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context5.next = 7;
+                  return this.getTokenContract();
+
+                case 7:
+                  tokenContract = _context5.sent;
+                  return _context5.abrupt("return", getUsersERC20Balance(usersAddress, tokenContract));
+
+                case 9:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5, this);
+        }));
+
+        function getUsersTokenBalance(_x8) {
+          return _getUsersTokenBalance.apply(this, arguments);
+        }
+
+        return getUsersTokenBalance;
+      }()
+      /**
+       * Fetches a users deposit allowance for the Prize Pool.
+       * @param usersAddress the address to fetch the deposit allowance for
+       * @returns the amount the user has approved for deposits
+       */
+      ;
+
+      _proto.getUsersDepositAllowance =
+      /*#__PURE__*/
+      function () {
+        var _getUsersDepositAllowance = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee6(usersAddress) {
+          var errorPrefix, tokenContract, prizePoolAddress, result, allowanceUnformatted;
+          return runtime_1.wrap(function _callee6$(_context6) {
+            while (1) {
+              switch (_context6.prev = _context6.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersDepositAllowance] | ';
+                  _context6.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context6.next = 5;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 5:
+                  _context6.next = 7;
+                  return this.getTokenContract();
+
+                case 7:
+                  tokenContract = _context6.sent;
+                  prizePoolAddress = this.prizePoolMetadata.address;
+                  _context6.next = 11;
+                  return tokenContract.functions.allowance(usersAddress, prizePoolAddress);
+
+                case 11:
+                  result = _context6.sent;
+                  allowanceUnformatted = result[0];
+                  return _context6.abrupt("return", {
+                    allowanceUnformatted: allowanceUnformatted,
+                    isApproved: !allowanceUnformatted.isZero()
+                  });
+
+                case 14:
+                case "end":
+                  return _context6.stop();
+              }
+            }
+          }, _callee6, this);
+        }));
+
+        function getUsersDepositAllowance(_x9) {
+          return _getUsersDepositAllowance.apply(this, arguments);
+        }
+
+        return getUsersDepositAllowance;
+      }()
+      /**
+       * Fetches the address a user has delegated to.
+       * @param usersAddress the address to fetch the delegate for
+       * @returns the address a user has delegated to
+       */
+      ;
+
+      _proto.getUsersTicketDelegate =
+      /*#__PURE__*/
+      function () {
+        var _getUsersTicketDelegate = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee7(usersAddress) {
+          var errorPrefix, ticketContract, result;
+          return runtime_1.wrap(function _callee7$(_context7) {
+            while (1) {
+              switch (_context7.prev = _context7.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getUsersTicketDelegate] | ';
+                  _context7.next = 3;
+                  return validateAddress(errorPrefix, usersAddress);
+
+                case 3:
+                  _context7.next = 5;
+                  return this.getTicketContract();
+
+                case 5:
+                  ticketContract = _context7.sent;
+                  _context7.next = 8;
+                  return ticketContract.functions.delegateOf(usersAddress);
+
+                case 8:
+                  result = _context7.sent;
+                  return _context7.abrupt("return", result[0]);
+
+                case 10:
+                case "end":
+                  return _context7.stop();
+              }
+            }
+          }, _callee7, this);
+        }));
+
+        function getUsersTicketDelegate(_x10) {
+          return _getUsersTicketDelegate.apply(this, arguments);
+        }
+
+        return getUsersTicketDelegate;
+      }()
+      /**
+       * Fetches decimals, name and symbol for the underling Token.
+       * @returns decimals, name and symbol for the underling token
+       */
+      ;
+
+      _proto.getTokenData =
+      /*#__PURE__*/
+      function () {
+        var _getTokenData2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee8() {
+          var errorPrefix, tokenContract;
+          return runtime_1.wrap(function _callee8$(_context8) {
+            while (1) {
+              switch (_context8.prev = _context8.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getTokenData] | ';
+                  _context8.next = 3;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 3:
+                  _context8.next = 5;
+                  return this.getTokenContract();
+
+                case 5:
+                  tokenContract = _context8.sent;
+                  return _context8.abrupt("return", getTokenData(tokenContract));
+
+                case 7:
+                case "end":
+                  return _context8.stop();
+              }
+            }
+          }, _callee8, this);
+        }));
+
+        function getTokenData$1() {
+          return _getTokenData2.apply(this, arguments);
+        }
+
+        return getTokenData$1;
+      }()
+      /**
+       * Fetches decimals, name and symbol for the Ticket.
+       * @returns decimals, name and symbol for the ticket
+       */
+      ;
+
+      _proto.getTicketData =
+      /*#__PURE__*/
+      function () {
+        var _getTicketData = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee9() {
+          var errorPrefix, ticketContract;
+          return runtime_1.wrap(function _callee9$(_context9) {
+            while (1) {
+              switch (_context9.prev = _context9.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getTicketData] | ';
+                  _context9.next = 3;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 3:
+                  _context9.next = 5;
+                  return this.getTicketContract();
+
+                case 5:
+                  ticketContract = _context9.sent;
+                  return _context9.abrupt("return", getTokenData(ticketContract));
+
+                case 7:
+                case "end":
+                  return _context9.stop();
+              }
+            }
+          }, _callee9, this);
+        }));
+
+        function getTicketData() {
+          return _getTicketData.apply(this, arguments);
+        }
+
+        return getTicketData;
+      }()
+      /**
+       * Fetches total supply for the Ticket.
+       * @returns the total supply of the ticket
+       */
+      ;
+
+      _proto.getTicketTotalSupply =
+      /*#__PURE__*/
+      function () {
+        var _getTicketTotalSupply = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee10() {
+          var errorPrefix, ticketContract, result, totalSupply;
+          return runtime_1.wrap(function _callee10$(_context10) {
+            while (1) {
+              switch (_context10.prev = _context10.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getTicketData] | ';
+                  _context10.next = 3;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 3:
+                  _context10.next = 5;
+                  return this.getTicketContract();
+
+                case 5:
+                  ticketContract = _context10.sent;
+                  _context10.next = 8;
+                  return ticketContract.functions.totalSupply();
+
+                case 8:
+                  result = _context10.sent;
+                  totalSupply = result[0];
+                  return _context10.abrupt("return", totalSupply);
+
+                case 11:
+                case "end":
+                  return _context10.stop();
+              }
+            }
+          }, _callee10, this);
+        }));
+
+        function getTicketTotalSupply() {
+          return _getTicketTotalSupply.apply(this, arguments);
+        }
+
+        return getTicketTotalSupply;
+      }()
+      /**
+       * Fetches total supply for the Ticket accounting for the TWAB.
+       * @param unixTimestamp the unix timestamp to fetch in seconds
+       * @returns the ticket total supply TWAB at the requested time
+       */
+      ;
+
+      _proto.getTicketTwabTotalSupplyAt =
+      /*#__PURE__*/
+      function () {
+        var _getTicketTwabTotalSupplyAt = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee11(unixTimestamp) {
+          var errorPrefix, ticketContract, result, totalSupply;
+          return runtime_1.wrap(function _callee11$(_context11) {
+            while (1) {
+              switch (_context11.prev = _context11.next) {
+                case 0:
+                  errorPrefix = 'PrizePool [getTicketTwabTotalSupplyAt] | ';
+                  _context11.next = 3;
+                  return validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId);
+
+                case 3:
+                  _context11.next = 5;
+                  return this.getTicketContract();
+
+                case 5:
+                  ticketContract = _context11.sent;
+                  _context11.next = 8;
+                  return ticketContract.functions.getTotalSupplyAt(unixTimestamp);
+
+                case 8:
+                  result = _context11.sent;
+                  totalSupply = result[0];
+                  return _context11.abrupt("return", totalSupply);
+
+                case 11:
+                case "end":
+                  return _context11.stop();
+              }
+            }
+          }, _callee11, this);
+        }));
+
+        function getTicketTwabTotalSupplyAt(_x11) {
+          return _getTicketTwabTotalSupplyAt.apply(this, arguments);
+        }
+
+        return getTicketTwabTotalSupplyAt;
+      }() // NOTE: Gas estimates are commented out as they are quite unreliable.
+
+      /**
+       * Fetches a gas estimate for depositing from the Prize Pool.
+       * @param usersAddress string
+       * @param amount BigNumber
+       * @returns BigNumber
+       */
+      // async getDepositGasEstimate(usersAddress: string, amount: BigNumber): Promise<BigNumber> {
+      //   const errorPrefix = 'PrizePool [getUsersDepositAllowance] | '
+      //   await validateAddress(errorPrefix, usersAddress)
+      //   await validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId)
+      //   return await this.prizePoolContract.estimateGas.depositTo(usersAddress, amount)
+      // }
+
+      /**
+       * Fetches a gas estimate for withdrawing from the Prize Pool.
+       * @param usersAddress string
+       * @param amount BigNumber
+       * @returns BigNumber
+       */
+      // async getWithdrawGasEstimate(usersAddress: string, amount: BigNumber): Promise<BigNumber> {
+      //   const errorPrefix = 'PrizePool [getWithdrawGasEstimate] | '
+      //   await validateAddress(errorPrefix, usersAddress)
+      //   await validateSignerOrProviderNetwork(errorPrefix, this.signerOrProvider, this.chainId)
+      //   return await this.prizePoolContract.estimateGas.withdrawFrom(usersAddress, amount)
+      // }
+
+      /**
+       * Fetches a gas estimate for approving deposits into the Prize Pool.
+       * @param usersAddress string
+       * @returns BigNumber
+       */
+      // async getApprovalGasEstimate(usersAddress: string): Promise<BigNumber> {
+      //   const errorPrefix = 'PrizePool [getApprovalGasEstimate] | '
+      //   await validateAddress(errorPrefix, usersAddress)
+      //   const tokenContract = await this.getTokenContract()
+      //   const prizePoolAddress = this.prizePoolMetadata.address
+      //   return await tokenContract.estimateGas.approve(prizePoolAddress, MaxUint256)
+      // }
+      //////////////////////////// Ethers Contracts Initializers ////////////////////////////
+
+      /**
+       * Fetches the addresses to build an instance of an ethers Contract for the Ticket
+       * @returns an ethers contract for the ticket
+       */
+      ;
+
+      _proto.getTicketContract =
+      /*#__PURE__*/
+      function () {
+        var _getTicketContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee13() {
+          var _this = this;
+
+          var getAddress, ticketAddress, _getMetadataAndContra, ticketMetadata, ticketContract;
+
+          return runtime_1.wrap(function _callee13$(_context13) {
+            while (1) {
+              switch (_context13.prev = _context13.next) {
+                case 0:
+                  if (!(this.ticketContract !== undefined)) {
+                    _context13.next = 2;
+                    break;
+                  }
+
+                  return _context13.abrupt("return", this.ticketContract);
+
+                case 2:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee12() {
+                      var result;
+                      return runtime_1.wrap(function _callee12$(_context12) {
+                        while (1) {
+                          switch (_context12.prev = _context12.next) {
+                            case 0:
+                              _context12.next = 2;
+                              return _this.prizePoolContract.functions.getTicket();
+
+                            case 2:
+                              result = _context12.sent;
+                              return _context12.abrupt("return", result[0]);
+
+                            case 4:
+                            case "end":
+                              return _context12.stop();
+                          }
+                        }
+                      }, _callee12);
+                    }));
+
+                    return function getAddress() {
+                      return _ref.apply(this, arguments);
+                    };
+                  }();
+
+                  _context13.next = 5;
+                  return getAddress();
+
+                case 5:
+                  ticketAddress = _context13.sent;
+                  _getMetadataAndContra = getMetadataAndContract(this.chainId, this.signerOrProvider, ContractType.Ticket, this.contractMetadataList, ticketAddress), ticketMetadata = _getMetadataAndContra.contractMetadata, ticketContract = _getMetadataAndContra.contract;
+                  this.ticketMetadata = ticketMetadata;
+                  this.ticketContract = ticketContract;
+                  return _context13.abrupt("return", ticketContract);
+
+                case 10:
+                case "end":
+                  return _context13.stop();
+              }
+            }
+          }, _callee13, this);
+        }));
+
+        function getTicketContract() {
+          return _getTicketContract.apply(this, arguments);
+        }
+
+        return getTicketContract;
+      }()
+      /**
+       * Fetches the addresses to build an instance of an ethers Contract for the underlying Token
+       * @returns an ethers contract for the underlying token
+       */
+      ;
+
+      _proto.getTokenContract =
+      /*#__PURE__*/
+      function () {
+        var _getTokenContract = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee15() {
+          var _this2 = this;
+
+          var getAddress, tokenAddress, tokenMetadata, tokenContract;
+          return runtime_1.wrap(function _callee15$(_context15) {
+            while (1) {
+              switch (_context15.prev = _context15.next) {
+                case 0:
+                  if (!(this.tokenContract !== undefined)) {
+                    _context15.next = 2;
+                    break;
+                  }
+
+                  return _context15.abrupt("return", this.tokenContract);
+
+                case 2:
+                  getAddress = /*#__PURE__*/function () {
+                    var _ref2 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee14() {
+                      var result;
+                      return runtime_1.wrap(function _callee14$(_context14) {
+                        while (1) {
+                          switch (_context14.prev = _context14.next) {
+                            case 0:
+                              _context14.next = 2;
+                              return _this2.prizePoolContract.functions.getToken();
+
+                            case 2:
+                              result = _context14.sent;
+                              return _context14.abrupt("return", result[0]);
+
+                            case 4:
+                            case "end":
+                              return _context14.stop();
+                          }
+                        }
+                      }, _callee14);
+                    }));
+
+                    return function getAddress() {
+                      return _ref2.apply(this, arguments);
+                    };
+                  }();
+
+                  _context15.next = 5;
+                  return getAddress();
+
+                case 5:
+                  tokenAddress = _context15.sent;
+                  tokenMetadata = createContractMetadata(this.chainId, tokenAddress, ContractType.Token, ERC20Abi);
+                  tokenContract = new Contract(tokenMetadata.address, tokenMetadata.abi, this.signerOrProvider);
+                  this.tokenMetadata = tokenMetadata;
+                  this.tokenContract = tokenContract;
+                  return _context15.abrupt("return", tokenContract);
+
+                case 11:
+                case "end":
+                  return _context15.stop();
+              }
+            }
+          }, _callee15, this);
+        }));
+
+        function getTokenContract() {
+          return _getTokenContract.apply(this, arguments);
+        }
+
+        return getTokenContract;
+      }();
+
+      return PrizePool;
+    }();
+    /**
+     * A utility function to create several PrizePools from a contract list.
+     * @param contractList a list of all of the relevant contract metadata for all of the Prize Pools
+     * @param providers providers for all of the networks in the list of Prize Pools
+     * @returns a list of initialized PrizePools
+     */
+
+    function initializePrizePools(contractList, providers) {
+      var prizePoolContractLists = sortContractsByContractTypeAndChildren(contractList.contracts, ContractType.YieldSourcePrizePool);
+      var prizePools = [];
+      prizePoolContractLists.forEach(function (contracts) {
+        var prizePoolMetadata = contracts.find(function (contract) {
+          return contract.type === ContractType.YieldSourcePrizePool;
+        });
+        var provider = providers[prizePoolMetadata.chainId];
+
+        try {
+          prizePools.push(new PrizePool(prizePoolMetadata, provider, contractList.contracts));
+        } catch (e) {
+          var error = e;
+          console.error(error.message);
+        }
+      });
+      return prizePools;
+    }
+
+    /**
+     * A Prize Pool Network.
+     * The network consists of one or more Prize Pools and Prize Distributors. PrizePoolNetwork provides read only functions for reading data from the contracts that make up the network. Initializes several PrizePools and PrizeDistributors on creation.
+     */
+
+    var PrizePoolNetwork = /*#__PURE__*/function () {
+      /**
+       * Create an instance of a PrizePoolNetwork by providing ethers Providers for each relevant network and a Contract List.
+       * @constructor
+       * @param providers ethers Providers for each network in the Prize Pool Network, keyed by their chain id.
+       * @param prizePoolNetworkContractList a Contract List containing all of the relevant metadata for the Prize Pool Network.
+       */
+      function PrizePoolNetwork(providers, prizePoolNetworkContractList) {
+        this.providers = providers;
+        this.contractList = prizePoolNetworkContractList;
+        this.prizePools = initializePrizePools(prizePoolNetworkContractList, providers);
+        this.prizeDistributors = initializePrizeDistributors(prizePoolNetworkContractList, providers); // DrawBeacon
+
+        var drawBeaconContractMetadata = prizePoolNetworkContractList.contracts.find(function (c) {
+          return c.type === ContractType.DrawBeacon;
+        });
+        var beaconChainId = drawBeaconContractMetadata.chainId;
+        var beaconProvider = providers[beaconChainId];
+        var drawBeaconContract = new Contract(drawBeaconContractMetadata.address, drawBeaconContractMetadata.abi, beaconProvider); // DrawBuffer
+
+        var drawBufferContractMetadata = prizePoolNetworkContractList.contracts.find(function (c) {
+          return c.type === ContractType.DrawBuffer && c.chainId === beaconChainId;
+        });
+        var drawBufferContract = new Contract(drawBufferContractMetadata.address, drawBufferContractMetadata.abi, beaconProvider); // Set values
+
+        this.beaconChainId = beaconChainId;
+        this.beaconAddress = drawBeaconContractMetadata.address;
+        this.drawBeaconMetadata = drawBeaconContractMetadata;
+        this.drawBeaconContract = drawBeaconContract;
+        this.drawBufferMetadata = drawBufferContractMetadata;
+        this.drawBufferContract = drawBufferContract;
+      }
+      /**
+       * Returns a unique id string for this PrizePoolNetwork.
+       * @returns a unique id for the PrizePoolNetwork
+       */
+
+
+      var _proto = PrizePoolNetwork.prototype;
+
+      _proto.id = function id() {
+        return "prize-pool-network-" + this.beaconChainId + "-" + this.beaconAddress;
+      } //////////////////////////// Ethers read functions ////////////////////////////
+
+      /**
+       * Fetch the users balances for all relevant tokens for all Prize Pools in the Prize Pool Network.
+       * @param usersAddress address to get balances for.
+       * @returns an array of objects containing the chain id & Prize Pool address and a balances object with the users balances for relevant tokens to the prize pool
+       */
+      ;
+
+      _proto.getUsersPrizePoolBalances =
+      /*#__PURE__*/
+      function () {
+        var _getUsersPrizePoolBalances = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(usersAddress) {
+          var balancesPromises;
+          return runtime_1.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  balancesPromises = this.prizePools.map( /*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(prizePool) {
+                      var balances;
+                      return runtime_1.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              _context.next = 2;
+                              return prizePool.getUsersPrizePoolBalances(usersAddress);
+
+                            case 2:
+                              balances = _context.sent;
+                              return _context.abrupt("return", {
+                                chainId: prizePool.chainId,
+                                address: prizePool.address,
+                                balances: balances
+                              });
+
+                            case 4:
+                            case "end":
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee);
+                    }));
+
+                    return function (_x2) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }());
+                  return _context2.abrupt("return", Promise.all(balancesPromises));
+
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        function getUsersPrizePoolBalances(_x) {
+          return _getUsersPrizePoolBalances.apply(this, arguments);
+        }
+
+        return getUsersPrizePoolBalances;
+      }()
+      /**
+       * Fetch the current Draw Beacon period data from the beacon Prize Pool.
+       * @returns the current draw beacon period.
+       */
+      ;
+
+      _proto.getDrawBeaconPeriod =
+      /*#__PURE__*/
+      function () {
+        var _getDrawBeaconPeriod = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+          var _yield$Promise$all, periodSecondsResult, periodStartedAtResult, nextDrawIdResult, startedAtSeconds, periodSeconds, endsAtSeconds, drawId;
+
+          return runtime_1.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return Promise.all([this.drawBeaconContract.functions.getBeaconPeriodSeconds(), this.drawBeaconContract.functions.getBeaconPeriodStartedAt(), this.drawBeaconContract.functions.getNextDrawId()]);
+
+                case 2:
+                  _yield$Promise$all = _context3.sent;
+                  periodSecondsResult = _yield$Promise$all[0];
+                  periodStartedAtResult = _yield$Promise$all[1];
+                  nextDrawIdResult = _yield$Promise$all[2];
+                  startedAtSeconds = periodStartedAtResult[0];
+                  periodSeconds = periodSecondsResult[0];
+                  endsAtSeconds = startedAtSeconds.add(periodSeconds);
+                  drawId = nextDrawIdResult[0];
+                  return _context3.abrupt("return", {
+                    startedAtSeconds: startedAtSeconds,
+                    periodSeconds: periodSeconds,
+                    endsAtSeconds: endsAtSeconds,
+                    drawId: drawId
+                  });
+
+                case 11:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function getDrawBeaconPeriod() {
+          return _getDrawBeaconPeriod.apply(this, arguments);
+        }
+
+        return getDrawBeaconPeriod;
+      }()
+      /**
+       * Fetch the range of available draw ids in the Draw Buffer for the beacon Prize Pool.
+       * @returns an array of draw ids
+       */
+      ;
+
+      _proto.getBeaconChainDrawIds =
+      /*#__PURE__*/
+      function () {
+        var _getBeaconChainDrawIds = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
+          var _yield$Promise$allSet, oldestDrawResponse, newestDrawResponse, oldestId, newestId, drawIds, i;
+
+          return runtime_1.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.next = 2;
+                  return Promise.allSettled([this.drawBufferContract.functions.getOldestDraw(), this.drawBufferContract.functions.getNewestDraw()]);
+
+                case 2:
+                  _yield$Promise$allSet = _context4.sent;
+                  oldestDrawResponse = _yield$Promise$allSet[0];
+                  newestDrawResponse = _yield$Promise$allSet[1];
+
+                  if (!(newestDrawResponse.status === 'rejected' || oldestDrawResponse.status === 'rejected')) {
+                    _context4.next = 7;
+                    break;
+                  }
+
+                  return _context4.abrupt("return", []);
+
+                case 7:
+                  oldestId = oldestDrawResponse.value[0].drawId;
+                  newestId = newestDrawResponse.value[0].drawId;
+                  drawIds = [];
+
+                  for (i = oldestId; i <= newestId; i++) {
+                    drawIds.push(i);
+                  }
+
+                  return _context4.abrupt("return", drawIds);
+
+                case 12:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, this);
+        }));
+
+        function getBeaconChainDrawIds() {
+          return _getBeaconChainDrawIds.apply(this, arguments);
+        }
+
+        return getBeaconChainDrawIds;
+      }()
+      /**
+       * Fetch all of the available Draws in the Draw Buffer for the beacon Prize Pool.
+       * @returns an object of draws keyed by their draw id
+       */
+      ;
+
+      _proto.getBeaconChainDraws =
+      /*#__PURE__*/
+      function () {
+        var _getBeaconChainDraws = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5() {
+          var drawIds, draws, result;
+          return runtime_1.wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.next = 2;
+                  return this.getBeaconChainDrawIds();
+
+                case 2:
+                  drawIds = _context5.sent;
+                  draws = {};
+                  _context5.next = 6;
+                  return this.drawBufferContract.functions.getDraws(drawIds);
+
+                case 6:
+                  result = _context5.sent;
+                  result[0].forEach(function (draw) {
+                    draws[draw.drawId] = {
+                      drawId: draw.drawId,
+                      timestamp: draw.timestamp,
+                      winningRandomNumber: draw.winningRandomNumber,
+                      beaconPeriodStartedAt: draw.beaconPeriodStartedAt,
+                      beaconPeriodSeconds: draw.beaconPeriodSeconds
+                    };
+                  });
+                  return _context5.abrupt("return", draws);
+
+                case 9:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5, this);
+        }));
+
+        function getBeaconChainDraws() {
+          return _getBeaconChainDraws.apply(this, arguments);
+        }
+
+        return getBeaconChainDraws;
+      }()
+      /**
+       * Returns a PrizePool from the list of Prize Pools that was created on initialization by their primary key. The primary key of a Prize Pool is the chain id it is on and the address of the YieldSourcePrizePool contract.
+       * @param chainId the chain id the requested prize pool is on
+       * @param address the address of the YieldSourcePrizePool contract
+       * @returns
+       */
+      ;
+
+      _proto.getPrizePool = function getPrizePool(chainId, address) {
+        return this.prizePools.find(function (prizePool) {
+          return prizePool.chainId === chainId && prizePool.address === address;
+        });
+      }
+      /**
+       * Returns a PrizeDistributor from the list of Prize Distributors that was created on initialization by their primary key. The primary key of a Prize Disctributor is the chain id it is on and the address of the PrizeDistributor contract.
+       * @param chainId the chain id the requested prize distributor is on
+       * @param address the address of the PrizeDistributor contract
+       * @returns
+       */
+      ;
+
+      _proto.getPrizeDistributor = function getPrizeDistributor(chainId, address) {
+        return this.prizeDistributors.find(function (prizeDistributor) {
+          return prizeDistributor.chainId === chainId && prizeDistributor.address === address;
+        });
+      };
+
+      return PrizePoolNetwork;
+    }();
+
+    class PoolTogether {
+        static prizePoolNetwork() {
+            if (!PoolTogether._prizePoolNetwork)
+                PoolTogether._prizePoolNetwork = new PrizePoolNetwork(PoolTogether.providers, mainnet);
+            return PoolTogether._prizePoolNetwork;
+        }
+        // static async totalDeposited(address: string) {
+        //   const chainIdMap: Record<number, Chain> = {
+        //     1: 'eth',
+        //     10: 'op',
+        //     137: 'poly',
+        //     43114: 'avax'
+        //   };
+        //   let balance = BigNumber.from(0);
+        //   for(const deployment of mainnet.contracts) {
+        //     if(deployment.type === "Ticket") {
+        //       const chain = chainIdMap[deployment.chainId];
+        //       const chainBalance: BigNumber = await query(chain, deployment.address as Address, deployment.abi as any, "balanceOf", [address]);
+        //       balance = balance.add(chainBalance);
+        //     }
+        //   }
+        //   return balance;
+        // }
+        static async totalDeposited(address) {
+            const res = await PoolTogether.prizePoolNetwork().getUsersPrizePoolBalances(address);
+            let balance = BigNumber.from(0);
+            for (const chain of res) {
+                balance = balance.add(chain.balances.token);
             }
             return balance;
         }
     }
+    PoolTogether.providers = {
+        1: functions.providers.eth[0],
+        10: functions.providers.op[0],
+        137: functions.providers.poly[0],
+        43114: functions.providers.avax[0]
+    };
+    PoolTogether._prizePoolNetwork = null;
 
     class Poolygotchi$1 {
         /* Constructor */
@@ -83357,7 +92014,7 @@ var app = (function () {
     	safeJsonStringify: safeJsonStringify_1
     }, '__esModule', {value: true});
 
-    var localStorage$1 = createCommonjsModule$1(function (module) {
+    var localStorage$1 = createCommonjsModule$4(function (module) {
     (function () {
         let db;
         function LocalStorage() { }
@@ -83401,7 +92058,7 @@ var app = (function () {
 
     });
 
-    var types$2 = createCommonjsModule$1(function (module, exports) {
+    var types$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.IKeyValueStorage = void 0;
     class IKeyValueStorage {
@@ -83410,7 +92067,7 @@ var app = (function () {
 
     });
 
-    var utils$4 = createCommonjsModule$1(function (module, exports) {
+    var utils$4 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.parseEntry = void 0;
 
@@ -83424,7 +92081,7 @@ var app = (function () {
 
     var tslib_1$4 = /*@__PURE__*/getAugmentedNamespace(tslib_es6$4);
 
-    var shared = createCommonjsModule$1(function (module, exports) {
+    var shared = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$4.__exportStar(types$2, exports);
@@ -83432,7 +92089,7 @@ var app = (function () {
 
     });
 
-    var browser$2 = createCommonjsModule$1(function (module, exports) {
+    var browser$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.KeyValueStorage = void 0;
 
@@ -83968,7 +92625,7 @@ var app = (function () {
         __classPrivateFieldSet: __classPrivateFieldSet$2
     });
 
-    var delay_1 = createCommonjsModule$1(function (module, exports) {
+    var delay_1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.delay = void 0;
     function delay(timeout) {
@@ -83982,7 +92639,7 @@ var app = (function () {
 
     });
 
-    var misc = createCommonjsModule$1(function (module, exports) {
+    var misc = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ONE_THOUSAND = exports.ONE_HUNDRED = void 0;
     exports.ONE_HUNDRED = 100;
@@ -83990,7 +92647,7 @@ var app = (function () {
 
     });
 
-    var time$1 = createCommonjsModule$1(function (module, exports) {
+    var time$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ONE_YEAR = exports.FOUR_WEEKS = exports.THREE_WEEKS = exports.TWO_WEEKS = exports.ONE_WEEK = exports.THIRTY_DAYS = exports.SEVEN_DAYS = exports.FIVE_DAYS = exports.THREE_DAYS = exports.ONE_DAY = exports.TWENTY_FOUR_HOURS = exports.TWELVE_HOURS = exports.SIX_HOURS = exports.THREE_HOURS = exports.ONE_HOUR = exports.SIXTY_MINUTES = exports.THIRTY_MINUTES = exports.TEN_MINUTES = exports.FIVE_MINUTES = exports.ONE_MINUTE = exports.SIXTY_SECONDS = exports.THIRTY_SECONDS = exports.TEN_SECONDS = exports.FIVE_SECONDS = exports.ONE_SECOND = void 0;
     exports.ONE_SECOND = 1;
@@ -84023,7 +92680,7 @@ var app = (function () {
 
     var tslib_1$3 = /*@__PURE__*/getAugmentedNamespace(tslib_es6$2);
 
-    var constants$2 = createCommonjsModule$1(function (module, exports) {
+    var constants$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$3.__exportStar(misc, exports);
@@ -84031,7 +92688,7 @@ var app = (function () {
 
     });
 
-    var convert = createCommonjsModule$1(function (module, exports) {
+    var convert = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.fromMiliseconds = exports.toMiliseconds = void 0;
 
@@ -84046,7 +92703,7 @@ var app = (function () {
 
     });
 
-    var utils$3 = createCommonjsModule$1(function (module, exports) {
+    var utils$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$3.__exportStar(delay_1, exports);
@@ -84054,7 +92711,7 @@ var app = (function () {
 
     });
 
-    var watch$1 = createCommonjsModule$1(function (module, exports) {
+    var watch$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Watch = void 0;
     class Watch {
@@ -84093,7 +92750,7 @@ var app = (function () {
 
     });
 
-    var watch = createCommonjsModule$1(function (module, exports) {
+    var watch = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.IWatch = void 0;
     class IWatch {
@@ -84102,14 +92759,14 @@ var app = (function () {
 
     });
 
-    var types$1 = createCommonjsModule$1(function (module, exports) {
+    var types$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$3.__exportStar(watch, exports);
 
     });
 
-    var cjs$5 = createCommonjsModule$1(function (module, exports) {
+    var cjs$5 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$3.__exportStar(utils$3, exports);
@@ -84129,7 +92786,7 @@ var app = (function () {
 
     var events_1 = /*@__PURE__*/getAugmentedNamespace(esm);
 
-    var heartbeat$2 = createCommonjsModule$1(function (module, exports) {
+    var heartbeat$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.IHeartBeat = void 0;
 
@@ -84144,14 +92801,14 @@ var app = (function () {
 
     var tslib_1$2 = /*@__PURE__*/getAugmentedNamespace(tslib_es6$3);
 
-    var types = createCommonjsModule$1(function (module, exports) {
+    var types = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$2.__exportStar(heartbeat$2, exports);
 
     });
 
-    var heartbeat$1 = createCommonjsModule$1(function (module, exports) {
+    var heartbeat$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.HEARTBEAT_EVENTS = exports.HEARTBEAT_INTERVAL = void 0;
 
@@ -84162,14 +92819,14 @@ var app = (function () {
 
     });
 
-    var constants$1 = createCommonjsModule$1(function (module, exports) {
+    var constants$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$2.__exportStar(heartbeat$1, exports);
 
     });
 
-    var heartbeat = createCommonjsModule$1(function (module, exports) {
+    var heartbeat = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.HeartBeat = void 0;
 
@@ -84221,7 +92878,7 @@ var app = (function () {
 
     });
 
-    var cjs$4 = createCommonjsModule$1(function (module, exports) {
+    var cjs$4 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1$2.__exportStar(heartbeat, exports);
@@ -84474,7 +93131,7 @@ var app = (function () {
         __classPrivateFieldSet: __classPrivateFieldSet$1
     });
 
-    var constants = createCommonjsModule$1(function (module, exports) {
+    var constants = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PINO_CUSTOM_CONTEXT_KEY = exports.PINO_LOGGER_DEFAULTS = void 0;
     exports.PINO_LOGGER_DEFAULTS = {
@@ -84484,7 +93141,7 @@ var app = (function () {
 
     });
 
-    var utils$2 = createCommonjsModule$1(function (module, exports) {
+    var utils$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.generateChildLogger = exports.formatChildLoggerContext = exports.getLoggerContext = exports.setBrowserLoggerContext = exports.getBrowserLoggerContext = exports.getDefaultLoggerOptions = void 0;
 
@@ -84531,7 +93188,7 @@ var app = (function () {
 
     var tslib_1$1 = /*@__PURE__*/getAugmentedNamespace(tslib_es6$1);
 
-    var cjs$3 = createCommonjsModule$1(function (module, exports) {
+    var cjs$3 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.pino = void 0;
 
@@ -84559,7 +93216,7 @@ var app = (function () {
         return typeof value === "string" ? value : JSON.stringify(value);
     }
 
-    var browser$1 = createCommonjsModule$1(function (module, exports) {
+    var browser$1 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -84625,7 +93282,7 @@ var app = (function () {
     	wipe: wipe_2
     }, '__esModule', {value: true});
 
-    var node = createCommonjsModule$1(function (module, exports) {
+    var node = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -84669,7 +93326,7 @@ var app = (function () {
 
     });
 
-    var system = createCommonjsModule$1(function (module, exports) {
+    var system = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -84707,7 +93364,7 @@ var app = (function () {
 
     });
 
-    var int = createCommonjsModule$1(function (module, exports) {
+    var int = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -85279,7 +93936,7 @@ var app = (function () {
     	writeFloat64LE: writeFloat64LE_1
     }, '__esModule', {value: true});
 
-    var random = createCommonjsModule$1(function (module, exports) {
+    var random = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -85362,7 +94019,7 @@ var app = (function () {
 
     });
 
-    var sha512$1 = createCommonjsModule$1(function (module, exports) {
+    var sha512$1 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -85915,7 +94572,7 @@ var app = (function () {
 
     });
 
-    var ed25519 = createCommonjsModule$1(function (module, exports) {
+    var ed25519 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -87926,7 +96583,7 @@ var app = (function () {
     	equal: equal_1
     }, '__esModule', {value: true});
 
-    var poly1305 = createCommonjsModule$1(function (module, exports) {
+    var poly1305 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -88350,7 +97007,7 @@ var app = (function () {
 
     });
 
-    var chacha20poly1305 = createCommonjsModule$1(function (module, exports) {
+    var chacha20poly1305 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -88820,7 +97477,7 @@ var app = (function () {
     }());
     var HKDF_1 = HKDF;
 
-    var sha256 = createCommonjsModule$1(function (module, exports) {
+    var sha256 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -89063,7 +97720,7 @@ var app = (function () {
 
     });
 
-    var x25519 = createCommonjsModule$1(function (module, exports) {
+    var x25519 = createCommonjsModule$4(function (module, exports) {
     // Copyright (C) 2016 Dmitry Chestnykh
     // MIT License. See LICENSE file for details.
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -89907,7 +98564,7 @@ var app = (function () {
         return output;
     }
 
-    var cjs$2 = createCommonjsModule$1(function (module, exports) {
+    var cjs$2 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getLocalStorage = exports.getLocalStorageOrThrow = exports.getCrypto = exports.getCryptoOrThrow = exports.getLocation = exports.getLocationOrThrow = exports.getNavigator = exports.getNavigatorOrThrow = exports.getDocument = exports.getDocumentOrThrow = exports.getFromWindowOrThrow = exports.getFromWindow = void 0;
     function getFromWindow(name) {
@@ -89969,7 +98626,7 @@ var app = (function () {
 
     });
 
-    var cjs$1 = createCommonjsModule$1(function (module, exports) {
+    var cjs$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getWindowMetadata = void 0;
 
@@ -90203,7 +98860,7 @@ var app = (function () {
     	return ret;
     };
 
-    var queryString = createCommonjsModule$1(function (module, exports) {
+    var queryString = createCommonjsModule$4(function (module, exports) {
 
 
 
@@ -90993,7 +99650,7 @@ var app = (function () {
         __classPrivateFieldSet: __classPrivateFieldSet
     });
 
-    var crypto$1 = createCommonjsModule$1(function (module, exports) {
+    var crypto$1 = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isBrowserCryptoAvailable = exports.getSubtleCrypto = exports.getBrowerCrypto = void 0;
     function getBrowerCrypto() {
@@ -91012,7 +99669,7 @@ var app = (function () {
 
     });
 
-    var env = createCommonjsModule$1(function (module, exports) {
+    var env = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isBrowser = exports.isNode = exports.isReactNative = void 0;
     function isReactNative() {
@@ -91036,7 +99693,7 @@ var app = (function () {
 
     var tslib_1 = /*@__PURE__*/getAugmentedNamespace(tslib_es6);
 
-    var cjs = createCommonjsModule$1(function (module, exports) {
+    var cjs = createCommonjsModule$4(function (module, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
 
     tslib_1.__exportStar(crypto$1, exports);
@@ -91394,7 +100051,7 @@ var app = (function () {
      * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
      */
 
-    var lodash_isequal = createCommonjsModule$1(function (module, exports) {
+    var lodash_isequal = createCommonjsModule$4(function (module, exports) {
     /** Used as the size to enable large array optimizations. */
     var LARGE_ARRAY_SIZE = 200;
 
@@ -93751,7 +102408,7 @@ var app = (function () {
      * @license  MIT
      */
 
-    var buffer = createCommonjsModule$1(function (module, exports) {
+    var buffer = createCommonjsModule$4(function (module, exports) {
 
 
 
@@ -97073,7 +105730,7 @@ var app = (function () {
     	toSJIS: toSJIS
     };
 
-    var errorCorrectionLevel = createCommonjsModule$1(function (module, exports) {
+    var errorCorrectionLevel = createCommonjsModule$4(function (module, exports) {
     exports.L = { bit: 1 };
     exports.M = { bit: 0 };
     exports.Q = { bit: 3 };
@@ -97240,7 +105897,7 @@ var app = (function () {
      * and their number depends on the symbol version.
      */
 
-    var alignmentPattern = createCommonjsModule$1(function (module, exports) {
+    var alignmentPattern = createCommonjsModule$4(function (module, exports) {
     const getSymbolSize = utils$1.getSymbolSize;
 
     /**
@@ -97348,7 +106005,7 @@ var app = (function () {
      * @type {Object}
      */
 
-    var maskPattern = createCommonjsModule$1(function (module, exports) {
+    var maskPattern = createCommonjsModule$4(function (module, exports) {
     exports.Patterns = {
       PATTERN000: 0,
       PATTERN001: 1,
@@ -97796,7 +106453,7 @@ var app = (function () {
     	mul: mul
     };
 
-    var polynomial = createCommonjsModule$1(function (module, exports) {
+    var polynomial = createCommonjsModule$4(function (module, exports) {
     /**
      * Multiplies two polynomials inside Galois Field
      *
@@ -97971,7 +106628,7 @@ var app = (function () {
     	testAlphanumeric: testAlphanumeric
     };
 
-    var mode = createCommonjsModule$1(function (module, exports) {
+    var mode = createCommonjsModule$4(function (module, exports) {
     /**
      * Numeric mode encodes data from the decimal digit set (0 - 9)
      * (byte values 30HEX to 39HEX).
@@ -98138,7 +106795,7 @@ var app = (function () {
     };
     });
 
-    var version = createCommonjsModule$1(function (module, exports) {
+    var version = createCommonjsModule$4(function (module, exports) {
     // Generator polynomial used to encode version information
     const G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
     const G18_BCH = utils$1.getBCHDigit(G18);
@@ -98564,7 +107221,7 @@ var app = (function () {
 
     var kanjiData = KanjiData;
 
-    var dijkstra_1 = createCommonjsModule$1(function (module) {
+    var dijkstra_1 = createCommonjsModule$4(function (module) {
 
     /******************************************************************************
      * Created 2008-08-19.
@@ -98730,7 +107387,7 @@ var app = (function () {
     }
     });
 
-    var segments = createCommonjsModule$1(function (module, exports) {
+    var segments = createCommonjsModule$4(function (module, exports) {
     /**
      * Returns UTF8 byte length
      *
@@ -99540,7 +108197,7 @@ var app = (function () {
     	create: create$1
     };
 
-    var utils = createCommonjsModule$1(function (module, exports) {
+    var utils = createCommonjsModule$4(function (module, exports) {
     function hex2rgba (hex) {
       if (typeof hex === 'number') {
         hex = hex.toString();
@@ -99642,7 +108299,7 @@ var app = (function () {
     };
     });
 
-    var canvas = createCommonjsModule$1(function (module, exports) {
+    var canvas = createCommonjsModule$4(function (module, exports) {
     function clearCanvas (ctx, canvas, size) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -100677,7 +109334,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		Web3Modal: p,
     		onDestroy,
     		WCAccount,
-    		ethers,
+    		ethers: ethers$1,
     		InjectedAccount,
     		ConnectOption,
     		close,
