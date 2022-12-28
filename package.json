@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@download/blockies": "^1.0.3",
+    "@ethersproject/abstract-signer": "^5.7.0",
     "@pooltogether/v4-client-js": "^0.17.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
