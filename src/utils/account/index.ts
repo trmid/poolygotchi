@@ -147,7 +147,7 @@ export abstract class BaseAccount {
 
 }
 
-export default interface Account {
+export interface Account {
   get address(): string
   get avatar(): string
   set avatar(url: string)

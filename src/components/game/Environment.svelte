@@ -1,8 +1,6 @@
 <!-- Component -->
 <script type="ts">
-  import type { BigNumberish, BigNumber } from "ethers";
-  import { Poolygotchi } from "../../utils/poolygotchi";
-  import { normalizeImageURI } from "../../utils/uri";
+  import type { BigNumberish } from "ethers";
   export let environmentId: BigNumberish;
 </script>
 

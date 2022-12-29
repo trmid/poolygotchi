@@ -54,7 +54,7 @@
       // TODO:
       if(!$account) throw new Error("missing account");
       const address = $account.address;
-      await $account.sign(
+      await $account.signer.sendTransaction(
         await Poolygotchi.contract().populateTransaction.hatch(
           name,
           speciesId,

@@ -1,8 +1,8 @@
 <!-- Module -->
 <script type="ts" context="module">
   import { get, writable } from "svelte/store";
-  import type Account from "../utils/account";
-  export const account = writable<Account | null>(null);
+  import type { AccountWithSigner, Account } from "../utils/account";
+  export const account = writable<AccountWithSigner | null>(null);
   export const disconnect = async () => {
     return get(account)?.disconnect().then(() => {
       account.set(null);

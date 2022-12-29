@@ -2,15 +2,15 @@
 <script type="ts" context="module">
   import { get, writable } from "svelte/store";
   import { account } from "./Account.svelte";
-  import type Account from "../utils/account";
-  export let resolveConnection: (account: Account) => void;
+  import type { AccountWithSigner } from "../utils/account";
+  export let resolveConnection: (account: AccountWithSigner) => void;
   export let stopConnecting: (err: string | Error) => void;
-  export let connectionPromise = writable<Promise<Account> | null>(null);
+  export let connectionPromise = writable<Promise<AccountWithSigner> | null>(null);
   export const connect = () => {
     let promise = get(connectionPromise);
     if(!promise) {
       promise = new Promise((resolve, reject) => {
-        resolveConnection = (connected: Account) => {
+        resolveConnection = (connected: AccountWithSigner) => {
           account.set(connected);
           if(get(connectionPromise)) {
             connectionPromise.set(null);
