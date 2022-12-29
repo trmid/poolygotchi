@@ -1,7 +1,7 @@
-import { BigNumber } from "ethers";
+import { BigNumber, Signer } from "ethers";
 import { providers } from "weaverfi/dist/functions";
 import mainnet from "./poolTogetherContracts.json";
-import { PrizePoolNetwork } from '@pooltogether/v4-client-js';
+import { PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
 
 export default class PoolTogether {
 
@@ -43,6 +43,10 @@ export default class PoolTogether {
       balance = balance.add(chain.balances.token);
     }
     return balance;
+  }
+
+  static async deposit(chain: number, amount: BigNumber, signer: Signer) {
+    // const user = new User();
   }
 
 }

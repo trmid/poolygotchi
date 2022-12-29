@@ -1,4 +1,5 @@
 import { createIcon } from "@download/blockies";
+import type { Signer } from "@ethersproject/abstract-signer";
 import { Contract, ethers } from "ethers";
 import WeaverFi, { Address } from "weaverfi";
 import { providers } from "weaverfi/dist/functions";
@@ -152,12 +153,14 @@ export default interface Account {
   set avatar(url: string)
   get defaultAvatar(): string
   get storedAvatar(): string | null
-  getProvider(chainId: number): Promise<ethers.providers.Provider>
-  sign(tx: ethers.providers.TransactionRequest): Promise<string>
-  disconnect(): Promise<void>
   ensName(): Promise<string | null>
   ensAvatar(): Promise<string | null>
   poolyAvatars(): Promise<string[]>
   allAvatars(): Promise<{ url: string, weight: number }[]>
   poolygotchi(): Promise<Poolygotchi | null>
 }
+
+export interface AccountWithSigner extends Account {
+  get signer(): Signer
+  disconnect(): Promise<void>
+};
