@@ -22,7 +22,7 @@ setTimeout(() => {
   });
 
   console.log("Starting dev rollup...")
-  const rollup = spawn('rollup', ['-c', '-w']);
+  const rollup = spawn('npx', ['rollup', '-c', '-w'], { shell: true });
   rollup.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
   });
