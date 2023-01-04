@@ -4,9 +4,10 @@
   import { onMount } from "svelte";
   import { account, disconnect } from "../Account.svelte";
   import Poolygotchi from "../../utils/poolygotchi";
-  import { buttons, menuComponents, setDefaultUI } from "./Game.svelte";
+  import { buttons, menuComponents, poolygotchi, setDefaultUI } from "./Game.svelte";
   import { onDestroy } from "svelte";
   import PoolTogether from "../../utils/poolTogether";
+  import { networks } from "../../config";
 
   // Pooly Attributes
   let name: string = "Anon Pooly"
@@ -51,18 +52,19 @@
   // Hatch Function:
   async function hatch() {
     try {
-      // TODO:
       if(!$account) throw new Error("missing account");
       const address = $account.address;
-      await $account.signer.sendTransaction(
-        await Poolygotchi.contract().populateTransaction.hatch(
-          name,
-          speciesId,
-          environmentId,
-          BigNumber.from(Math.floor(weeklyGoal)).mul(10**6),
-          await PoolTogether.totalDeposited(address)
-        )
+      const hatchTx = await Poolygotchi.contract().populateTransaction.hatch(
+        name,
+        speciesId,
+        environmentId,
+        BigNumber.from(Math.floor(weeklyGoal)).mul(10**6),
+        await PoolTogether.totalDeposited(address)
       );
+      hatchTx.chainId = networks.poolygotchi.chainId;
+      console.log(hatchTx);
+      await (await $account.safeSendTransaction(hatchTx)).wait();
+      $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
     }

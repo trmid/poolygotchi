@@ -1,11 +1,13 @@
 import { createIcon } from "@download/blockies";
 import type { Signer } from "@ethersproject/abstract-signer";
 import { Contract, ethers } from "ethers";
+import type { Deferrable } from "ethers/lib/utils";
 import WeaverFi, { Address } from "weaverfi";
 import { providers } from "weaverfi/dist/functions";
 import erc721 from "../../solidity/node_modules/@openzeppelin/contracts/build/contracts/ERC721.json";
 import Poolygotchi from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
+import type { TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
 
 export abstract class BaseAccount {
   constructor(private _address: string) { }
@@ -162,5 +164,10 @@ export interface Account {
 
 export interface AccountWithSigner extends Account {
   get signer(): Signer
+  safeSendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse>
   disconnect(): Promise<void>
-};
+}
+
+export function transactionHasChainId(tx: TransactionRequest): tx is TransactionRequest & { chainId: number } {
+  return tx.chainId !== undefined;
+}

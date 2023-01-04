@@ -1,7 +1,6 @@
-import WeaverFi from "weaverfi";
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
-import { hatcheryAddress, network } from "../config";
-import type { ABI, Address, Chain } from "weaverfi/dist/types";
+import { hatcheryAddress, networks } from "../config";
+import type { Address } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 import { BigNumber, ethers } from "ethers";
 import PoolTogether from "./poolTogether";
@@ -38,7 +37,7 @@ export default class Poolygotchi {
 
   /* Static Functions */
   static contract() {
-    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(network.rpcUrls[0], network)) as PoolygotchiHatchery;
+    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(networks.poolygotchi.rpcUrls[0], networks.poolygotchi)) as PoolygotchiHatchery;
   }
 
 }

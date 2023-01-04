@@ -1,12 +1,12 @@
 import type { SignClient } from "@walletconnect/sign-client/dist/types/client";
 import type { SessionTypes } from "@walletconnect/types";
-import type { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
+import type { Provider, TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
 import { Bytes, hexlify } from "@ethersproject/bytes";
-import type { Deferrable } from "@ethersproject/properties";
+import { Deferrable, resolveProperties } from "@ethersproject/properties";
 import { ethers } from "ethers";
-import { AccountWithSigner, BaseAccount } from ".";
+import { AccountWithSigner, BaseAccount, transactionHasChainId } from ".";
 import { Signer } from "@ethersproject/abstract-signer";
-import { network } from "../../config";
+import { networks } from "../../config";
 
 export default class WCAccount extends BaseAccount implements AccountWithSigner {
 
@@ -16,7 +16,7 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
   }
 
   get signer() {
-    return new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(network.rpcUrls[0], network));
+    return new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(networks.op.rpcUrls[0], networks.op));
   }
 
   public async sign(tx: ethers.providers.TransactionRequest): Promise<string> {
@@ -38,6 +38,15 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
       } as any
     });
     return res.result;
+  }
+
+  public async safeSendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse> {
+    const tx = await resolveProperties(transaction);
+    if(transactionHasChainId(tx)) {
+      return await this.signer.sendTransaction(tx);
+    } else {
+      throw { ...new Error("Transaction missing chainId"), tx };
+    }
   }
 
   public async disconnect(): Promise<void> {
