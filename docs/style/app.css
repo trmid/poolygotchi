@@ -95,6 +95,10 @@ a:hover {
   outline: 1px solid #0004;
 }
 
+input[type=text], input[type=number] {
+  cursor: text;
+}
+
 .btn:hover, button:hover,
 .btn.outline, button.outline {
   outline: 1px solid #fff4;
