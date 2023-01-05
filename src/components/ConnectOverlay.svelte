@@ -52,13 +52,15 @@
 
   // Wallet Connect:
   const walletConnectProjectId = "7e6fcc227cb1599585bb33cb400e6bf9";
-  const chainList = ["eip155:1", "eip155:10", "eip155:137", "eip155:43114"];
+  const chainList = ["eip155:1", "eip155:10", "eip155:137", "eip155:43114", "eip155:31337"];
   const web3Modal = new Web3Modal({
     projectId: walletConnectProjectId,
     standaloneChains: chainList,
     themeColor: "blue",
     themeBackground: "themeColor"
   });
+  web3Modal.subscribeModal(({open}) => web3ModalOpen = open);
+  let web3ModalOpen = false;
   let signClientWC: SignClient | null = null;
   const connectWC = async () => {
     if(!signClientWC) {
@@ -116,6 +118,7 @@
     } catch(err) {
       console.error(err);
     } finally {
+      console.log("closed");
       web3Modal.closeModal();
     }
   };
@@ -128,28 +131,6 @@
     const web3Provider = new ethers.providers.Web3Provider(ethereum, "any");
     await web3Provider.send("eth_requestAccounts", []);
     const signer = web3Provider.getSigner();
-    // if (await signer.getChainId() != network.chainId) {
-    //   const hexChainId = `0x${network.chainId.toString(16)}`;
-    //   try {
-    //     await web3Provider.send('wallet_switchEthereumChain',
-    //       [{ chainId: hexChainId }],
-    //     );
-    //   } catch (switchError) {
-    //     // This error code indicates that the chain has not been added to MetaMask.
-    //     if ((<any>switchError).code === 4902) {
-    //       try {
-    //         await web3Provider.send('wallet_addEthereumChain',
-    //           [{ chainName: network.name, chainId: hexChainId, rpcUrls: network.rpcUrls, nativeCurrency: network.nativeCurrency, blockExplorerUrls: network.blockExplorerUrls }],
-    //         );
-    //       } catch (addError) {
-    //         console.error(addError);
-    //       }
-    //     } else {
-    //       console.error(switchError);
-    //     }
-    //   }
-    //   throw new Error("Not connected to Avalanche Chain...");
-    // }
     resolveConnection(new InjectedAccount(signer, await signer.getAddress()));
     // Also check if we are synced with the network and signer changes:
     if(!$injectedSynced) {
@@ -161,16 +142,6 @@
             await connectInjected().catch(console.error);
           }
         });
-        // Reload page on network change:
-        // const provider = new ethers.providers.JsonRpcProvider(network.rpcUrls[0], network);
-        // provider.on("network", (newNetwork, oldNetwork) => {
-        //   // When a Provider makes its initial connection, it emits a "network"
-        //   // event with a null oldNetwork along with the newNetwork. So, if the
-        //   // oldNetwork exists, it represents a changing network
-        //   if (oldNetwork) {
-        //     location.reload();
-        //   }
-        // });
         $injectedSynced = true;
       } catch(err) {
         console.error(err);
@@ -184,7 +155,7 @@
   });
 </script>
 
-{#if $connectionPromise}
+{#if $connectionPromise && !web3ModalOpen}
 <Overlay width={300} {close}>
   <h3>connect</h3>
   <ConnectOption name="Injected" onClick={() => {connectInjected().catch(console.error);}}>
