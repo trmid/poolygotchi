@@ -5,6 +5,9 @@
   import Footer from "./components/Footer.svelte";
   import { page, routes } from "./routes";
   import ConnectOverlay from "./components/ConnectOverlay.svelte";
+  import Notifications from "./components/Notifications.svelte";
+  import Focus from "./components/Focus.svelte";
+  import Time from "./components/Time.svelte";
 </script>
 
 <!-- Header -->
@@ -18,3 +21,12 @@
 
 <!-- Connect Overlay -->
 <ConnectOverlay />
+
+<!-- Notifications -->
+<Notifications />
+
+<!-- Focus -->
+<Focus />
+
+<!-- Time -->
+<Time />
