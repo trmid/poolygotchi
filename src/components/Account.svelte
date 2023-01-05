@@ -143,7 +143,8 @@
     flex-direction: column;
     gap: 0.5rem;
     border-radius: 0.5rem;
-    background-color: var(--c0);
+    background-color: var(--c3);
+    background: var(--tri-gradient-light);
     width: max-content;
   }
   #address {
