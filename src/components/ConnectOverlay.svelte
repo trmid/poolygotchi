@@ -3,6 +3,9 @@
   import { get, writable } from "svelte/store";
   import { account } from "./Account.svelte";
   import type { AccountWithSigner } from "../utils/account";
+  import { pushNotification } from "./Notifications.svelte";
+  import { shortAddress } from "./Address.svelte";
+
   export let resolveConnection: (account: AccountWithSigner) => void;
   export let stopConnecting: (err: string | Error) => void;
   export let connectionPromise = writable<Promise<AccountWithSigner> | null>(null);
@@ -15,6 +18,10 @@
           if(get(connectionPromise)) {
             connectionPromise.set(null);
             resolve(connected);
+            pushNotification({
+              message: `<strong>Connected account:</strong> ${shortAddress(connected.address)}`,
+              type: "success"
+            });
           }
         };
         stopConnecting = (err: string | Error) => {
