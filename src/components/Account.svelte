@@ -20,19 +20,31 @@
   // Update account avatar on resolution:
   let avatarList: string[] = [];
   $: $account && resolveAccountAvatar($account);
-  function resolveAccountAvatar(a: Account) {
-    a.allAvatars().then(avatars => {
-      if(a == $account) {
-        console.log("Fetched avatars:", avatars);
-        // Set avatar to highest weight uri (if not set before)
-        avatarList = avatars.map(x => x.url);
-        if(avatarList.length > 0) {
-          if(!$account.storedAvatar && avatarList[0] !== $account.defaultAvatar) {
-            $account.avatar = avatarList[0];
+  async function resolveAccountAvatar(a: Account) {
+    try {
+
+      // Set immediately available avatars:
+      avatarList = [...new Set([a.avatar, a.defaultAvatar])];
+
+      // Fetch other avatar options:
+      await a.allAvatars().then(avatars => {
+        // Check if active account is still the account we were fetching for:
+        if(a == $account) {
+          console.log("Fetched avatars:", avatars);
+          // Set avatar to highest weight uri (if not set before):
+          avatarList = avatars.map(x => x.url);
+          if(avatarList.length > 0) {
+            if(!$account.storedAvatar && avatarList[0] !== $account.defaultAvatar) {
+              $account.avatar = avatarList[0];
+            }
           }
+        } else {
+          console.warn(`Loaded avatars for ${a.address}, which does not match ${$account?.address}`);
         }
-      }
-    }).catch(console.error);
+      });
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   // UI Variables:
@@ -125,7 +137,8 @@
   }
   #avatar {
     min-width: 0;
-    max-height: var(--avatar-height);
+    width: var(--avatar-height);
+    height: var(--avatar-height);
     padding: 0;
   }
   #avatar:hover {
@@ -146,6 +159,8 @@
     background-color: var(--c3);
     background: var(--tri-gradient-light);
     width: max-content;
+    border: 3px solid var(--c0);
+    outline: 3px solid var(--c3);
   }
   #address {
     margin-left: calc(0.5rem + var(--avatar-height));

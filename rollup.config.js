@@ -65,9 +65,12 @@ const generateSW = () => ({
 		const template = fs.readFileSync("sw-template.js", { encoding: 'utf-8' });
 
 		// Replace markers:
-		const sw = template
+		let sw = template
 			.replace(/\$PACKAGE\_VERSION/g, nodePackage.version)
 			.replace(/\$FILES_TO_CACHE/g, JSON.stringify([...outFiles]));
+
+		// Append ipfs.min.js contents to worker:
+		sw += "\n\n" + fs.readFileSync("node_modules/ipfs-core/dist/index.min.js", { encoding: 'utf-8' });
 
 		// Copy sw.js to out:
 		const swFilename = join(out, "sw.js")
@@ -78,15 +81,16 @@ const generateSW = () => ({
 	}
 });
 
+// TODO: remove
 // Custom plugin to copy ipfs.min.js to out folder:
-const copyIpfsMin = () => ({
-	name: "Copy Task for ipfs.min.js",
-	buildEnd: () => {
-		const minFile = fs.readFileSync("node_modules/ipfs-core/dist/index.min.js", { encoding: 'utf-8' });
-		fs.writeFileSync(join(out, "scripts/ipfs.min.js"), minFile, { encoding: 'utf-8' });
-		console.log('\x1b[32m%s\x1b[0m', `created ${out}/scripts/ipfs.min.js`);
-	}
-});
+// const copyIpfsMin = () => ({
+// 	name: "Copy Task for ipfs.min.js",
+// 	buildEnd: () => {
+// 		const minFile = fs.readFileSync("node_modules/ipfs-core/dist/index.min.js", { encoding: 'utf-8' });
+// 		fs.writeFileSync(join(out, "scripts/ipfs.min.js"), minFile, { encoding: 'utf-8' });
+// 		console.log('\x1b[32m%s\x1b[0m', `created ${out}/scripts/ipfs.min.js`);
+// 	}
+// });
 
 // Custom plugin to fix pooltogether dynamic debug module:
 const ignoreDebugModule = () => ({
@@ -152,8 +156,9 @@ export default {
 		// Write service worker to out folder
 		generateSW(),
 
+		// TODO: remove
 		// Copy ipfs.min.js to out folder
-		copyIpfsMin(),
+		// copyIpfsMin(),
 
     // Hotfix for pooltogether dynamic require of debug module
     ignoreDebugModule(),
