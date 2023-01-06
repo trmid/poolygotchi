@@ -45,7 +45,7 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", async () => {
-        if ((location.pathname || "/").match(/\//)?.length == 1) {
+        if ((location.pathname || "/") === "/") {
 
           // Register sw:
           const sw = await navigator.serviceWorker.register("sw.js");
