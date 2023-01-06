@@ -13,23 +13,45 @@ export const fetchJSON = async (uri: string): Promise<any> => {
   }
   
   // IPFS Data URIs:
-  const ipfsMatch = matchIpfsUri(uri);
+  const ipfsMatch = matchIpfsURI(uri);
   if(ipfsMatch) {
-    return await fetch(`/ipfs/${ipfsMatch[2]}`).then(res => res.json());
+    return await fetch(await ipfsPathToURI(`/ipfs/${ipfsMatch[2]}`)).then(res => res.json());
   }
 
   throw new Error("Could not recognize URI format...");
 }
 
 export const normalizeImageURI = async (uri: string) => {
-  const ipfsMatch = matchIpfsUri(uri);
+  const ipfsMatch = matchIpfsURI(uri);
   if(ipfsMatch) {
-    return `/ipfs/${ipfsMatch[2]}`;
+    return await ipfsPathToURI(`/ipfs/${ipfsMatch[2]}`);
   } else {
     return uri;
   }
 }
 
-const matchIpfsUri = (uri: string) => {
+const matchIpfsURI = (uri: string) => {
   return uri.match(/^(\/ipfs\/|ipfs\:\/\/)(.+)/);
 };
+
+// IPFS Path to URI (uses service worker if available, otherwise a public gateway)
+const ipfsPathToURI = async (path: string) => {
+  if((location.pathname || "/") === "/" && "serviceWorker" in navigator && await navigator.serviceWorker.ready) {
+    return path;
+  } else {
+    return gatewayURL(path);
+  }
+};
+
+// IPFS Public gateway rotator:
+let gatewayIndex = 0;
+const publicGateways = [
+  'https://ipfs.io',
+  'https://dweb.link',
+  'https://cloudflare-ipfs.com'
+];
+function gatewayURL(path: string) {
+  const url = publicGateways[gatewayIndex++] + path;
+  if(gatewayIndex >= publicGateways.length) gatewayIndex = 0;
+  return url;
+}
