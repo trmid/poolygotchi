@@ -110,7 +110,7 @@ export abstract class BaseAccount {
         // Async fetch all on-chain avatars:
         const promises: Promise<any>[] = [
           this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ url: x, weight: 1 })))).catch(console.error),
-          this.ensAvatar().then(res => res && avatars.push({ url: res, weight: 2 })).catch(console.error)
+          this.ensAvatar().then(res => res && avatars.push({ url: res + "?ens", weight: 2 })).catch(console.error)
         ];
         await Promise.allSettled(promises);
         

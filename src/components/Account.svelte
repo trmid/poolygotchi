@@ -116,7 +116,10 @@
   <div id="avatar-selector">
     {#each avatarList as avatar, i}
       <button class="avatar-option" on:click={() => $account && ($account.avatar = avatar) && (showAvatarSelector = false)} class:selected={avatar === $account?.avatar}>
-        <img src={avatar} alt="avatar option #{i}">
+        <img class="avatar" src={avatar} alt="avatar option #{i}">
+        {#if avatar.endsWith("?ens")}
+          <img title="ENS Avatar" class="ens-pin" src="img/ens.webp" alt="">
+        {/if}
       </button>
     {/each}
   </div>
@@ -155,7 +158,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     background-color: var(--c3);
     background: var(--tri-gradient-light);
     width: max-content;
@@ -174,15 +177,26 @@
     gap: 0.5rem;
   }
   .avatar-option {
+    position: relative;
     padding: 0;
     min-width: 0;
     background: var(--bg-gradient);
     overflow: hidden;
   }
-  .avatar-option > img {
+  .avatar-option > img.avatar {
     display: block;
     width: 38px;
     height: 38px;
+  }
+  .avatar-option > img.ens-pin {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    border: 1px solid var(--c3);
+    position: absolute;
   }
   .avatar-option.selected {
     outline: 2px solid var(--c2);

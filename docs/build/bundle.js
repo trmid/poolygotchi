@@ -90259,7 +90259,7 @@ var app = (function () {
                     // Async fetch all on-chain avatars:
                     const promises = [
                         this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ url: x, weight: 1 })))).catch(console.error),
-                        this.ensAvatar().then(res => res && avatars.push({ url: res, weight: 2 })).catch(console.error)
+                        this.ensAvatar().then(res => res && avatars.push({ url: res + "?ens", weight: 2 })).catch(console.error)
                     ];
                     await Promise.allSettled(promises);
                     // Return avatars:
@@ -90911,7 +90911,7 @@ var app = (function () {
     }
 
     // (40:57) 
-    function create_if_block_3$1(ctx) {
+    function create_if_block_3$2(ctx) {
     	let t;
 
     	const block = {
@@ -90928,7 +90928,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$1.name,
+    		id: create_if_block_3$2.name,
     		type: "if",
     		source: "(40:57) ",
     		ctx
@@ -91002,7 +91002,7 @@ var app = (function () {
     	function select_block_type(ctx, dirty) {
     		if (/*selectedNotification*/ ctx[0].type === 'error') return create_if_block_1$3;
     		if (/*selectedNotification*/ ctx[0].type === 'warning') return create_if_block_2$3;
-    		if (/*selectedNotification*/ ctx[0].type === 'standard') return create_if_block_3$1;
+    		if (/*selectedNotification*/ ctx[0].type === 'standard') return create_if_block_3$2;
     		if (/*selectedNotification*/ ctx[0].type === 'success') return create_if_block_4;
     	}
 
@@ -109956,7 +109956,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     }
 
     // (58:0) {#if $account}
-    function create_if_block_1$2(ctx) {
+    function create_if_block_2$2(ctx) {
     	let div;
     	let img;
     	let img_src_value;
@@ -109964,7 +109964,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block = /*showAccountOptions*/ ctx[2] && create_if_block_2$2(ctx);
+    	let if_block = /*showAccountOptions*/ ctx[2] && create_if_block_3$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -109973,14 +109973,14 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			t = space();
     			if (if_block) if_block.c();
     			attr_dev(img, "id", "avatar");
-    			attr_dev(img, "class", "btn border hover svelte-fgs69g");
+    			attr_dev(img, "class", "btn border hover svelte-1t49cle");
     			if (!src_url_equal(img.src, img_src_value = /*$account*/ ctx[0].avatar)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "User Avatar");
     			attr_dev(img, "tabindex", "0");
     			attr_dev(img, "title", "account");
     			add_location(img, file$g, 62, 2, 2243);
     			attr_dev(div, "id", "account");
-    			attr_dev(div, "class", "svelte-fgs69g");
+    			attr_dev(div, "class", "svelte-1t49cle");
     			toggle_class(div, "raised", /*showAccountOptions*/ ctx[2]);
     			add_location(div, file$g, 58, 0, 2102);
     		},
@@ -110013,7 +110013,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block_2$2(ctx);
+    					if_block = create_if_block_3$1(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, null);
@@ -110051,7 +110051,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_2$2.name,
     		type: "if",
     		source: "(58:0) {#if $account}",
     		ctx
@@ -110061,7 +110061,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     }
 
     // (74:2) {#if showAccountOptions}
-    function create_if_block_2$2(ctx) {
+    function create_if_block_3$1(ctx) {
     	let div1;
     	let div0;
     	let promise;
@@ -110100,12 +110100,12 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			button1 = element("button");
     			button1.textContent = "disconnect";
     			attr_dev(div0, "id", "address");
-    			attr_dev(div0, "class", "svelte-fgs69g");
+    			attr_dev(div0, "class", "svelte-1t49cle");
     			add_location(div0, file$g, 77, 4, 2689);
     			add_location(button0, file$g, 88, 4, 2988);
     			add_location(button1, file$g, 93, 4, 3108);
     			attr_dev(div1, "id", "options");
-    			attr_dev(div1, "class", "svelte-fgs69g");
+    			attr_dev(div1, "class", "svelte-1t49cle");
     			add_location(div1, file$g, 74, 2, 2581);
     		},
     		m: function mount(target, anchor) {
@@ -110164,7 +110164,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$2.name,
+    		id: create_if_block_3$1.name,
     		type: "if",
     		source: "(74:2) {#if showAccountOptions}",
     		ctx
@@ -110379,14 +110379,50 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	return block;
     }
 
+    // (116:8) {#if avatar.endsWith("?ens")}
+    function create_if_block_1$2(ctx) {
+    	let img;
+    	let img_src_value;
+
+    	const block = {
+    		c: function create() {
+    			img = element("img");
+    			attr_dev(img, "title", "ENS Avatar");
+    			attr_dev(img, "class", "ens-pin svelte-1t49cle");
+    			if (!src_url_equal(img.src, img_src_value = "img/ens.webp")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "");
+    			add_location(img, file$g, 116, 10, 3917);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, img, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(img);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$2.name,
+    		type: "if",
+    		source: "(116:8) {#if avatar.endsWith(\\\"?ens\\\")}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     // (113:4) {#each avatarList as avatar, i}
     function create_each_block$1(ctx) {
     	let button;
     	let img;
     	let img_src_value;
-    	let t;
+    	let t0;
+    	let show_if = /*avatar*/ ctx[17].endsWith("?ens");
+    	let t1;
     	let mounted;
     	let dispose;
+    	let if_block = show_if && create_if_block_1$2(ctx);
 
     	function click_handler_6() {
     		return /*click_handler_6*/ ctx[14](/*avatar*/ ctx[17]);
@@ -110396,19 +110432,23 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		c: function create() {
     			button = element("button");
     			img = element("img");
-    			t = space();
+    			t0 = space();
+    			if (if_block) if_block.c();
+    			t1 = space();
+    			attr_dev(img, "class", "avatar svelte-1t49cle");
     			if (!src_url_equal(img.src, img_src_value = /*avatar*/ ctx[17])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "avatar option #" + /*i*/ ctx[19]);
-    			attr_dev(img, "class", "svelte-fgs69g");
     			add_location(img, file$g, 114, 8, 3808);
-    			attr_dev(button, "class", "avatar-option svelte-fgs69g");
+    			attr_dev(button, "class", "avatar-option svelte-1t49cle");
     			toggle_class(button, "selected", /*avatar*/ ctx[17] === /*$account*/ ctx[0]?.avatar);
     			add_location(button, file$g, 113, 6, 3635);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
     			append_dev(button, img);
-    			append_dev(button, t);
+    			append_dev(button, t0);
+    			if (if_block) if_block.m(button, null);
+    			append_dev(button, t1);
 
     			if (!mounted) {
     				dispose = listen_dev(button, "click", click_handler_6, false, false, false);
@@ -110422,12 +110462,26 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     				attr_dev(img, "src", img_src_value);
     			}
 
+    			if (dirty & /*avatarList*/ 2) show_if = /*avatar*/ ctx[17].endsWith("?ens");
+
+    			if (show_if) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_1$2(ctx);
+    					if_block.c();
+    					if_block.m(button, t1);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
     			if (dirty & /*avatarList, $account*/ 3) {
     				toggle_class(button, "selected", /*avatar*/ ctx[17] === /*$account*/ ctx[0]?.avatar);
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button);
+    			if (if_block) if_block.d();
     			mounted = false;
     			dispose();
     		}
@@ -110488,7 +110542,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			add_location(i, file$g, 109, 4, 3479);
     			add_location(p, file$g, 108, 2, 3470);
     			attr_dev(div, "id", "avatar-selector");
-    			attr_dev(div, "class", "svelte-fgs69g");
+    			attr_dev(div, "class", "svelte-1t49cle");
     			add_location(div, file$g, 111, 2, 3564);
     		},
     		m: function mount(target, anchor) {
@@ -110564,7 +110618,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block_1$2, create_else_block$1];
+    	const if_block_creators = [create_if_block_2$2, create_else_block$1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
