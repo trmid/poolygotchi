@@ -81,17 +81,6 @@ const generateSW = () => ({
 	}
 });
 
-// TODO: remove
-// Custom plugin to copy ipfs.min.js to out folder:
-// const copyIpfsMin = () => ({
-// 	name: "Copy Task for ipfs.min.js",
-// 	buildEnd: () => {
-// 		const minFile = fs.readFileSync("node_modules/ipfs-core/dist/index.min.js", { encoding: 'utf-8' });
-// 		fs.writeFileSync(join(out, "scripts/ipfs.min.js"), minFile, { encoding: 'utf-8' });
-// 		console.log('\x1b[32m%s\x1b[0m', `created ${out}/scripts/ipfs.min.js`);
-// 	}
-// });
-
 // Custom plugin to fix pooltogether dynamic debug module:
 const ignoreDebugModule = () => ({
   name: "Ignore require('debug')",
@@ -155,10 +144,6 @@ export default {
 
 		// Write service worker to out folder
 		generateSW(),
-
-		// TODO: remove
-		// Copy ipfs.min.js to out folder
-		// copyIpfsMin(),
 
     // Hotfix for pooltogether dynamic require of debug module
     ignoreDebugModule(),
