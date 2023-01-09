@@ -57,7 +57,14 @@
       if(healthFactor < -1) possibleStates.push('crying');
       state = possibleStates[Math.floor(Math.random() * possibleStates.length)];
       if(state === 'walking') {
-        const walkTo = Math.random();
+
+        // Generate new position:
+        let walkTo = Math.random();
+        
+        // Ensure position is decently far from current position:
+        if(Math.abs(walkTo - x) < .1) walkTo = 1 - walkTo;
+
+        // Update poolygotchi walking state:
         walkingDuration = Math.abs(walkTo - x) * 5;
         if(walkTo > x) direction = 1;
         else direction = -1;
