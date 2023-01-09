@@ -253,6 +253,7 @@
     left: 1px;
     border: 1px solid var(--c3);
     position: absolute;
+    z-index: 1;
   }
   .avatar-option.selected {
     outline: 2px solid var(--c2);
