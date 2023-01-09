@@ -69,7 +69,9 @@
     background-color: dodgerblue;
     color: white;
     font-size: small;
-    cursor: pointer
+    cursor: pointer;
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   #notification.error {
@@ -88,5 +90,8 @@
 
   .full-message {
     white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    max-height: 60vh;
   }
 </style>
