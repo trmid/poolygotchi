@@ -174,3 +174,12 @@ input[type=text], input[type=number] {
     outline-color: var(--c3);
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
