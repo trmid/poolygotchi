@@ -8,9 +8,10 @@
   import { onDestroy } from "svelte";
   import PoolTogether from "../../utils/poolTogether";
   import { networks } from "../../config";
+  import { Notification, pushNotification } from "../Notifications.svelte";
 
   // Pooly Attributes
-  let name: string = "Anon Pooly"
+  let name: string = "";
   let speciesId: BigNumberish = 0;
   let environmentId: BigNumberish = 0;
   let weeklyGoal: number = 100;
@@ -63,10 +64,22 @@
       );
       hatchTx.chainId = networks.poolygotchi.chainId;
       console.log(hatchTx);
-      await (await $account.safeSendTransaction(hatchTx)).wait();
+      const res = await $account.safeSendTransaction(hatchTx);
+      console.log(res);
+      await res.wait();
       $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
+      const notification: Omit<Notification, "timestamp"> = {
+        message: err instanceof Error ? err.message : "reason unknown",
+        type: 'error'
+      }; 
+      if(notification.message.includes("user rejected transaction")) {
+        notification.message = "transaction rejected";
+        notification.type = 'warning';
+      }
+      notification.message = `Failed to hatch: ${notification.message}`;
+      pushNotification(notification);
     }
   }
 
