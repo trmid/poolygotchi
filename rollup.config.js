@@ -128,6 +128,7 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production,
+			exclude: ["src/solidity/**/*.ts"]
 		}),
 
 		// In dev mode, call `npm run start` once
