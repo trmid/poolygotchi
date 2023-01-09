@@ -9,8 +9,8 @@ import Poolygotchi from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
 import type { TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
 
-export abstract class BaseAccount {
-  private _resolvedAvatars: Promise<{ url: string, weight: number }[]> | undefined;
+export abstract class BaseAccount implements Account {
+  private _resolvedAvatars: Promise<{ url: string | (() => Promise<string>), category: string, weight: number }[]> | undefined;
   constructor(private _address: string) { }
   get address() {
     return this._address;
@@ -43,35 +43,42 @@ export abstract class BaseAccount {
     }
     return null;
   }
-  async poolyAvatars(): Promise<string[]> {
-    const nftContracts: Record<string, { contract: Address, unique?: boolean }> = {
+  async poolyAvatars(): Promise<{ url: (() => Promise<string>), category: string }[]> {
+    const nftContracts: Record<string, { contract: Address, category: string, unique?: boolean }> = {
       supporter: {
         contract: "0x90B3832e2F2aDe2FE382a911805B6933C056D6ed",
+        category: "Pooly - Supporter",
         unique: true
       },
       lawyer: {
         contract: "0x3545192b340F50d77403DC0A64cf2b32F03d00A9",
+        category: "Pooly - Lawyer"
       },
       judge: {
         contract: "0x5663e3E096f1743e77B8F71b5DE0CF9Dfd058523",
+        category: "Pooly - Judge"
       },
       pfer: {
         contract: "0xBCC664B1E6848caba2Eb2f3dE6e21F81b9276dD8",
-        unique: true,
+        category: "Pooly - pfer",
+        unique: true
       }
     };
-    const avatars: string[] = [];
+    const avatarPromises: { url: () => Promise<string>, category: string}[] = [];
     const promises: Promise<any>[] = [];
     for(const key in nftContracts) {
       promises.push((async () => {
         const contract = new Contract(nftContracts[key].contract, erc721.abi, providers.eth[0]);
-        const addToken = async (tokenId: ethers.BigNumberish) => {
-          const tokenURI = await contract.tokenURI(tokenId);
-          console.log(`Loading token: ${key} - ${tokenId}`);
-          const metadata = await fetchJSON(tokenURI);
-          console.log("Metadata: ", metadata);
-          avatars.push(await normalizeImageURI(metadata.image));
-          console.log("Resolved: ", metadata.image);
+        const addToken = (tokenId: ethers.BigNumberish) => {
+          avatarPromises.push({ url: () => (async () => {
+            const tokenURI = await contract.tokenURI(tokenId);
+            console.log(`Loading token: ${key} - ${tokenId}`);
+            const metadata = await fetchJSON(tokenURI);
+            console.log("Metadata: ", metadata);
+            const url = await normalizeImageURI(metadata.image);
+            console.log("Resolved: ", url);
+            return url;
+          })(), category: nftContracts[key].category });
         };
         const balance = await contract.balanceOf(this.address);
         if(balance > 0) {
@@ -85,32 +92,29 @@ export abstract class BaseAccount {
               }
             }
             for(const tokenId of tokenIdsIn) {
-              await addToken(ethers.BigNumber.from(tokenId));
+              addToken(ethers.BigNumber.from(tokenId));
             }
           } else {
-            await addToken(0);
+            addToken(0);
           }
         }
-        console.log(`Done resolving: ${key}`);
       })());
     }
-    console.log("Waiting for promises to settle...");
     await Promise.allSettled(promises).catch(console.error);
-    console.log("Promises settled!");
-    return avatars;
+    return avatarPromises;
   }
-  allAvatars(): Promise<{ url: string, weight: number }[]> {
+  allAvatars(): Promise<{ url: string | (() => Promise<string>), category: string, weight: number }[]> {
     if(!this._resolvedAvatars) {
-      this._resolvedAvatars = new Promise(async (resolve, reject) => {
+      this._resolvedAvatars = new Promise(async (resolve) => {
         // Create list of avatars:
-        let avatars: { url: string, weight: number }[] = [
-          { url: this.defaultAvatar, weight: 0 }
+        let avatars: { url: string | (() => Promise<string>), category: string, weight: number }[] = [
+          { url: this.defaultAvatar, category: "Blockies", weight: 0 }
         ];
 
         // Async fetch all on-chain avatars:
         const promises: Promise<any>[] = [
-          this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ url: x, weight: 1 })))).catch(console.error),
-          this.ensAvatar().then(res => res && avatars.push({ url: res + "?ens", weight: 2 })).catch(console.error)
+          this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ ...x, weight: 1 })))).catch(console.error),
+          this.ensAvatar().then(res => res && avatars.push({ url: res, category: "ENS - Avatar", weight: 2 })).catch(console.error)
         ];
         await Promise.allSettled(promises);
         
@@ -154,8 +158,8 @@ export interface Account {
   get storedAvatar(): string | null
   ensName(): Promise<string | null>
   ensAvatar(): Promise<string | null>
-  poolyAvatars(): Promise<string[]>
-  allAvatars(): Promise<{ url: string, weight: number }[]>
+  poolyAvatars(): Promise<{ url: (() => Promise<string>), category: string }[]>
+  allAvatars(): Promise<{ url: string | (() => Promise<string>), category: string, weight: number }[]>
   poolygotchi(): Promise<Poolygotchi | null>
 }
 

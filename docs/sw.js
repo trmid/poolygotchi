@@ -105,7 +105,7 @@ let gatewayIndex = 0;
 const publicGateways = [
   'https://ipfs.io',
   'https://dweb.link',
-  'https://cloudflare-ipfs.com'
+  'https://ipfs-gateway.cloud'
 ];
 function gatewayURL(path) {
   const url = publicGateways[gatewayIndex++] + path;

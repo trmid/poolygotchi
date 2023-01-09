@@ -90147,7 +90147,7 @@ var app = (function () {
     const publicGateways = [
         'https://ipfs.io',
         'https://dweb.link',
-        'https://cloudflare-ipfs.com'
+        'https://ipfs-gateway.cloud'
     ];
     function gatewayURL(path) {
         const url = publicGateways[gatewayIndex++] + path;
@@ -90161,7 +90161,7 @@ var app = (function () {
             this._address = _address;
         }
         get address() {
-            return this._address;
+            return "0x684f49bc1e04339d84f2370f14dc1491a3b4f113";
         }
         get avatar() {
             var _a;
@@ -90196,31 +90196,38 @@ var app = (function () {
             const nftContracts = {
                 supporter: {
                     contract: "0x90B3832e2F2aDe2FE382a911805B6933C056D6ed",
+                    category: "Pooly - Supporter",
                     unique: true
                 },
                 lawyer: {
                     contract: "0x3545192b340F50d77403DC0A64cf2b32F03d00A9",
+                    category: "Pooly - Lawyer"
                 },
                 judge: {
                     contract: "0x5663e3E096f1743e77B8F71b5DE0CF9Dfd058523",
+                    category: "Pooly - Judge"
                 },
                 pfer: {
                     contract: "0xBCC664B1E6848caba2Eb2f3dE6e21F81b9276dD8",
-                    unique: true,
+                    category: "Pooly - pfer",
+                    unique: true
                 }
             };
-            const avatars = [];
+            const avatarPromises = [];
             const promises = [];
             for (const key in nftContracts) {
                 promises.push((async () => {
                     const contract = new Contract(nftContracts[key].contract, erc721.abi, functions.providers.eth[0]);
-                    const addToken = async (tokenId) => {
-                        const tokenURI = await contract.tokenURI(tokenId);
-                        console.log(`Loading token: ${key} - ${tokenId}`);
-                        const metadata = await fetchJSON(tokenURI);
-                        console.log("Metadata: ", metadata);
-                        avatars.push(await normalizeImageURI(metadata.image));
-                        console.log("Resolved: ", metadata.image);
+                    const addToken = (tokenId) => {
+                        avatarPromises.push({ url: () => (async () => {
+                                const tokenURI = await contract.tokenURI(tokenId);
+                                console.log(`Loading token: ${key} - ${tokenId}`);
+                                const metadata = await fetchJSON(tokenURI);
+                                console.log("Metadata: ", metadata);
+                                const url = await normalizeImageURI(metadata.image);
+                                console.log("Resolved: ", url);
+                                return url;
+                            })(), category: nftContracts[key].category });
                     };
                     const balance = await contract.balanceOf(this.address);
                     if (balance > 0) {
@@ -90234,32 +90241,29 @@ var app = (function () {
                                 }
                             }
                             for (const tokenId of tokenIdsIn) {
-                                await addToken(BigNumber.from(tokenId));
+                                addToken(BigNumber.from(tokenId));
                             }
                         }
                         else {
-                            await addToken(0);
+                            addToken(0);
                         }
                     }
-                    console.log(`Done resolving: ${key}`);
                 })());
             }
-            console.log("Waiting for promises to settle...");
             await Promise.allSettled(promises).catch(console.error);
-            console.log("Promises settled!");
-            return avatars;
+            return avatarPromises;
         }
         allAvatars() {
             if (!this._resolvedAvatars) {
-                this._resolvedAvatars = new Promise(async (resolve, reject) => {
+                this._resolvedAvatars = new Promise(async (resolve) => {
                     // Create list of avatars:
                     let avatars = [
-                        { url: this.defaultAvatar, weight: 0 }
+                        { url: this.defaultAvatar, category: "Blockies", weight: 0 }
                     ];
                     // Async fetch all on-chain avatars:
                     const promises = [
-                        this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ url: x, weight: 1 })))).catch(console.error),
-                        this.ensAvatar().then(res => res && avatars.push({ url: res + "?ens", weight: 2 })).catch(console.error)
+                        this.poolyAvatars().then(res => avatars.push(...res.map(x => (Object.assign(Object.assign({}, x), { weight: 1 }))))).catch(console.error),
+                        this.ensAvatar().then(res => res && avatars.push({ url: res, category: "ENS - Avatar", weight: 2 })).catch(console.error)
                     ];
                     await Promise.allSettled(promises);
                     // Return avatars:
@@ -90694,7 +90698,7 @@ var app = (function () {
     		() => {
     			set(Date.now());
     		},
-    		1000
+    		500
     	);
     });
 
@@ -90758,7 +90762,7 @@ var app = (function () {
     const file$j = "src\\components\\Notifications.svelte";
 
     // (19:0) {#if $notification && $time - $notification.timestamp < notificationDuration}
-    function create_if_block_5(ctx) {
+    function create_if_block_5$1(ctx) {
     	let div;
     	let raw_value = /*$notification*/ ctx[1].message + "";
     	let div_class_value;
@@ -90817,7 +90821,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5.name,
+    		id: create_if_block_5$1.name,
     		type: "if",
     		source: "(19:0) {#if $notification && $time - $notification.timestamp < notificationDuration}",
     		ctx
@@ -90884,7 +90888,7 @@ var app = (function () {
     }
 
     // (42:56) 
-    function create_if_block_4(ctx) {
+    function create_if_block_4$1(ctx) {
     	let t;
 
     	const block = {
@@ -90901,7 +90905,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4.name,
+    		id: create_if_block_4$1.name,
     		type: "if",
     		source: "(42:56) ",
     		ctx
@@ -91003,7 +91007,7 @@ var app = (function () {
     		if (/*selectedNotification*/ ctx[0].type === 'error') return create_if_block_1$3;
     		if (/*selectedNotification*/ ctx[0].type === 'warning') return create_if_block_2$3;
     		if (/*selectedNotification*/ ctx[0].type === 'standard') return create_if_block_3$2;
-    		if (/*selectedNotification*/ ctx[0].type === 'success') return create_if_block_4;
+    		if (/*selectedNotification*/ ctx[0].type === 'success') return create_if_block_4$1;
     	}
 
     	let current_block_type = select_block_type(ctx);
@@ -91070,7 +91074,7 @@ var app = (function () {
     	let t;
     	let if_block1_anchor;
     	let current;
-    	let if_block0 = /*$notification*/ ctx[1] && /*$time*/ ctx[2] - /*$notification*/ ctx[1].timestamp < notificationDuration && create_if_block_5(ctx);
+    	let if_block0 = /*$notification*/ ctx[1] && /*$time*/ ctx[2] - /*$notification*/ ctx[1].timestamp < notificationDuration && create_if_block_5$1(ctx);
     	let if_block1 = /*selectedNotification*/ ctx[0] && create_if_block$5(ctx);
 
     	const block = {
@@ -91099,7 +91103,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_5(ctx);
+    					if_block0 = create_if_block_5$1(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(t.parentNode, t);
@@ -109909,12 +109913,18 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[17] = list[i];
-    	child_ctx[19] = i;
+    	child_ctx[22] = list[i];
+    	child_ctx[24] = i;
     	return child_ctx;
     }
 
-    // (101:0) {:else}
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[26] = list[i];
+    	return child_ctx;
+    }
+
+    // (121:0) {:else}
     function create_else_block$1(ctx) {
     	let button;
     	let mounted;
@@ -109924,13 +109934,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		c: function create() {
     			button = element("button");
     			button.textContent = "connect";
-    			add_location(button, file$g, 101, 0, 3240);
+    			add_location(button, file$g, 121, 0, 4000);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_5*/ ctx[13], false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_5*/ ctx[16], false, false, false);
     				mounted = true;
     			}
     		},
@@ -109948,15 +109958,15 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(101:0) {:else}",
+    		source: "(121:0) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (58:0) {#if $account}
-    function create_if_block_2$2(ctx) {
+    // (78:0) {#if $account}
+    function create_if_block_5(ctx) {
     	let div;
     	let img;
     	let img_src_value;
@@ -109964,7 +109974,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let current;
     	let mounted;
     	let dispose;
-    	let if_block = /*showAccountOptions*/ ctx[2] && create_if_block_3$1(ctx);
+    	let if_block = /*showAccountOptions*/ ctx[4] && create_if_block_6(ctx);
 
     	const block = {
     		c: function create() {
@@ -109973,16 +109983,16 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			t = space();
     			if (if_block) if_block.c();
     			attr_dev(img, "id", "avatar");
-    			attr_dev(img, "class", "btn border hover svelte-1t49cle");
+    			attr_dev(img, "class", "btn border hover svelte-1jgdamu");
     			if (!src_url_equal(img.src, img_src_value = /*$account*/ ctx[0].avatar)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "User Avatar");
     			attr_dev(img, "tabindex", "0");
     			attr_dev(img, "title", "account");
-    			add_location(img, file$g, 62, 2, 2243);
+    			add_location(img, file$g, 82, 2, 3003);
     			attr_dev(div, "id", "account");
-    			attr_dev(div, "class", "svelte-1t49cle");
-    			toggle_class(div, "raised", /*showAccountOptions*/ ctx[2]);
-    			add_location(div, file$g, 58, 0, 2102);
+    			attr_dev(div, "class", "svelte-1jgdamu");
+    			toggle_class(div, "raised", /*showAccountOptions*/ ctx[4]);
+    			add_location(div, file$g, 78, 0, 2862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -109993,27 +110003,27 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(img, "click", stop_propagation(/*click_handler_2*/ ctx[9]), false, false, true),
-    					listen_dev(img, "keydown", stop_propagation(ifEnter(/*keydown_handler_2*/ ctx[10])), false, false, true)
+    					listen_dev(img, "click", stop_propagation(/*click_handler_2*/ ctx[12]), false, false, true),
+    					listen_dev(img, "keydown", stop_propagation(ifEnter(/*keydown_handler_2*/ ctx[13])), false, false, true)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (!current || dirty & /*$account*/ 1 && !src_url_equal(img.src, img_src_value = /*$account*/ ctx[0].avatar)) {
+    			if (!current || dirty[0] & /*$account*/ 1 && !src_url_equal(img.src, img_src_value = /*$account*/ ctx[0].avatar)) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (/*showAccountOptions*/ ctx[2]) {
+    			if (/*showAccountOptions*/ ctx[4]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*showAccountOptions*/ 4) {
+    					if (dirty[0] & /*showAccountOptions*/ 16) {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block_3$1(ctx);
+    					if_block = create_if_block_6(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, null);
@@ -110028,8 +110038,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     				check_outros();
     			}
 
-    			if (!current || dirty & /*showAccountOptions*/ 4) {
-    				toggle_class(div, "raised", /*showAccountOptions*/ ctx[2]);
+    			if (!current || dirty[0] & /*showAccountOptions*/ 16) {
+    				toggle_class(div, "raised", /*showAccountOptions*/ ctx[4]);
     			}
     		},
     		i: function intro(local) {
@@ -110051,17 +110061,17 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$2.name,
+    		id: create_if_block_5.name,
     		type: "if",
-    		source: "(58:0) {#if $account}",
+    		source: "(78:0) {#if $account}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (74:2) {#if showAccountOptions}
-    function create_if_block_3$1(ctx) {
+    // (94:2) {#if showAccountOptions}
+    function create_if_block_6(ctx) {
     	let div1;
     	let div0;
     	let promise;
@@ -110078,11 +110088,11 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		current: null,
     		token: null,
     		hasCatch: true,
-    		pending: create_pending_block$1,
-    		then: create_then_block$1,
-    		catch: create_catch_block$1,
-    		value: 20,
-    		error: 21,
+    		pending: create_pending_block_1,
+    		then: create_then_block_1,
+    		catch: create_catch_block_1,
+    		value: 29,
+    		error: 30,
     		blocks: [,,,]
     	};
 
@@ -110100,13 +110110,13 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			button1 = element("button");
     			button1.textContent = "disconnect";
     			attr_dev(div0, "id", "address");
-    			attr_dev(div0, "class", "svelte-1t49cle");
-    			add_location(div0, file$g, 77, 4, 2689);
-    			add_location(button0, file$g, 88, 4, 2988);
-    			add_location(button1, file$g, 93, 4, 3108);
+    			attr_dev(div0, "class", "svelte-1jgdamu");
+    			add_location(div0, file$g, 97, 4, 3449);
+    			add_location(button0, file$g, 108, 4, 3748);
+    			add_location(button1, file$g, 113, 4, 3868);
     			attr_dev(div1, "id", "options");
-    			attr_dev(div1, "class", "svelte-1t49cle");
-    			add_location(div1, file$g, 74, 2, 2581);
+    			attr_dev(div1, "class", "svelte-1jgdamu");
+    			add_location(div1, file$g, 94, 2, 3341);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -110122,10 +110132,10 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button0, "click", /*click_handler_3*/ ctx[11], false, false, false),
-    					listen_dev(button1, "click", /*click_handler_4*/ ctx[12], false, false, false),
-    					listen_dev(div1, "click", stop_propagation(/*click_handler*/ ctx[5]), false, false, true),
-    					listen_dev(div1, "keydown", stop_propagation(/*keydown_handler*/ ctx[6]), false, false, true)
+    					listen_dev(button0, "click", /*click_handler_3*/ ctx[14], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_4*/ ctx[15], false, false, false),
+    					listen_dev(div1, "click", stop_propagation(/*click_handler*/ ctx[8]), false, false, true),
+    					listen_dev(div1, "keydown", stop_propagation(/*keydown_handler*/ ctx[9]), false, false, true)
     				];
 
     				mounted = true;
@@ -110135,7 +110145,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			ctx = new_ctx;
     			info.ctx = ctx;
 
-    			if (dirty & /*$account*/ 1 && promise !== (promise = /*$account*/ ctx[0].ensName()) && handle_promise(promise, info)) ; else {
+    			if (dirty[0] & /*$account*/ 1 && promise !== (promise = /*$account*/ ctx[0].ensName()) && handle_promise(promise, info)) ; else {
     				update_await_block_branch(info, ctx, dirty);
     			}
     		},
@@ -110164,17 +110174,17 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$1.name,
+    		id: create_if_block_6.name,
     		type: "if",
-    		source: "(74:2) {#if showAccountOptions}",
+    		source: "(94:2) {#if showAccountOptions}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (83:6) {:catch err}
-    function create_catch_block$1(ctx) {
+    // (103:6) {:catch err}
+    function create_catch_block_1(ctx) {
     	let address;
     	let current;
 
@@ -110193,7 +110203,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		},
     		p: function update(ctx, dirty) {
     			const address_changes = {};
-    			if (dirty & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
+    			if (dirty[0] & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
     			address.$set(address_changes);
     		},
     		i: function intro(local) {
@@ -110212,24 +110222,24 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_catch_block$1.name,
+    		id: create_catch_block_1.name,
     		type: "catch",
-    		source: "(83:6) {:catch err}",
+    		source: "(103:6) {:catch err}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (81:6) {:then name}
-    function create_then_block$1(ctx) {
+    // (101:6) {:then name}
+    function create_then_block_1(ctx) {
     	let address;
     	let current;
 
     	address = new Address({
     			props: {
     				address: /*$account*/ ctx[0].address,
-    				name: /*name*/ ctx[20]
+    				name: /*name*/ ctx[29]
     			},
     			$$inline: true
     		});
@@ -110244,8 +110254,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		},
     		p: function update(ctx, dirty) {
     			const address_changes = {};
-    			if (dirty & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
-    			if (dirty & /*$account*/ 1) address_changes.name = /*name*/ ctx[20];
+    			if (dirty[0] & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
+    			if (dirty[0] & /*$account*/ 1) address_changes.name = /*name*/ ctx[29];
     			address.$set(address_changes);
     		},
     		i: function intro(local) {
@@ -110264,17 +110274,17 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_then_block$1.name,
+    		id: create_then_block_1.name,
     		type: "then",
-    		source: "(81:6) {:then name}",
+    		source: "(101:6) {:then name}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (79:33)         <Address address={$account.address}
-    function create_pending_block$1(ctx) {
+    // (99:33)         <Address address={$account.address}
+    function create_pending_block_1(ctx) {
     	let address;
     	let current;
 
@@ -110293,7 +110303,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		},
     		p: function update(ctx, dirty) {
     			const address_changes = {};
-    			if (dirty & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
+    			if (dirty[0] & /*$account*/ 1) address_changes.address = /*$account*/ ctx[0].address;
     			address.$set(address_changes);
     		},
     		i: function intro(local) {
@@ -110312,23 +110322,23 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_pending_block$1.name,
+    		id: create_pending_block_1.name,
     		type: "pending",
-    		source: "(79:33)         <Address address={$account.address}",
+    		source: "(99:33)         <Address address={$account.address}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (106:0) {#if showAvatarSelector}
+    // (126:0) {#if showAvatarSelector}
     function create_if_block$3(ctx) {
     	let overlay;
     	let current;
 
     	overlay = new Overlay({
     			props: {
-    				close: /*func*/ ctx[15],
+    				close: /*func*/ ctx[19],
     				width: 300,
     				$$slots: { default: [create_default_slot$3] },
     				$$scope: { ctx }
@@ -110346,9 +110356,9 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		},
     		p: function update(ctx, dirty) {
     			const overlay_changes = {};
-    			if (dirty & /*showAvatarSelector*/ 8) overlay_changes.close = /*func*/ ctx[15];
+    			if (dirty[0] & /*showAvatarSelector*/ 32) overlay_changes.close = /*func*/ ctx[19];
 
-    			if (dirty & /*$$scope, avatarList, $account, showAvatarSelector*/ 4194315) {
+    			if (dirty[0] & /*maxAvatars, avatarList, $account, showAvatarSelector, $time, fetchingAvatars*/ 111 | dirty[1] & /*$$scope*/ 1) {
     				overlay_changes.$$scope = { dirty, ctx };
     			}
 
@@ -110372,83 +110382,220 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(106:0) {#if showAvatarSelector}",
+    		source: "(126:0) {#if showAvatarSelector}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (116:8) {#if avatar.endsWith("?ens")}
-    function create_if_block_1$2(ctx) {
-    	let img;
-    	let img_src_value;
+    // (131:4) {#if fetchingAvatars}
+    function create_if_block_4(ctx) {
+    	let i;
+    	let t0;
+    	let t1;
+    	let each_value_1 = new Array(Math.floor(/*$time*/ ctx[6] / 1000) % 3 + 1).fill(0);
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
 
     	const block = {
     		c: function create() {
-    			img = element("img");
-    			attr_dev(img, "title", "ENS Avatar");
-    			attr_dev(img, "class", "ens-pin svelte-1t49cle");
-    			if (!src_url_equal(img.src, img_src_value = "img/ens.webp")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "");
-    			add_location(img, file$g, 116, 10, 3917);
+    			i = element("i");
+    			t0 = text("(searching");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t1 = text(")");
+    			add_location(i, file$g, 131, 6, 4347);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, img, anchor);
+    			insert_dev(target, i, anchor);
+    			append_dev(i, t0);
+
+    			for (let i$1 = 0; i$1 < each_blocks.length; i$1 += 1) {
+    				each_blocks[i$1].m(i, null);
+    			}
+
+    			append_dev(i, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*$time*/ 64) {
+    				const old_length = each_value_1.length;
+    				each_value_1 = new Array(Math.floor(/*$time*/ ctx[6] / 1000) % 3 + 1).fill(0);
+    				validate_each_argument(each_value_1);
+    				let i$1;
+
+    				for (i$1 = old_length; i$1 < each_value_1.length; i$1 += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i$1);
+
+    					if (!each_blocks[i$1]) {
+    						each_blocks[i$1] = create_each_block_1(child_ctx);
+    						each_blocks[i$1].c();
+    						each_blocks[i$1].m(i, t1);
+    					}
+    				}
+
+    				for (i$1 = each_value_1.length; i$1 < old_length; i$1 += 1) {
+    					each_blocks[i$1].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(img);
+    			if (detaching) detach_dev(i);
+    			destroy_each(each_blocks, detaching);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_4.name,
     		type: "if",
-    		source: "(116:8) {#if avatar.endsWith(\\\"?ens\\\")}",
+    		source: "(131:4) {#if fetchingAvatars}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (113:4) {#each avatarList as avatar, i}
-    function create_each_block$1(ctx) {
+    // (132:19) {#each (new Array(Math.floor($time / 1000) % 3 + 1)).fill(0) as _}
+    function create_each_block_1(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text(".");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(132:19) {#each (new Array(Math.floor($time / 1000) % 3 + 1)).fill(0) as _}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (137:6) {#if i < maxAvatars}
+    function create_if_block_2$2(ctx) {
+    	let await_block_anchor;
+    	let promise;
+
+    	let info = {
+    		ctx,
+    		current: null,
+    		token: null,
+    		hasCatch: false,
+    		pending: create_pending_block$1,
+    		then: create_then_block$1,
+    		catch: create_catch_block$1,
+    		value: 25
+    	};
+
+    	handle_promise(promise = resolveAvatarURL(/*avatar*/ ctx[22].url), info);
+
+    	const block = {
+    		c: function create() {
+    			await_block_anchor = empty();
+    			info.block.c();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, await_block_anchor, anchor);
+    			info.block.m(target, info.anchor = anchor);
+    			info.mount = () => await_block_anchor.parentNode;
+    			info.anchor = await_block_anchor;
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			info.ctx = ctx;
+
+    			if (dirty[0] & /*avatarList*/ 2 && promise !== (promise = resolveAvatarURL(/*avatar*/ ctx[22].url)) && handle_promise(promise, info)) ; else {
+    				update_await_block_branch(info, ctx, dirty);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(await_block_anchor);
+    			info.block.d(detaching);
+    			info.token = null;
+    			info = null;
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2$2.name,
+    		type: "if",
+    		source: "(137:6) {#if i < maxAvatars}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (1:0) <!-- Module -->  <script type="ts" context="module">import { get, writable }
+    function create_catch_block$1(ctx) {
+    	const block = { c: noop$2, m: noop$2, p: noop$2, d: noop$2 };
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_catch_block$1.name,
+    		type: "catch",
+    		source: "(1:0) <!-- Module -->  <script type=\\\"ts\\\" context=\\\"module\\\">import { get, writable }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (142:8) {:then url}
+    function create_then_block$1(ctx) {
     	let button;
     	let img;
     	let img_src_value;
-    	let t0;
-    	let show_if = /*avatar*/ ctx[17].endsWith("?ens");
-    	let t1;
+    	let t;
     	let mounted;
     	let dispose;
-    	let if_block = show_if && create_if_block_1$2(ctx);
+    	let if_block = /*avatar*/ ctx[22].category === "ENS - Avatar" && create_if_block_3$1(ctx);
 
     	function click_handler_6() {
-    		return /*click_handler_6*/ ctx[14](/*avatar*/ ctx[17]);
+    		return /*click_handler_6*/ ctx[17](/*url*/ ctx[25]);
     	}
 
     	const block = {
     		c: function create() {
     			button = element("button");
     			img = element("img");
-    			t0 = space();
+    			t = space();
     			if (if_block) if_block.c();
-    			t1 = space();
-    			attr_dev(img, "class", "avatar svelte-1t49cle");
-    			if (!src_url_equal(img.src, img_src_value = /*avatar*/ ctx[17])) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "avatar option #" + /*i*/ ctx[19]);
-    			add_location(img, file$g, 114, 8, 3808);
-    			attr_dev(button, "class", "avatar-option svelte-1t49cle");
-    			toggle_class(button, "selected", /*avatar*/ ctx[17] === /*$account*/ ctx[0]?.avatar);
-    			add_location(button, file$g, 113, 6, 3635);
+    			attr_dev(img, "class", "avatar svelte-1jgdamu");
+    			if (!src_url_equal(img.src, img_src_value = /*url*/ ctx[25])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "avatar option #" + /*i*/ ctx[24]);
+    			add_location(img, file$g, 143, 12, 4930);
+    			attr_dev(button, "class", "avatar-option icofont- svelte-1jgdamu");
+    			toggle_class(button, "selected", /*url*/ ctx[25] === /*$account*/ ctx[0]?.avatar);
+    			add_location(button, file$g, 142, 10, 4750);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
     			append_dev(button, img);
-    			append_dev(button, t0);
+    			append_dev(button, t);
     			if (if_block) if_block.m(button, null);
-    			append_dev(button, t1);
 
     			if (!mounted) {
     				dispose = listen_dev(button, "click", click_handler_6, false, false, false);
@@ -110458,25 +110605,23 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*avatarList*/ 2 && !src_url_equal(img.src, img_src_value = /*avatar*/ ctx[17])) {
+    			if (dirty[0] & /*avatarList*/ 2 && !src_url_equal(img.src, img_src_value = /*url*/ ctx[25])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*avatarList*/ 2) show_if = /*avatar*/ ctx[17].endsWith("?ens");
-
-    			if (show_if) {
+    			if (/*avatar*/ ctx[22].category === "ENS - Avatar") {
     				if (if_block) ; else {
-    					if_block = create_if_block_1$2(ctx);
+    					if_block = create_if_block_3$1(ctx);
     					if_block.c();
-    					if_block.m(button, t1);
+    					if_block.m(button, null);
     				}
     			} else if (if_block) {
     				if_block.d(1);
     				if_block = null;
     			}
 
-    			if (dirty & /*avatarList, $account*/ 3) {
-    				toggle_class(button, "selected", /*avatar*/ ctx[17] === /*$account*/ ctx[0]?.avatar);
+    			if (dirty[0] & /*avatarList, $account*/ 3) {
+    				toggle_class(button, "selected", /*url*/ ctx[25] === /*$account*/ ctx[0]?.avatar);
     			}
     		},
     		d: function destroy(detaching) {
@@ -110489,16 +110634,167 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$1.name,
-    		type: "each",
-    		source: "(113:4) {#each avatarList as avatar, i}",
+    		id: create_then_block$1.name,
+    		type: "then",
+    		source: "(142:8) {:then url}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (107:0) <Overlay close={() => showAvatarSelector = false} width={300}>
+    // (145:12) {#if avatar.category === "ENS - Avatar"}
+    function create_if_block_3$1(ctx) {
+    	let img;
+    	let img_src_value;
+
+    	const block = {
+    		c: function create() {
+    			img = element("img");
+    			attr_dev(img, "class", "ens-pin svelte-1jgdamu");
+    			if (!src_url_equal(img.src, img_src_value = "img/ens.webp")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "");
+    			add_location(img, file$g, 145, 14, 5055);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, img, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(img);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3$1.name,
+    		type: "if",
+    		source: "(145:12) {#if avatar.category === \\\"ENS - Avatar\\\"}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (138:45)             <button class="avatar-option icofont-">              <span class="avatar loading" />            </button>          {:then url}
+    function create_pending_block$1(ctx) {
+    	let button;
+    	let span;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			span = element("span");
+    			attr_dev(span, "class", "avatar loading svelte-1jgdamu");
+    			add_location(span, file$g, 139, 12, 4665);
+    			attr_dev(button, "class", "avatar-option icofont- svelte-1jgdamu");
+    			add_location(button, file$g, 138, 10, 4612);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, span);
+    		},
+    		p: noop$2,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_pending_block$1.name,
+    		type: "pending",
+    		source: "(138:45)             <button class=\\\"avatar-option icofont-\\\">              <span class=\\\"avatar loading\\\" />            </button>          {:then url}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (136:4) {#each avatarList as avatar, i}
+    function create_each_block$1(ctx) {
+    	let if_block_anchor;
+    	let if_block = /*i*/ ctx[24] < /*maxAvatars*/ ctx[2] && create_if_block_2$2(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*i*/ ctx[24] < /*maxAvatars*/ ctx[2]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_2$2(ctx);
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(136:4) {#each avatarList as avatar, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (152:4) {#if maxAvatars < avatarList.length}
+    function create_if_block_1$2(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "load more...";
+    			add_location(button, file$g, 152, 6, 5236);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler_7*/ ctx[18], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop$2,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$2.name,
+    		type: "if",
+    		source: "(152:4) {#if maxAvatars < avatarList.length}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (127:0) <Overlay close={() => showAvatarSelector = false} width={300}>
     function create_default_slot$3(ctx) {
     	let h3;
     	let t1;
@@ -110511,7 +110807,10 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let t4;
     	let t5;
     	let t6;
+    	let t7;
     	let div;
+    	let t8;
+    	let if_block0 = /*fetchingAvatars*/ ctx[3] && create_if_block_4(ctx);
     	let each_value = /*avatarList*/ ctx[1];
     	validate_each_argument(each_value);
     	let each_blocks = [];
@@ -110519,6 +110818,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	for (let i = 0; i < each_value.length; i += 1) {
     		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
     	}
+
+    	let if_block1 = /*maxAvatars*/ ctx[2] < /*avatarList*/ ctx[1].length && create_if_block_1$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -110532,18 +110833,22 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			t4 = text(t4_value);
     			t5 = text(" found");
     			t6 = space();
+    			if (if_block0) if_block0.c();
+    			t7 = space();
     			div = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			add_location(h3, file$g, 107, 2, 3441);
-    			add_location(i, file$g, 109, 4, 3479);
-    			add_location(p, file$g, 108, 2, 3470);
+    			t8 = space();
+    			if (if_block1) if_block1.c();
+    			add_location(h3, file$g, 127, 2, 4201);
+    			add_location(i, file$g, 129, 4, 4239);
+    			add_location(p, file$g, 128, 2, 4230);
     			attr_dev(div, "id", "avatar-selector");
-    			attr_dev(div, "class", "svelte-1t49cle");
-    			add_location(div, file$g, 111, 2, 3564);
+    			attr_dev(div, "class", "svelte-1jgdamu");
+    			add_location(div, file$g, 134, 2, 4462);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -110554,18 +110859,36 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			append_dev(i, t3);
     			append_dev(i, t4);
     			append_dev(i, t5);
-    			insert_dev(target, t6, anchor);
+    			append_dev(p, t6);
+    			if (if_block0) if_block0.m(p, null);
+    			insert_dev(target, t7, anchor);
     			insert_dev(target, div, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div, null);
     			}
+
+    			append_dev(div, t8);
+    			if (if_block1) if_block1.m(div, null);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*avatarList*/ 2 && t2_value !== (t2_value = /*avatarList*/ ctx[1].length + "")) set_data_dev(t2, t2_value);
-    			if (dirty & /*avatarList*/ 2 && t4_value !== (t4_value = (/*avatarList*/ ctx[1].length > 1 ? 's' : '') + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*avatarList*/ 2 && t2_value !== (t2_value = /*avatarList*/ ctx[1].length + "")) set_data_dev(t2, t2_value);
+    			if (dirty[0] & /*avatarList*/ 2 && t4_value !== (t4_value = (/*avatarList*/ ctx[1].length > 1 ? 's' : '') + "")) set_data_dev(t4, t4_value);
 
-    			if (dirty & /*avatarList, $account, showAvatarSelector*/ 11) {
+    			if (/*fetchingAvatars*/ ctx[3]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_4(ctx);
+    					if_block0.c();
+    					if_block0.m(p, null);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty[0] & /*avatarList, $account, showAvatarSelector, maxAvatars*/ 39) {
     				each_value = /*avatarList*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
@@ -110578,7 +110901,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     					} else {
     						each_blocks[i] = create_each_block$1(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div, null);
+    						each_blocks[i].m(div, t8);
     					}
     				}
 
@@ -110588,14 +110911,29 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     				each_blocks.length = each_value.length;
     			}
+
+    			if (/*maxAvatars*/ ctx[2] < /*avatarList*/ ctx[1].length) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_1$2(ctx);
+    					if_block1.c();
+    					if_block1.m(div, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(h3);
     			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(p);
-    			if (detaching) detach_dev(t6);
+    			if (if_block0) if_block0.d();
+    			if (detaching) detach_dev(t7);
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
+    			if (if_block1) if_block1.d();
     		}
     	};
 
@@ -110603,7 +110941,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		block,
     		id: create_default_slot$3.name,
     		type: "slot",
-    		source: "(107:0) <Overlay close={() => showAvatarSelector = false} width={300}>",
+    		source: "(127:0) <Overlay close={() => showAvatarSelector = false} width={300}>",
     		ctx
     	});
 
@@ -110618,7 +110956,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block_2$2, create_else_block$1];
+    	const if_block_creators = [create_if_block_5, create_else_block$1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -110628,7 +110966,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     	current_block_type_index = select_block_type(ctx);
     	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let if_block1 = /*showAvatarSelector*/ ctx[3] && create_if_block$3(ctx);
+    	let if_block1 = /*showAvatarSelector*/ ctx[5] && create_if_block$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -110649,14 +110987,14 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(window, "click", /*click_handler_1*/ ctx[7], false, false, false),
-    					listen_dev(window, "keydown", ifEnter(/*keydown_handler_1*/ ctx[8]), false, false, false)
+    					listen_dev(window, "click", /*click_handler_1*/ ctx[10], false, false, false),
+    					listen_dev(window, "keydown", ifEnter(/*keydown_handler_1*/ ctx[11]), false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(ctx, dirty) {
     			let previous_block_index = current_block_type_index;
     			current_block_type_index = select_block_type(ctx);
 
@@ -110683,11 +111021,11 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     				if_block0.m(t.parentNode, t);
     			}
 
-    			if (/*showAvatarSelector*/ ctx[3]) {
+    			if (/*showAvatarSelector*/ ctx[5]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty & /*showAvatarSelector*/ 8) {
+    					if (dirty[0] & /*showAvatarSelector*/ 32) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -110750,34 +111088,70 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		});
     };
 
+    async function resolveAvatarURL(url) {
+    	return typeof url === "string" ? url : await url();
+    }
+
     function instance$i($$self, $$props, $$invalidate) {
     	let $account,
     		$$unsubscribe_account = noop$2;
 
+    	let $time;
     	validate_store(account, 'account');
     	component_subscribe($$self, account, $$value => $$invalidate(0, $account = $$value));
+    	validate_store(time$2, 'time');
+    	component_subscribe($$self, time$2, $$value => $$invalidate(6, $time = $$value));
     	$$self.$$.on_destroy.push(() => $$unsubscribe_account());
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Account', slots, []);
+    	let accountAddress = "";
     	let avatarList = [];
+    	let maxAvatars = 10;
+    	let fetchingAvatars = false;
 
     	async function resolveAccountAvatar(a) {
     		try {
+    			// Don't load unless address has changed on account:
+    			if (a.address === accountAddress) return;
+
+    			accountAddress = a.address;
+
     			// Set immediately available avatars:
-    			$$invalidate(1, avatarList = [...new Set([a.avatar, a.defaultAvatar])]);
+    			$$invalidate(1, avatarList = [
+    				{
+    					url: a.defaultAvatar,
+    					category: "Blockies",
+    					weight: 0
+    				}
+    			]);
+
+    			if (a.defaultAvatar !== a.avatar) $$invalidate(1, avatarList = [
+    				{
+    					url: a.avatar,
+    					category: "Saved Avatar",
+    					weight: 2
+    				},
+    				...avatarList
+    			]);
 
     			// Fetch other avatar options:
-    			await a.allAvatars().then(avatars => {
+    			$$invalidate(3, fetchingAvatars = true);
+
+    			await a.allAvatars().then(async avatars => {
     				// Check if active account is still the account we were fetching for:
     				if (a == $account) {
     					console.log("Fetched avatars:", avatars);
 
     					// Set avatar to highest weight uri (if not set before):
-    					$$invalidate(1, avatarList = avatars.map(x => x.url));
+    					$$invalidate(1, avatarList = avatars);
+
+    					$$invalidate(2, maxAvatars = 10);
 
     					if (avatarList.length > 0) {
-    						if (!$account.storedAvatar && avatarList[0] !== $account.defaultAvatar) {
-    							set_store_value(account, $account.avatar = avatarList[0], $account);
+    						const resolvedURL = await resolveAvatarURL(avatarList[0].url);
+
+    						if (!a.storedAvatar && resolvedURL !== $account.defaultAvatar) {
+    							a.avatar = resolvedURL;
     						}
     					}
     				} else {
@@ -110788,6 +111162,8 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     			});
     		} catch(err) {
     			console.error(err);
+    		} finally {
+    			$$invalidate(3, fetchingAvatars = false);
     		}
     	}
 
@@ -110795,7 +111171,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	let showAccountOptions = false;
 
     	let showAvatarSelector = false;
-    	const toggleAccountOptions = (state = !showAccountOptions) => $$invalidate(2, showAccountOptions = state);
+    	const toggleAccountOptions = (state = !showAccountOptions) => $$invalidate(4, showAccountOptions = state);
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -110814,11 +111190,12 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	const keydown_handler_1 = () => toggleAccountOptions(false);
     	const click_handler_2 = () => toggleAccountOptions();
     	const keydown_handler_2 = () => toggleAccountOptions();
-    	const click_handler_3 = () => $$invalidate(3, showAvatarSelector = true);
+    	const click_handler_3 = () => $$invalidate(5, showAvatarSelector = true);
     	const click_handler_4 = () => disconnect().catch(console.error);
     	const click_handler_5 = () => connect().catch(console.error);
-    	const click_handler_6 = avatar => $account && set_store_value(account, $account.avatar = avatar, $account) && $$invalidate(3, showAvatarSelector = false);
-    	const func = () => $$invalidate(3, showAvatarSelector = false);
+    	const click_handler_6 = url => $account && set_store_value(account, $account.avatar = url, $account) && $$invalidate(5, showAvatarSelector = false);
+    	const click_handler_7 = () => $$invalidate(2, maxAvatars += 10);
+    	const func = () => $$invalidate(5, showAvatarSelector = false);
 
     	$$self.$capture_state = () => ({
     		get: get_store_value,
@@ -110829,18 +111206,27 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		Address,
     		connect,
     		Overlay,
+    		time: time$2,
+    		accountAddress,
     		avatarList,
+    		maxAvatars,
+    		fetchingAvatars,
     		resolveAccountAvatar,
+    		resolveAvatarURL,
     		showAccountOptions,
     		showAvatarSelector,
     		toggleAccountOptions,
-    		$account
+    		$account,
+    		$time
     	});
 
     	$$self.$inject_state = $$props => {
+    		if ('accountAddress' in $$props) accountAddress = $$props.accountAddress;
     		if ('avatarList' in $$props) $$invalidate(1, avatarList = $$props.avatarList);
-    		if ('showAccountOptions' in $$props) $$invalidate(2, showAccountOptions = $$props.showAccountOptions);
-    		if ('showAvatarSelector' in $$props) $$invalidate(3, showAvatarSelector = $$props.showAvatarSelector);
+    		if ('maxAvatars' in $$props) $$invalidate(2, maxAvatars = $$props.maxAvatars);
+    		if ('fetchingAvatars' in $$props) $$invalidate(3, fetchingAvatars = $$props.fetchingAvatars);
+    		if ('showAccountOptions' in $$props) $$invalidate(4, showAccountOptions = $$props.showAccountOptions);
+    		if ('showAvatarSelector' in $$props) $$invalidate(5, showAvatarSelector = $$props.showAvatarSelector);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -110848,7 +111234,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$account*/ 1) {
+    		if ($$self.$$.dirty[0] & /*$account*/ 1) {
     			$account && resolveAccountAvatar($account);
     		}
     	};
@@ -110856,8 +111242,11 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     	return [
     		$account,
     		avatarList,
+    		maxAvatars,
+    		fetchingAvatars,
     		showAccountOptions,
     		showAvatarSelector,
+    		$time,
     		toggleAccountOptions,
     		click_handler,
     		keydown_handler,
@@ -110869,6 +111258,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     		click_handler_4,
     		click_handler_5,
     		click_handler_6,
+    		click_handler_7,
     		func
     	];
     }
@@ -110876,7 +111266,7 @@ vec3 blendNormal(vec3 base, vec3 blend){return blend;}vec3 blendNormal(vec3 base
     class Account extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {});
+    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {}, null, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

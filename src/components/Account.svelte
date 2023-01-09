@@ -1,7 +1,7 @@
 <!-- Module -->
 <script type="ts" context="module">
   import { get, writable } from "svelte/store";
-  import type { AccountWithSigner, Account } from "../utils/account";
+  import type { AccountWithSigner, Account, BaseAccount } from "../utils/account";
   export const account = writable<AccountWithSigner | null>(null);
   export const disconnect = async () => {
     return get(account)?.disconnect().then(() => {
@@ -16,26 +16,41 @@
   import Address from "./Address.svelte";
   import { connect } from "./ConnectOverlay.svelte";
   import Overlay from "./Overlay.svelte";
+  import { time } from "./Time.svelte";
 
   // Update account avatar on resolution:
-  let avatarList: string[] = [];
+  let accountAddress: string = "";
+  let avatarList: Awaited<ReturnType<BaseAccount["allAvatars"]>> = [];
+  let maxAvatars = 10;
+  let fetchingAvatars = false;
   $: $account && resolveAccountAvatar($account);
+
   async function resolveAccountAvatar(a: Account) {
     try {
 
+      // Don't load unless address has changed on account:
+      if(a.address === accountAddress) return;
+      accountAddress = a.address;
+
       // Set immediately available avatars:
-      avatarList = [...new Set([a.avatar, a.defaultAvatar])];
+      avatarList = [{ url: a.defaultAvatar, category: "Blockies", weight: 0 }];
+      if(a.defaultAvatar !== a.avatar) avatarList = [{ url: a.avatar, category: "Saved Avatar", weight: 2 }, ...avatarList];
 
       // Fetch other avatar options:
-      await a.allAvatars().then(avatars => {
+      fetchingAvatars = true;
+      await a.allAvatars().then(async avatars => {
+
         // Check if active account is still the account we were fetching for:
         if(a == $account) {
           console.log("Fetched avatars:", avatars);
+
           // Set avatar to highest weight uri (if not set before):
-          avatarList = avatars.map(x => x.url);
+          avatarList = avatars;
+          maxAvatars = 10;
           if(avatarList.length > 0) {
-            if(!$account.storedAvatar && avatarList[0] !== $account.defaultAvatar) {
-              $account.avatar = avatarList[0];
+            const resolvedURL = await resolveAvatarURL(avatarList[0].url);
+            if(!a.storedAvatar && resolvedURL !== $account.defaultAvatar) {
+              a.avatar = resolvedURL;
             }
           }
         } else {
@@ -44,7 +59,14 @@
       });
     } catch(err) {
       console.error(err);
+    } finally {
+      fetchingAvatars = false;
     }
+  }
+
+  // Function to resolve an avatar url:
+  async function resolveAvatarURL(url: typeof avatarList[0]["url"]) {
+    return typeof url === "string" ? url : await url();
   }
 
   // UI Variables:
@@ -112,16 +134,30 @@
   <h3>select an avatar</h3>
   <p>
     <i>{avatarList.length} option{avatarList.length > 1 ? 's' : ''} found</i>
+    {#if fetchingAvatars}
+      <i>(searching{#each (new Array(Math.floor($time / 1000) % 3 + 1)).fill(0) as _}.{/each})</i>
+    {/if}
   </p>
   <div id="avatar-selector">
     {#each avatarList as avatar, i}
-      <button class="avatar-option" on:click={() => $account && ($account.avatar = avatar) && (showAvatarSelector = false)} class:selected={avatar === $account?.avatar}>
-        <img class="avatar" src={avatar} alt="avatar option #{i}">
-        {#if avatar.endsWith("?ens")}
-          <img title="ENS Avatar" class="ens-pin" src="img/ens.webp" alt="">
-        {/if}
-      </button>
+      {#if i < maxAvatars}
+        {#await resolveAvatarURL(avatar.url)}
+          <button class="avatar-option icofont-">
+            <span class="avatar loading" />
+          </button>
+        {:then url}
+          <button class="avatar-option icofont-" on:click={() => $account && ($account.avatar = url) && (showAvatarSelector = false)} class:selected={url === $account?.avatar}>
+            <img class="avatar" src={url} alt="avatar option #{i}">
+            {#if avatar.category === "ENS - Avatar"}
+              <img class="ens-pin" src="img/ens.webp" alt="">
+            {/if}
+          </button>
+        {/await}
+      {/if}
     {/each}
+    {#if maxAvatars < avatarList.length}
+      <button on:click={() => maxAvatars += 10}>load more...</button>
+    {/if}
   </div>
 </Overlay>
 {/if}
@@ -133,15 +169,15 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    --avatar-height: 38px;
+    --avatar-size: 38px;
   }
   #account.raised {
     z-index: 2;
   }
   #avatar {
     min-width: 0;
-    width: var(--avatar-height);
-    height: var(--avatar-height);
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     padding: 0;
   }
   #avatar:hover {
@@ -166,7 +202,7 @@
     outline: 3px solid var(--c3);
   }
   #address {
-    margin-left: calc(0.5rem + var(--avatar-height));
+    margin-left: calc(0.5rem + var(--avatar-size));
   }
   #avatar-selector {
     display: flex;
@@ -175,6 +211,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 0.5rem;
+    --avatar-size: 38px;
+    overflow-y: auto;
+    max-height: 60vh;
+    padding: 0.5rem;
   }
   .avatar-option {
     position: relative;
@@ -183,10 +223,26 @@
     background: var(--bg-gradient);
     overflow: hidden;
   }
-  .avatar-option > img.avatar {
+  .avatar-option > .avatar {
+    position: relative;
     display: block;
-    width: 38px;
-    height: 38px;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    z-index: 1;
+  }
+  .avatar-option::before {
+    content: "\eff5";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
   }
   .avatar-option > img.ens-pin {
     display: block;
