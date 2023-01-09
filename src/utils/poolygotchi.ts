@@ -1,6 +1,5 @@
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
 import { hatcheryAddress, networks } from "../config";
-import type { Address } from "weaverfi/dist/types";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 import { BigNumber, ethers } from "ethers";
 import PoolTogether from "./poolTogether";
@@ -8,7 +7,7 @@ import PoolTogether from "./poolTogether";
 export default class Poolygotchi {
 
   /* Static vars */
-  static address: Address = hatcheryAddress;
+  static address: string = hatcheryAddress;
   static abi = hatcheryInfo.abi;
 
   /* Private vars */
