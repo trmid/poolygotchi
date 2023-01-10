@@ -10,8 +10,10 @@
 
   const keyDown = (e: KeyboardEvent) => {
     if(e.key === "ArrowUp") {
+      e.preventDefault();
       $menuSelectedIndex = Math.max(0, $menuSelectedIndex - 1);
     } else if(e.key === "ArrowDown") {
+      e.preventDefault();
       $menuSelectedIndex = Math.min($menuComponents.length - 1, $menuSelectedIndex + 1);
     }
   };
@@ -37,7 +39,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
-    background-color: #0004;
+    background-color: #000a;
   }
 
   #menu > :global(*) {
