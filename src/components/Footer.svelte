@@ -12,5 +12,6 @@
     opacity: 0.5;
     font-size: small;
     text-align: center;
+    margin-top: 3rem;
   }
 </style>
