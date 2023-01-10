@@ -193,5 +193,6 @@
     transform: translateX(-50%);
     transition-property: left;
     transition-timing-function: linear;
+    cursor: pointer;
   }
 </style>
