@@ -11,5 +11,6 @@
     gap: 10px;
     opacity: 0.5;
     font-size: small;
+    text-align: center;
   }
 </style>
