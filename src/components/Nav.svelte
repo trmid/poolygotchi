@@ -69,5 +69,9 @@
       top: 1rem;
       border-radius: 0.5rem;
     }
+
+    nav > :global(a), nav > :global(button) {
+      min-width: 4rem;
+    }
   }
 </style>
