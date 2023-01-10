@@ -39,7 +39,7 @@
 
 <!-- Selected Notification -->
 {#if selectedNotification}
-  <Overlay close={() => selectedNotification = null}>
+  <Overlay close={() => selectedNotification = null} width={400}>
     <h3 class={selectedNotification.type}>
       {#if selectedNotification.type === 'error'}
         Error
@@ -52,6 +52,9 @@
       {/if}
     </h3>
     <p class="full-message">{@html selectedNotification.message}</p>
+    <div>
+      <button on:click={() => { if(selectedNotification == $notification){ $notification = null }; selectedNotification = null; }}>dismiss</button>
+    </div>
   </Overlay>
 {/if}
 
@@ -66,26 +69,30 @@
     max-height: 250px;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    background-color: dodgerblue;
-    color: white;
     font-size: small;
     cursor: pointer;
     word-wrap: break-word;
     overflow: hidden;
   }
 
-  #notification.error {
-    background-color: var(--c4);
+  .standard {
+    background-color: dodgerblue;
+    color: white;
   }
 
-  #notification.success {
+  .error {
+    background-color: var(--c4);
+    color: white;
+  }
+
+  .success {
     background-color: var(--c2);
     color: #444;
   }
 
-  #notification.warning {
-    background-color: #666;
-    color: gold;
+  .warning {
+    background-color: gold;
+    color: #444;
   }
 
   .full-message {
