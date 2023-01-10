@@ -24,8 +24,8 @@
   }
   #overlay {
     box-sizing: content-box;
-    max-width: calc(100vw - 1rem);
-    max-height: calc(100vh - 1rem);
+    max-width: calc(100vw - 4rem);
+    max-height: calc(100vh - 4rem);
     padding: 1rem;
     border-radius: 1rem;
     background-color: var(--c0);
