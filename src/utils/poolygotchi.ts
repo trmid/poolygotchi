@@ -34,9 +34,24 @@ export default class Poolygotchi {
     return secondsOff.toNumber() / secondsInWeek;
   }
 
+  public possibleStates(healthFactor: number) {
+    const states: State[] = [];
+    if(healthFactor < -2) {
+      states.push('sleeping');
+    } else {
+      states.push('neutral', 'walking');
+      if(healthFactor >= 0) states.push('happy');
+      else states.push('sad');
+      if(healthFactor < -1) states.push('crying');
+    }
+    return states;
+  }
+
   /* Static Functions */
   static contract() {
     return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(networks.poolygotchi.rpcUrls[0], networks.poolygotchi)) as PoolygotchiHatchery;
   }
 
 }
+
+export type State = 'crying' | 'happy' | 'neutral' | 'sad' | 'sleeping' |'walking';
