@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { account, disconnect } from "../Account.svelte";
   import Poolygotchi from "../../utils/poolygotchi";
-  import { buttons, menuComponents, poolygotchi, setDefaultUI } from "./Game.svelte";
+  import { gameUI, poolygotchi } from "./Game.svelte";
   import { onDestroy } from "svelte";
   import PoolTogether from "../../utils/poolTogether";
   import { networks } from "../../config";
@@ -90,11 +90,13 @@
     Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
     Poolygotchi.contract().numEnvironments().then(num => numEnvironments = num).catch(console.error);
 
-    // Set menu options:
-    $menuComponents = [];
-
-    // Set device buttons:
-    $buttons = {
+    // Set game UI:
+    gameUI.push({
+      menu: {
+        components: [],
+        index: 0
+      },
+      buttons: {
       left: {
         title: "back",
         class: "icofont-arrow-left",
@@ -110,13 +112,13 @@
         class: "icofont-arrow-right",
         action: next
       }
-    };
-
+    }
+    });
   });
 
   // On Destroy:
   onDestroy(() => {
-    setDefaultUI();
+    gameUI.pop();
   });
 
 </script>

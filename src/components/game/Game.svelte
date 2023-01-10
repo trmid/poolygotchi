@@ -4,6 +4,7 @@
   import { get, writable } from "svelte/store";
   import type Poolygotchi from "../../utils/poolygotchi";
   import { account } from "../Account.svelte";
+  import { stateStack } from "../../utils/stateStack";
 
   /* Default Values */
   const DEFAULT_BUTTONS = {
@@ -15,26 +16,42 @@
   /* Game State Stores */
   export const poolygotchi = writable<Poolygotchi | null>(null);
   export const viewingAsGuest = writable(false);
-  export const menuComponents = writable<UIComponent[]>([]);
-  export const menuSelectedIndex = writable(0);
   export const showMenu = writable(false);
-  export const buttons = writable<DeviceButtons>(DEFAULT_BUTTONS);
+  export const gameUI = stateStack<{
+    menu: {
+      components: UIComponent[],
+      index: number
+    },
+    buttons: DeviceButtons
+  }>({
+    menu: {
+      components: [],
+      index: 0
+    },
+    buttons: DEFAULT_BUTTONS
+  });
 
   /* Helper Functions */
   export function selectMenuComponent(component: UIComponent) {
-    const index = get(menuComponents).indexOf(component);
+    const ui = get(gameUI);
+    const index = ui.menu.components.indexOf(component);
     if(index > -1) {
-      menuSelectedIndex.set(index);
+      ui.menu.index = index;
+      gameUI.replace(ui);
     } else {
       throw new Error("Selecting non-existent component");
     }
   }
 
   /* Set Default Game UI */
-  export function setDefaultUI() {
-    menuComponents.set([]);
-    menuSelectedIndex.set(0);
-    buttons.set(DEFAULT_BUTTONS);
+  export function rebaseUI() {
+    gameUI.rebase({
+      menu: {
+        components: [],
+        index: 0
+      },
+      buttons: DEFAULT_BUTTONS
+    });
   }
 
   /* Subscriptions */
@@ -58,7 +75,7 @@
 <div id="device">
   <div class="case" />
   <Screen />
-  <Buttons buttons={$buttons} />
+  <Buttons buttons={$gameUI.buttons} />
 </div>
 
 <!-- Style -->

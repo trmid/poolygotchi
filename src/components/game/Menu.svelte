@@ -1,6 +1,6 @@
 <script type="ts">
   import type { UIButton, UIComponent } from "./game";
-  import { menuComponents, menuSelectedIndex, showMenu } from "./Game.svelte";
+  import { gameUI } from "./Game.svelte";
   import UIButtonSvelte from "./UIButton.svelte";
 
   const asButton = (component: UIComponent): UIButton => {
@@ -9,22 +9,24 @@
   };
 
   const keyDown = (e: KeyboardEvent) => {
+    const ui = $gameUI;
     if(e.key === "ArrowUp") {
       e.preventDefault();
-      $menuSelectedIndex = Math.max(0, $menuSelectedIndex - 1);
+      ui.menu.index = Math.max(0, ui.menu.index - 1);
     } else if(e.key === "ArrowDown") {
       e.preventDefault();
-      $menuSelectedIndex = Math.min($menuComponents.length - 1, $menuSelectedIndex + 1);
+      ui.menu.index = Math.min(ui.menu.components.length - 1, ui.menu.index + 1);
     }
+    gameUI.replace(ui);
   };
 </script>
 
 <div id="menu" on:keydown={keyDown}>
   <h3>menu</h3>
-  {#each $menuComponents as component, i}
-  {#if component.type === "button"}
-  <UIButtonSvelte button={asButton(component)} selected={$menuSelectedIndex == i} />
-  {/if}
+  {#each $gameUI.menu.components as component, i}
+    {#if component.type === "button"}
+      <UIButtonSvelte button={asButton(component)} selected={$gameUI.menu.index == i} />
+    {/if}
   {/each}
 </div>
 

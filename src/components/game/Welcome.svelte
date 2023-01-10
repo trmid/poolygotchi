@@ -3,18 +3,24 @@
   import { onMount, onDestroy } from "svelte";
   import { push } from "svelte-spa-router";
   import { connect } from "../ConnectOverlay.svelte";
-  import { buttons, setDefaultUI } from "./Game.svelte";
+  import { gameUI } from "./Game.svelte";
 
   // Lifecycle:
   onMount(() => {
-    $buttons = {
-      left: { title: "-", class: "icofont-minus", action: () => null },
-      middle: { title: "connect", class: "icofont-wallet", action: () => connect().catch(console.error) },
-      right: { title: "about", class: "icofont-question", action: () => push("/about") }
-    };
+    gameUI.push({
+      menu: {
+        components: [],
+        index: 0
+      },
+      buttons: {
+        left: { title: "-", class: "icofont-minus", action: () => null },
+        middle: { title: "connect", class: "icofont-wallet", action: () => connect().catch(console.error) },
+        right: { title: "about", class: "icofont-question", action: () => push("/about") }
+      }
+    });
   });
   onDestroy(() => {
-    setDefaultUI();
+    gameUI.pop();
   });
 </script>
 

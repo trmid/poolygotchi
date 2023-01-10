@@ -34,17 +34,37 @@ export default class Poolygotchi {
     return secondsOff.toNumber() / secondsInWeek;
   }
 
-  public possibleStates(healthFactor: number) {
-    const states: State[] = [];
-    if(healthFactor < -2) {
-      states.push('sleeping');
+  public possibleStates(healthFactor: number): { state: State, chance: number }[] {
+    if(healthFactor < -3) {
+      return [{ state: 'hibernating', chance: 1 }];
+    } else if(healthFactor < -2) {
+      return [
+        { state: 'crying', chance: 2 },
+        { state: 'sad', chance: 3 },
+        { state: 'neutral', chance: 1 },
+        { state: 'walking', chance: 1 }
+      ];
+    } else if(healthFactor < -1) {
+      return [
+        { state: 'sad', chance: 6 },
+        { state: 'neutral', chance: 4 },
+        { state: 'walking', chance: 2 },
+        { state: 'sleeping', chance: 1 }
+      ];
+    } else if(healthFactor < 0) {
+      return [
+        { state: 'neutral', chance: 6 },
+        { state: 'walking', chance: 6 },
+        { state: 'sleeping', chance: 1 }
+      ];
     } else {
-      states.push('neutral', 'walking');
-      if(healthFactor >= 0) states.push('happy');
-      else states.push('sad');
-      if(healthFactor < -1) states.push('crying');
+      return [
+        { state: 'happy', chance: 6 },
+        { state: 'neutral', chance: 6 },
+        { state: 'walking', chance: 6 },
+        { state: 'sleeping', chance: 1 }
+      ];
     }
-    return states;
   }
 
   /* Static Functions */
@@ -52,6 +72,56 @@ export default class Poolygotchi {
     return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(networks.poolygotchi.rpcUrls[0], networks.poolygotchi)) as PoolygotchiHatchery;
   }
 
+  static expression(state: State, name: string) {
+    const expressionDuration = 30; // 30 seconds
+    const possibleExpressions = Poolygotchi.expressions[state];
+    const timedIndex = Math.floor(possibleExpressions.length * (Math.floor(Date.now() / 1000) % expressionDuration) / expressionDuration);
+    console.log(timedIndex);
+    const expression = possibleExpressions[timedIndex];
+    return expression.replace(/\$name/g, name);
+  }
+
+  /**
+   * Key Expressions
+   * 
+   * Maps each State to an expressive statement that a poolygotchi would say.
+   */
+  static expressions: Record<State, string[]> = {
+    neutral: [
+      "$name reassures you with a confident smile.",
+      "$name is confident.",
+      "$name is looking optimistic today.",
+      "$name is looking for something to do.",
+      "$name wants to play a game.",
+      "$name is wandering around."
+    ],
+    happy: [
+      "$name looks very happy!",
+      "$name is happy to see you!",
+      "$name is proud of you.",
+      "$name is having fun!",
+    ],
+    sad: [
+      "$name looks upset about something...",
+      "$name could use some cheering up...",
+      "$name is sad today. Maybe we should play a game!",
+      "$name is pouting."
+    ],
+    crying: [
+      "$name looks very upset...",
+      "$name could use some cheering up...",
+      "$name is feeling distant and ignored.",
+      "$name won't stop crying!"
+    ],
+    sleeping: [
+      "$name is taking a nap.",
+      "$name looks cozy."
+    ],
+    hibernating: ["$name is hibernating. Things have been a little quiet around here lately..."],
+    walking: ["$name is wandering around."]
+  }
+
 }
 
-export type State = 'crying' | 'happy' | 'neutral' | 'sad' | 'sleeping' |'walking';
+export type Animation = 'crying' | 'happy' | 'neutral' | 'sad' | 'sleeping' | 'walking';
+export type State = Animation | 'hibernating';

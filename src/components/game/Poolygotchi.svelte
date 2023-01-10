@@ -3,22 +3,18 @@
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
   import type { State } from "../../utils/poolygotchi";
-  import type Poolygotchi from "../../utils/poolygotchi";
+  import Poolygotchi from "../../utils/poolygotchi";
+  import { focused } from "../Focus.svelte";
   import type { UIButton } from "./game";
-  import { buttons, menuComponents, menuSelectedIndex, setDefaultUI, showMenu } from "./Game.svelte";
+  import { gameUI, showMenu } from "./Game.svelte";
+  import Speech from "./Speech.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
   export const interact = () => {
     try {
       // Block normal state setting:
-      const unlock = setStateLock();
-
-      // Set timeout to return to neutral state:
-      setTimeout(() => {
-        unlock();
-        setState("neutral");
-      }, 2000);
+      unlock = setStateLock();
 
       // Break walking animation if currently occurring:
       if(state === 'walking') {
@@ -26,16 +22,26 @@
         console.log(t);
         x = x - (t * (x - walkingFrom));
         walkingDuration = 0;
-      }
+      } 
 
-      // Find key state:
-      const possibleStates = poolygotchi.possibleStates(healthFactor);
-      const keyStates: State[] = ['happy', 'crying', 'sad']; // in order of importance
-      for(let i = 0; i < keyStates.length; i++) {
-        if(possibleStates.includes(keyStates[i])) {
-          state = keyStates[i];
-          break;
+      if (state === 'sleeping') {
+
+        // If napping, don't change the state. Poolygotchi need to sleep!!!
+        speech = Poolygotchi.expression(state, name);
+
+      } else {
+
+        // Find key state:
+        const possibleStates = poolygotchi.possibleStates(healthFactor).map(x => x.state);
+        const keyStates: State[] = ['hibernating', 'happy', 'crying', 'sad', 'neutral']; // in order of importance
+        for(let i = 0; i < keyStates.length; i++) {
+          if(possibleStates.includes(keyStates[i])) {
+            state = keyStates[i];
+            speech = Poolygotchi.expression(state, name);
+            break;
+          }
         }
+
       }
     } catch(err) {
       if(err instanceof Error && err.message !== 'already locked') {
@@ -51,32 +57,36 @@
     neutral: new Image(),
     sad: new Image(),
     sleeping: new Image(),
+    hibernating: new Image(),
     walking: new Image()
   };
+  let name = "";
   let healthFactor = 1;
   let state: State = 'neutral';
   let stateLock = false; // do not modify directly, use setStateLock() instead
+  let unlock: (() => void) | null = null;
   let walkingFrom = 0.5;
   let walkingStarted = 0;
   let walkingDuration = 1;
   let x = 0.5;
   let direction = 1;
+  let speech = "";
+  let napping = false;
 
   // Reactive variables:
-  $: poolygotchi, updateAnimations();
+  $: poolygotchi, refresh();
   $: animation = animations[state];
 
   // Function to update animation images from active poolygotchi
-  const updateAnimations = () => {
+  const refresh = () => {
     poolygotchi.data().then(data => {
-      console.log(data);
+      name = data.name;
       for(const key of (Object.keys(animations) as State[])) {
-        const url = `assets/species/${data.speciesId.toString()}/${key}.gif`;
+        const url = `assets/species/${data.speciesId.toString()}/${key === 'hibernating' ? 'sleeping' : key}.gif`;
         const image = new Image();
         image.src = url;
         animations[key as (keyof typeof animations)] = image;
       }
-      console.log(animations);
       poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
     }).catch(console.error);
   };
@@ -97,48 +107,62 @@
 
   // Decision loop:
   const timer = setInterval(() => {
-    const possibleStates = poolygotchi.possibleStates(healthFactor);
-    setState(possibleStates[Math.floor(Math.random() * possibleStates.length)]);
-    if(state === 'walking') {
+    if($focused && !napping) {
+      const possibleStates: State[] = [];
+      for(const { state, chance } of poolygotchi.possibleStates(healthFactor)){
+        for(let i = 0; i < chance; i++) {
+          possibleStates.push(state);
+        }
+      }
+      setState(possibleStates[Math.floor(Math.random() * possibleStates.length)]);
+      if(state === 'sleeping') {
+        napping = true;
+        setTimeout(() => napping = false, 30000);
+      } else if(state === 'walking') {
 
-      // Generate new position:
-      let walkTo = Math.random();
-      
-      // Ensure position is decently far from current position:
-      if(Math.abs(walkTo - x) < .1) walkTo = 1 - walkTo;
+        // Generate new position:
+        let walkTo = Math.random();
+        
+        // Ensure position is decently far from current position:
+        if(Math.abs(walkTo - x) < .1) walkTo = 1 - walkTo;
 
-      // Update poolygotchi walking state:
-      walkingFrom = x;
-      walkingStarted = Date.now();
-      walkingDuration = Math.abs(walkTo - x) * 5;
-      if(walkTo > x) direction = 1;
-      else direction = -1;
-      x = walkTo;
-      setTimeout(() => setState('neutral'), walkingDuration * 1000);
-    } else if(state !== 'neutral' && state !== 'sleeping') {
-      setTimeout(() => setState('neutral'), 2000);
+        // Update poolygotchi walking state:
+        walkingFrom = x;
+        walkingStarted = Date.now();
+        walkingDuration = Math.abs(walkTo - x) * 5;
+        if(walkTo > x) direction = 1;
+        else direction = -1;
+        x = walkTo;
+        setTimeout(() => { setState('neutral'); walkingDuration = 0; }, walkingDuration * 1000);
+      } else if(state !== 'neutral' && state !== 'hibernating') {
+        setTimeout(() => setState('neutral'), 2000);
+      }
     }
   }, 6000);
 
   // On Mount:
   onMount(() => {
-    $buttons = {
-      left: { title: "Home", class: "icofont-ui-home", action: () => {showMenu.set(false)} },
-      middle: { title: "Interact!", class: "icofont-comment", action: () => { showMenu.set(false); interact(); } },
-      right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
-    };
-    $menuSelectedIndex = 0;
-    $menuComponents = [
-      { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
-      { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
-      { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
-    ];
+    gameUI.push({
+      menu: {
+        components: [
+          { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
+          { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
+          { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
+        ],
+        index: 0
+      },
+      buttons: {
+        left: { title: "Home", class: "icofont-ui-home", action: () => {showMenu.set(false)} },
+        middle: { title: "Interact!", class: "icofont-comment", action: () => { showMenu.set(false); interact(); } },
+        right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu.set(!get(showMenu)) },
+      }
+    });
   });
 
   // On Destroy:
   onDestroy(() => {
     clearInterval(timer);
-    setDefaultUI();
+    gameUI.pop();
   });
 </script>
 
@@ -153,6 +177,11 @@
   style:left="{20 + 60 * x}%"
   on:click={interact}
 >
+
+<!-- Speech Bubble -->
+{#if speech && unlock}
+  <Speech {speech} close={() => { speech = ""; unlock && unlock(); }} />
+{/if}
 
 <!-- Style -->
 <style>
