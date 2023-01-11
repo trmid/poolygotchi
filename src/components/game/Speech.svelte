@@ -1,6 +1,7 @@
 <script type="ts">
   import { onMount, onDestroy } from "svelte";
   import { gameUI } from "./Game.svelte";
+  import { fly } from "svelte/transition";
 
   // Exports:
   export let speech: string;
@@ -48,12 +49,16 @@
 </script>
 
 <!-- Content -->
-<div id="speech-bubble">
+<div id="speech-bubble" transition:fly={{ y: 80, duration: 200 }}>
   <div class="moving-gradient" />
   <div class="text">
     <span>{written}</span>
   </div>
 </div>
+
+<!-- Clickable Overlay -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id="click-mask" on:click={close} />
 
 <!-- Style -->
 <style>
@@ -118,5 +123,12 @@
     border-bottom: 3px solid var(--c0);
     background-color: var(--c3);
     transform: rotate(45deg);
+  }
+
+  #click-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    cursor: pointer;
   }
 </style>
