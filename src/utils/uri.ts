@@ -47,8 +47,7 @@ const ipfsPathToURI = async (path: string) => {
 let gatewayIndex = 0;
 const publicGateways = [
   'https://ipfs.io',
-  'https://dweb.link',
-  'https://ipfs-gateway.cloud'
+  'https://dweb.link'
 ];
 function gatewayURL(path: string) {
   const url = publicGateways[gatewayIndex++] + path;

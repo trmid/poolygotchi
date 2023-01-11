@@ -48,15 +48,29 @@ self.addEventListener("fetch", event => {
           return event.respondWith(
             caches.open('ipfs').then(cache => 
 							cache.match(event.request).then(response => {
+                if(response) return response;
+                let fetchedFromIPFS = false;
                 const ipfsFetch = Promise.race([
-                  fetchIPFSContent({ path: url.pathname, event }),
-                  wait(30).then(() => fetch(gatewayURL(url.pathname))) // wait 30 seconds before trying to serve from public gateway
+
+                  // Fetch from IPFS:
+                  fetchIPFSContent({ path: url.pathname, event }).then(res => { fetchedFromIPFS = true; return res; }),
+
+                  // Wait 30 seconds before trying to serve from public gateway:
+                  wait(30).then(() => { 
+                    if(!fetchedFromIPFS) {
+                      return fetch(gatewayURL(url.pathname))
+                    } else {
+                      return undefined;
+                    }
+                  })
+
                 ]);
 								const networkResponse = ipfsFetch.then(networkResponse => {
+                  if(!networkResponse) return new Response({ status: 404, statusText: "not found" });
 									if(networkResponse.status == 200) cache.put(event.request, networkResponse.clone()); // only cache if successful
 									return networkResponse;
 								}).catch(console.warn);
-								return response ?? networkResponse;
+								return networkResponse;
 							})
 						)
           );
@@ -105,7 +119,6 @@ let gatewayIndex = 0;
 const publicGateways = [
   'https://ipfs.io',
   'https://dweb.link',
-  'https://ipfs-gateway.cloud'
 ];
 function gatewayURL(path) {
   const url = publicGateways[gatewayIndex++] + path;
