@@ -39,7 +39,10 @@
 </script>
 
 <!-- Format address preview -->
-<button class="address monospace" title="copy" class:alert-copy={showCopyAlert} on:click={copyAddress}>{name ?? shortAddress(address)}</button>
+<button class="address monospace" title="copy" class:alert-copy={showCopyAlert} on:click={copyAddress}>
+  <i class="icofont-ui-copy" />
+  {name ?? shortAddress(address)}
+</button>
 
 <!-- Style -->
 <style>
@@ -48,9 +51,14 @@
     position: relative;
     overflow: hidden;
     cursor: copy;
+    min-width: 140px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: monospace;
   }
   .address.alert-copy::after {
-    content: "Copied!";
+    content: "Address copied!";
     position: absolute;
     inset: 0;
     color: var(--c2);
