@@ -126,7 +126,7 @@ export default {
 		}),
 		commonjs(),
 		typescript({
-			sourceMap: !production,
+			sourceMap: false && !production,
 			inlineSources: !production,
 			exclude: ["src/solidity/**/*.ts"]
 		}),
