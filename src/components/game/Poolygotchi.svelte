@@ -20,8 +20,7 @@
       // Break walking animation if currently occurring:
       if(state === 'walking') {
         const t = (Date.now() - walkingStarted) / (1000 * walkingDuration);
-        console.log(t);
-        x = x - (t * (x - walkingFrom));
+        x = walkingFrom + (t * (x - walkingFrom));
         walkingDuration = 0;
       } 
 
