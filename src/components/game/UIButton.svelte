@@ -19,11 +19,18 @@
   on:click={button.action}
   on:pointerenter={onHover}
 >
-  {button.name}
+  {@html button.name}
 </button>
 
 <!-- Style -->
 <style>
+  button {
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+  }
   button:focus {
     background: var(--bg-gradient);
     outline: 1px solid var(--c3);
@@ -32,5 +39,8 @@
     animation-play-state: running;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+  }
+  button > :global(i[class^=icofont-]) {
+    font-size: 16px;
   }
 </style>
