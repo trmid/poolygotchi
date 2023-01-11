@@ -167,9 +167,13 @@
     gameUI.push({
       menu: {
         components: [
-          { type: "button", name: "btn1", action: () => { console.log("btn1") } } as UIButton,
-          { type: "button", name: "btn2", action: () => { console.log("btn2") } } as UIButton,
-          { type: "button", name: "close", action: () => showMenu.set(false) } as UIButton
+          { type: "button", name: "<i class='icofont-coins' style='color:hsl(50,75%,64%);'></i>deposit", action: () => { console.log("deposit") } } as UIButton,
+          { type: "button", name: "<i class='icofont-star' style='color:hsl(310,75%,64%);'></i>goal", action: () => { console.log("goal") } } as UIButton,
+          { type: "button", name: "<i class='icofont-paint' style='color:hsl(30,75%,64%);'></i>personalize", action: () => { console.log("personalize") } } as UIButton,
+          { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i>close", action: () => showMenu.set(false) } as UIButton,
+          { type: "button", name: "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>withdraw", action: () => { console.log("withdraw") } } as UIButton,
+          { type: "button", name: "<i class='icofont-game' style='color:hsl(80,75%,64%);'></i>minigames", action: () => { console.log("minigames") } } as UIButton,
+          { type: "button", name: "<i class='icofont-ui-home' style='color:hsl(190,75%,64%);'></i>visit", action: () => { console.log("visit") } } as UIButton,
         ],
         index: 0
       },
