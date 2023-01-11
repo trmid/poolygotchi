@@ -72,25 +72,36 @@ const generateSW = () => ({
 		// Append ipfs.min.js contents to worker:
 		sw += "\n\n" + fs.readFileSync("node_modules/ipfs-core/dist/index.min.js", { encoding: 'utf-8' });
 
-		// Copy sw.js to out:
-		const swFilename = join(out, "sw.js")
-		fs.writeFileSync(swFilename, sw, { encoding: 'utf-8' });
+		// Copy sw.js to out if file has changed:
+		const swFilename = join(out, "sw.js");
+		const stat = fs.statSync(swFilename);
+		let writeFile = true;
+		if(stat.isFile()) {
+			const swContent = fs.readFileSync(swFilename, 'utf8');
+			if(swContent === sw) writeFile = false;
+		}
+		if(writeFile) {
+			fs.writeFileSync(swFilename, sw, { encoding: 'utf-8' });
+			console.log('\x1b[32m%s\x1b[0m', `created ${out}/sw.js`);
+		} else {
+			console.log('\x1b[32m%s\x1b[0m', `no changes for ${out}/sw.js`);
+		}
 
 		// Done!
-		console.log('\x1b[32m%s\x1b[0m', `created ${out}/sw.js`);
 	}
 });
 
 // Custom plugin to fix pooltogether dynamic debug module:
 const ignoreDebugModule = () => ({
   name: "Ignore require('debug')",
-  writeBundle: (options, bundle) => {
-    // console.log(options, bundle);
-    const file = `${out}/build/bundle.js`;
-    const content = fs.readFileSync(file, { encoding: 'utf-8' });
-    fs.writeFileSync(file, content.replaceAll(/require\(['"]debug['"]\)/g, `(() => (() => null))`));
-    console.log('\x1b[32m%s\x1b[0m', `Ignored require('debug') statements in ${file}`);
-  }
+	transform: function transform(data, id) {
+		if(id.match(/node_modules[\\\/]@pooltogether.+\.js$/)) {
+			return {
+				code: data.replace(/require\(['"]debug['"]\)/g, `(() => (() => null))`),
+				map: { mappings: '' }
+			}
+		}
+	}
 });
 
 export default {
