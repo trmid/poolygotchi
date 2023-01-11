@@ -96,7 +96,7 @@ const ignoreDebugModule = () => ({
 export default {
 	input: 'src/main.ts',
 	output: {
-		sourcemap: !production,
+		sourcemap: false && !production,
 		format: 'iife',
 		name: 'app',
 		file: `${out}/build/bundle.js`,
@@ -127,7 +127,7 @@ export default {
 		commonjs(),
 		typescript({
 			sourceMap: false && !production,
-			inlineSources: !production,
+			inlineSources: false && !production,
 			exclude: ["src/solidity/**/*.ts"]
 		}),
 
