@@ -191,7 +191,7 @@
 
   .selector {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 
