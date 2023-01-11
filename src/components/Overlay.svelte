@@ -1,13 +1,20 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <script type="ts">
+  import { fly } from "svelte/transition";
+
   export let width = 720;
   export let zIndex = 100;
   export let close: () => void;
 </script>
 
 <div id="overlay-bg" style:z-index={zIndex} on:click={close}>
-  <div id="overlay" style:width="{width}px" on:click|stopPropagation>
+  <div
+    id="overlay"
+    style:width="{width}px"
+    on:click|stopPropagation
+    transition:fly={{ duration: 200, y: 100 }}
+  >
     <slot></slot>
   </div>
 </div>
