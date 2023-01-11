@@ -19,12 +19,10 @@ export function stateStack<T>(value: T) {
   let stack: T[] = [value];
   const stateStack: StateStack<T> = {
     push: (value: T) => {
-      console.trace(`push:`, value, stack);
       stack.push(value);
       _set(value);
     },
     pop: () => {
-      console.trace(`pop`, stack);
       if(stack.length < 2) throw new Error("Cannot pop stack: Stack only has one entry left");
       const popped = stack.pop() as T;
       _set(stack[stack.length - 1]);
