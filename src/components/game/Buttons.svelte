@@ -38,10 +38,16 @@
     outline: 2px solid var(--c3);
     border-radius: 50%;
     cursor: pointer;
+    transition: outline-offset 0.1s ease-in-out;
   }
 
   #buttons > button:active {
     background: var(--tri-gradient);
+  }
+
+  #buttons > button:hover,
+  #buttons > button:focus {
+    outline-offset: 2px;
   }
 
   #middle-btn {
