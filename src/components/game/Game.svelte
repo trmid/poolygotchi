@@ -60,6 +60,8 @@
       account.poolygotchi()
         .then(poolygotchi.set)
         .catch(console.error);
+    } else {
+      poolygotchi.set(null);
     }
   });
   poolygotchi.subscribe(console.log);
