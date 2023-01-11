@@ -2,7 +2,7 @@
 <script type="ts">
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
-  import type { State } from "../../utils/poolygotchi";
+  import type { Animation, State } from "../../utils/poolygotchi";
   import Poolygotchi from "../../utils/poolygotchi";
   import Confetti from "../Confetti.svelte";
   import { focused } from "../Focus.svelte";
@@ -52,13 +52,12 @@
   };
 
   // Variables:
-  let animations: Record<State, HTMLImageElement> = {
+  let animations: Record<Animation, HTMLImageElement> = {
     crying: new Image(),
     happy: new Image(),
     neutral: new Image(),
     sad: new Image(),
     sleeping: new Image(),
-    hibernating: new Image(),
     walking: new Image()
   };
   let name = "";
@@ -78,7 +77,11 @@
 
   // Reactive variables:
   $: poolygotchi, refresh();
-  $: animation = animations[state];
+  $: stateAnimation = {
+    ...animations,
+    hibernating: animations.sleeping
+  };
+  $: animation = stateAnimation[state];
 
   // Function to update animation images from active poolygotchi
   const refresh = () => {
@@ -102,10 +105,10 @@
         }, 4000);
       }
       for(const key of (Object.keys(animations) as State[])) {
-        const url = `assets/species/${data.speciesId.toString()}/${key === 'hibernating' ? 'sleeping' : key}.gif`;
+        const url = `assets/species/${data.speciesId.toString()}/${key}.gif`;
         const image = new Image();
         image.src = url;
-        animations[key as (keyof typeof animations)] = image;
+        animations[key as Animation] = image;
       }
       poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
     }).catch(console.error);
