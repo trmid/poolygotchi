@@ -17,6 +17,7 @@
   import { connect } from "./ConnectOverlay.svelte";
   import Overlay from "./Overlay.svelte";
   import { time } from "./Time.svelte";
+  import { fade, fly } from "svelte/transition";
 
   // Update account avatar on resolution:
   let accountAddress: string = "";
@@ -98,10 +99,15 @@
 
   <!-- Account Options -->
   {#if showAccountOptions}
-  <div id="options" on:click|stopPropagation on:keydown|stopPropagation>
+  <div
+    id="options"
+    on:click|stopPropagation
+    on:keydown|stopPropagation
+    out:fade={{ duration: 100 }}
+  >
 
     <!-- Account Address -->
-    <div id="address">
+    <div id="address" in:fly={{ x: 50, duration: 200, delay: 50 }}>
       {#await $account.ensName()}
       <Address address={$account.address}/>
       {:then name}
@@ -112,12 +118,12 @@
     </div>
 
     <!-- Avatar Change -->
-    <button on:click={() => showAvatarSelector = true}>
+    <button on:click={() => showAvatarSelector = true} in:fly={{ x: 50, duration: 200, delay: 100 }}>
       change avatar
     </button>
 
     <!-- Disconnect -->
-    <button on:click={() => disconnect().catch(console.error)}>
+    <button on:click={() => disconnect().catch(console.error)} in:fly={{ x: 50, duration: 200, delay: 150 }}>
       disconnect
     </button>
   </div>
@@ -200,6 +206,7 @@
     width: max-content;
     border: 3px solid var(--c0);
     outline: 3px solid var(--c3);
+    overflow: hidden;
   }
   #address {
     margin-left: calc(0.5rem + var(--avatar-size));
