@@ -4,6 +4,7 @@
   import { get } from "svelte/store";
   import type { State } from "../../utils/poolygotchi";
   import Poolygotchi from "../../utils/poolygotchi";
+  import Confetti from "../Confetti.svelte";
   import { focused } from "../Focus.svelte";
   import type { UIButton } from "./game";
   import { gameUI, showMenu } from "./Game.svelte";
@@ -72,6 +73,8 @@
   let direction = 1;
   let speech = "";
   let napping = false;
+  let justHatched = false;
+  let confetti = false;
 
   // Reactive variables:
   $: poolygotchi, refresh();
@@ -81,6 +84,23 @@
   const refresh = () => {
     poolygotchi.data().then(data => {
       name = data.name;
+      if((Math.floor(Date.now() / 1000) - data.hatchDate.toNumber() < 40)) {
+        justHatched = true;
+        setTimeout(() => {
+          try {
+            justHatched = false;
+            confetti = true;
+            speech = `${name} just hatched!`;
+            setState("happy");
+            unlock = setStateLock();
+            setTimeout(() => {
+              confetti = false;
+            }, 4000);
+          } catch(err) {
+            console.error(err);
+          }
+        }, 4000);
+      }
       for(const key of (Object.keys(animations) as State[])) {
         const url = `assets/species/${data.speciesId.toString()}/${key === 'hibernating' ? 'sleeping' : key}.gif`;
         const image = new Image();
@@ -170,13 +190,18 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <img
   id="poolygotchi"
-  src={animation.src}
+  src={justHatched ? "favicon.png" : animation.src}
   alt="Poolygotchi of {poolygotchi.address.slice(0, 6)}..."
   style:transition-duration="{walkingDuration}s"
   style:transform="translateX(-50%) scaleX({direction})"
   style:left="{20 + 60 * x}%"
   on:click={interact}
 >
+
+<!-- Confetti -->
+{#if confetti}
+  <Confetti originX={x * 0.6 + 0.2} originY={0.9} />
+{/if}
 
 <!-- Speech Bubble -->
 {#if speech && unlock}
