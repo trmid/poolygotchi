@@ -128,7 +128,7 @@ input[type=text], input[type=number] {
 }
 
 /* No Text Select Class */
-.no-select, .text-gradient {
+.no-select, *[class^=text-gradient] {
   user-select: none;
   -moz-user-select: none;
 }
