@@ -10,9 +10,13 @@
   // Variables:
   let written = "";
   let timer: NodeJS.Timer | null = null;
+  let bubble: HTMLDivElement | undefined;
+  let bubbleWidth = 300;
+  let bubbleHeight = 60;
 
   // Reactions:
   $: speech, reset();
+  $: written, getBubbleSize();
 
   // Functions:
   const reset = () => {
@@ -25,6 +29,14 @@
         written += speech[written.length];
       }
     }, 50);
+  };
+
+  const getBubbleSize = () => {
+    if(bubble) {
+      const bb = bubble.getBoundingClientRect();
+      bubbleWidth = bb.width;
+      bubbleHeight = bb.height;
+    }
   };
 
   // On Mount:
@@ -48,9 +60,21 @@
   });
 </script>
 
+<!-- Window listeners -->
+<svelte:window on:resize={getBubbleSize} />
+
 <!-- Content -->
-<div id="speech-bubble" transition:fly={{ y: 80, duration: 200 }}>
-  <div class="moving-gradient" />
+<div id="speech-bubble" transition:fly={{ y: 80, duration: 200 }} bind:this={bubble}>
+  <div id="big-gradient" class="moving-gradient">
+    <div class="bg" />
+  </div>
+  <div id="little-gradient" class="moving-gradient">
+    <div class="rotation-corrector">
+      <div class="position-corrector" style:left="calc({bubbleWidth/2}px - 3rem)" style:bottom="{bubbleHeight/2}px">
+        <div class="bg" />
+      </div>
+    </div>
+  </div>
   <div class="text">
     <span>{written}</span>
   </div>
@@ -85,20 +109,16 @@
     min-height: 1rem;
   }
 
-  #speech-bubble > .moving-gradient {
+  .moving-gradient {
     position: absolute;
-    inset: -3px;
     background-color: var(--c3);
-    border-radius: 1rem;
     overflow: hidden;
   }
 
-  #speech-bubble > .moving-gradient::after {
+  .moving-gradient .bg {
     --size: calc(1.2 * var(--game-size));
     content: "";
     position: absolute;
-    left: calc(50% - 0.5 * var(--size));
-    top: calc(50% - 0.5 * var(--size));
     width: var(--size);
     height: var(--size);
     background-color: var(--c3);
@@ -109,6 +129,43 @@
     animation-play-state: running;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+  }
+  
+  #big-gradient.moving-gradient {
+    inset: -3px;
+    border-radius: 1rem;
+  }
+
+  #big-gradient.moving-gradient .bg {
+    left: calc(50% - 0.5 * var(--size));
+    top: calc(50% - 0.5 * var(--size));
+  }
+
+  #little-gradient.moving-gradient {
+    left: calc(2rem - 1px);
+    width: 26px;
+    height: 27px;
+    bottom: -15px;
+    border-radius: 0 0 5px 0;
+    transform: rotate(45deg);
+  }
+  
+  #little-gradient > .rotation-corrector {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: rotate(-45deg);
+  }
+
+  #little-gradient .position-corrector {
+    position: relative;
+    left: 150px;
+    top: -30px;
+  }
+
+  #little-gradient .bg {
+    left: calc(-0.5 * var(--size));
+    top: calc(-0.5 * var(--size));
   }
 
   #speech-bubble::after {
