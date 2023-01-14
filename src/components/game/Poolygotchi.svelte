@@ -3,7 +3,7 @@
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
   import { fade } from "svelte/transition";
-  import { lockable } from "../../utils/lockable";
+  import { lockable, LockableError } from "../../utils/lockable";
   import type { Animation, State } from "../../utils/poolygotchi";
   import Poolygotchi from "../../utils/poolygotchi";
   import Confetti from "../Confetti.svelte";
@@ -170,7 +170,8 @@
         }
       }
     } catch(err) {
-      console.error(err);
+      if(err instanceof LockableError) console.warn(err);
+      else console.error(err);
     }
   }, 6000);
 
@@ -184,8 +185,8 @@
           { type: "button", name: "<i class='icofont-paint' style='color:hsl(30,75%,64%);'></i>personalize", action: () => { console.log("personalize") } } as UIButton,
           { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i>close", action: () => showMenu.set(false) } as UIButton,
           { type: "button", name: "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>withdraw", action: () => { console.log("withdraw") } } as UIButton,
-          { type: "button", name: "<i class='icofont-game' style='color:hsl(80,75%,64%);'></i>minigames", action: () => { console.log("minigames") } } as UIButton,
-          { type: "button", name: "<i class='icofont-ui-home' style='color:hsl(190,75%,64%);'></i>visit", action: () => { console.log("visit") } } as UIButton,
+          { type: "button", name: "<i class='icofont-game' style='color:hsl(80,75%,64%);'></i>minigames", action: () => { console.log("minigames") }, disabled: true, title: "Coming Soon!" } as UIButton,
+          { type: "button", name: "<i class='icofont-ui-home' style='color:hsl(190,75%,64%);'></i>visit", action: () => { console.log("visit") }, disabled: true, title:"Coming Soon!" } as UIButton,
         ],
         index: 0
       },

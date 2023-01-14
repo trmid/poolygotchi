@@ -5,6 +5,8 @@ export interface UIComponent {
 export interface UIButton extends UIComponent {
   type: 'button'
   name: string
+  disabled?: boolean
+  title?: string
   action: () => any
 }
 

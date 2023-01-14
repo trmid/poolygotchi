@@ -16,8 +16,10 @@
 <!-- Button -->
 <button
   bind:this={buttonElement}
-  on:click={button.action}
+  on:click={button.disabled ? null : button.action}
   on:pointerenter={onHover}
+  title={button.title ?? ""}
+  class:disabled={button.disabled}
 >
   {@html button.name}
 </button>
@@ -42,5 +44,8 @@
   }
   button > :global(i[class^=icofont-]) {
     font-size: 16px;
+  }
+  button.disabled {
+    filter: grayscale(0.8);
   }
 </style>
