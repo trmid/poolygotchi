@@ -84,14 +84,26 @@ export abstract class BaseAccount implements Account {
         if(balance > 0) {
           if(nftContracts[key].unique) {
             const tokenInFilter = contract.filters.Transfer(null, this.address);
+            const tokenOutFilter = contract.filters.Transfer(this.address, null);
             const tokenInEvents = await contract.queryFilter(tokenInFilter);
-            const tokenIdsIn = new Set<string>();
-            for(const event of tokenInEvents) {
-              if(event.args && event.args["tokenId"]) {
-                tokenIdsIn.add(ethers.BigNumber.from(event.args["tokenId"]).toHexString());
+            const tokenOutEvents = await contract.queryFilter(tokenOutFilter);
+            const sequentialTransfers = tokenInEvents.concat(tokenOutEvents);
+            if(sequentialTransfers.length > 1) {
+              sequentialTransfers.sort((a,b) => a.blockNumber - b.blockNumber);
+            }
+            const tokenIds = new Set<string>();
+            const lowerCaseAddress = this.address.toLowerCase();
+            for(let i = 0; i < sequentialTransfers.length; i++) {
+              const event = sequentialTransfers[i];
+              if(event.args && event.args["tokenId"] && event.args["to"] && event.args["from"]) {
+                const tokenId = ethers.BigNumber.from(event.args["tokenId"]).toHexString();
+                if(event.args["to"].toLowerCase() === lowerCaseAddress)
+                  tokenIds.add(tokenId);
+                else if(event.args["from"].toLowerCase() === lowerCaseAddress)
+                  tokenIds.delete(tokenId);
               }
             }
-            for(const tokenId of tokenIdsIn) {
+            for(const tokenId of tokenIds) {
               addToken(ethers.BigNumber.from(tokenId));
             }
           } else {
