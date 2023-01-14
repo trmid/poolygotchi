@@ -53,7 +53,8 @@
             console.log("SW update found!");
             const newWorker = sw.installing;
             newWorker.addEventListener("statechange", () => {
-              if (newWorker.state === "activated") location.reload();
+              console.log(newWorker.state);
+              if (newWorker.state === "activated") setTimeout(() => location.reload(), 0);
             });
           });
         }
