@@ -47,9 +47,9 @@
         index: 0
       },
       buttons: {
-        left: { title: "-", class: "icofont-minus", action: () => null },
+        left: { title: "No Action", class: "icofont-minus", action: () => null },
         middle: { title: "Acknowledge", class: "icofont-ui-check", action: close },
-        right: { title: "-", class: "icofont-minus", action: () => null },
+        right: { title: "No Action", class: "icofont-minus", action: () => null },
       }
     });
   });

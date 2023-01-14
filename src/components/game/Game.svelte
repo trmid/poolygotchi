@@ -8,9 +8,9 @@
 
   /* Default Values */
   const DEFAULT_BUTTONS = {
-    left: { title: "-", class: "icofont-minus", action: () => null },
-    middle: { title: "-", class: "icofont-minus", action: () => null },
-    right: { title: "-", class: "icofont-minus", action: () => null }
+    left: { title: "No Action", class: "icofont-minus", action: () => null },
+    middle: { title: "No Action", class: "icofont-minus", action: () => null },
+    right: { title: "No Action", class: "icofont-minus", action: () => null }
   };
 
   /* Game State Stores */

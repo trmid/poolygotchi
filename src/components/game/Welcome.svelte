@@ -13,7 +13,7 @@
         index: 0
       },
       buttons: {
-        left: { title: "-", class: "icofont-minus", action: () => null },
+        left: { title: "No Action", class: "icofont-minus", action: () => null },
         middle: { title: "connect", class: "icofont-wallet", action: () => connect().catch(console.error) },
         right: { title: "about", class: "icofont-question", action: () => push("/about") }
       }
