@@ -17,6 +17,13 @@ const production = !process.env.ROLLUP_WATCH;
 // Output path:
 const out = "docs";
 
+// Files in the out folder to ignore in the service worker cache:
+const ignoreFilesSW = [
+	"sw.js",
+	"build/bundle.js.map",
+	"CNAME",
+];
+
 function serve() {
 	let server;
 
@@ -59,14 +66,14 @@ const generateSW = () => ({
 		};
 		
 		// Read all files in out folder:
-		const outFiles = new Set(["./", "build/bundle.js", "build/bundle.css", ...recursiveFiles("./").filter(file => file !== 'sw.js')].map(filename => filename.replace(/\\/g, "/")));
+		const outFiles = new Set(["./", "build/bundle.js", "build/bundle.css", ...recursiveFiles("./")].map(filename => filename.replace(/\\/g, "/")).filter(file => !ignoreFilesSW.includes(file)));
 
 		// Read sw-template:
 		const template = fs.readFileSync("sw-template.js", { encoding: 'utf-8' });
 
 		// Replace markers:
 		let sw = template
-			.replace(/\$PACKAGE\_VERSION/g, nodePackage.version)
+			.replace(/\$PACKAGE\_VERSION/g, nodePackage.version + (production ? "" : ":" + Math.floor(Math.random() * 0xffffffff).toString(16)))
 			.replace(/\$FILES_TO_CACHE/g, JSON.stringify([...outFiles]));
 
 		// Append ipfs.min.js contents to worker:
