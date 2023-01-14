@@ -33,7 +33,7 @@
     align-items: center;
     gap: 0.5rem;
   }
-  button:focus {
+  button:focus, button:hover {
     background: var(--bg-gradient);
     outline: 1px solid var(--c3);
     animation-name: outline-pulse;
