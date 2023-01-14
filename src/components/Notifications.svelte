@@ -1,15 +1,24 @@
 <!-- Module -->
 <script type="ts" context="module">
-  import { writable } from "svelte/store";
+  import { get, writable } from "svelte/store";
   export interface Notification {
     message: string
     type: 'error' | 'warning' | 'standard' | 'success'
     timestamp: number
+    popup?: boolean
+    title?: string
+    hideDismissButton?: boolean
   }
   export const notification = writable<Notification | null>(null);
+  export const selectedNotification = writable<Notification | null>(null);
   export function pushNotification(_notification: Omit<Notification, "timestamp">) {
     (_notification as Notification).timestamp = Date.now();
     notification.set((_notification as Notification));
+    return () => {
+      console.log("dismissing...");
+      if(get(notification) == _notification) notification.set(null);
+      if(get(selectedNotification) == _notification) selectedNotification.set(null);
+    };
   }
 </script>
 
@@ -20,7 +29,12 @@
   import { fly, fade } from "svelte/transition";
 
   const notificationDuration = 9000;
-  let selectedNotification: Notification | null = null;
+
+  $: if($notification && $notification.popup) select($notification);
+
+  function select(notification: Notification) {
+    $selectedNotification = notification;
+  }
 </script>
 
 <!-- Notifications -->
@@ -29,7 +43,7 @@
   <div
     id="notification"
     class={$notification.type}
-    on:click={() => selectedNotification = $notification}
+    on:click={() => $selectedNotification = $notification}
     in:fly={{ y: 250 }}
     out:fade={{ duration: 1000 }}
   >
@@ -38,23 +52,29 @@
 {/if}
 
 <!-- Selected Notification -->
-{#if selectedNotification}
-  <Overlay close={() => selectedNotification = null} width={400}>
-    <h3 class={selectedNotification.type}>
-      {#if selectedNotification.type === 'error'}
-        Error
-      {:else if selectedNotification.type === 'warning'}
-        Warning
-      {:else if selectedNotification.type === 'standard'}
-        Notification
-      {:else if selectedNotification.type === 'success'}
-        Success
+{#if $selectedNotification}
+  <Overlay close={() => $selectedNotification = null} width={400}>
+    <h3 class={$selectedNotification.type}>
+      {#if $selectedNotification.title}
+        {$selectedNotification.title}
+      {:else}
+        {#if $selectedNotification.type === 'error'}
+          Error
+        {:else if $selectedNotification.type === 'warning'}
+          Warning
+        {:else if $selectedNotification.type === 'standard'}
+          Notification
+        {:else if $selectedNotification.type === 'success'}
+          Success
+        {/if}
       {/if}
     </h3>
-    <p class="full-message">{@html selectedNotification.message}</p>
-    <div>
-      <button on:click={() => { if(selectedNotification == $notification){ $notification = null }; selectedNotification = null; }}>dismiss</button>
-    </div>
+    <p class="full-message">{@html $selectedNotification.message}</p>
+    {#if !$selectedNotification.hideDismissButton}
+      <div>
+        <button on:click={() => { if($selectedNotification == $notification){ $notification = null }; $selectedNotification = null; }}>dismiss</button>
+      </div>
+    {/if}
   </Overlay>
 {/if}
 

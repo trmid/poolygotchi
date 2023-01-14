@@ -8,7 +8,11 @@
   import Notifications from "./components/Notifications.svelte";
   import Focus from "./components/Focus.svelte";
   import Time from "./components/Time.svelte";
+  import ServiceWorker from "./components/ServiceWorker.svelte";
 </script>
+
+<!-- Service Worker -->
+<ServiceWorker />
 
 <!-- Header -->
 <Header />
