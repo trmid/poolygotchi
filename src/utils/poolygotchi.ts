@@ -93,25 +93,33 @@ export default class Poolygotchi {
       "$name is looking optimistic today.",
       "$name is looking for something to do.",
       "$name wants to play a game.",
-      "$name is wandering around."
+      "$name is wandering around.",
+      "$name is hoping for a win today!",
+      "$name could go for a swim.",
+      "$name is feeling lucky!"
     ],
     happy: [
       "$name looks very happy!",
       "$name is happy to see you!",
       "$name is proud of you.",
       "$name is having fun!",
+      "$name feels like winning today!",
+      "$name could go for a swim!",
+      "$name is feeling lucky!"
     ],
     sad: [
       "$name looks upset about something...",
       "$name could use some cheering up...",
       "$name is sad today. Maybe we should play a game!",
-      "$name is pouting."
+      "$name is pouting.",
+      "$name is hoping for a win."
     ],
     crying: [
       "$name looks very upset...",
       "$name could use some cheering up...",
       "$name is feeling distant and ignored.",
-      "$name won't stop crying!"
+      "$name won't stop crying!",
+      "$name could really use a win."
     ],
     sleeping: [
       "$name is taking a nap.",
