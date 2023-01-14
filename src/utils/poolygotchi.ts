@@ -27,11 +27,13 @@ export default class Poolygotchi {
 
   public async healthFactor() {
     const secondsInWeek = 60 * 60 * 24 * 7;
-    const { goalAmountWeekly, startBalance } = await this.data();
+    const { goalAmountWeekly, startBalance, goalStartDate } = await this.data();
     const totalDeposited = await PoolTogether.totalDeposited(this.address);
     const balanceChange = totalDeposited.sub(startBalance);
-    const secondsOff = balanceChange.mul(secondsInWeek).div(BigNumber.from(goalAmountWeekly));
-    return secondsOff.toNumber() / secondsInWeek;
+    const secondsSaved = balanceChange.mul(secondsInWeek).div(BigNumber.from(goalAmountWeekly));
+    const secondsOff = goalStartDate.add(secondsSaved).sub(Math.floor(Date.now() / 1000)).toNumber();
+    console.log(`Seconds off saving goal: ${secondsOff}`);
+    return secondsOff / secondsInWeek;
   }
 
   public possibleStates(healthFactor: number): { state: State, chance: number }[] {
@@ -73,9 +75,9 @@ export default class Poolygotchi {
   }
 
   static expression(state: State, name: string) {
-    const expressionDuration = 30; // 30 seconds
+    const expressionDuration = 20; // 20 seconds
     const possibleExpressions = Poolygotchi.expressions[state];
-    const timedIndex = Math.floor(possibleExpressions.length * (Math.floor(Date.now() / 1000) % expressionDuration) / expressionDuration);
+    const timedIndex = Math.floor((Date.now() / 1000) / expressionDuration) % possibleExpressions.length;
     console.log(timedIndex);
     const expression = possibleExpressions[timedIndex];
     return expression.replace(/\$name/g, name);
