@@ -97,22 +97,22 @@
         index: 0
       },
       buttons: {
-      left: {
-        title: "back",
-        class: "icofont-arrow-left",
-        action: back
-      },
-      middle: {
-        title: "cancel",
-        class: "icofont-ui-close",
-        action: disconnect
-      },
-      right: {
-        title: "next",
-        class: "icofont-arrow-right",
-        action: next
+        left: {
+          title: "back",
+          class: "icofont-arrow-left",
+          action: back
+        },
+        middle: {
+          title: "cancel",
+          class: "icofont-ui-close",
+          action: disconnect
+        },
+        right: {
+          title: "next",
+          class: "icofont-arrow-right",
+          action: next
+        }
       }
-    }
     });
   });
 
