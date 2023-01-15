@@ -2,6 +2,7 @@ import { BigNumber, Signer } from "ethers";
 import { providers } from "weaverfi/dist/functions";
 import mainnet from "./poolTogetherContracts.json";
 import { PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
+import type { AccountWithSigner } from "./account";
 
 export default class PoolTogether {
 
@@ -18,24 +19,6 @@ export default class PoolTogether {
     return PoolTogether._prizePoolNetwork;
   }
 
-  // static async totalDeposited(address: string) {
-  //   const chainIdMap: Record<number, Chain> = {
-  //     1: 'eth',
-  //     10: 'op',
-  //     137: 'poly',
-  //     43114: 'avax'
-  //   };
-  //   let balance = BigNumber.from(0);
-  //   for(const deployment of mainnet.contracts) {
-  //     if(deployment.type === "Ticket") {
-  //       const chain = chainIdMap[deployment.chainId];
-  //       const chainBalance: BigNumber = await query(chain, deployment.address as Address, deployment.abi as any, "balanceOf", [address]);
-  //       balance = balance.add(chainBalance);
-  //     }
-  //   }
-  //   return balance;
-  // }
-
   static async totalDeposited(address: string) {
     const res = await PoolTogether.prizePoolNetwork().getUsersPrizePoolBalances(address);
     let balance = BigNumber.from(0);
@@ -45,8 +28,30 @@ export default class PoolTogether {
     return balance;
   }
 
-  static async deposit(chain: number, amount: BigNumber, signer: Signer) {
-    // const user = new User();
+  static prizePool(chain: number) {
+    const address = mainnet.contracts.filter(x => x.chainId == chain && x.type === "YieldSourcePrizePool")[0]?.address;
+    if(!address) throw new Error(`Could not find YieldSourcePrizePool for chain: ${chain}`);
+    const prizePool = PoolTogether.prizePoolNetwork().getPrizePool(chain, address);
+    if(!prizePool) throw new Error(`Could not find prize pool for chain: ${chain} and address: ${address}`);
+    return prizePool;
   }
 
+  static async deposit(chain: number, amount: BigNumber, account: AccountWithSigner) {
+    await account.switchChain(chain);
+    const prizePool = PoolTogether.prizePool(chain);
+    const user = new User(prizePool.prizePoolMetadata, account.signer, prizePool);
+    const { isApproved, allowanceUnformatted } = await prizePool.getUsersDepositAllowance(account.address);
+    if(!isApproved || allowanceUnformatted.lt(amount)) {
+      throw new NotEnoughAllowanceError(allowanceUnformatted, amount);
+    }
+    await user.deposit(amount);
+  }
+
+}
+
+export class NotEnoughAllowanceError extends Error {
+  readonly isNotEnoughAllowanceError = true;
+  constructor (readonly available: BigNumber, readonly needed: BigNumber) {
+    super(`Expected: ${needed}, Available: ${available}`);
+  }
 }

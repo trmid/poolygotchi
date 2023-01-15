@@ -1,83 +1,47 @@
 <!-- Module -->
 <script type="ts" context="module">
-  import type { UIComponent, DeviceButtons } from "./game";
-  import { get, writable } from "svelte/store";
+  import { writable } from "svelte/store";
   import type Poolygotchi from "../../utils/poolygotchi";
   import { account } from "../Account.svelte";
-  import { stateStack } from "../../utils/stateStack";
 
-  /* Default Values */
-  const DEFAULT_BUTTONS = {
-    left: { title: "No Action", class: "icofont-minus", action: () => null },
-    middle: { title: "No Action", class: "icofont-minus", action: () => null },
-    right: { title: "No Action", class: "icofont-minus", action: () => null }
-  };
-
-  /* Game State Stores */
+  // Exports:
   export const poolygotchi = writable<Poolygotchi | null>(null);
-  export const viewingAsGuest = writable(false);
-  export const showMenu = writable(false);
-  export const gameUI = stateStack<{
-    menu: {
-      components: UIComponent[],
-      index: number
-    },
-    buttons: DeviceButtons
-  }>({
-    menu: {
-      components: [],
-      index: 0
-    },
-    buttons: DEFAULT_BUTTONS
-  });
 
-  /* Helper Functions */
-  export function selectMenuComponent(component: UIComponent) {
-    const ui = get(gameUI);
-    const index = ui.menu.components.indexOf(component);
-    if(index > -1) {
-      ui.menu.index = index;
-      gameUI.replace(ui);
-    } else {
-      throw new Error("Selecting non-existent component");
-    }
-  }
-
-  /* Set Default Game UI */
-  export function rebaseUI() {
-    gameUI.rebase({
-      menu: {
-        components: [],
-        index: 0
-      },
-      buttons: DEFAULT_BUTTONS
-    });
-  }
-
-  /* Subscriptions */
-  account.subscribe(account => {
-    if(account) {
-      account.poolygotchi()
-        .then(poolygotchi.set)
-        .catch(console.error);
-    } else {
+  // Subscribe poolygotchi to account:
+  account.subscribe(async account => {
+    try {
+      if(!account) {
+        poolygotchi.set(null);
+      } else {
+        poolygotchi.set(await account.poolygotchi());
+      }
+    } catch(err) {
+      console.error(err);
       poolygotchi.set(null);
     }
   });
-  poolygotchi.subscribe(console.log);
 </script>
 
 <!-- Component -->
 <script type="ts">
-  import Screen from "./Screen.svelte";
-  import Buttons from "./Buttons.svelte";
+  import Home from "./scenes/Home.svelte";
+  import Welcome from "./scenes/Welcome.svelte";
+  import AccountSetup from "./scenes/AccountSetup.svelte";
 </script>
 
 <!-- Device Container -->
 <div id="device">
   <div class="case" />
-  <Screen />
-  <Buttons buttons={$gameUI.buttons} />
+
+  <!-- Scene -->
+  {#if $poolygotchi}
+    <Home poolygotchi={$poolygotchi} />
+  {:else if $account}
+    <AccountSetup />
+  {:else}
+    <Welcome />
+  {/if}
+
 </div>
 
 <!-- Style -->

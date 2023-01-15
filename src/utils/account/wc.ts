@@ -49,6 +49,10 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
     }
   }
 
+  public async switchChain(chain: number) {
+    return;
+  }
+
   public async disconnect(): Promise<void> {
     console.warn("Not implemented!");
   }
