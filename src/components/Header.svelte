@@ -7,6 +7,8 @@
     "Ribbit 🐸",
     "Slow and steady 🐢",
     "Chirp chirp 🐦",
+    "Ready to play and save?",
+    "Play or save? Why not both?"
   ];
   let index = Math.floor(Math.random() * announcements.length);
 </script>
