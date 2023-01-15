@@ -96,8 +96,8 @@
 
   #menu > :global(*) {
     box-sizing: border-box;
-    width: 16rem;
-    max-width: 90%;
+    width: 20rem;
+    max-width: 95%;
   }
 
   #menu > .buttons {
