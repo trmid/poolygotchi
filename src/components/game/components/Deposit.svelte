@@ -32,7 +32,6 @@
 
   // Menu Components:
   let menuComponents: (UIComponent | null)[] = [];
-  $: console.log(formatUSDC);
   $: menuComponents = [
 
     /* Chain Label */
@@ -44,8 +43,8 @@
     /* Empty */
     null,
 
-    /* Close Button */
-    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i> cancel", action: close } as UIButton,
+    /* Back Button */
+    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i> back", action: close } as UIButton,
 
     /* Chain Selector */
     {
@@ -96,7 +95,7 @@
   // Device Buttons:
   let buttons: DeviceButtons;
   $: buttons = {
-    left: { title: "cancel", class: "icofont-undo", action: close },
+    left: { title: "back", class: "icofont-undo", action: close },
     middle: isApproved ? 
       (depositing ? EMPTY_BUTTON : { title: "deposit", class: "icofont-coins", action: () => deposit() }) :
       (approving ? EMPTY_BUTTON : { title: "approve", class: "icofont-ui-check", action: () => approve() }),
@@ -133,22 +132,27 @@
   // Function to trigger the approval transaction:
   let approving = false;
   const approve = async () => {
+    let dismissPending: (() => void) | undefined;
     try {
       approving = true;
       if(!$account) throw new Error("Not connected!");
-      pushNotification({ message: "Approving USDC (step 1 of 2) ...", type: "standard", title: "Approving USDC" });
+      dismissPending = pushNotification({ message: "Approving USDC (step 1 of 2) <i class='icofont-custom-spinner'></i>", type: "standard", title: "Approving USDC", persist: true });
       const res = await PoolTogether.approve(chain, amount, $account);
+      dismissPending();
+      dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Approving USDC", persist: true });
       if(res) {
         const receipt = await res.wait();
         pushNotification({ message: `USDC approved. You can now deposit into your PoolTogether balance.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "standard", title: "USDC Approved" });
       } else {
         pushNotification({ message: "USDC already approved. You may continue with your deposit.", type: "standard", title: "USDC Approved" });
       }
+      dismissPending();
       await queryBalance(chain);
     } catch(err) {
       console.error(err);
       pushNotification({ message: "Approval failed.", type: "error" });
     } finally {
+      dismissPending && dismissPending();
       approving = false;
     }
   };
@@ -156,19 +160,24 @@
   // Function to trigger the deposit transaction:
   let depositing = false;
   const deposit = async () => {
+    let dismissPending: (() => void) | undefined;
     try {
       depositing = true;
       if(!$account) throw new Error("Not connected!");
       if(amount.eq(0)) return pushNotification({ message: "Please input a deposit amount greater than zero.", type: "warning" });
-      pushNotification({ message: "Depositing USDC (step 2 of 2) ...", type: "standard", title: "Depositing USDC" });
+      dismissPending = pushNotification({ message: "Depositing USDC (step 2 of 2) <i class='icofont-custom-spinner'></i>", type: "standard", title: "Depositing USDC", persist: true });
       const res = await PoolTogether.deposit(chain, amount, $account);
+      dismissPending();
+      dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Depositing USDC", persist: true });
       const receipt = await res.wait();
+      dismissPending();
       pushNotification({ message: `Deposited ${formatUSDC(amount)} USDC.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success", title: "USDC Deposited!" });
       await queryBalance(chain);
     } catch(err) {
       console.error(err);
       pushNotification({ message: "Failed to deposit.", type: "error" });
     } finally {
+      dismissPending && dismissPending();
       depositing = false;
     }
   };
