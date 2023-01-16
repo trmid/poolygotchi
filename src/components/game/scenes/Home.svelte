@@ -8,6 +8,7 @@
   import Menu from "../components/Menu.svelte";
   import { buttonController } from "../components/ButtonController.svelte";
   import Environment from "../components/Environment.svelte";
+  import Withdraw from "../components/Withdraw.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
@@ -24,7 +25,7 @@
     { type: "button", name: "<i class='icofont-star' style='color:hsl(310,75%,64%);'></i>goal", action: () => { console.log("goal") } } as UIButton,
     { type: "button", name: "<i class='icofont-paint' style='color:hsl(30,75%,64%);'></i>personalize", action: () => { console.log("personalize") } } as UIButton,
     { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i>close", action: () => showMenu = false } as UIButton,
-    { type: "button", name: "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>withdraw", action: () => { console.log("withdraw") } } as UIButton,
+    { type: "button", name: "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>withdraw", action: () => { widget = "withdraw" } } as UIButton,
     { type: "button", name: "<i class='icofont-game' style='color:hsl(80,75%,64%);'></i>minigames", action: () => { console.log("minigames") }, disabled: true, title: "Coming Soon!" } as UIButton,
     { type: "button", name: "<i class='icofont-ui-home' style='color:hsl(190,75%,64%);'></i>visit", action: () => { console.log("visit") }, disabled: true, title:"Coming Soon!" } as UIButton,
   ];
@@ -51,11 +52,20 @@
   <!-- Menu or Widget -->
   <!-- Menu or Widget -->
   {#if showMenu && !widget}
+
     <!-- Menu -->
     <Menu components={menuComponents} />
+
   {:else if widget === "deposit"}
+
     <!-- Deposit -->
     <Deposit {deviceButtonController} close={() => widget = null} />
+
+  {:else if widget === "withdraw"}
+
+    <!-- Withdraw -->
+    <Withdraw {deviceButtonController} close={() => widget = null} />
+
   {/if}
 
 </Scene>
