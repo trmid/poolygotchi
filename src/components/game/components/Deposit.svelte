@@ -10,6 +10,7 @@
   import Menu from "./Menu.svelte";
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
+  import { explorerReceipt } from "../../../utils/tx";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -30,36 +31,84 @@
   });
 
   // Menu Components:
-  let menuComponents: UIComponent[] = [];
+  let menuComponents: (UIComponent | null)[] = [];
   $: console.log(formatUSDC);
   $: menuComponents = [
+
+    /* Chain Label */
     { type: "label", label: "chain" } as UILabel,
-    { type: "label", label: "deposited" } as UILabel,
+
+    /* Amount Label */
     { type: "label", label: "amount" } as UILabel,
-    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i>cancel", action: close } as UIButton,
-    { type: "chain", chain, onChange: c => chainChanged(c) } as UIChainInput,
-    { type: "label", label: deposited === undefined ? "loading..." : formatUSDC(deposited), token: 'usdc', style: 'text-align:right;' } as UILabel,
-    { type: "number", placeholder: "amount", token: 'usdc', attributes: { min: 0, max: parseFloat(formatUSDC(balance ?? BigNumber.from(0), false)), step: 5 }, onChange: v => amountChanged(v), style: 'text-align:right;' } as UINumberInput,
+
+    /* Empty */
+    null,
+
+    /* Close Button */
+    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i> cancel", action: close } as UIButton,
+
+    /* Chain Selector */
+    {
+      type: "chain",
+      chain,
+      onChange: c => chainChanged(c),
+      disabled: depositing || approving,
+    } as UIChainInput,
+
+    /* Amount Input */
+    {
+      type: "number",
+      placeholder: "amount",
+      token: 'usdc',
+      initialValue: parseFloat(formatUSDC(amount ?? BigNumber.from(0), false)),
+      attributes: { min: 0, max: parseFloat(formatUSDC(balance ?? BigNumber.from(0), false)), step: 5 },
+      onChange: v => amountChanged(v),
+      style: 'text-align:right;',
+      disabled: depositing || approving,
+    } as UINumberInput,
+
+    /* Max Button */
     {
       type: "button",
-      name: isApproved ? "<i class='icofont-coins' style='color:hsl(50,75%,64%);'></i> deposit" : "<i class='icofont-ui-check' style='color:hsl(190,75%,64%);'></i> approve",
-      action: isApproved ? (() => deposit()) : (() => approve())
-    } as UIButton
+      name: (balance === undefined) ? "loading <i class='icofont-custom-spinner'></i>" : `$${formatUSDC(balance)} (max)`, token: 'usdc', style: 'justify-content:right;color:#888;',
+      disabled: depositing || approving,
+      action: () => balance && amountChanged(balance)
+    } as UIButton,
+
+    /* Approve / Deposit Button */
+    (
+      isApproved ?
+      {
+        type: "button",
+        name: `${depositing ? "<i class='icofont-custom-spinner'></i>" : "<i class='icofont-coins' style='color:hsl(50,75%,64%);'></i>"} deposit`,
+        disabled: depositing,
+        action: deposit
+      } as UIButton :
+      {
+        type: "button",
+        name: `${approving ? "<i class='icofont-custom-spinner'></i>" : "<i class='icofont-ui-check' style='color:hsl(190,75%,64%);'></i>"} approve`,
+        disabled: approving,
+        action: approve
+      } as UIButton
+    )
   ];
 
-  // Buttons:
+  // Device Buttons:
   let buttons: DeviceButtons;
   $: buttons = {
     left: { title: "cancel", class: "icofont-undo", action: close },
-    middle: isApproved ? { title: "deposit", class: "icofont-coins", action: () => deposit() } : { title: "approve", class: "icofont-ui-check", action: () => approve() },
+    middle: isApproved ? 
+      (depositing ? EMPTY_BUTTON : { title: "deposit", class: "icofont-coins", action: () => deposit() }) :
+      (approving ? EMPTY_BUTTON : { title: "approve", class: "icofont-ui-check", action: () => approve() }),
     right: EMPTY_BUTTON
   };
 
   // Handle amount value change:
-  const amountChanged = (value: number) => {
-    const newAmount = ethers.utils.parseUnits(""+value, 6);
+  const amountChanged = (value: number | BigNumber) => {
+    const newAmount = (typeof value === "number") ? ethers.utils.parseUnits(""+value, 6) : BigNumber.from(value);
     if(!newAmount.eq(amount)) {
       amount = newAmount;
+      if(balance && amount.gt(balance)) amount = balance;
     }
   };
 
@@ -71,32 +120,56 @@
   // Function to query balance and approvals for a given chain:
   const queryBalance = async (chain: number) => {
     if(!$account) return;
+    balance = undefined;
+    deposited = undefined;
+    approved = undefined;
     const prizePool = PoolTogether.prizePool(chain);
-    balance = await prizePool.getUsersTokenBalance($account.address);
-    deposited = (await prizePool.getUsersPrizePoolBalances($account.address)).ticket;
+    const balances = await prizePool.getUsersPrizePoolBalances($account.address);
+    balance = balances.token;
+    deposited = balances.ticket;
     approved = (await prizePool.getUsersDepositAllowance($account.address)).allowanceUnformatted;
   };
 
   // Function to trigger the approval transaction:
+  let approving = false;
   const approve = async () => {
     try {
+      approving = true;
       if(!$account) throw new Error("Not connected!");
-      await PoolTogether.approve(chain, amount, $account);
+      pushNotification({ message: "Approving USDC (step 1 of 2) ...", type: "standard", title: "Approving USDC" });
+      const res = await PoolTogether.approve(chain, amount, $account);
+      if(res) {
+        const receipt = await res.wait();
+        pushNotification({ message: `USDC approved. You can now deposit into your PoolTogether balance.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "standard", title: "USDC Approved" });
+      } else {
+        pushNotification({ message: "USDC already approved. You may continue with your deposit.", type: "standard", title: "USDC Approved" });
+      }
       await queryBalance(chain);
     } catch(err) {
       console.error(err);
-      pushNotification({ message: "Failed to approve.", type: "error" });
+      pushNotification({ message: "Approval failed.", type: "error" });
+    } finally {
+      approving = false;
     }
   };
 
   // Function to trigger the deposit transaction:
+  let depositing = false;
   const deposit = async () => {
     try {
+      depositing = true;
       if(!$account) throw new Error("Not connected!");
-      await PoolTogether.deposit(chain, amount, $account);
+      if(amount.eq(0)) return pushNotification({ message: "Please input a deposit amount greater than zero.", type: "warning" });
+      pushNotification({ message: "Depositing USDC (step 2 of 2) ...", type: "standard", title: "Depositing USDC" });
+      const res = await PoolTogether.deposit(chain, amount, $account);
+      const receipt = await res.wait();
+      pushNotification({ message: `Deposited ${formatUSDC(amount)} USDC.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success", title: "USDC Deposited!" });
+      await queryBalance(chain);
     } catch(err) {
       console.error(err);
       pushNotification({ message: "Failed to deposit.", type: "error" });
+    } finally {
+      depositing = false;
     }
   };
 
