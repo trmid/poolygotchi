@@ -1,4 +1,4 @@
-import { BigNumber, Signer } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { providers } from "weaverfi/dist/functions";
 import mainnet from "./poolTogetherContracts.json";
 import { PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
@@ -54,7 +54,12 @@ export default class PoolTogether {
     if(!isApproved || allowanceUnformatted.lt(amount)) {
       throw new NotEnoughAllowanceError(allowanceUnformatted, amount);
     }
-    return await user.deposit(amount);
+    const delegateAddress = await user.getTicketDelegate();
+    if(delegateAddress === ethers.constants.AddressZero) {
+      return await user.depositAndDelegate(amount, account.address);
+    } else {
+      return await user.deposit(amount);
+    }
   }
 
 }
