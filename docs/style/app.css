@@ -155,6 +155,17 @@ select.game-ui:disabled, select.game-ui.disabled {
   -webkit-text-fill-color: transparent;
 }
 
+/* Inline Spinner */
+.icofont-custom-spinner::before {
+  content: "\eff5";
+  display: inline-block;
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: linear;
+}
+
 /* No Text Select Class */
 .no-select, *[class^=text-gradient] {
   user-select: none;
