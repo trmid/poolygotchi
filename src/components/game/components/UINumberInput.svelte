@@ -5,9 +5,14 @@
   export let select: () => void;
   export let index: number;
 
-  let value = input.initialValue ?? 0;
+  let value = 0;
 
+  $: if(input.initialValue !== undefined) setInitial();
   $: input.onChange(value ?? 0);
+
+  function setInitial() {
+    value = input.initialValue ?? 0;
+  }
 </script>
 
 <!-- Input -->
