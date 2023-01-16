@@ -62,11 +62,29 @@ export default class PoolTogether {
     }
   }
 
+  static async withdraw(chain: number, amount: BigNumber, account: AccountWithSigner) {
+    await account.switchChain(chain);
+    const prizePool = PoolTogether.prizePool(chain);
+    const user = new User(prizePool.prizePoolMetadata, account.signer, prizePool);
+    const { ticket } = await prizePool.getUsersPrizePoolBalances(account.address);
+    if(ticket.lt(amount)) {
+      throw new NotEnoughAllowanceError(ticket, amount);
+    }
+    return await user.withdraw(amount);
+  }
+
 }
 
 export class NotEnoughAllowanceError extends Error {
   readonly isNotEnoughAllowanceError = true;
   constructor (readonly available: BigNumber, readonly needed: BigNumber) {
     super(`Expected: ${needed}, Available: ${available}`);
+  }
+}
+
+export class NotEnoughDepositedError extends Error {
+  readonly isNotEnoughDepositedError = true;
+  constructor (readonly available: BigNumber, readonly needed: BigNumber) {
+    super(`Expected: ${needed}, Deposited: ${available}`);
   }
 }
