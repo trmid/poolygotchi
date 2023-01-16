@@ -83,9 +83,7 @@
         await PoolTogether.totalDeposited(address)
       );
       hatchTx.chainId = networks.poolygotchi.chainId;
-      console.log(hatchTx);
       const res = await $account.safeSendTransaction(hatchTx);
-      console.log(res);
       await res.wait();
       $poolygotchi = await $account.poolygotchi();
     } catch(err) {

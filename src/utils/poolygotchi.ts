@@ -78,7 +78,6 @@ export default class Poolygotchi {
     const expressionDuration = 20; // 20 seconds
     const possibleExpressions = Poolygotchi.expressions[state];
     const timedIndex = Math.floor((Date.now() / 1000) / expressionDuration) % possibleExpressions.length;
-    console.log(timedIndex);
     const expression = possibleExpressions[timedIndex];
     return expression.replace(/\$name/g, name);
   }

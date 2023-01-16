@@ -72,11 +72,8 @@ export abstract class BaseAccount implements Account {
         const addToken = (tokenId: ethers.BigNumberish) => {
           avatarPromises.push({ url: () => (async () => {
             const tokenURI = await contract.tokenURI(tokenId);
-            console.log(`Loading token: ${key} - ${tokenId}`);
             const metadata = await fetchJSON(tokenURI);
-            console.log("Metadata: ", metadata);
             const url = await normalizeImageURI(metadata.image);
-            console.log("Resolved: ", url);
             return url;
           })(), category: nftContracts[key].category });
         };

@@ -43,7 +43,6 @@
 
         // Check if active account is still the account we were fetching for:
         if(a == $account) {
-          console.log("Fetched avatars:", avatars);
 
           // Set avatar to highest weight uri (if not set before):
           avatarList = avatars;

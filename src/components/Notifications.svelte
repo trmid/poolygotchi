@@ -16,7 +16,6 @@
     (_notification as Notification).timestamp = Date.now();
     notification.set((_notification as Notification));
     return () => {
-      console.log("dismissing...");
       if(get(notification) == _notification) notification.set(null);
       if(get(selectedNotification) == _notification) selectedNotification.set(null);
     };

@@ -26,7 +26,6 @@
         };
         stopConnecting = (err: string | Error) => {
           if(get(connectionPromise)) {
-            console.log("Setting null");
             connectionPromise.set(null);
             reject(err instanceof Error ? err : new Error(err));
           }
@@ -125,7 +124,6 @@
     } catch(err) {
       console.error(err);
     } finally {
-      console.log("closed");
       web3Modal.closeModal();
     }
   };
