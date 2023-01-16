@@ -8,6 +8,7 @@
     popup?: boolean
     title?: string
     hideDismissButton?: boolean
+    persist?: boolean
   }
   export const notification = writable<Notification | null>(null);
   export const selectedNotification = writable<Notification | null>(null);
@@ -38,44 +39,48 @@
 </script>
 
 <!-- Notifications -->
-{#if $notification && $time - $notification.timestamp < notificationDuration}
+{#if $notification && ($notification.persist || ($time - $notification.timestamp < notificationDuration))}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    id="notification"
-    class={$notification.type}
-    on:click={() => $selectedNotification = $notification}
-    in:fly={{ y: 250 }}
-    out:fade={{ duration: 1000 }}
-  >
-    {@html $notification.message}
-  </div>
+  {#key $notification}
+    <div
+      id="notification"
+      class={$notification.type}
+      on:click={() => $selectedNotification = $notification}
+      in:fly={{ y: 250 }}
+      out:fade={{ duration: 1000 }}
+    >
+      {@html $notification.message}
+    </div>
+  {/key}
 {/if}
 
 <!-- Selected Notification -->
 {#if $selectedNotification}
-  <Overlay close={() => $selectedNotification = null} width={400}>
-    <h3 class={$selectedNotification.type}>
-      {#if $selectedNotification.title}
-        {$selectedNotification.title}
-      {:else}
-        {#if $selectedNotification.type === 'error'}
-          Error
-        {:else if $selectedNotification.type === 'warning'}
-          Warning
-        {:else if $selectedNotification.type === 'standard'}
-          Notification
-        {:else if $selectedNotification.type === 'success'}
-          Success
+  {#key $selectedNotification}
+    <Overlay close={() => $selectedNotification = null} width={400}>
+      <h3 class={$selectedNotification.type}>
+        {#if $selectedNotification.title}
+          {$selectedNotification.title}
+        {:else}
+          {#if $selectedNotification.type === 'error'}
+            Error
+          {:else if $selectedNotification.type === 'warning'}
+            Warning
+          {:else if $selectedNotification.type === 'standard'}
+            Notification
+          {:else if $selectedNotification.type === 'success'}
+            Success
+          {/if}
         {/if}
+      </h3>
+      <p class="full-message">{@html $selectedNotification.message}</p>
+      {#if !$selectedNotification.hideDismissButton}
+        <div>
+          <button on:click={() => { if($selectedNotification == $notification){ $notification = null }; $selectedNotification = null; }}>dismiss</button>
+        </div>
       {/if}
-    </h3>
-    <p class="full-message">{@html $selectedNotification.message}</p>
-    {#if !$selectedNotification.hideDismissButton}
-      <div>
-        <button on:click={() => { if($selectedNotification == $notification){ $notification = null }; $selectedNotification = null; }}>dismiss</button>
-      </div>
-    {/if}
-  </Overlay>
+    </Overlay>
+  {/key}
 {/if}
 
 <!-- Style -->
@@ -93,6 +98,7 @@
     cursor: pointer;
     word-wrap: break-word;
     overflow: hidden;
+    box-shadow: 3px 4px 0 var(--shadow-color);
   }
 
   #notification :global(a) {
