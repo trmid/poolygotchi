@@ -95,6 +95,10 @@
     overflow: hidden;
   }
 
+  #notification :global(a) {
+    text-decoration-color: currentColor;
+  }
+
   .standard {
     background-color: dodgerblue;
     color: white;
@@ -120,5 +124,6 @@
     word-wrap: break-word;
     overflow-y: auto;
     max-height: 60vh;
+    padding: 0 1px;
   }
 </style>
