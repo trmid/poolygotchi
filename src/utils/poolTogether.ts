@@ -23,7 +23,7 @@ export default class PoolTogether {
     const res = await PoolTogether.prizePoolNetwork().getUsersPrizePoolBalances(address);
     let balance = BigNumber.from(0);
     for(const chain of res) {
-      balance = balance.add(chain.balances.token);
+      balance = balance.add(chain.balances.ticket);
     }
     return balance;
   }
@@ -36,6 +36,16 @@ export default class PoolTogether {
     return prizePool;
   }
 
+  static async approve(chain: number, amount: BigNumber, account: AccountWithSigner) {
+    await account.switchChain(chain);
+    const prizePool = PoolTogether.prizePool(chain);
+    const user = new User(prizePool.prizePoolMetadata, account.signer, prizePool);
+    const { isApproved, allowanceUnformatted } = await prizePool.getUsersDepositAllowance(account.address);
+    if(!isApproved || allowanceUnformatted.lt(amount)) {
+      return await user.approveDeposits(amount);
+    }
+  }
+
   static async deposit(chain: number, amount: BigNumber, account: AccountWithSigner) {
     await account.switchChain(chain);
     const prizePool = PoolTogether.prizePool(chain);
@@ -44,7 +54,7 @@ export default class PoolTogether {
     if(!isApproved || allowanceUnformatted.lt(amount)) {
       throw new NotEnoughAllowanceError(allowanceUnformatted, amount);
     }
-    await user.deposit(amount);
+    return await user.deposit(amount);
   }
 
 }

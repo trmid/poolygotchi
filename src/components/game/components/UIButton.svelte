@@ -2,25 +2,20 @@
   import type { UIButton } from "./Menu.svelte";
 
   export let button: UIButton;
-  export let selected = false;
-  export let onSelect: () => void;
+  export let select: () => void;
+  export let index: number;
 
-  let buttonElement: HTMLButtonElement | undefined;
-  $: if(selected && buttonElement) buttonElement.focus(); 
-
-  const onHover = () => {
-    buttonElement?.focus();
-    onSelect();
-  };
 </script>
 
 <!-- Button -->
 <button
-  bind:this={buttonElement}
   on:click={button.disabled ? null : button.action}
-  on:pointerenter={onHover}
+  on:pointerenter={select}
+  data-index={index}
   title={button.title ?? ""}
+  class="game-ui"
   class:disabled={button.disabled}
+  style={button.style ?? ""}
 >
   {@html button.name}
 </button>
@@ -28,25 +23,12 @@
 <!-- Style -->
 <style>
   button {
-    font-size: 14px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
   }
-  button:focus, button:hover {
-    background: var(--bg-gradient);
-    outline: 1px solid var(--c3);
-    animation-name: outline-pulse;
-    animation-duration: 1.2s;
-    animation-play-state: running;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-  }
   button > :global(i[class^=icofont-]) {
     font-size: 16px;
-  }
-  button.disabled {
-    filter: grayscale(0.8);
   }
 </style>

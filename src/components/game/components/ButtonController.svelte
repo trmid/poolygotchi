@@ -10,9 +10,18 @@
       define: b => {
         stack.push(b);
         _set(b);
-        return () => {
-          stack = stack.filter(x => x != b);
-          _set(stack[stack.length - 1]);
+        return {
+          remove: () => {
+            stack = stack.filter(x => x != b);
+            _set(stack[stack.length - 1]);
+          },
+          update: (b2) => {
+            let index = stack.indexOf(b);
+            if(index < 0) throw new Error("item was removed");
+            b = b2;
+            stack[index] = b;
+            if(index == stack.length - 1) _set(b);
+          }
         };
       },
       ...readable<DeviceButtons>(root, set => {
@@ -23,7 +32,7 @@
   }
 
   export interface ButtonController extends Readable<DeviceButtons> {
-    define: (buttons: DeviceButtons) => () => void
+    define: (buttons: DeviceButtons) => { remove: () => void, update: (buttons: DeviceButtons) => void }
   }
 </script>
 
@@ -33,8 +42,15 @@
   
   export let controller: ButtonController;
   export let buttons: DeviceButtons;
+  
+  $: buttons && _update && _update(buttons);
 
-  let remove: () => void;
-  onMount(() => remove = controller.define(buttons));
-  onDestroy(() => remove());
+  let _remove: () => void;
+  let _update: (b: DeviceButtons) => void;
+  onMount(() => {
+    const { remove, update } = controller.define(buttons);
+    _remove = remove;
+    _update = update;
+  });
+  onDestroy(() => _remove());
 </script>
