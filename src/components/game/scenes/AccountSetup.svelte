@@ -10,6 +10,7 @@
   import { Notification, pushNotification } from "../../Notifications.svelte";
   import Scene from "../components/Scene.svelte";
   import { buttonController } from "../components/ButtonController.svelte";
+    import { explorerReceipt } from "../../../utils/tx";
 
   // Pooly Attributes
   let name: string = "";
@@ -71,8 +72,11 @@
   };
 
   // Hatch Function:
+  let hatching = false;
   async function hatch() {
+    let dismissPending: (() => void) | undefined;
     try {
+      hatching = true;
       if(!$account) throw new Error("missing account");
       const address = $account.address;
       const hatchTx = await Poolygotchi.contract().populateTransaction.hatch(
@@ -83,8 +87,13 @@
         await PoolTogether.totalDeposited(address)
       );
       hatchTx.chainId = networks.poolygotchi.chainId;
+      dismissPending = pushNotification({ message: "Hatching your poolygotchi <i class='icofont-custom-spinner'></i>", type: "standard", title: "Hatching...", persist: true });
       const res = await $account.safeSendTransaction(hatchTx);
-      await res.wait();
+      dismissPending();
+      dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Transaction Sent", persist: true });
+      const receipt = await res.wait();
+      dismissPending();
+      pushNotification({ message: `Transaction successful!\n\n<a href="${explorerReceipt(hatchTx.chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
       $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
@@ -98,6 +107,9 @@
       }
       notification.message = `Failed to hatch: ${notification.message}`;
       pushNotification(notification);
+    } finally {
+      dismissPending && dismissPending();
+      hatching = false;
     }
   }
 
@@ -142,9 +154,13 @@
     {:else if page == 3}
       <h3>Hatch Your Poolygotchi</h3>
       <div id="hatch">
-        <button on:click={hatch}>
-          <img src="favicon.png" alt="poolygotchi egg">
-          Hatch!
+        <button on:click={hatch} disabled={hatching}>
+          {#if hatching}
+            Hatching...
+          {:else}
+            <img src="favicon.png" alt="poolygotchi egg">
+            Hatch!
+          {/if}
         </button>
       </div>
     {/if}
@@ -263,6 +279,10 @@
     align-items: center;
     gap: 0.5rem;
     border-radius: 1rem;
+  }
+
+  #hatch > button:disabled {
+    filter: grayscale(0.8);
   }
 
   #hatch > button > img {
