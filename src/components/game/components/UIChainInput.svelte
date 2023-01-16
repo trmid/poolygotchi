@@ -17,6 +17,7 @@
   data-index={index}
   class="game-ui"
   class:disabled={input.disabled}
+  disabled={input.disabled}
   style={input.style ?? ""}
 >
   <option value={1}>Ethereum</option>
