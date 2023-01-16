@@ -71,7 +71,7 @@
 
   // Props:
   export let title = "menu";
-  export let components: UIComponent[];
+  export let components: (UIComponent | null)[];
   export let itemsPerColumn = 4;
 
   // Variables:
@@ -126,7 +126,7 @@
         newIndex = wrappedCoordsToIndex(x + 1, y);
       }
     }
-    if(newIndex >= 0 && components[newIndex].type !== "label") {
+    if(newIndex >= 0 && components[newIndex]?.type !== "label") {
       selectedComponentIndex = newIndex;
       focusIndex(newIndex);
     }
@@ -152,14 +152,16 @@
         in:fly={{ duration: 150, delay: 100 + 100 * componentCoords(i).y, y: 50 }}
         out:fly={{ duration: 150, delay: 100 * componentCoords(itemsPerColumn - i - 1).y, y: 50 }}
       >
-        {#if component.type === "button"}
-          <UIButtonSvelte button={asButton(component)} select={() => selectedComponentIndex = i} index={i} />
-        {:else if component.type === "number"}
-          <UINumberInputSvelte input={asNumberInput(component)} select={() => selectedComponentIndex = i} index={i} />
-        {:else if component.type === "label"}
-          <UILabelSvelte label={asLabel(component)} />
-        {:else if component.type === "chain"}
-          <UIChainInputSvelte input={asChainInput(component)} select={() => selectedComponentIndex = i} index={i} />
+        {#if component}
+          {#if component.type === "button"}
+            <UIButtonSvelte button={asButton(component)} select={() => selectedComponentIndex = i} index={i} />
+          {:else if component.type === "number"}
+            <UINumberInputSvelte input={asNumberInput(component)} select={() => selectedComponentIndex = i} index={i} />
+          {:else if component.type === "label"}
+            <UILabelSvelte label={asLabel(component)} />
+          {:else if component.type === "chain"}
+            <UIChainInputSvelte input={asChainInput(component)} select={() => selectedComponentIndex = i} index={i} />
+          {/if}
         {/if}
       </div>
     {/each}
