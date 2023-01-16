@@ -80,9 +80,9 @@
 <style>
   #speech-bubble {
     position: absolute;
-    top: 7%;
-    left: 7%;
-    right: 7%;
+    top: 6%;
+    left: 6%;
+    right: 6%;
   }
 
   #speech-bubble > .text {
@@ -90,7 +90,7 @@
     inset: 0;
     background-color: var(--c3);
     color: #222;
-    padding: 1rem;
+    padding: calc(0.04 * var(--game-size));
     border: 3px solid var(--c0);
     border-radius: 1rem;
     text-align: left;
