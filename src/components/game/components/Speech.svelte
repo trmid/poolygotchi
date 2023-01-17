@@ -2,18 +2,18 @@
   import { fly } from "svelte/transition";
   import ButtonControllerSvelte from "./ButtonController.svelte";
   import type { ButtonController } from "./ButtonController.svelte";
-  import type { DeviceButtons } from "./Buttons.svelte";
+  import { DeviceButtons, EMPTY_BUTTON } from "./Buttons.svelte";
 
   // Exports:
   export let speech: string;
-  export let deviceButtonController: ButtonController;
-  export let close: () => void;
+  export let deviceButtonController: ButtonController | undefined = undefined;
+  export let close: (() => void) | undefined = undefined;
 
   // Constants:
   const buttons: DeviceButtons = {
-    left: { title: "No Action", class: "icofont-minus", action: () => null },
-    middle: { title: "Acknowledge", class: "icofont-ui-check", action: close },
-    right: { title: "No Action", class: "icofont-minus", action: () => null },
+    left: EMPTY_BUTTON,
+    middle: { title: "Acknowledge", class: "icofont-ui-check", action: close ?? (() => null) },
+    right: EMPTY_BUTTON,
   };
 
   // Variables:
@@ -37,7 +37,7 @@
       } else {
         written += speech[written.length];
       }
-    }, 50);
+    }, 40);
   };
 
   const getBubbleSize = () => {
@@ -52,8 +52,10 @@
 <!-- Window listeners -->
 <svelte:window on:resize={getBubbleSize} />
 
-<!-- Button Controller -->
-<ButtonControllerSvelte controller={deviceButtonController} {buttons} />
+{#if deviceButtonController}
+  <!-- Button Controller -->
+  <ButtonControllerSvelte controller={deviceButtonController} {buttons} />
+{/if}
 
 <!-- Content -->
 <div id="speech-bubble" transition:fly={{ y: 80, duration: 200 }} bind:this={bubble}>
@@ -72,9 +74,11 @@
   </div>
 </div>
 
-<!-- Clickable Overlay -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div id="click-mask" on:click={close} />
+{#if close}
+  <!-- Clickable Overlay -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div id="click-mask" on:click={close} />
+{/if}
 
 <!-- Style -->
 <style>
