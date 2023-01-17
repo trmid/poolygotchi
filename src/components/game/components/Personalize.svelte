@@ -4,7 +4,7 @@
   import { DeviceButtons, EMPTY_BUTTON } from "./Buttons.svelte";
   import type { UIButton, UIComponent } from "./Menu.svelte";
   import Menu from "./Menu.svelte";
-    import ChooseEnvironment from "./ChooseEnvironment.svelte";
+  import ChooseEnvironment from "./ChooseEnvironment.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -18,7 +18,7 @@
   $: menuComponents = [
     { type: "button", name: "<i class='icofont-picture' style='color:hsl(190,75%,64%);'></i> environment", action: () => page = 'environment' } as UIButton,
     { type: "button", name: "<i class='icofont-dna-alt-1' style='color:hsl(310,75%,64%);'></i> species", action: () => page = 'species' } as UIButton,
-    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i> back", action: close } as UIButton,
+    { type: "button", name: "<i class='icofont-undo colored'></i> back", action: close } as UIButton,
   ];
 
   // Device Buttons:

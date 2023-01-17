@@ -10,7 +10,7 @@
   import Menu from "./Menu.svelte";
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
-  import { explorerReceipt } from "../../../utils/tx";
+  import { explorerReceipt, txNotification } from "../../../utils/tx";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -44,7 +44,7 @@
     null,
 
     /* Back Button */
-    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i> back", action: close } as UIButton,
+    { type: "button", name: "<i class='icofont-undo colored'></i> back", action: close } as UIButton,
 
     /* Chain Selector */
     {
@@ -150,7 +150,7 @@
       await queryBalance(chain);
     } catch(err) {
       console.error(err);
-      pushNotification({ message: "Approval failed.", type: "error" });
+      pushNotification(txNotification(err) ?? { message: "Approval failed.", type: "error" });
     } finally {
       dismissPending && dismissPending();
       approving = false;
@@ -175,7 +175,7 @@
       await queryBalance(chain);
     } catch(err) {
       console.error(err);
-      pushNotification({ message: "Failed to deposit.", type: "error" });
+      pushNotification(txNotification(err) ?? { message: "Failed to deposit.", type: "error" });
     } finally {
       dismissPending && dismissPending();
       depositing = false;

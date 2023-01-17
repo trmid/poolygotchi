@@ -24,13 +24,13 @@
   let showMenu = false;
   let widget: Widget | null = null;
   let menuComponents: UIComponent[] = [
-    { type: "button", name: "<i class='icofont-coins' style='color:hsl(50,75%,64%);'></i>deposit", action: () => { widget = "deposit" } } as UIButton,
-    { type: "button", name: "<i class='icofont-star' style='color:hsl(310,75%,64%);'></i>goal", action: () => { widget = "goal" } } as UIButton,
-    { type: "button", name: "<i class='icofont-paint' style='color:hsl(30,75%,64%);'></i>personalize", action: () => { widget = "personalize" } } as UIButton,
-    { type: "button", name: "<i class='icofont-undo' style='color:hsl(0,75%,64%);'></i>close", action: () => showMenu = false } as UIButton,
-    { type: "button", name: "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>withdraw", action: () => { widget = "withdraw" } } as UIButton,
-    { type: "button", name: "<i class='icofont-game' style='color:hsl(80,75%,64%);'></i>minigames", action: () => { console.log("minigames") }, disabled: true, title: "Coming Soon!" } as UIButton,
-    { type: "button", name: "<i class='icofont-ui-home' style='color:hsl(190,75%,64%);'></i>visit", action: () => { console.log("visit") }, disabled: true, title:"Coming Soon!" } as UIButton,
+    { type: "button", name: "<i class='icofont-coins' style='color:var(--icon-gold);'></i>deposit", action: () => { widget = "deposit" } } as UIButton,
+    { type: "button", name: "<i class='icofont-star' style='color:var(--icon-pink);'></i>goal", action: () => { widget = "goal" } } as UIButton,
+    { type: "button", name: "<i class='icofont-paint' style='color:var(--icon-orange);'></i>personalize", action: () => { widget = "personalize" } } as UIButton,
+    { type: "button", name: "<i class='icofont-undo colored'></i>close", action: () => showMenu = false } as UIButton,
+    { type: "button", name: "<i class='icofont-exit' style='color:var(--icon-red-orange);'></i>withdraw", action: () => { widget = "withdraw" } } as UIButton,
+    { type: "button", name: "<i class='icofont-game' style='color:var(--icon-green);'></i>minigames", action: () => { console.log("minigames") }, disabled: true, title: "Coming Soon!" } as UIButton,
+    { type: "button", name: "<i class='icofont-ui-home' style='color:var(--icon-blue);'></i>visit", action: () => { console.log("visit") }, disabled: true, title:"Coming Soon!" } as UIButton,
   ];
   const buttons: DeviceButtons = {
     left: { title: "Home", class: "icofont-ui-home", action: () => { showMenu = false; widget = null; } },
