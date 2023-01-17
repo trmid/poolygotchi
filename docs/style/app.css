@@ -11,6 +11,14 @@
   --c3: #F5FBEF;
   --c4: #E85D75;
 
+  --icon-red: hsl(0,75%,64%);
+  --icon-red-orange: hsl(10,75%,64%);
+  --icon-orange: hsl(30,75%,64%);
+  --icon-gold: hsl(50,75%,64%);
+  --icon-green: hsl(80,75%,64%);
+  --icon-blue: hsl(190,75%,64%);
+  --icon-pink: hsl(310,75%,64%);
+
   --shadow-color: #0004;
   --box-shadow: 2px 2px 7px var(--shadow-color);
 
@@ -119,6 +127,7 @@ input[type=text], input[type=number] {
 input.game-ui, button.game-ui, select.game-ui {
   background: var(--bg-gradient);
 }
+button.pulse:focus, button.pulse:hover,
 input.game-ui:focus, input.game-ui:hover,
 button.game-ui:focus, button.game-ui:hover,
 select.game-ui:focus, select.game-ui:hover {
@@ -129,9 +138,10 @@ select.game-ui:focus, select.game-ui:hover {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
-input.game-ui:disabled, input.game-ui.disabled,
-button.game-ui:disabled, button.game-ui.disabled,
-select.game-ui:disabled, select.game-ui.disabled {
+input:disabled, button:disabled, select:disabled,
+input.game-ui.disabled,
+button.game-ui.disabled,
+select.game-ui.disabled {
   filter: grayscale(0.8);
 }
 
@@ -179,6 +189,15 @@ select.game-ui:disabled, select.game-ui.disabled {
   animation-iteration-count: infinite;
   animation-play-state: running;
   animation-timing-function: linear;
+}
+
+/* Global icon coloring */
+.icofont-undo.colored {
+  color: var(--icon-red);
+}
+
+.icofont-save.colored {
+  color: var(--icon-green);
 }
 
 /* No Text Select Class */
