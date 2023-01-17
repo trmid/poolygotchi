@@ -94,6 +94,10 @@ a:hover {
   outline: 1px solid #0004;
 }
 
+input::placeholder {
+  color: #999;
+}
+
 input[type=text], input[type=number] {
   cursor: text;
 }

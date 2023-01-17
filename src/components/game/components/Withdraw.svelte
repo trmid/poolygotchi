@@ -66,7 +66,7 @@
     /* Max Button */
     {
       type: "button",
-      name: (deposited === undefined) ? "loading <i class='icofont-custom-spinner'></i>" : `$${formatUSDC(deposited)} (max)`, token: 'usdc', style: 'justify-content:right;color:#888;',
+      name: (deposited === undefined) ? "loading <i class='icofont-custom-spinner'></i>" : `$${formatUSDC(deposited)} (max)`, token: 'usdc', style: 'justify-content:right;color:#999;',
       disabled: withdrawing,
       action: () => deposited && amountChanged(deposited)
     } as UIButton,
