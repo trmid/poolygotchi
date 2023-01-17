@@ -14,6 +14,8 @@
 <style>
   #label {
     position: relative;
+    background: linear-gradient(165deg, #bbba -50%, var(--c0) 110%);
+    outline: none;
   }
   #label > img.token {
     position: absolute;
