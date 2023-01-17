@@ -146,11 +146,11 @@
   <h3>{@html title ?? "menu"}</h3>
   <div class="buttons">
     {#each components as component, i}
+      <!-- NOTE: Make sure out transition is done before the parent transition! (DOM bug) -->
       <div
         style:grid-row={i % itemsPerColumn + 1}
         style:grid-column={Math.floor(i / itemsPerColumn) + 1}
         in:fly={{ duration: 150, delay: 100 + 100 * componentCoords(i).y, y: 50 }}
-        out:fly={{ duration: 150, delay: 100 * componentCoords(itemsPerColumn - i - 1).y, y: 50 }}
       >
         {#if component}
           {#if component.type === "button"}
