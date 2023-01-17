@@ -219,15 +219,12 @@ select.game-ui:disabled, select.game-ui.disabled {
 @keyframes outline-pulse {
   0% {
     outline-width: 1px;
-    outline-color: var(--c3);
   }
   50% {
     outline-width: 5px;
-    outline-color: var(--c3);
   }
   100% {
     outline-width: 1px;
-    outline-color: var(--c3);
   }
 }
 
