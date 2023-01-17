@@ -79,7 +79,7 @@ export default class Poolygotchi {
     const possibleExpressions = Poolygotchi.expressions[state];
     const timedIndex = Math.floor((Date.now() / 1000) / expressionDuration) % possibleExpressions.length;
     const expression = possibleExpressions[timedIndex];
-    return expression.replace(/\$name/g, name);
+    return expression.replace(/\$name/g, name || "Anon");
   }
 
   /**
