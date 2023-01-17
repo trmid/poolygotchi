@@ -5,9 +5,9 @@
 
 <!-- Carousel -->
 <div id="carousel">
-  <button on:click={prev}><i class="icofont-caret-left" /></button>
+  <button class="game-ui" on:click={prev}><i class="icofont-caret-left" /></button>
   <slot></slot>
-  <button on:click={next}><i class="icofont-caret-right" /></button>
+  <button class="game-ui" on:click={next}><i class="icofont-caret-right" /></button>
 </div>
 
 <!-- Style -->
