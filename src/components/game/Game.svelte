@@ -27,20 +27,34 @@
   import Home from "./scenes/Home.svelte";
   import Welcome from "./scenes/Welcome.svelte";
   import AccountSetup from "./scenes/AccountSetup.svelte";
+  import Buttons, { EMPTY_BUTTON } from "./components/Buttons.svelte";
+  import { buttonController } from "./components/ButtonController.svelte";
+  import Screen from "./components/Screen.svelte";
+
+  const deviceButtonController = buttonController({
+    left: EMPTY_BUTTON,
+    middle: EMPTY_BUTTON,
+    right: EMPTY_BUTTON
+  });
 </script>
 
 <!-- Device Container -->
 <div id="device">
   <div class="case" />
 
-  <!-- Scene -->
-  {#if $poolygotchi}
-    <Home poolygotchi={$poolygotchi} />
-  {:else if $account}
-    <AccountSetup />
-  {:else}
-    <Welcome />
-  {/if}
+  <!-- Screen -->
+  <Screen>
+    {#if $poolygotchi}
+      <Home poolygotchi={$poolygotchi} {deviceButtonController} />
+    {:else if $account}
+      <AccountSetup {deviceButtonController} />
+    {:else}
+      <Welcome {deviceButtonController} />
+    {/if}
+  </Screen>
+
+  <!-- Buttons -->
+  <Buttons buttons={$deviceButtonController} />
 
 </div>
 
