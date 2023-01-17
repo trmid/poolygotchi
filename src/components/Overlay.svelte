@@ -48,6 +48,7 @@
     padding: 1rem;
     border-radius: 1rem;
     background-color: var(--c0);
+    background: var(--bg-gradient);
     box-shadow: 2px 2px 7px #0006;
   }
 </style>
