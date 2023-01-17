@@ -75,7 +75,7 @@
       <p class="full-message">{@html $selectedNotification.message}</p>
       {#if !$selectedNotification.hideDismissButton}
         <div>
-          <button on:click={() => { if($selectedNotification == $notification){ $notification = null }; $selectedNotification = null; }}>dismiss</button>
+          <button class="pulse" on:click={() => { if($selectedNotification == $notification){ $notification = null }; $selectedNotification = null; }}>dismiss</button>
         </div>
       {/if}
     </Overlay>
