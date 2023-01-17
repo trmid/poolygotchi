@@ -8,35 +8,36 @@
   import PoolTogether from "../../../utils/poolTogether";
   import { networks } from "../../../config";
   import { Notification, pushNotification } from "../../Notifications.svelte";
-  import { explorerReceipt } from "../../../utils/tx";
+  import { explorerReceipt, txNotification } from "../../../utils/tx";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
   import type { DeviceButtons } from "../components/Buttons.svelte";
+  import EnvironmentSelector from "../components/EnvironmentSelector.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
 
   // Pooly Attributes
   let name: string = "";
-  let speciesId: BigNumberish = 0;
-  let environmentId: BigNumberish = 0;
+  let speciesId: BigNumberish = BigNumber.from(0);
+  let environmentId: BigNumber = BigNumber.from(0);
   let weeklyGoal: number = 100;
 
   // Constants:
   const maxPage = 3;
   const buttons: DeviceButtons = {
     left: {
-      title: "back",
+      title: "Back",
       class: "icofont-arrow-left",
       action: () => back()
     },
     middle: {
-      title: "cancel",
+      title: "Cancel",
       class: "icofont-ui-close",
       action: disconnect
     },
     right: {
-      title: "next",
+      title: "Next",
       class: "icofont-arrow-right",
       action: () => next()
     }
@@ -45,7 +46,6 @@
   // Variables
   let page = 0;
   let numSpecies: BigNumberish = 3;
-  let numEnvironments: BigNumberish = 3;
 
   // Navigation functions:
   const back = () => {
@@ -65,16 +65,6 @@
     if(speciesId.gte(numSpecies)) speciesId = 0;
   };
 
-  // Environment Selectors:
-  const prevEnvironment = () => {
-    environmentId = BigNumber.from(environmentId).sub(1);
-    if(environmentId.lt(0)) environmentId = BigNumber.from(numEnvironments).sub(1);
-  };
-  const nextEnvironment = () => {
-    environmentId = BigNumber.from(environmentId).add(1);
-    if(environmentId.gte(numEnvironments)) environmentId = 0;
-  };
-
   // Hatch Function:
   let hatching = false;
   async function hatch() {
@@ -82,35 +72,24 @@
     try {
       hatching = true;
       if(!$account) throw new Error("missing account");
-      const address = $account.address;
-      const hatchTx = await Poolygotchi.contract().populateTransaction.hatch(
+      dismissPending = pushNotification({ message: "Hatching your poolygotchi <i class='icofont-custom-spinner'></i>", type: "standard", title: "Hatching...", persist: true });
+      await $account.switchChain(networks.poolygotchi.chainId);
+      const res = await Poolygotchi.contract().connect($account.signer).hatch(
         name,
         speciesId,
         environmentId,
         BigNumber.from(Math.floor(weeklyGoal)).mul(10**6),
-        await PoolTogether.totalDeposited(address)
+        await PoolTogether.totalDeposited($account.address)
       );
-      hatchTx.chainId = networks.poolygotchi.chainId;
-      dismissPending = pushNotification({ message: "Hatching your poolygotchi <i class='icofont-custom-spinner'></i>", type: "standard", title: "Hatching...", persist: true });
-      const res = await $account.safeSendTransaction(hatchTx);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Transaction Sent", persist: true });
       const receipt = await res.wait();
       dismissPending();
-      pushNotification({ message: `Transaction successful!\n\n<a href="${explorerReceipt(hatchTx.chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
+      pushNotification({ message: `Transaction successful!\n\n<a href="${explorerReceipt(networks.poolygotchi.chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
       $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
-      const notification: Omit<Notification, "timestamp"> = {
-        message: err instanceof Error ? err.message : "reason unknown",
-        type: 'error'
-      }; 
-      if(notification.message.includes("user rejected transaction")) {
-        notification.message = "transaction rejected";
-        notification.type = 'warning';
-      }
-      notification.message = `Failed to hatch: ${notification.message}`;
-      pushNotification(notification);
+      pushNotification(txNotification(err) ?? { message: `Failed to hatch.`, type: "error" });
     } finally {
       dismissPending && dismissPending();
       hatching = false;
@@ -122,7 +101,6 @@
 
     // Get accurate asset counts:
     Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
-    Poolygotchi.contract().numEnvironments().then(num => numEnvironments = num).catch(console.error);
 
   });
 
@@ -145,11 +123,7 @@
     </div>
   {:else if page == 1}
     <h3>Select Your Environment</h3>
-    <div class="selector">
-      <button on:click={prevEnvironment}><i class="icofont-caret-left" /></button>
-      <img class="environment" src="assets/environments/{environmentId}/environment.png" alt="poolygotchi environment {environmentId}">
-      <button on:click={nextEnvironment}><i class="icofont-caret-right" /></button>
-    </div>
+    <EnvironmentSelector bind:environmentId />
   {:else if page == 2}
     <h3>Set Your Goal</h3>
     <div id="goal-num">
@@ -219,12 +193,6 @@
   img.poolygotchi {
     display: block;
     width: calc(var(--game-size) * 0.4);
-  }
-
-  img.environment {
-    display: block;
-    width: calc(var(--game-size) * 0.5);
-    border-radius: 0.5rem;
   }
 
   #page-selector {
