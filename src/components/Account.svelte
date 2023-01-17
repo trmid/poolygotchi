@@ -88,7 +88,7 @@
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <img
     id="avatar"
-    class="btn border hover"
+    class="btn pulse"
     src="{$account.avatar}"
     alt="User Avatar"
     tabindex="0"
@@ -117,12 +117,12 @@
     </div>
 
     <!-- Avatar Change -->
-    <button on:click={() => showAvatarSelector = true} in:fly={{ x: 50, duration: 200, delay: 100 }}>
+    <button class="pulse" on:click={() => showAvatarSelector = true} in:fly={{ x: 50, duration: 200, delay: 100 }}>
       change avatar
     </button>
 
     <!-- Disconnect -->
-    <button on:click={() => disconnect().catch(console.error)} in:fly={{ x: 50, duration: 200, delay: 150 }}>
+    <button class="pulse" on:click={() => disconnect().catch(console.error)} in:fly={{ x: 50, duration: 200, delay: 150 }}>
       disconnect
     </button>
   </div>
@@ -130,7 +130,7 @@
 
 </div>
 {:else}
-<button on:click={() => connect().catch(console.error)}>connect</button>
+<button class="pulse" on:click={() => connect().catch(console.error)}>connect</button>
 {/if}
 
 <!-- Avatar Selector -->
@@ -151,7 +151,7 @@
             <span class="avatar loading" />
           </button>
         {:then url}
-          <button class="avatar-option icofont-" on:click={() => $account && ($account.avatar = url) && (showAvatarSelector = false)} class:selected={url === $account?.avatar}>
+          <button class="pulse avatar-option icofont-" on:click={() => $account && ($account.avatar = url) && (showAvatarSelector = false)} class:selected={url === $account?.avatar}>
             <img class="avatar" src={url} alt="avatar option #{i}">
             {#if avatar.category === "ENS - Avatar"}
               <img class="ens-pin" src="img/ens.webp" alt="">
@@ -186,7 +186,7 @@
     padding: 0;
   }
   #avatar:hover {
-    outline: 1px solid #fff4;
+    outline: 1px solid var(--c3);
     cursor: pointer;
   }
   #options {
@@ -201,7 +201,7 @@
     gap: 0.5rem;
     border-radius: 1rem;
     background-color: var(--c3);
-    background: var(--tri-gradient-light);
+    background: var(--bg-gradient);
     width: max-content;
     border: 3px solid var(--c0);
     outline: 3px solid var(--c3);

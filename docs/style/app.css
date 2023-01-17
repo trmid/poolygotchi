@@ -111,6 +111,7 @@ input[type=text], input[type=number] {
 }
 
 .btn:hover, button:hover,
+.btn:focus, button:focus,
 .btn.outline, button.outline {
   outline: 1px solid #fff4;
 }
@@ -127,7 +128,8 @@ input[type=text], input[type=number] {
 input.game-ui, button.game-ui, select.game-ui {
   background: var(--bg-gradient);
 }
-button.pulse:focus, button.pulse:hover,
+.btn.pulse:hover,
+button.pulse:hover,
 input.game-ui:focus, input.game-ui:hover,
 button.game-ui:focus, button.game-ui:hover,
 select.game-ui:focus, select.game-ui:hover {
@@ -138,6 +140,7 @@ select.game-ui:focus, select.game-ui:hover {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+.btn:disabled,
 input:disabled, button:disabled, select:disabled,
 input.game-ui.disabled,
 button.game-ui.disabled,

@@ -8,7 +8,7 @@
   <span id="logo">
     <slot name="logo"></slot>
   </span>
-  <button on:click|stopPropagation={onClick}>
+  <button class="pulse" on:click|stopPropagation={onClick}>
     {name}
   </button>
 </div>
