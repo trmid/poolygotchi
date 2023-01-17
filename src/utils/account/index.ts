@@ -174,7 +174,6 @@ export interface Account {
 
 export interface AccountWithSigner extends Account {
   get signer(): Signer
-  safeSendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse>
   switchChain(chain: number): Promise<void>
   disconnect(): Promise<void>
 }

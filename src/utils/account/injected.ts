@@ -20,20 +20,6 @@ export default class InjectedAccount extends BaseAccount implements AccountWithS
     return this._signer;
   }
 
-  public async safeSendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse> {
-    const tx = await resolveProperties(transaction);
-    if(transactionHasChainId(tx)) {
-
-      // Switch to chain:
-      await this.switchChain(tx.chainId);
-
-      // Send TX:
-      return await this.signer.sendTransaction(tx);
-    } else {
-      throw { ...new Error("Transaction missing chainId"), tx };
-    }
-  }
-
   public async switchChain(chain: number) {
     const chainId = await this._signer.getChainId();
     if(chainId != chain) {

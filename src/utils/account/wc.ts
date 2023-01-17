@@ -1,10 +1,10 @@
 import type { SignClient } from "@walletconnect/sign-client/dist/types/client";
 import type { SessionTypes } from "@walletconnect/types";
-import type { Provider, TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
+import type { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
+import type { Deferrable } from "@ethersproject/properties";
 import { Bytes, hexlify } from "@ethersproject/bytes";
-import { Deferrable, resolveProperties } from "@ethersproject/properties";
 import { ethers } from "ethers";
-import { AccountWithSigner, BaseAccount, transactionHasChainId } from ".";
+import { AccountWithSigner, BaseAccount } from ".";
 import { Signer } from "@ethersproject/abstract-signer";
 import { networks } from "../../config";
 
@@ -38,15 +38,6 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
       } as any
     });
     return res.result;
-  }
-
-  public async safeSendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse> {
-    const tx = await resolveProperties(transaction);
-    if(transactionHasChainId(tx)) {
-      return await this.signer.sendTransaction(tx);
-    } else {
-      throw { ...new Error("Transaction missing chainId"), tx };
-    }
   }
 
   public async switchChain(chain: number) {
