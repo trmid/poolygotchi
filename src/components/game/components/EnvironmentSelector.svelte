@@ -6,6 +6,7 @@
 
   // Props:
   export let environmentId: BigNumber;
+  export let highlightId: BigNumber | undefined = undefined;
 
   // Variables:
   let numEnvironments: BigNumber = BigNumber.from(3);
@@ -28,7 +29,7 @@
 
 <!-- Environment Carousel -->
 <Carousel {prev} {next}>
-  <img class="environment" src="assets/environments/{environmentId}/environment.png" alt="Environment #{environmentId}">
+  <img class="environment" src="assets/environments/{environmentId}/environment.png" alt="Environment #{environmentId}" class:highlight={highlightId && environmentId.eq(highlightId)}>
 </Carousel>
 
 <!-- Style -->
@@ -37,5 +38,8 @@
     display: block;
     width: calc(var(--game-size) * 0.5);
     border-radius: 0.5rem;
+  }
+  img.environment.highlight {
+    outline: 2px solid var(--c2);
   }
 </style>
