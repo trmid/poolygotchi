@@ -35,7 +35,7 @@
       } else {
 
         // Find key state:
-        const possibleStates = poolygotchi.possibleStates(healthFactor).map(x => x.state);
+        const possibleStates = Poolygotchi.possibleStates(healthFactor).map(x => x.state);
         const keyStates: State[] = ['hibernating', 'happy', 'crying', 'sad', 'neutral']; // in order of importance
         for(let i = 0; i < keyStates.length; i++) {
           if(possibleStates.includes(keyStates[i])) {
@@ -140,7 +140,7 @@
     try {
       if($focused && !napping && !hatchingStage) {
         const possibleStates: State[] = [];
-        for(const possible of poolygotchi.possibleStates(healthFactor)) {
+        for(const possible of Poolygotchi.possibleStates(healthFactor)) {
           for(let i = 0; i < possible.chance; i++) {
             possibleStates.push(possible.state);
           }

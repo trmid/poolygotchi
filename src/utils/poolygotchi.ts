@@ -36,35 +36,35 @@ export default class Poolygotchi {
     return secondsOff / secondsInWeek;
   }
 
-  public possibleStates(healthFactor: number): { state: State, chance: number }[] {
+  static possibleStates(healthFactor: number): { state: State, animation: Animation, chance: number }[] {
     if(healthFactor < -3) {
-      return [{ state: 'hibernating', chance: 1 }];
+      return [{ state: 'hibernating', animation: 'sleeping', chance: 1 }];
     } else if(healthFactor < -2) {
       return [
-        { state: 'crying', chance: 2 },
-        { state: 'sad', chance: 3 },
-        { state: 'neutral', chance: 1 },
-        { state: 'walking', chance: 1 }
+        { state: 'crying', animation: 'crying', chance: 2 },
+        { state: 'sad', animation: 'sad', chance: 3 },
+        { state: 'neutral', animation: 'neutral', chance: 1 },
+        { state: 'walking', animation: 'walking', chance: 1 }
       ];
     } else if(healthFactor < -1) {
       return [
-        { state: 'sad', chance: 6 },
-        { state: 'neutral', chance: 4 },
-        { state: 'walking', chance: 2 },
-        { state: 'sleeping', chance: 1 }
+        { state: 'sad', animation: 'sad', chance: 6 },
+        { state: 'neutral', animation: 'neutral', chance: 4 },
+        { state: 'walking', animation: 'walking', chance: 2 },
+        { state: 'sleeping', animation: 'sleeping', chance: 1 }
       ];
     } else if(healthFactor < 0) {
       return [
-        { state: 'neutral', chance: 6 },
-        { state: 'walking', chance: 6 },
-        { state: 'sleeping', chance: 1 }
+        { state: 'neutral', animation: 'neutral', chance: 6 },
+        { state: 'walking', animation: 'walking', chance: 6 },
+        { state: 'sleeping', animation: 'sleeping', chance: 1 }
       ];
     } else {
       return [
-        { state: 'happy', chance: 6 },
-        { state: 'neutral', chance: 6 },
-        { state: 'walking', chance: 6 },
-        { state: 'sleeping', chance: 1 }
+        { state: 'happy', animation: 'happy', chance: 6 },
+        { state: 'neutral', animation: 'neutral', chance: 6 },
+        { state: 'walking', animation: 'walking', chance: 6 },
+        { state: 'sleeping', animation: 'sleeping', chance: 1 }
       ];
     }
   }
