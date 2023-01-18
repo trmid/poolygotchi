@@ -62,7 +62,6 @@
       initialValue: parseFloat(formatUSDC(amount ?? BigNumber.from(0), false)),
       attributes: { min: 0, max: parseFloat(formatUSDC(balance ?? BigNumber.from(0), false)), step: 5 },
       onChange: v => amountChanged(v),
-      style: 'text-align:right;',
       disabled: depositing || approving,
     } as UINumberInput,
 
@@ -74,7 +73,7 @@
         "loading <i class='icofont-custom-spinner'></i>" :
         `$${formatUSDC(balance)} (max)`,
       token: 'usdc',
-      style: 'justify-content:right;color:#ccc;',
+      style: 'color:#ccc;',
       disabled: depositing || approving,
       action: () => balance && amountChanged(balance)
     } as UIButton,
