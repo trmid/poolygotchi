@@ -38,6 +38,11 @@
     next?: () => void
   }
 
+  export const uiNumberInput = (c: UINumberInput) => c;
+  export const uiLabel = (c: UILabel) => c;
+  export const uiButton = (c: UIButton) => c;
+  export const uiChainInput = (c: UIChainInput) => c;
+
   export const asButton = (component: UIComponent): UIButton => {
     if(component.type === "button") return component as UIButton;
     throw new Error("expected button");
