@@ -20,6 +20,7 @@
   <input
     bind:value={value}
     on:pointerenter={select}
+    on:keydown|stopPropagation
     title={input.title ?? ""}
     data-index={index}
     class="game-ui"
@@ -39,16 +40,18 @@
   input {
     width: 100%;
     box-sizing: border-box;
+    padding-left: 2.1rem;
+    text-align: left;
   }
   .wrapper {
     position: relative;
   }
   .wrapper > img.token {
     position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 5px;
-    top: 50%;
+    width: 21px;
+    height: 21px;
+    left: 0.45rem;
+    top: 49%;
     transform: translateY(-50%);
   }
 </style>
