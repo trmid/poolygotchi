@@ -10,7 +10,7 @@
   import Personalize from "../components/Personalize.svelte";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
-  import { DeviceButtons, EMPTY_BUTTON } from "../components/Buttons.svelte";
+  import type { DeviceButtons } from "../components/Buttons.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
@@ -33,7 +33,7 @@
     { type: "button", icon: "icofont-ui-home colored", name: "visit", title: "Coming Soon!", action: () => { console.log("visit") }, disabled: true } as UIButton,
   ];
   const buttons: DeviceButtons = {
-    left: EMPTY_BUTTON,
+    left: { title: "Home", class: "icofont-ui-home", action: () => { showMenu = false; widget = null; } },
     middle: { title: "Interact!", class: "icofont-comment", action: () => poolygotchiComponent?.interact() },
     right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu = true },
   };

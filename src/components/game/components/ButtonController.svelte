@@ -5,22 +5,31 @@
 
   export function buttonController(root: DeviceButtons) {
     let _set: Subscriber<DeviceButtons>;
-    let stack: DeviceButtons[] = [root];
+    let stack: Partial<DeviceButtons>[] = [root];
+    const update = () => {
+      const b = {...stack[stack.length - 1]};
+      for(let i = stack.length - 1; i >= 0; i--) {
+        b.left ??= stack[i].left;
+        b.middle ??= stack[i].middle;
+        b.right ??= stack[i].right;
+      }
+      _set(b as DeviceButtons);
+    };
     const controller: ButtonController = {
       define: b => {
         stack.push(b);
-        _set(b);
+        update();
         return {
           remove: () => {
             stack = stack.filter(x => x != b);
-            _set(stack[stack.length - 1]);
+            update();
           },
           update: (b2) => {
             let index = stack.indexOf(b);
             if(index < 0) throw new Error("item was removed");
             b = b2;
             stack[index] = b;
-            if(index == stack.length - 1) _set(b);
+            update();
           }
         };
       },
@@ -32,7 +41,7 @@
   }
 
   export interface ButtonController extends Readable<DeviceButtons> {
-    define: (buttons: DeviceButtons) => { remove: () => void, update: (buttons: DeviceButtons) => void }
+    define: (buttons: Partial<DeviceButtons>) => { remove: () => void, update: (buttons: Partial<DeviceButtons>) => void }
   }
 </script>
 
@@ -41,12 +50,12 @@
   import { onDestroy, onMount } from "svelte";
   
   export let controller: ButtonController;
-  export let buttons: DeviceButtons;
+  export let buttons: Partial<DeviceButtons>;
   
   $: buttons && _update && _update(buttons);
 
   let _remove: () => void;
-  let _update: (b: DeviceButtons) => void;
+  let _update: (b: Partial<DeviceButtons>) => void;
   onMount(() => {
     const { remove, update } = controller.define(buttons);
     _remove = remove;

@@ -97,9 +97,9 @@
   $: console.log(selectedComponent);
 
   // Device Buttons:
-  let buttons: DeviceButtons;
+  let buttons: Partial<DeviceButtons>;
   $: buttons = {
-    left: components.length > 0 ? { title: "Previous", class: "icofont-caret-up", action: () => selectPreviousComponent() } : EMPTY_BUTTON,
+    // left: components.length > 0 ? { title: "Previous", class: "icofont-caret-up", action: () => selectPreviousComponent() } : EMPTY_BUTTON,
     middle: (selectedComponent && !selectedComponent.disabled) ?
       {
         title: (selectedComponent as any).title ?? "Select",
