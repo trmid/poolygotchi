@@ -70,6 +70,10 @@
     outline-offset: 2px;
   }
 
+  #buttons > button > i {
+    color: inherit !important;
+  }
+
   #middle-btn {
     top: 20%;
     scale: 1.1;

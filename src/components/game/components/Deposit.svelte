@@ -3,10 +3,8 @@
   import PoolTogether from "../../../utils/poolTogether";
   import { account } from "../../Account.svelte";
   import { pushNotification } from "../../Notifications.svelte";
-  import ButtonControllerSvelte from "./ButtonController.svelte";
   import type { ButtonController } from "./ButtonController.svelte";
   import type { UIButton, UIChainInput, UIComponent, UILabel, UINumberInput } from "./Menu.svelte";
-  import { DeviceButtons, EMPTY_BUTTON } from "./Buttons.svelte";
   import Menu from "./Menu.svelte";
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
@@ -44,11 +42,12 @@
     null,
 
     /* Back Button */
-    { type: "button", name: "<i class='icofont-undo colored'></i> back", action: close } as UIButton,
+    { type: "button", icon: "icofont-undo colored", name: "back", title: "Back", action: close } as UIButton,
 
     /* Chain Selector */
     {
       type: "chain",
+      title: "Switch Chains",
       chain,
       onChange: c => chainChanged(c),
       disabled: depositing || approving,
@@ -58,6 +57,7 @@
     {
       type: "number",
       placeholder: "amount",
+      title: "Edit Amount",
       token: 'usdc',
       initialValue: parseFloat(formatUSDC(amount ?? BigNumber.from(0), false)),
       attributes: { min: 0, max: parseFloat(formatUSDC(balance ?? BigNumber.from(0), false)), step: 5 },
@@ -69,7 +69,12 @@
     /* Max Button */
     {
       type: "button",
-      name: (balance === undefined) ? "loading <i class='icofont-custom-spinner'></i>" : `$${formatUSDC(balance)} (max)`, token: 'usdc', title: 'set max', style: 'justify-content:right;color:#ccc;',
+      title: "Set to Max",
+      name: (balance === undefined) ?
+        "loading <i class='icofont-custom-spinner'></i>" :
+        `$${formatUSDC(balance)} (max)`,
+      token: 'usdc',
+      style: 'justify-content:right;color:#ccc;',
       disabled: depositing || approving,
       action: () => balance && amountChanged(balance)
     } as UIButton,
@@ -79,28 +84,22 @@
       isApproved ?
       {
         type: "button",
-        name: `${depositing ? "<i class='icofont-custom-spinner'></i>" : "<i class='icofont-coins' style='color:hsl(50,75%,64%);'></i>"} deposit`,
+        icon: depositing ? "icofont-custom-spinner" : "icofont-coins colored",
+        name: "deposit",
+        title: "Deposit",
         disabled: depositing,
         action: deposit
       } as UIButton :
       {
         type: "button",
-        name: `${approving ? "<i class='icofont-custom-spinner'></i>" : "<i class='icofont-ui-check' style='color:hsl(190,75%,64%);'></i>"} approve`,
+        icon: approving ? "icofont-custom-spinner" : "icofont-ui-check colored",
+        name: "approve",
+        title: "Approve",
         disabled: approving,
         action: approve
       } as UIButton
     )
   ];
-
-  // Device Buttons:
-  let buttons: DeviceButtons;
-  $: buttons = {
-    left: { title: "back", class: "icofont-undo", action: close },
-    middle: isApproved ? 
-      (depositing ? EMPTY_BUTTON : { title: "deposit", class: "icofont-coins", action: () => deposit() }) :
-      (approving ? EMPTY_BUTTON : { title: "approve", class: "icofont-ui-check", action: () => approve() }),
-    right: EMPTY_BUTTON
-  };
 
   // Handle amount value change:
   const amountChanged = (value: number | BigNumber) => {
@@ -190,8 +189,5 @@
   });
 </script>
 
-<!-- Button Controller -->
-<ButtonControllerSvelte controller={deviceButtonController} {buttons} />
-
 <!-- Menu -->
-<Menu components={menuComponents} title="deposit" />
+<Menu components={menuComponents} title="deposit" selectedComponentIndex={4} {deviceButtonController} />

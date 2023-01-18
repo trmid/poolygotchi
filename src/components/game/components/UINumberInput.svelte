@@ -20,6 +20,7 @@
   <input
     bind:value={value}
     on:pointerenter={select}
+    title={input.title ?? ""}
     data-index={index}
     class="game-ui"
     type="number"

@@ -3,10 +3,8 @@
   import PoolTogether from "../../../utils/poolTogether";
   import { account } from "../../Account.svelte";
   import { pushNotification } from "../../Notifications.svelte";
-  import ButtonControllerSvelte from "./ButtonController.svelte";
   import type { ButtonController } from "./ButtonController.svelte";
   import type { UIButton, UIChainInput, UIComponent, UILabel, UINumberInput } from "./Menu.svelte";
-  import { DeviceButtons, EMPTY_BUTTON } from "./Buttons.svelte";
   import Menu from "./Menu.svelte";
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
@@ -41,11 +39,12 @@
     null,
 
     /* Back Button */
-    { type: "button", name: "<i class='icofont-undo colored'></i> back", action: close } as UIButton,
+    { type: "button", icon: "icofont-undo colored", name: "back", title: "Back", action: close } as UIButton,
 
     /* Chain Selector */
     {
       type: "chain",
+      title: "Switch Chains",
       chain,
       onChange: c => chainChanged(c),
       disabled: withdrawing,
@@ -55,6 +54,7 @@
     {
       type: "number",
       placeholder: "amount",
+      title: "Edit Amount",
       token: 'usdc',
       initialValue: parseFloat(formatUSDC(amount ?? BigNumber.from(0), false)),
       attributes: { min: 0, max: parseFloat(formatUSDC(deposited ?? BigNumber.from(0), false)), step: 5 },
@@ -66,7 +66,12 @@
     /* Max Button */
     {
       type: "button",
-      name: (deposited === undefined) ? "loading <i class='icofont-custom-spinner'></i>" : `$${formatUSDC(deposited)} (max)`, token: 'usdc', style: 'justify-content:right;color:#999;',
+      title: "Set to Max",
+      name: (deposited === undefined) ?
+        "loading <i class='icofont-custom-spinner'></i>" :
+        `$${formatUSDC(deposited)} (max)`,
+      token: 'usdc',
+      style: 'justify-content:right;color:#999;',
       disabled: withdrawing,
       action: () => deposited && amountChanged(deposited)
     } as UIButton,
@@ -74,19 +79,13 @@
     /* Withdraw Button */
     {
       type: "button",
-      name: `${withdrawing ? "<i class='icofont-custom-spinner'></i>" : "<i class='icofont-exit' style='color:hsl(10,75%,64%);'></i>"} withdraw`,
+      icon: withdrawing ? "icofont-custom-spinner" : "icofont-exit colored",
+      title: "Withdraw",
+      name: "withdraw",
       disabled: withdrawing,
       action: withdraw
     } as UIButton
   ];
-
-  // Device Buttons:
-  let buttons: DeviceButtons;
-  $: buttons = {
-    left: { title: "back", class: "icofont-undo", action: close },
-    middle: withdrawing ? EMPTY_BUTTON : { title: "withdraw", class: "icofont-exit", action: () => withdraw() },
-    right: EMPTY_BUTTON
-  };
 
   // Handle amount value change:
   const amountChanged = (value: number | BigNumber) => {
@@ -145,8 +144,5 @@
   });
 </script>
 
-<!-- Button Controller -->
-<ButtonControllerSvelte controller={deviceButtonController} {buttons} />
-
 <!-- Menu -->
-<Menu components={menuComponents} title="withdraw" />
+<Menu components={menuComponents} title="withdraw" selectedComponentIndex={4} {deviceButtonController} />

@@ -198,9 +198,38 @@ select.game-ui.disabled {
 .icofont-undo.colored {
   color: var(--icon-red);
 }
-
 .icofont-save.colored {
   color: var(--icon-green);
+}
+.icofont-coins.colored {
+  color: var(--icon-gold);
+}
+.icofont-star.colored {
+  color: var(--icon-pink);
+}
+.icofont-paint.colored {
+  color: var(--icon-orange);
+}
+.icofont-exit.colored {
+  color: var(--icon-red-orange);
+}
+.icofont-game.colored {
+  color: var(--icon-green);
+}
+.icofont-ui-home.colored {
+  color: var(--icon-blue);
+}
+.icofont-picture.colored {
+  color: var(--icon-blue);
+}
+.icofont-dna-alt-1.colored {
+  color: var(--icon-pink);
+}
+.icofont-ui-check.colored {
+  color: var(--icon-green);
+}
+.icofont-tag.colored {
+  color: var(--c3);
 }
 
 /* No Text Select Class */

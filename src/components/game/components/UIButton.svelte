@@ -17,6 +17,9 @@
   class:disabled={button.disabled}
   style={button.style ?? ""}
 >
+  {#if button.icon}
+    <i class="icon {button.icon}" />
+  {/if}
   {@html button.name}
 </button>
 
@@ -28,7 +31,7 @@
     align-items: center;
     gap: 0.5rem;
   }
-  button > :global(i[class^=icofont-]) {
+  button > i.icon {
     font-size: 16px;
   }
 </style>

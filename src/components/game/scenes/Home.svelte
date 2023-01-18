@@ -10,7 +10,7 @@
   import Personalize from "../components/Personalize.svelte";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
-  import type { DeviceButtons } from "../components/Buttons.svelte";
+  import { DeviceButtons, EMPTY_BUTTON } from "../components/Buttons.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
@@ -24,18 +24,18 @@
   let showMenu = false;
   let widget: Widget | null = null;
   let menuComponents: UIComponent[] = [
-    { type: "button", name: "<i class='icofont-coins' style='color:var(--icon-gold);'></i>deposit", action: () => { widget = "deposit" } } as UIButton,
-    { type: "button", name: "<i class='icofont-star' style='color:var(--icon-pink);'></i>goal", action: () => { widget = "goal" } } as UIButton,
-    { type: "button", name: "<i class='icofont-paint' style='color:var(--icon-orange);'></i>personalize", action: () => { widget = "personalize" } } as UIButton,
-    { type: "button", name: "<i class='icofont-undo colored'></i>close", action: () => showMenu = false } as UIButton,
-    { type: "button", name: "<i class='icofont-exit' style='color:var(--icon-red-orange);'></i>withdraw", action: () => { widget = "withdraw" } } as UIButton,
-    { type: "button", name: "<i class='icofont-game' style='color:var(--icon-green);'></i>minigames", action: () => { console.log("minigames") }, disabled: true, title: "Coming Soon!" } as UIButton,
-    { type: "button", name: "<i class='icofont-ui-home' style='color:var(--icon-blue);'></i>visit", action: () => { console.log("visit") }, disabled: true, title:"Coming Soon!" } as UIButton,
+    { type: "button", icon: "icofont-coins colored", name: "deposit", title: "Deposit", action: () => { widget = "deposit" } } as UIButton,
+    { type: "button", icon: "icofont-star colored", name: "goal", title: "Goal", action: () => { widget = "goal" } } as UIButton,
+    { type: "button", icon: "icofont-paint colored", name: "personalize", title: "Personalize", action: () => { widget = "personalize" } } as UIButton,
+    { type: "button", icon: "icofont-undo colored", name: "close", title: "Close", action: () => showMenu = false } as UIButton,
+    { type: "button", icon: "icofont-exit colored", name: "withdraw", title: "Withdraw", action: () => { widget = "withdraw" } } as UIButton,
+    { type: "button", icon: "icofont-game colored", name: "minigames", title: "Coming Soon!", action: () => { console.log("minigames") }, disabled: true } as UIButton,
+    { type: "button", icon: "icofont-ui-home colored", name: "visit", title: "Coming Soon!", action: () => { console.log("visit") }, disabled: true } as UIButton,
   ];
   const buttons: DeviceButtons = {
-    left: { title: "Home", class: "icofont-ui-home", action: () => { showMenu = false; widget = null; } },
-    middle: { title: "Interact!", class: "icofont-comment", action: () => { showMenu = false; poolygotchiComponent?.interact(); } },
-    right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu = !showMenu },
+    left: EMPTY_BUTTON,
+    middle: { title: "Interact!", class: "icofont-comment", action: () => poolygotchiComponent?.interact() },
+    right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu = true },
   };
 </script>
 
@@ -57,7 +57,7 @@
 {#if showMenu && !widget}
 
   <!-- Menu -->
-  <Menu components={menuComponents} />
+  <Menu components={menuComponents} {deviceButtonController} />
 
 {:else if widget === "deposit"}
 

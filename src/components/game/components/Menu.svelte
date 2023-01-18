@@ -4,21 +4,21 @@
 
   export interface UIComponent {
     type: 'button' | 'number' | 'label' | 'chain'
+    title?: string
+    icon?: string
     style?: string
+    disabled?: boolean
   }
 
   export interface UIButton extends UIComponent {
     type: 'button'
     name: string
-    disabled?: boolean
-    title?: string
     action: () => any
   }
 
   export interface UINumberInput extends UIComponent {
     type: 'number'
     placeholder?: string
-    disabled?: boolean
     initialValue?: number
     attributes?: Object
     token?: Token
@@ -28,15 +28,14 @@
   export interface UILabel extends UIComponent {
     type: 'label'
     label: string
-    title?: string
     token?: Token
   }
 
   export interface UIChainInput extends UIComponent {
     type: 'chain'
     chain: number
-    disabled?: boolean
     onChange: (chain: number) => void
+    next?: () => void
   }
 
   export const asButton = (component: UIComponent): UIButton => {
@@ -54,9 +53,19 @@
     throw new Error("expected label");
   };
 
-  export const asChainInput= (component: UIComponent): UIChainInput=> {
+  export const asChainInput = (component: UIComponent): UIChainInput => {
     if(component.type === "chain") return component as UIChainInput;
     throw new Error("expected chain");
+  };
+
+  export const componentIcon = (component: UIComponent): string | null => {
+    if(component.icon) return component.icon;
+    switch(component.type) {
+      case "button": return "icofont-ui-check";
+      case "chain": return "icofont-edit";
+      case "number": return "icofont-edit";
+      default: return null;
+    }
   };
 </script>
 
@@ -68,17 +77,78 @@
   import UINumberInputSvelte from "./UINumberInput.svelte";
   import UILabelSvelte from "./UILabel.svelte";
   import UIChainInputSvelte from "./UIChainInput.svelte";
+  import ButtonControllerSvelte from "./ButtonController.svelte";
+  import type { ButtonController } from "./ButtonController.svelte";
+  import { DeviceButtons, EMPTY_BUTTON } from "./Buttons.svelte";
 
   // Props:
   export let title = "menu";
   export let components: (UIComponent | null)[];
+  export let selectedComponentIndex = 0;
   export let itemsPerColumn = 4;
+  export let deviceButtonController: ButtonController;
 
   // Variables:
-  let selectedComponentIndex = 0;
+  let selectedComponent: UIComponent | null = null;
   let menu: HTMLElement;
 
+  // Reactive statements:
+  $: selectedComponentIndex, enforceComponentSelection();
+  $: console.log(selectedComponent);
+
+  // Device Buttons:
+  let buttons: DeviceButtons;
+  $: buttons = {
+    left: components.length > 0 ? { title: "Previous", class: "icofont-caret-up", action: () => selectPreviousComponent() } : EMPTY_BUTTON,
+    middle: (selectedComponent && !selectedComponent.disabled) ?
+      {
+        title: (selectedComponent as any).title ?? "Select",
+        class: componentIcon(selectedComponent) ?? "icofont-ui-check",
+        action: () => {
+          const elem = focusIndex(selectedComponentIndex);
+          if(selectedComponent?.type === "chain") (asChainInput(selectedComponent).next ?? (() => null))();
+          else elem?.click();
+        }
+      } :
+      EMPTY_BUTTON,
+    right: components.length > 0 ? { title: "Next", class: "icofont-caret-down", action: () => selectNextComponent() } : EMPTY_BUTTON
+  };
+
   // Functions:
+  const hasSelectable = (components: (UIComponent | null)[]) => {
+    return components.filter(x => x !== null && x.type !== 'label').length > 0;
+  };
+
+  const enforceComponentSelection = () => {
+    if(hasSelectable(components)) {
+      selectedComponent = components[selectedComponentIndex];
+      while(!selectedComponent || selectedComponent.type === 'label') {
+        if(++selectedComponentIndex >= components.length) selectedComponentIndex = 0;
+        selectedComponent = components[selectedComponentIndex];
+      }
+    }
+  };
+
+  const selectPreviousComponent = () => {
+    if(hasSelectable(components)) {
+      do {
+        if(--selectedComponentIndex < 0) selectedComponentIndex = components.length - 1;
+        selectedComponent = components[selectedComponentIndex];
+      } while(!selectedComponent || selectedComponent.type === 'label');
+      focusIndex(selectedComponentIndex);
+    }
+  };
+
+  const selectNextComponent = () => {
+    if(hasSelectable(components)) {
+      do {
+        if(++selectedComponentIndex >= components.length) selectedComponentIndex = 0;
+        selectedComponent = components[selectedComponentIndex];
+      } while(!selectedComponent || selectedComponent.type === 'label');
+      focusIndex(selectedComponentIndex);
+    }
+  };
+
   const componentCoords = (index: number) => {
     return {
       x: Math.floor(index / itemsPerColumn),
@@ -134,7 +204,11 @@
 
   const focusIndex = (index: number) => {
     const elem: any = menu.querySelector(`.game-ui[data-index='${index}']`);
-    if(elem && "focus" in elem) elem.focus();
+    if(elem && "focus" in elem) {
+      elem.focus();
+      return elem as HTMLElement;
+    }
+    return null;
   }
 
   onMount(() => {
@@ -142,6 +216,10 @@
   });
 </script>
 
+<!-- Device Button Controller -->
+<ButtonControllerSvelte controller={deviceButtonController} {buttons} />
+
+<!-- Menu -->
 <div id="menu" on:keydown={keyDown} transition:fade={{ duration: 250 }} bind:this={menu}>
   <h3>{@html title ?? "menu"}</h3>
   <div class="buttons">
