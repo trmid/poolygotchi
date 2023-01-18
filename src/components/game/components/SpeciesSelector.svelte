@@ -8,6 +8,7 @@
   // Props:
   export let speciesId: BigNumber;
   export let highlightId: BigNumber | undefined = undefined;
+  export let size = 0.4;
 
   // Variables:
   let numSpecies: BigNumber = BigNumber.from(3);
@@ -44,7 +45,13 @@
 <!-- Species Carousel -->
 <Carousel {prev} {next}>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <img class="species" src="assets/species/{speciesId}/{animation}.gif" alt="Species #{speciesId}" class:highlight={highlightId && speciesId.eq(highlightId)} on:click={() => expandedSpecies = speciesId }>
+  <img
+    class="species"
+    src="assets/species/{speciesId}/{animation}.gif"
+    alt="Species #{speciesId}" class:highlight={highlightId && speciesId.eq(highlightId)}
+    style:width="calc(var(--game-size) * {Math.max(0, Math.min(1, size))})"
+    on:click={() => expandedSpecies = speciesId }
+  >
 </Carousel>
 
 <!-- Expanded Species Viewer -->
@@ -61,12 +68,9 @@
     display: block;
     width: calc(var(--game-size) * 0.4);
     border-radius: 0.5rem;
-    background-color: var(--c1);
-    background: var(--bg-gradient);
-    outline: 2px solid var(--c3);
   }
   img.species.highlight {
-    outline: 2px solid var(--c4);
+    outline: 2px dashed var(--c3);
   }
   img.species-large {
     display: block;

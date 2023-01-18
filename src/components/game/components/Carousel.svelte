@@ -16,6 +16,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background: var(--transparent-gradient);
+    border-radius: 0.5rem;
+    outline: 1px solid #fff5;
+    padding: 0.5rem;
   }
 
   #carousel > button {

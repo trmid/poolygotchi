@@ -130,6 +130,8 @@ input.game-ui, button.game-ui, select.game-ui {
 }
 .btn.pulse:hover,
 button.pulse:hover,
+input.pulse:hover,
+select.pulse:hover,
 input.game-ui:focus, input.game-ui:hover,
 button.game-ui:focus, button.game-ui:hover,
 select.game-ui:focus, select.game-ui:hover {

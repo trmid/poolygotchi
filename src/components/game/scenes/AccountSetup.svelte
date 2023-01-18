@@ -95,8 +95,8 @@
   {#if page == 0}
     <h3>Choose Your Poolygotchi</h3>
     <div class="column">
-      <SpeciesSelector bind:speciesId />
-      <input id="name-input" type="text" placeholder="Name Tag" maxlength="48" bind:value={name}>
+      <SpeciesSelector bind:speciesId size={0.35} />
+      <input id="name-input" class="game-ui" type="text" placeholder="Name Tag" maxlength="48" bind:value={name}>
     </div>
   {:else if page == 1}
     <h3>Select Your Environment</h3>
@@ -105,7 +105,7 @@
     <h3>Set Your Goal</h3>
     <div id="goal-num">
       <img src="img/usdc.webp" alt="USDC">
-      <input type="number" placeholder="Weekly Savings Goal" bind:value={weeklyGoal}>
+      <input class="game-ui" type="number" placeholder="Weekly Savings Goal" bind:value={weeklyGoal}>
       <strong><i>(per week)</i></strong>
     </div>
   {:else if page == 3}
@@ -122,9 +122,9 @@
     </div>
   {/if}
   <div id="page-selector">
-    <button on:click={back} class:hidden={page == 0}>back</button>
+    <button class="game-ui" on:click={back} class:hidden={page == 0}>back</button>
     <i>Step {page + 1} of 4</i>
-    <button on:click={next} class:hidden={page == maxPage}>next</button>
+    <button class="game-ui" on:click={next} class:hidden={page == maxPage}>next</button>
   </div>
 </div>
 
@@ -151,6 +151,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: 0.5rem;
   }
 
   #page-selector {
