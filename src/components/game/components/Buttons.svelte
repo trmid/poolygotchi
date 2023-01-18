@@ -13,7 +13,7 @@
   }
 
   export const EMPTY_BUTTON: DeviceButton = {
-    title: "no action",
+    title: "No Action",
     class: "icofont-minus",
     action: () => null
   };
