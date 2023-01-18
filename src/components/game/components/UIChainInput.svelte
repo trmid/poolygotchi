@@ -2,7 +2,6 @@
   import type { UIChainInput } from "./Menu.svelte";
 
   export let input: UIChainInput;
-  export let select: () => void;
   export let index: number;
 
   // Constants:
@@ -34,7 +33,6 @@
 <!-- Select -->
 <select
   bind:value={chain}
-  on:pointerenter={select}
   title={input.title ?? ""}
   data-index={index}
   class="game-ui"

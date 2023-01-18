@@ -2,7 +2,6 @@
   import type { UINumberInput } from "./Menu.svelte";
 
   export let input: UINumberInput;
-  export let select: () => void;
   export let index: number;
 
   let value = 0;
@@ -19,7 +18,6 @@
 <div class='wrapper'>
   <input
     bind:value={value}
-    on:pointerenter={select}
     on:keydown|stopPropagation
     title={input.title ?? ""}
     data-index={index}

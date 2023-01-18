@@ -99,7 +99,6 @@
 
   // Reactive statements:
   $: selectedComponentIndex, enforceComponentSelection();
-  $: console.log(selectedComponent);
 
   // Device Buttons:
   let buttons: Partial<DeviceButtons>;
@@ -237,13 +236,13 @@
       >
         {#if component}
           {#if component.type === "button"}
-            <UIButtonSvelte button={asButton(component)} select={() => selectedComponentIndex = i} index={i} />
+            <UIButtonSvelte button={asButton(component)} index={i} />
           {:else if component.type === "number"}
-            <UINumberInputSvelte input={asNumberInput(component)} select={() => selectedComponentIndex = i} index={i} />
+            <UINumberInputSvelte input={asNumberInput(component)} index={i} />
           {:else if component.type === "label"}
             <UILabelSvelte label={asLabel(component)} />
           {:else if component.type === "chain"}
-            <UIChainInputSvelte input={asChainInput(component)} select={() => selectedComponentIndex = i} index={i} />
+            <UIChainInputSvelte input={asChainInput(component)} index={i} />
           {/if}
         {/if}
       </div>
