@@ -3,6 +3,7 @@
   import type { UIButton, UIComponent } from "./Menu.svelte";
   import Menu from "./Menu.svelte";
   import ChooseEnvironment from "./ChooseEnvironment.svelte";
+  import ChooseSpecies from "./ChooseSpecies.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -25,7 +26,7 @@
 {#if page === 'environment'}
   <ChooseEnvironment {deviceButtonController} close={() => page = null} />
 {:else if page === 'species'}
-  <!--  -->
+  <ChooseSpecies {deviceButtonController} close={() => page = null} />
 {:else}
   <Menu components={menuComponents} {deviceButtonController}  />
 {/if}

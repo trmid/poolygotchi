@@ -1,25 +1,25 @@
 <!-- Component -->
 <script type="ts">
   import { BigNumber, BigNumberish } from "ethers";
-  import { onMount } from "svelte";
   import { account, disconnect } from "../../Account.svelte";
   import Poolygotchi from "../../../utils/poolygotchi";
   import { poolygotchi } from "../Game.svelte";
   import PoolTogether from "../../../utils/poolTogether";
   import { networks } from "../../../config";
-  import { Notification, pushNotification } from "../../Notifications.svelte";
+  import { pushNotification } from "../../Notifications.svelte";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
   import type { DeviceButtons } from "../components/Buttons.svelte";
   import EnvironmentSelector from "../components/EnvironmentSelector.svelte";
+    import SpeciesSelector from "../components/SpeciesSelector.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
 
   // Pooly Attributes
   let name: string = "";
-  let speciesId: BigNumberish = BigNumber.from(0);
+  let speciesId: BigNumber = BigNumber.from(0);
   let environmentId: BigNumber = BigNumber.from(0);
   let weeklyGoal: number = 100;
 
@@ -45,7 +45,6 @@
 
   // Variables
   let page = 0;
-  let numSpecies: BigNumberish = 3;
 
   // Navigation functions:
   const back = () => {
@@ -53,16 +52,6 @@
   };
   const next = () => {
     if(page < maxPage) page++;
-  };
-
-  // Species Selectors:
-  const prevSpecies = () => {
-    speciesId = BigNumber.from(speciesId).sub(1);
-    if(speciesId.lt(0)) speciesId = BigNumber.from(numSpecies).sub(1);
-  };
-  const nextSpecies = () => {
-    speciesId = BigNumber.from(speciesId).add(1);
-    if(speciesId.gte(numSpecies)) speciesId = 0;
   };
 
   // Hatch Function:
@@ -96,14 +85,6 @@
     }
   }
 
-  // On Mount:
-  onMount(() => {
-
-    // Get accurate asset counts:
-    Poolygotchi.contract().numSpecies().then(num => numSpecies = num).catch(console.error);
-
-  });
-
 </script>
 
 <!-- Device Button Controller -->
@@ -114,11 +95,7 @@
   {#if page == 0}
     <h3>Choose Your Poolygotchi</h3>
     <div class="column">
-      <div class="selector">
-        <button on:click={prevSpecies}><i class="icofont-caret-left" /></button>
-        <img class="poolygotchi" src="assets/species/{speciesId}/neutral.gif" alt="poolygotchi species {speciesId}">
-        <button on:click={nextSpecies}><i class="icofont-caret-right" /></button>
-      </div>
+      <SpeciesSelector bind:speciesId />
       <input id="name-input" type="text" placeholder="Name Tag" maxlength="48" bind:value={name}>
     </div>
   {:else if page == 1}
@@ -174,25 +151,6 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .selector {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .selector > button {
-    font-size: 24px;
-    padding: 0;
-    min-width: 0;
-    width: 32px;
-    height: 32px;
-  }
-
-  img.poolygotchi {
-    display: block;
-    width: calc(var(--game-size) * 0.4);
   }
 
   #page-selector {

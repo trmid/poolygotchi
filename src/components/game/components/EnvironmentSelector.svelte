@@ -49,9 +49,10 @@
     display: block;
     width: calc(var(--game-size) * 0.5);
     border-radius: 0.5rem;
+    outline: 2px solid var(--c3);
   }
   img.environment.highlight {
-    outline: 2px solid var(--c2);
+    outline: 2px solid var(--c4);
   }
   img.environment-large {
     display: block;
