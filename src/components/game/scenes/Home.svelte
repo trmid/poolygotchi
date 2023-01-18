@@ -11,6 +11,7 @@
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
   import type { DeviceButtons } from "../components/Buttons.svelte";
+  import Goal from "../components/Goal.svelte";
 
   // Parameters:
   export let poolygotchi: Poolygotchi;
@@ -77,6 +78,6 @@
 {:else if widget === "goal"}
 
   <!-- Goal -->
-  <!-- <Goal {deviceButtonController} close={() => widget = null} /> -->
+  <Goal {deviceButtonController} close={() => widget = null} />
 
 {/if}
