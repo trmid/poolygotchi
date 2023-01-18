@@ -207,7 +207,7 @@ select.game-ui.disabled {
   color: var(--icon-gold);
 }
 .icofont-star.colored {
-  color: var(--icon-pink);
+  color: var(--c2);
 }
 .icofont-paint.colored {
   color: var(--icon-orange);
@@ -216,7 +216,7 @@ select.game-ui.disabled {
   color: var(--icon-red-orange);
 }
 .icofont-game.colored {
-  color: var(--icon-green);
+  color: var(--icon-pink);
 }
 .icofont-ui-home.colored {
   color: var(--icon-blue);
