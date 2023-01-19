@@ -1,4 +1,4 @@
-import { readable, Readable, Subscriber } from "svelte/store"
+import { Readable, writable } from "svelte/store"
 
 /**
  * A readable store gated by a lock.
@@ -7,12 +7,15 @@ import { readable, Readable, Subscriber } from "svelte/store"
  * @returns a new Lockable store
  */
 export function lockable<T>(value: T) {
-  let _set: Subscriber<T>;
+  const { set, subscribe } = writable(value);
   let _locked = false;
   const lockable: Lockable<T> = {
     set: (v, throwIfLocked = true) => {
-      if(_locked && throwIfLocked) throw new LockableError("Lockable: locked");
-      _set(v);
+      if(_locked) {
+        if(throwIfLocked) throw new LockableError("Lockable: locked");
+      } else {
+        set(v);
+      }
       return !_locked;
     },
     lock: () => {
@@ -20,13 +23,11 @@ export function lockable<T>(value: T) {
       _locked = true;
       return {
         unlock: () => _locked = false,
-        set: _set
+        set: (v) => { console.log(v); set(v); }
       };
     },
     isLocked: () => _locked,
-    ...(readable(value, set => {
-      _set = set;
-    }))
+    subscribe
   };
   return lockable;
 }
