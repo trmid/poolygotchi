@@ -23,7 +23,7 @@ export function lockable<T>(value: T) {
       _locked = true;
       return {
         unlock: () => _locked = false,
-        set: (v) => { console.log(v); set(v); }
+        set: (v) => { set(v); }
       };
     },
     isLocked: () => _locked,
