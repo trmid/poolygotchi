@@ -3,11 +3,9 @@
   export let label: UILabel;
 </script>
 
-{#if !label.disabled}
-  <strong id="label" class="game-ui" title={label.title ?? ""} style={label.style ?? ""}>
+<strong id="label" class="game-ui" title={label.title ?? ""} style={label.style ?? ""} class:disabled={label.disabled}>
     {@html label.label}
-  </strong>
-{/if}
+</strong>
 
 <!-- Style -->
 <style>
