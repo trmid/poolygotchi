@@ -1,10 +1,10 @@
 <!-- Module -->
 <script type="ts" context="module">
-  import { readable, Readable, Subscriber } from "svelte/store";
+  import { Readable, writable } from "svelte/store";
   import type { DeviceButtons } from "./Buttons.svelte";
 
   export function buttonController(root: DeviceButtons) {
-    let _set: Subscriber<DeviceButtons>;
+    const { set, subscribe } = writable(root);
     let stack: Partial<DeviceButtons>[] = [root];
     const update = () => {
       const b = {...stack[stack.length - 1]};
@@ -13,7 +13,7 @@
         b.middle ??= stack[i].middle;
         b.right ??= stack[i].right;
       }
-      _set(b as DeviceButtons);
+      set(b as DeviceButtons);
     };
     const controller: ButtonController = {
       define: b => {
@@ -33,9 +33,7 @@
           }
         };
       },
-      ...readable<DeviceButtons>(root, set => {
-        _set = set;
-      })
+      subscribe
     };
     return controller;
   }
@@ -51,15 +49,21 @@
   
   export let controller: ButtonController;
   export let buttons: Partial<DeviceButtons>;
-  
+
+  let _remove: (() => void) | undefined;
+  let _update: ((b: Partial<DeviceButtons>) => void) | undefined;
+  let mounted = false;
+
+  $: mounted && define(controller);
   $: buttons && _update && _update(buttons);
 
-  let _remove: () => void;
-  let _update: (b: Partial<DeviceButtons>) => void;
-  onMount(() => {
+  const define = (controller: ButtonController) => {
+    _remove && _remove();
     const { remove, update } = controller.define(buttons);
     _remove = remove;
     _update = update;
-  });
-  onDestroy(() => _remove());
+  };
+
+  onMount(() => mounted = true);
+  onDestroy(() => _remove && _remove());
 </script>
