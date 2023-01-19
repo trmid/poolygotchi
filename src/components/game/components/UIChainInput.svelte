@@ -18,15 +18,16 @@
   // Reactive Statements:
   $: input.onChange(chain ?? 10);
   $: if(input.next != next) input.next = next;
+  $: filteredChains = chains.filter(x => (input.chainIds ?? [1,10,137,43114]).includes(x.id));
 
   // Next function:
   const next = () => {
     let index = -1;
-    chains.forEach((x, i) => {
+    filteredChains.forEach((x, i) => {
       if(x.id == chain) index = i;
     });
-    if(index >= chains.length - 1) index = -1;
-    chain = chains[index + 1].id;
+    if(index >= filteredChains.length - 1) index = -1;
+    chain = filteredChains[index + 1].id;
   };
 </script>
 
@@ -40,10 +41,9 @@
   disabled={input.disabled}
   style={input.style ?? ""}
 >
-  <option value={1}>Ethereum</option>
-  <option value={10}>Optimism</option>
-  <option value={137}>Polygon</option>
-  <option value={43114}>Avalanche</option>
+  {#each filteredChains as chain}
+    <option value={chain.id}>{chain.name}</option>
+  {/each}
 </select>
 
 <!-- Style -->

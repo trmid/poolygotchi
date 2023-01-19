@@ -34,6 +34,7 @@
   export interface UIChainInput extends UIComponent {
     type: 'chain'
     chain: number
+    chainIds?: number[]
     onChange: (chain: number) => void
     next?: () => void
   }
