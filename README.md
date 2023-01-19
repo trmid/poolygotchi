@@ -6,11 +6,16 @@
 
 ## Installation
 
-Clone or fork this repo and run `npm i`. 
+1. Clone or fork this repo and run `npm i`.
+2. Install solidity dependencies by entering the solidity folder with `cd src/solidity` and running `npm i`.
 
 ## Development
 
-Run `npm run dev` to start the development server.
+Follow these steps to setup your development environment:
+
+1. Optionally, open the `scripts/devDeploy.ts` file and update line 20 with your test address to be sent test funds on the local node. (An easier method will be added soon)
+2. Navigate back to the root folder.
+3. Run `npm run dev` to start the development server.
 
 ## Build
 
