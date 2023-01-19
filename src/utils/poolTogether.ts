@@ -37,6 +37,7 @@ export default class PoolTogether {
     return prizeDistributor;
   }
 
+  // TODO: update function to query entire history over a long period with a cb for when it is done and a cancel function returned
   static getUnclaimedDraws(address: string) {
 
     // Fetch the draw results for each chain:
