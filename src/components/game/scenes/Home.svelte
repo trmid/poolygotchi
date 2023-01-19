@@ -8,9 +8,9 @@
   import Environment from "../components/Environment.svelte";
   import Withdraw from "../components/Withdraw.svelte";
   import Personalize from "../components/Personalize.svelte";
-  import ButtonControllerSvelte from "../components/ButtonController.svelte";
+  import ButtonControllerSvelte, { buttonController } from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
-  import type { DeviceButtons } from "../components/Buttons.svelte";
+  import { DeviceButtons, EMPTY_BUTTON } from "../components/Buttons.svelte";
   import Goal from "../components/Goal.svelte";
 
   // Parameters:
@@ -49,8 +49,16 @@
   <!-- Environment -->
   <Environment environmentId={data.environmentId} />
 
-  <!-- Poolygotchi -->
-  <PoolygotchiSvelte {poolygotchi} {deviceButtonController} bind:this={poolygotchiComponent} />
+  <!-- Poolygotchi (give dummy button controller if menu or widget is open) -->
+  <PoolygotchiSvelte
+    bind:this={poolygotchiComponent}
+    {poolygotchi}
+    deviceButtonController={
+      (showMenu || widget) ?
+      buttonController({ left: EMPTY_BUTTON, middle: EMPTY_BUTTON, right: EMPTY_BUTTON }) :
+      deviceButtonController
+    }
+  />
 
 {/await}
 
