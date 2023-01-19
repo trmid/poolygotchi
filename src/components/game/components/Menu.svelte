@@ -38,10 +38,10 @@
     next?: () => void
   }
 
-  export const uiNumberInput = (c: UINumberInput) => c;
-  export const uiLabel = (c: UILabel) => c;
-  export const uiButton = (c: UIButton) => c;
-  export const uiChainInput = (c: UIChainInput) => c;
+  export const uiNumberInput = (c: Omit<UINumberInput, "type">): UINumberInput => ({ ...c, type: "number" });
+  export const uiLabel = (c: Omit<UILabel, "type">): UILabel => ({ ...c, type: "label" });
+  export const uiButton = (c: Omit<UIButton, "type">): UIButton => ({ ...c, type: "button" });
+  export const uiChainInput = (c: Omit<UIChainInput, "type">): UIChainInput => ({ ...c, type: "chain" });
 
   export const asButton = (component: UIComponent): UIButton => {
     if(component.type === "button") return component as UIButton;
