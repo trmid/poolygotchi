@@ -181,7 +181,6 @@
   #click-mask {
     position: absolute;
     inset: 0;
-    z-index: 1;
     cursor: pointer;
   }
 </style>
