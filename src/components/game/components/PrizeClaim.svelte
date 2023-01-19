@@ -24,7 +24,7 @@
   // Reactive Assignments:
   $: anyClaimable = (unclaimedDraws ?? []).filter(x => x.unclaimedDraws.length > 0).length > 0;
   $: chainIds = [...new Set((unclaimedDraws ?? []).filter(x => x.unclaimedDraws.length > 0).map(x => x.chainId))];
-  $: claimableAmount = claimable(chain);
+  $: claimableAmount = claimable(chain, unclaimedDraws);
 
   // Edit menu:
   let components: (UIComponent | null)[] = [];
@@ -45,11 +45,11 @@
     if(chain != newChain) chain = newChain;
   };
 
-  const claimable = (chainId: number) => {
-    if(!unclaimedDraws) return BigNumber.from(0);
-    const draws = unclaimedDraws.filter(x => x.chainId == chainId)[0].unclaimedDraws;
+  const claimable = (chainId: number, draws: typeof unclaimedDraws) => {
+    if(!draws) return BigNumber.from(0);
+    const chainDraws = draws.filter(x => x.chainId == chainId)[0].unclaimedDraws;
     let amount = BigNumber.from(0);
-    for(const draw of draws) {
+    for(const draw of chainDraws) {
       amount = amount.add(draw.totalValue);
     }
     return amount;
