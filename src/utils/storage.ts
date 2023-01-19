@@ -47,6 +47,13 @@ export namespace PrizeInfo {
 
 }
 
+// Storage to get and save prize alert info:
+export namespace PrizeAlert {
+  const keyOf = (address: string) => `prizeAlert:${address}`;
+  export const get = (address: string) => JSON.parse(""+localStorage.getItem(keyOf(address))) as number | null;
+  export const set = (address: string, drawId: number) => localStorage.setItem(keyOf(address), "" + drawId);
+}
+
 // Storage to get and save ens name resolutions:
 export namespace ENSName {
   const keyOf = (address: string) => `ens:name:${address.toLowerCase()}`;
