@@ -47,10 +47,10 @@
   // Edit menu:
   let editComponents: (UIComponent | null)[] = [];
   $: editComponents = [
-    uiLabel({ type: "label", label: "weekly goal" }),
-    uiButton({ type: "button", icon: "icofont-undo colored", name: "back", title: "Back", action: () => editing = false }),
-    uiNumberInput({ type: "number", title: "Edit Amount", token: 'usdc', attributes: { min: 0 }, onChange: onGoalChange, disabled: settingGoal }),
-    uiButton({ type: "button", icon: "icofont-save colored", name: "set goal", title: "Set New Goal", action: setGoal, disabled: settingGoal }),
+    uiLabel({ label: "weekly goal" }),
+    uiButton({ icon: "icofont-undo colored", name: "back", title: "Back", action: () => editing = false }),
+    uiNumberInput({ title: "Edit Amount", token: 'usdc', attributes: { min: 0 }, onChange: onGoalChange, disabled: settingGoal }),
+    uiButton({ icon: "icofont-save colored", name: "set goal", title: "Set New Goal", action: setGoal, disabled: settingGoal }),
   ];
 
   // Functions:
