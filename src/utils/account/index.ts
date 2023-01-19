@@ -1,13 +1,13 @@
 import { createIcon } from "@download/blockies";
 import type { Signer } from "@ethersproject/abstract-signer";
 import { Contract, ethers } from "ethers";
-import type { Deferrable } from "ethers/lib/utils";
 import WeaverFi, { Address } from "weaverfi";
 import { providers } from "weaverfi/dist/functions";
 import erc721 from "../../solidity/node_modules/@openzeppelin/contracts/build/contracts/ERC721.json";
 import Poolygotchi from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
-import type { TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
+import type { TransactionRequest } from "@ethersproject/abstract-provider";
+import { ENSName, StoredAvatar } from "../storage";
 
 export abstract class BaseAccount implements Account {
   private _resolvedAvatars: Promise<{ url: string | (() => Promise<string>), category: string, weight: number }[]> | undefined;
@@ -19,14 +19,13 @@ export abstract class BaseAccount implements Account {
     return this.storedAvatar ?? this.defaultAvatar;
   }
   set avatar(url: string) {
-    localStorage.setItem(`avatar:${this.address.toLowerCase()}`, url);
+    StoredAvatar.set(this._address, url);
   }
   get defaultAvatar() {
     return createIcon({ seed: this.address.toLowerCase(), scale: 8 }).toDataURL() as string;
   }
   get storedAvatar() {
-    const storageID = `avatar:${this.address.toLowerCase()}`;
-    return localStorage.getItem(storageID);
+    return StoredAvatar.get(this._address);
   }
   ensName() {
     return BaseAccount.ensName(this.address);
@@ -143,15 +142,14 @@ export abstract class BaseAccount implements Account {
 
   /* Static functions */
   static async ensName(address: string, { useCache = false } = {}) {
-    const cacheKey = `ens-name-${address.toLowerCase()}`;
     const promise = WeaverFi.eth.lookupENS(address as Address).then(name => {
       if(name) {
-        localStorage.setItem(cacheKey, name);
+        ENSName.set(address, name);
       }
       return name;
     });
     if(useCache) {
-      const name = localStorage.getItem(cacheKey);
+      const name = ENSName.get(address);
       if(name) return name;
     }
     return await promise;

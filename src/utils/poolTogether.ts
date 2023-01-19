@@ -1,8 +1,9 @@
 import { BigNumber, ethers } from "ethers";
 import { providers } from "weaverfi/dist/functions";
 import mainnet from "./poolTogetherContracts.json";
-import { PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
+import { DrawResults, PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
 import type { AccountWithSigner } from "./account";
+import { PrizeInfo } from "./storage";
 
 export default class PoolTogether {
 
@@ -26,6 +27,64 @@ export default class PoolTogether {
       balance = balance.add(chain.balances.ticket);
     }
     return balance;
+  }
+
+  static prizeDistributor(chain: number) {
+    const address = mainnet.contracts.filter(x => x.chainId == chain && x.type === "PrizeDistributor")[0]?.address;
+    if(!address) throw new Error(`Could not PrizeDistributor for chain: ${chain}`);
+    const prizeDistributor = PoolTogether.prizePoolNetwork().getPrizeDistributor(chain, address);
+    if(!prizeDistributor) throw new Error(`Could not find prize distributor for chain: ${chain} and address: ${address}`);
+    return prizeDistributor;
+  }
+
+  static getUnclaimedDraws(address: string) {
+
+    // Fetch the draw results for each chain:
+    return Promise.all([1, 10, 137, 43114].map(chainId => new Promise<{ chainId: number, unclaimedDraws: DrawResults[] }>(async (resolve, reject) => {
+      try {
+        const distributor = PoolTogether.prizeDistributor(chainId);
+
+        // Get last two weeks drawIds:
+        let drawIds = (await distributor.getValidDrawIds()).slice(-14, -1);
+
+        // Get stored prize check info:
+        let storedPrizeInfo = PrizeInfo.get(address, chainId);
+        if(storedPrizeInfo) {
+
+          // Prevent double-checking of drawIds:
+          const lastIndexChecked = drawIds.indexOf(storedPrizeInfo.lastDrawChecked);
+          if(lastIndexChecked > -1) drawIds = drawIds.slice(lastIndexChecked + 1);
+
+          // Combine unclaimed drawIds with new drawIds:
+          drawIds = storedPrizeInfo.unclaimed.concat(drawIds);
+        }
+        console.log(drawIds);
+        if(drawIds.length > 0) {
+          const latestDrawChecked = drawIds[drawIds.length - 1];
+
+          // Check results:
+          const prizeDistributions = await distributor.getPrizeDistributions(drawIds);
+          const resultsMap = await distributor.getUsersDrawResultsForDrawIds(address, drawIds, drawIds.map(id => prizeDistributions[id].maxPicksPerUser));
+          const results = drawIds.map(id => resultsMap[id]);
+          const winningDraws = results.filter(x => x.totalValue.gt(0));
+          const claimedAmountMap = await distributor.getUsersClaimedAmounts(address, winningDraws.map(x => x.drawId));
+          const unclaimedDraws = winningDraws.filter(x => claimedAmountMap[x.drawId].eq(0));
+
+          // Save info:
+          PrizeInfo.set(address, {
+            chainId,
+            lastDrawChecked: latestDrawChecked,
+            unclaimed: unclaimedDraws.map(x => x.drawId)
+          });
+
+          resolve({ chainId, unclaimedDraws });
+        } else {
+          resolve({ chainId, unclaimedDraws: [] });
+        }
+      } catch(err) {
+        reject(err);
+      }
+    })));
   }
 
   static prizePool(chain: number) {

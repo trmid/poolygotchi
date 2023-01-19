@@ -8,6 +8,8 @@
   import { lockable, LockableError } from "../../../utils/lockable";
   import Poolygotchi from "../../../utils/poolygotchi";
   import type { ButtonController } from "../components/ButtonController.svelte";
+  import PoolTogether from "../../../utils/poolTogether";
+  import { pushNotification } from "../../Notifications.svelte";
 
   // Props:
   export let poolygotchi: Poolygotchi;
@@ -69,6 +71,7 @@
   let napping = false;
   let hatchingStage: 'bouncing' | 'hatching' | null = null;
   let confetti = false;
+  let unclaimedDraws: Awaited<ReturnType<(typeof PoolTogether)["getUnclaimedDraws"]>>
 
   // Animation Image Caches:
   let animations: Record<Animation, HTMLImageElement> = {
@@ -88,8 +91,10 @@
   };
   $: animation = stateAnimation[$state];
 
-  // Function to update animation images from active poolygotchi:
+  // Function to refresh poolygotchi and network data:
   const refresh = () => {
+
+    // Get poolygotchi data and animations:
     hatchingStage = null;
     poolygotchi.data().then(data => {
       name = data.name;
@@ -105,6 +110,16 @@
       }
       poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
     }).catch(console.error);
+
+    // Query for prizes:
+    PoolTogether.getUnclaimedDraws(poolygotchi.address).then(res => {
+      unclaimedDraws = res;
+      console.log(res);
+    }).catch(err => {
+      console.error(err);
+      pushNotification({ message: "Failed to query unclaimed prizes...", type: "warning" });
+    });
+
   };
 
   // Hatch Function:
@@ -177,9 +192,7 @@
 
   // On Mount:
   onMount(() => {
-    setInterval(() => {
-      poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
-    }, 30000);
+    poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
   });
 
   // On Destroy:
