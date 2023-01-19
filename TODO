@@ -1,0 +1,16 @@
+# TODO
+
+## General
+[ ] Pull latest Wallet Connect packages and integrate
+[ ] Add full prize history claiming
+[ ] Add rename page in personalization menu
+[ ] Add prize claim health factor boost
+[ ] Fix health factor -0.00 format
+[ ] Add auto connect for injected wallets
+[ ] Add info components
+[ ] Convert Menu object components to actual Svelte Components
+
+## Testnet Deployment
+[ ] Add testnet and private key args on deploy script
+[ ] Configure test.poolygotchi.com deployment on fleek
+[ ] Add welcome overlay and disclaimer for testnet on page load
