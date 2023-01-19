@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, ethers, Signer } from "ethers";
 import { providers } from "weaverfi/dist/functions";
 import mainnet from "./poolTogetherContracts.json";
 import { DrawResults, PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
@@ -29,12 +29,16 @@ export default class PoolTogether {
     return balance;
   }
 
-  static prizeDistributor(chain: number) {
+  static prizeDistributor(chain: number, network?: PrizePoolNetwork) {
     const address = mainnet.contracts.filter(x => x.chainId == chain && x.type === "PrizeDistributor")[0]?.address;
     if(!address) throw new Error(`Could not PrizeDistributor for chain: ${chain}`);
-    const prizeDistributor = PoolTogether.prizePoolNetwork().getPrizeDistributor(chain, address);
+    const prizeDistributor = (network ?? PoolTogether.prizePoolNetwork()).getPrizeDistributor(chain, address);
     if(!prizeDistributor) throw new Error(`Could not find prize distributor for chain: ${chain} and address: ${address}`);
     return prizeDistributor;
+  }
+
+  static getNewestDraw(chainId: number) {
+    return PoolTogether.prizeDistributor(chainId).getNewestDraw();
   }
 
   // TODO: update function to query entire history over a long period with a cb for when it is done and a cancel function returned
@@ -46,7 +50,7 @@ export default class PoolTogether {
         const distributor = PoolTogether.prizeDistributor(chainId);
 
         // Get last two weeks drawIds:
-        let drawIds = (await distributor.getValidDrawIds()).slice(-14, -1);
+        let drawIds = (await distributor.getValidDrawIds()).slice(-7, -1);
 
         // Get stored prize check info:
         let storedPrizeInfo = PrizeInfo.get(address, chainId);
@@ -59,7 +63,6 @@ export default class PoolTogether {
           // Combine unclaimed drawIds with new drawIds:
           drawIds = storedPrizeInfo.unclaimed.concat(drawIds);
         }
-        console.log(drawIds);
         if(drawIds.length > 0) {
           const latestDrawChecked = drawIds[drawIds.length - 1];
 
@@ -86,6 +89,12 @@ export default class PoolTogether {
         reject(err);
       }
     })));
+  }
+
+  static claim(chain: number, draws: Record<number, DrawResults>, signer: Signer) {
+    if(!signer.provider) signer = signer.connect(PoolTogether.providers[chain as 1]);
+    const network = new PrizePoolNetwork({ ...PoolTogether.providers, [chain]: signer }, mainnet as any);
+    return PoolTogether.prizeDistributor(chain, network).claimPrizesAcrossMultipleDrawsByDrawResults(draws);
   }
 
   static prizePool(chain: number) {

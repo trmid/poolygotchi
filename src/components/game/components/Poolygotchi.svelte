@@ -10,6 +10,10 @@
   import type { ButtonController } from "../components/ButtonController.svelte";
   import PoolTogether from "../../../utils/poolTogether";
   import { pushNotification } from "../../Notifications.svelte";
+  import { BigNumber } from "ethers";
+  import { formatUSDC } from "../../../utils/token";
+  import { PrizeAlert, PrizeInfo } from "../../../utils/storage";
+    import PrizeClaim from "./PrizeClaim.svelte";
 
   // Props:
   export let poolygotchi: Poolygotchi;
@@ -17,6 +21,9 @@
   export const interact = () => {
     let unlockState: (() => void) | undefined;
     try {
+      // Check prize announcement:
+      totalUnclaimedPrizeAmount.gt(0) && !hatchingStage && announcePrizes();
+
       // Block normal state setting:
       const { unlock, set } = state.lock();
       unlockState = unlock;
@@ -48,30 +55,33 @@
         }
 
       }
-      setSpeech(newSpeech, unlock);
+      speech.set({ message: newSpeech, onClose: unlock });
     } catch(err) {
       unlockState && unlockState();
-      if(err instanceof Error && err.message !== 'already locked') {
+      if(err instanceof Error && !(err instanceof LockableError)) {
         console.error(err);
       }
     }
   };
 
+  // Lockable stores:
+  const state = lockable<State>('neutral');
+  const speech = lockable<{ message: string, onClose?: () => void } | null>(null);
+
   // Variables:
   let name = "";
   let healthFactor = 1;
-  let state = lockable<State>('neutral');
   let walkingFrom = 0.5;
   let walkingStarted = 0;
   let walkingDuration = 1;
   let x = 0.5;
   let direction = 1;
-  let speech = "";
-  let onSpeechClose: (() => void) | null = null;
   let napping = false;
   let hatchingStage: 'bouncing' | 'hatching' | null = null;
   let confetti = false;
   let unclaimedDraws: Awaited<ReturnType<(typeof PoolTogether)["getUnclaimedDraws"]>>
+  let totalUnclaimedPrizeAmount: BigNumber = BigNumber.from(0);
+  let claimingPrizes = false;
 
   // Animation Image Caches:
   let animations: Record<Animation, HTMLImageElement> = {
@@ -99,8 +109,7 @@
     poolygotchi.data().then(data => {
       name = data.name;
       if((Math.floor(Date.now() / 1000) - data.hatchDate.toNumber() < 40)) {
-        hatchingStage = 'bouncing';
-        setSpeech("The egg looks like it's about to hatch!", hatch);
+        hatch();
       }
       for(const key of (Object.keys(animations) as State[])) {
         const url = `assets/species/${data.speciesId.toString()}/${key}.gif`;
@@ -112,42 +121,85 @@
     }).catch(console.error);
 
     // Query for prizes:
-    PoolTogether.getUnclaimedDraws(poolygotchi.address).then(res => {
-      unclaimedDraws = res;
-      console.log(res);
-    }).catch(err => {
-      console.error(err);
-      pushNotification({ message: "Failed to query unclaimed prizes...", type: "warning" });
-    });
+    PoolTogether.getNewestDraw(10)
+      .then(newestDraw => {
+        // Check if we have already alerted the user about the latest draw:
+        if(PrizeAlert.get(poolygotchi.address) != newestDraw.drawId - 1) {
+          // Get unclaimed draws:
+          PoolTogether.getUnclaimedDraws(poolygotchi.address).then(res => {
+            unclaimedDraws = res;
+            console.log(res);
+            totalUnclaimedPrizeAmount = BigNumber.from(0);
+            for(const chain of unclaimedDraws) {
+              for(const draw of chain.unclaimedDraws) {
+                totalUnclaimedPrizeAmount = totalUnclaimedPrizeAmount.add(draw.totalValue);
+              }
+            }
+            // Check if we should announce the prizes:
+            totalUnclaimedPrizeAmount.gt(0) && !hatchingStage && announcePrizes();
+          }).catch(err => {
+            console.error(err);
+            pushNotification({ message: "Failed to query unclaimed prizes...", type: "warning" });
+          });
+        }
+      })
+      .catch(console.error);
 
+  };
+
+  // Announce Prizes Function:
+  const announcePrizes = () => {
+    try {
+      if(totalUnclaimedPrizeAmount.gt(0)) {
+        const stateLock = state.lock();
+        stateLock.set("happy");
+        const speechLock = speech.lock();
+        speechLock.set({ message: `${name} looks excited about something!`, onClose: () => {
+          speechLock.set({ message: `You won ${formatUSDC(totalUnclaimedPrizeAmount)} USDC in prizes!`, onClose: () => {
+            stateLock.unlock();
+            speechLock.unlock();
+            claimingPrizes = true;
+            totalUnclaimedPrizeAmount = BigNumber.from(0);
+            PrizeAlert.set(poolygotchi.address, PrizeInfo.get(poolygotchi.address, 10)?.lastDrawChecked ?? -1);
+          }});
+          confetti = true;
+          setTimeout(() => {
+            confetti = false;
+          }, 4000);
+        }});
+      }
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   // Hatch Function:
   const hatch = () => {
-    const p = poolygotchi;
-    hatchingStage = 'hatching';
-    setTimeout(() => {
-      if(p != poolygotchi) return;
-      try {
-        hatchingStage = null;
-        confetti = true;
-        state.set("happy");
-        const { unlock } = state.lock();
-        setSpeech(`${name} just hatched!`, unlock);
+    try {
+      hatchingStage = 'bouncing';
+      const stateLock = state.lock();
+      const speechLock = speech.lock();
+      speechLock.set({ message: "The egg looks like it's about to hatch!", onClose: () => {
+        const p = poolygotchi;
+        hatchingStage = 'hatching';
         setTimeout(() => {
-          confetti = false;
-        }, 4000);
-      } catch(err) {
-        console.error(err);
-      }
-    }, 2000);
-  };
-
-  // Function to set the speech content:
-  const setSpeech = (message: string, onClose?: () => void) => {
-    speech = message;
-    if(onSpeechClose) try { onSpeechClose(); } catch (err) { console.error(err) };
-    onSpeechClose = onClose ?? null;
+          if(p != poolygotchi) return;
+          try {
+            hatchingStage = null;
+            confetti = true;
+            stateLock.set("happy");
+            speechLock.set({ message: `${name} just hatched!`, onClose: () => { stateLock.unlock(); speechLock.unlock(); } });
+            setTimeout(() => {
+              confetti = false;
+            }, 4000);
+          } catch(err) {
+            console.error(err);
+          }
+        }, 2000);
+      }});
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   // Decision loop:
@@ -236,8 +288,13 @@
 {/if}
 
 <!-- Speech Bubble -->
-{#if speech}
-  <Speech {speech} {deviceButtonController} close={() => setSpeech("")} />
+{#if $speech}
+  <Speech speech={$speech.message} {deviceButtonController} close={() => { $speech?.onClose && $speech.onClose(); try { speech.set(null) } catch { }} } />
+{/if}
+
+<!-- Prize Claim -->
+{#if claimingPrizes}
+  <PrizeClaim {unclaimedDraws} {deviceButtonController} close={() => claimingPrizes = false} />
 {/if}
 
 <!-- Style -->

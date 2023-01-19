@@ -142,6 +142,7 @@ select.game-ui:focus, select.game-ui:hover {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+.game-ui.disabled,
 .btn:disabled,
 input:disabled, button:disabled, select:disabled,
 input.game-ui.disabled,
@@ -232,6 +233,9 @@ select.game-ui.disabled {
 }
 .icofont-tag.colored {
   color: var(--c3);
+}
+.icofont-money.colored {
+  color: var(--icon-gold);
 }
 
 /* No Text Select Class */
