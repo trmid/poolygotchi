@@ -81,31 +81,6 @@ contract PoolygotchiHatchery is Ownable {
     return _Poolygotchi[pooler];
   }
 
-  // function healthFactor(address pooler, uint256 currentBalance) public view _hasPoolygotchi(pooler) returns (int32) {
-  //   // returns the number of seconds that the depositor is off from their goal
-  //   // factor > 0 means depositor is ahead of their goal
-  //   // factor < 0 means depositor is behind their goal
-  //   // maxes out at +/- MAX_INT32
-
-  //   uint256 balanceChange;
-  //   bool balanceNegative = false;
-  //   if(currentBalance < _Poolygotchi[pooler].goalStartBalance) {
-  //     balanceNegative = true;
-  //     balanceChange = _Poolygotchi[pooler].goalStartBalance - currentBalance;
-  //   } else {
-  //     balanceChange = currentBalance - _Poolygotchi[pooler].goalStartBalance;
-  //   }
-  //   uint256 secondsOff = (1 weeks * balanceChange) / _Poolygotchi[pooler].goalAmountWeekly;
-  //   if(secondsOff > MAX_INT32) {
-  //     secondsOff = MAX_INT32;
-  //   }
-  //   int32 factor = int32(uint32(secondsOff));
-  //   if(balanceNegative) {
-  //     factor = factor * -1;
-  //   }
-  //   return factor;
-  // }
-
   function speciesURI(uint64 speciesId) external view speciesExists(speciesId) returns (string memory) {
     return _species[speciesId].uri;
   }
