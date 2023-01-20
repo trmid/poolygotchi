@@ -238,6 +238,11 @@ select.game-ui.disabled {
   color: var(--icon-gold);
 }
 
+/* w3m-modal */
+w3m-modal {
+  --color-fg-accent: #512BC7;
+}
+
 /* No Text Select Class */
 .no-select, *[class^=text-gradient] {
   user-select: none;
