@@ -9,6 +9,7 @@
   import Focus from "./components/Focus.svelte";
   import Time from "./components/Time.svelte";
   import ServiceWorker from "./components/ServiceWorker.svelte";
+  import TestnetWelcome from "./components/TestnetWelcome.svelte";
 </script>
 
 <!-- Service Worker -->
@@ -25,6 +26,9 @@
 
 <!-- Connect Overlay -->
 <ConnectOverlay />
+
+<!-- Testnet Disclaimer -->
+<TestnetWelcome />
 
 <!-- Notifications -->
 <Notifications />

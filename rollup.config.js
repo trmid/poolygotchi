@@ -12,7 +12,13 @@ import { join } from 'path';
 import nodePackage from "./package.json";
 
 // Determine production or development:
-const production = !process.env.ROLLUP_WATCH;
+const production = !!(process.env.NODE_ENV ?? "").match(/production/);
+
+// Check if we are using testnet deployment:
+const testnet = (process.env.POOLYGOTCHI_TESTNET ?? "").toLowerCase() !== "true";
+
+// Get app version:
+const version = nodePackage.version + (production ? "" : (":" + Math.floor(Math.random() * 0xffffffff).toString(16)));
 
 // Output path:
 const out = "docs";
@@ -73,7 +79,7 @@ const generateSW = () => ({
 
 		// Replace markers:
 		let sw = template
-			.replace(/\$PACKAGE\_VERSION/g, nodePackage.version + (production ? "" : ":" + Math.floor(Math.random() * 0xffffffff).toString(16)))
+			.replace(/\$PACKAGE\_VERSION/g, version)
 			.replace(/\$FILES_TO_CACHE/g, JSON.stringify([...outFiles]));
 
 		// Append ipfs.min.js contents to worker:
@@ -105,6 +111,19 @@ const ignoreDebugModule = () => ({
 		if(id.match(/node_modules[\\\/]@pooltogether.+\.js$/)) {
 			return {
 				code: data.replace(/require\(['"]debug['"]\)/g, `(() => (() => null))`),
+				map: { mappings: '' }
+			}
+		}
+	}
+});
+
+// Custom plugin to inject custom build config info:
+const injectConfig = () => ({
+  name: "Inject Custom Build Config",
+	transform: function transform(data, id) {
+		if(id.match(/src[\\\/]config.ts$/)) {
+			return {
+				code: data.replace(/\$BUILD_CONFIG/g, `{ "production": ${production}, "testnet": ${testnet}, "version": "${version}" }`),
 				map: { mappings: '' }
 			}
 		}
@@ -161,11 +180,10 @@ export default {
 		// instead of npm run dev), minify
 		production && terser(),
 
-		// Write service worker to out folder
+		// Custom plugins:
 		generateSW(),
-
-    // Hotfix for pooltogether dynamic require of debug module
     ignoreDebugModule(),
+		injectConfig(),
 	],
 	watch: {
 		clearScreen: false

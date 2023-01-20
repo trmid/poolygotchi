@@ -1,9 +1,9 @@
 import type { TransactionReceipt } from "@ethersproject/abstract-provider"
 import type { Notification } from "../components/Notifications.svelte";
-import { networks } from "../config";
+import { Config } from "../config";
 
 export function explorerReceipt(chainId: number, tx: TransactionReceipt) {
-  const network = networks[chainId];
+  const network = Config.networks[chainId];
   if(!network) throw new Error(`Invalid chainId: ${chainId}`);
   return network.blockExplorerUrls[0] + "tx/" + tx.transactionHash;
 }

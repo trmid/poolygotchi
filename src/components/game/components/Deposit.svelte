@@ -9,6 +9,8 @@
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
+  import { Config } from "../../../config";
+  import { poolygotchi } from "../Game.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -139,7 +141,7 @@
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Approving USDC", persist: true });
       if(res) {
-        const receipt = await res.wait();
+        const receipt = await res.wait(Config.confirmations);
         pushNotification({ message: `USDC approved. You can now deposit into your PoolTogether balance.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "standard", title: "USDC Approved" });
       } else {
         pushNotification({ message: "USDC already approved. You may continue with your deposit.", type: "standard", title: "USDC Approved" });
@@ -167,10 +169,13 @@
       const res = await PoolTogether.deposit(chain, amount, $account);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Depositing USDC", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
       pushNotification({ message: `Deposited ${formatUSDC(amount)} USDC.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success", title: "USDC Deposited!" });
       await queryBalance(chain);
+
+      // Trigger poolygotchi refresh:
+      $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
       pushNotification(txNotification(err) ?? { message: "Failed to deposit.", type: "error" });

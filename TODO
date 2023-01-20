@@ -11,6 +11,6 @@
 [ ] Convert Menu object components to actual Svelte Components
 
 ## Testnet Deployment
-[ ] Add testnet and private key args on deploy script
+[x] Add testnet and private key args on deploy script
 [ ] Configure test.poolygotchi.com deployment on fleek
-[ ] Add welcome overlay and disclaimer for testnet on page load
+[x] Add welcome overlay and disclaimer for testnet on page load

@@ -1,5 +1,5 @@
 import hatcheryInfo from "../solidity/artifacts/contracts/PoolygotchiHatchery.sol/PoolygotchiHatchery.json";
-import { hatcheryAddress, networks } from "../config";
+import { Config } from "../config";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 import { BigNumber, ethers } from "ethers";
 import PoolTogether from "./poolTogether";
@@ -7,7 +7,7 @@ import PoolTogether from "./poolTogether";
 export default class Poolygotchi {
 
   /* Static vars */
-  static address: string = hatcheryAddress;
+  static address: string = Config.hatcheryAddress;
   static abi = hatcheryInfo.abi;
 
   /* Private vars */
@@ -71,7 +71,7 @@ export default class Poolygotchi {
 
   /* Static Functions */
   static contract() {
-    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(networks.poolygotchi.rpcUrls[0], networks.poolygotchi)) as PoolygotchiHatchery;
+    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(Config.networks.poolygotchi.rpcUrls[0], Config.networks.poolygotchi)) as PoolygotchiHatchery;
   }
 
   static expression(state: State, name: string) {

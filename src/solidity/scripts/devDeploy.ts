@@ -23,7 +23,7 @@ async function main() {
   const configPath = `${__dirname}/../../config.ts`;
   console.log(configPath);
   let config = fs.readFileSync(configPath, { encoding: 'utf-8' });
-  config = config.replace(/export const hatcheryAddress = "[0-9a-zA-Z]*"\;/, `export const hatcheryAddress = "${hatchery.address}";`);
+  config = config.replace(/const devHatcheryAddress = "[0-9a-zA-Z]*"\;/, `const devHatcheryAddress = "${hatchery.address}";`);
   fs.writeFileSync(configPath, config);
   console.log("Wrote to config file.");
 }

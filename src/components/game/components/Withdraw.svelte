@@ -9,6 +9,8 @@
   import { onMount } from "svelte";
   import { formatUSDC } from "../../../utils/token";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
+  import { Config } from "../../../config";
+  import { poolygotchi } from "../Game.svelte";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -122,10 +124,13 @@
       const res = await PoolTogether.withdraw(chain, amount, $account);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Withdrawing USDC", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
       pushNotification({ message: `Withdrew ${formatUSDC(amount)} USDC.\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success", title: "Withdrawal Successful" });
       await queryBalance(chain);
+
+      // Trigger poolygotchi refresh:
+      $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);
       pushNotification(txNotification(err) ?? { message: "Failed to withdraw.", type: "error" });

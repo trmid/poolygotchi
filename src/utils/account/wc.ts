@@ -6,7 +6,7 @@ import { Bytes, hexlify } from "@ethersproject/bytes";
 import { ethers } from "ethers";
 import { AccountWithSigner, BaseAccount } from ".";
 import { Signer } from "@ethersproject/abstract-signer";
-import { networks } from "../../config";
+import { Config } from "../../config";
 
 export default class WCAccount extends BaseAccount implements AccountWithSigner {
 
@@ -15,7 +15,7 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
   constructor(private signClient: SignClient, private session: SessionTypes.Struct) {
     const address = ((session.namespaces["eip155"].accounts[0] ?? "").match(/eip155:1:(.+)/) ?? [])[1] ?? null;
     super(address);
-    this._signer = new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(networks.op.rpcUrls[0], networks.op));
+    this._signer = new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(Config.networks.op.rpcUrls[0], Config.networks.op));
   }
 
   get signer() {
@@ -45,7 +45,7 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
   // }
 
   public async switchChain(chain: number) {
-    const provider = new ethers.providers.JsonRpcProvider(networks[chain].rpcUrls[0], networks[chain]);
+    const provider = new ethers.providers.JsonRpcProvider(Config.networks[chain].rpcUrls[0], Config.networks[chain]);
     this._signer = this._signer.connect(provider);
   }
 

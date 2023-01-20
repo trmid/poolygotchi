@@ -10,7 +10,7 @@
   import { account } from "../../Account.svelte";
   import Poolygotchi from "../../../utils/poolygotchi";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
-  import { networks } from "../../../config";
+  import { Config } from "../../../config";
 
   // Props:
   export let deviceButtonController: ButtonController;
@@ -42,12 +42,12 @@
       saving = true;
       if(!$account) throw new Error("Not connected!");
       dismissPending = pushNotification({ message: "Waiting for transaction approval <i class='icofont-custom-spinner'></i>", type: "standard", title: "Updating Environment", persist: true });
-      const chainId = networks.poolygotchi.chainId;
+      const chainId = Config.networks.poolygotchi.chainId;
       await $account.switchChain(chainId);
       const res = await Poolygotchi.contract().connect($account.signer).setEnvironment(newId);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Updating Environment", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
       pushNotification({ message: `Environment Updated!\n\n<a href="${explorerReceipt(chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success",  });
       $poolygotchi = await $account.poolygotchi();

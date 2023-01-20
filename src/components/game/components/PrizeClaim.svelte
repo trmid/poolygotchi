@@ -11,6 +11,7 @@
   import { explorerReceipt, txNotification } from "../../../utils/tx";
   import { onDestroy, onMount } from "svelte";
   import type { DrawResults } from "@pooltogether/v4-client-js";
+  import { Config } from "../../../config";
 
   // Props:
   export let unclaimedDraws: Awaited<ReturnType<(typeof PoolTogether)["getUnclaimedDraws"]>> | undefined = undefined;
@@ -95,7 +96,7 @@
       const res = await PoolTogether.claim(chain, draws, $account.signer);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Claiming Prizes", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
       pushNotification({ message: `Prizes claimed!\n\n<a href="${explorerReceipt(chain, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
 

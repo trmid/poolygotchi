@@ -5,7 +5,7 @@
   import Poolygotchi from "../../../utils/poolygotchi";
   import { poolygotchi } from "../Game.svelte";
   import PoolTogether from "../../../utils/poolTogether";
-  import { networks } from "../../../config";
+  import { Config } from "../../../config";
   import { pushNotification } from "../../Notifications.svelte";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
@@ -62,7 +62,7 @@
       hatching = true;
       if(!$account) throw new Error("missing account");
       dismissPending = pushNotification({ message: "Hatching your poolygotchi <i class='icofont-custom-spinner'></i>", type: "standard", title: "Hatching...", persist: true });
-      await $account.switchChain(networks.poolygotchi.chainId);
+      await $account.switchChain(Config.networks.poolygotchi.chainId);
       const res = await Poolygotchi.contract().connect($account.signer).hatch(
         name,
         speciesId,
@@ -72,9 +72,9 @@
       );
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Transaction Sent", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
-      pushNotification({ message: `Transaction successful!\n\n<a href="${explorerReceipt(networks.poolygotchi.chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
+      pushNotification({ message: `Transaction successful!\n\n<a href="${explorerReceipt(Config.networks.poolygotchi.chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
       $poolygotchi = await $account.poolygotchi();
     } catch(err) {
       console.error(err);

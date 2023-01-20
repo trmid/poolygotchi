@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { AccountWithSigner, BaseAccount, transactionHasChainId } from ".";
 import type { TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
 import { Deferrable, resolveProperties } from "ethers/lib/utils";
-import { networks } from "../../config";
+import { Config } from "../../config";
 
 export default class InjectedAccount extends BaseAccount implements AccountWithSigner {
 
@@ -33,10 +33,10 @@ export default class InjectedAccount extends BaseAccount implements AccountWithS
         // This error code indicates that the chain has not been added to MetaMask.
         if (switchError && (switchError as any).code === 4902) {
           try {
-            if(!(chain in networks)) {
+            if(!(chain in Config.networks)) {
               throw new Error(`Chain, ${chain}, is not supported`);
             }
-            const network = networks[chain];
+            const network = Config.networks[chain];
             await web3Provider.send('wallet_addEthereumChain',
               [{ chainName: network.name, chainId: hexChainId, rpcUrls: network.rpcUrls, nativeCurrency: network.nativeCurrency, blockExplorerUrls: network.blockExplorerUrls }],
             );

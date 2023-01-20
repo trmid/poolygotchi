@@ -13,7 +13,7 @@
   import { uiButton, UIComponent, uiLabel, uiNumberInput } from "./Menu.svelte";
   import Menu from "./Menu.svelte";
   import { pushNotification } from "../../Notifications.svelte";
-  import { networks } from "../../../config";
+  import { Config } from "../../../config";
   import Poolygotchi from "../../../utils/poolygotchi";
   import { explorerReceipt, txNotification } from "../../../utils/tx";
 
@@ -65,13 +65,13 @@
       settingGoal = true;
       if(!$account) throw new Error("Not connected!");
       dismissPending = pushNotification({ message: "Waiting for transaction approval <i class='icofont-custom-spinner'></i>", type: "standard", title: "Setting New Goal", persist: true });
-      const chainId = networks.poolygotchi.chainId;
+      const chainId = Config.networks.poolygotchi.chainId;
       await $account.switchChain(chainId);
       const deposited = await PoolTogether.totalDeposited($account.address);
       const res = await Poolygotchi.contract().connect($account.signer).setGoal(newWeeklyGoal, deposited);
       dismissPending();
       dismissPending = pushNotification({ message: "Waiting for transaction receipt <i class='icofont-custom-spinner'></i>", type: "standard", title: "Setting New Goal", persist: true });
-      const receipt = await res.wait();
+      const receipt = await res.wait(Config.confirmations);
       dismissPending();
       pushNotification({ message: `New goal set!\n\n<a href="${explorerReceipt(chainId, receipt)}" target="_blank" rel="noreferrer">View Receipt</a>`, type: "success" });
       $poolygotchi = await $account.poolygotchi();
