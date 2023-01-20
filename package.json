@@ -8,6 +8,8 @@
     "testnet-build": "POOLYGOTCHI_TESTNET=true && NODE_ENV=production && rollup -c",
     "testnet-build-win": "set POOLYGOTCHI_TESTNET=true && set NODE_ENV=production && rollup -c",
     "dev": "node dev.js",
+    "testnet-dev": "POOLYGOTCHI_TESTNET=true && rollup -c -w",
+    "testnet-dev-win": "set POOLYGOTCHI_TESTNET=true && rollup -c -w",
     "start": "sirv docs --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
