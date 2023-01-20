@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.17;
+pragma solidity 0.8.16;
 
 import "./IWhitelist.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
@@ -75,7 +75,7 @@ contract PoolygotchiHatchery is Ownable {
     return _nextEnvironmentId;
   }
 
-  function poolygotchiOf(address pooler) external view _hasPoolygotchi(_msgSender()) returns (Poolygotchi memory) {
+  function poolygotchiOf(address pooler) external view _hasPoolygotchi(pooler) returns (Poolygotchi memory) {
     return _Poolygotchi[pooler];
   }
 
