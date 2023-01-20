@@ -18,7 +18,7 @@ const production = !!(process.env.NODE_ENV ?? "").match(/production/);
 const testnet = (process.env.POOLYGOTCHI_TESTNET ?? "").toLowerCase() !== "true";
 
 // Get app version:
-const version = nodePackage.version + (production ? "" : (":" + Math.floor(Math.random() * 0xffffffff).toString(16)));
+const version = nodePackage.version;
 
 // Output path:
 const out = "docs";
@@ -79,7 +79,7 @@ const generateSW = () => ({
 
 		// Replace markers:
 		let sw = template
-			.replace(/\$PACKAGE\_VERSION/g, version)
+			.replace(/\$PACKAGE\_VERSION/g, version + (production ? "" : (":" + Math.floor(Math.random() * 0xffffffff).toString(16))))
 			.replace(/\$FILES_TO_CACHE/g, JSON.stringify([...outFiles]));
 
 		// Append ipfs.min.js contents to worker:
