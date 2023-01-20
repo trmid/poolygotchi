@@ -10,38 +10,43 @@ import { networks } from "../../config";
 
 export default class WCAccount extends BaseAccount implements AccountWithSigner {
 
+  private _signer: WCSigner;
+
   constructor(private signClient: SignClient, private session: SessionTypes.Struct) {
     const address = ((session.namespaces["eip155"].accounts[0] ?? "").match(/eip155:1:(.+)/) ?? [])[1] ?? null;
     super(address);
+    this._signer = new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(networks.op.rpcUrls[0], networks.op));
   }
 
   get signer() {
-    return new WCSigner(this.signClient, this.session, new ethers.providers.JsonRpcProvider(networks.op.rpcUrls[0], networks.op));
+    return this._signer;
   }
 
-  public async sign(tx: ethers.providers.TransactionRequest): Promise<string> {
-    const res = await this.signClient.request<any>({
-      topic: this.session.topic,
-      chainId: 'eip155:1',
-      request: {
-        id: 1,
-        jsonrpc: "2.0",
-        method: "eth_sendTransaction",
-        params:[{
-          from: this.address,
-          to: tx.to,
-          data: tx.data,
-          gasPrice: tx.gasPrice ? ethers.BigNumber.from(tx.gasPrice).toHexString() : undefined,
-          gasLimit: tx.gasLimit ? ethers.BigNumber.from(tx.gasLimit).toHexString() : undefined,
-          value: tx.value ? ethers.BigNumber.from(tx.value).toHexString() : undefined
-        }]
-      } as any
-    });
-    return res.result;
-  }
+  // public async sign(tx: ethers.providers.TransactionRequest): Promise<string> {
+  //   if(!transactionHasChainId(tx)) throw new Error("missing chainId in transaction");
+  //   const res = await this.signClient.request<any>({
+  //     topic: this.session.topic,
+  //     chainId: `eip155:${tx.chainId}`,
+  //     request: {
+  //       id: 1,
+  //       jsonrpc: "2.0",
+  //       method: "eth_sendTransaction",
+  //       params:[{
+  //         from: this.address,
+  //         to: tx.to,
+  //         data: tx.data,
+  //         gasPrice: tx.gasPrice ? ethers.BigNumber.from(tx.gasPrice).toHexString() : undefined,
+  //         gasLimit: tx.gasLimit ? ethers.BigNumber.from(tx.gasLimit).toHexString() : undefined,
+  //         value: tx.value ? ethers.BigNumber.from(tx.value).toHexString() : undefined
+  //       }]
+  //     } as any
+  //   });
+  //   return res.result;
+  // }
 
   public async switchChain(chain: number) {
-    return;
+    const provider = new ethers.providers.JsonRpcProvider(networks[chain].rpcUrls[0], networks[chain]);
+    this._signer = this._signer.connect(provider);
   }
 
   public async disconnect(): Promise<void> {
@@ -75,7 +80,7 @@ class WCSigner extends Signer {
       request: {
         id: 1,
         jsonrpc: "2.0",
-        method: "eth_signTransaction",
+        method: "eth_sign",
         params:[this._address, hexlify(bytes)]
       } as any
     });

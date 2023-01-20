@@ -57,8 +57,8 @@
   };
 
   // Wallet Connect:
-  const walletConnectProjectId = "7e6fcc227cb1599585bb33cb400e6bf9";
-  const chainList = ["eip155:1", "eip155:10", "eip155:137", "eip155:43114", "eip155:31337"];
+  const walletConnectProjectId = "6091c818213d395ed7d3b61e97bd180f";
+  const chainList = ["eip155:1", "eip155:10", "eip155:137", "eip155:43114", "eip155:420"];
   const web3Modal = new Web3Modal({
     projectId: walletConnectProjectId,
     standaloneChains: chainList,
@@ -104,8 +104,6 @@
             "eth_sendTransaction",
             "eth_signTransaction",
             "eth_sign",
-            "personal_sign",
-            "eth_signTypedData",
           ],
           chains: chainList,
           events: ["chainChanged", "accountsChanged"],
