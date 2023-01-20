@@ -15,7 +15,7 @@ export namespace Config {
   const opHatcheryAddress = "n/a";
 
   // Determined hatchery address based on build:
-  export const hatcheryAddress = build.production ? (build.testnet ? opGoerliHatcheryAddress : opHatcheryAddress) : devHatcheryAddress;
+  export const hatcheryAddress = build.testnet ? opGoerliHatcheryAddress : (build.production ? opHatcheryAddress : devHatcheryAddress);
 
   // Confirmations to wait for:
   export const confirmations = 2;
@@ -66,7 +66,7 @@ export namespace Config {
   export const networks: Record<number | "eth" | "op" | "poly" | "avax" | "opGoerli" | "local" | "poolygotchi", ethers.providers.Network & { rpcUrls: string[], nativeCurrency: any, blockExplorerUrls: string[] }> = {
 
     // Current Deployed Chain:
-    poolygotchi: build.production ? ( build.testnet ? opGoerliNetwork : opNetwork) : localNetwork,
+    poolygotchi: build.testnet ? opGoerliNetwork : (build.production ? opNetwork : localNetwork),
 
     // Local:
     31337: localNetwork,
