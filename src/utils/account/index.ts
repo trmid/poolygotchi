@@ -116,12 +116,12 @@ export abstract class BaseAccount implements Account {
       this._resolvedAvatars = new Promise(async (resolve) => {
         // Create list of avatars:
         let avatars: { url: string | (() => Promise<string>), category: string, weight: number }[] = [
-          { url: this.defaultAvatar, category: "Blockies", weight: 0 }
+          { url: this.defaultAvatar, category: "Blockies", weight: 1 }
         ];
 
         // Async fetch all on-chain avatars:
         const promises: Promise<any>[] = [
-          this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ ...x, weight: 1 })))).catch(console.error),
+          this.poolyAvatars().then(res => avatars.push(...res.map(x => ({ ...x, weight: 0 })))).catch(console.error),
           this.ensAvatar().then(res => res && avatars.push({ url: res, category: "ENS - Avatar", weight: 2 })).catch(console.error)
         ];
         await Promise.allSettled(promises);
