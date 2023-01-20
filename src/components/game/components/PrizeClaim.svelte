@@ -129,6 +129,7 @@
   // On Destroy:
   onDestroy(() => {
     if(stopPrizeSearch) stopPrizeSearch();
+    if(searchStartTimeout) clearTimeout(searchStartTimeout);
   });
 </script>
 
