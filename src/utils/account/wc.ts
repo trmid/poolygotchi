@@ -1,12 +1,14 @@
 import type { SignClient } from "@walletconnect/sign-client/dist/types/client";
 import type { SessionTypes } from "@walletconnect/types";
 import type { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
+import type { TransactionResponse } from "@ethersproject/abstract-provider/src.ts/index"
 import type { Deferrable } from "@ethersproject/properties";
 import { Bytes, hexlify } from "@ethersproject/bytes";
 import { ethers } from "ethers";
 import { AccountWithSigner, BaseAccount } from ".";
 import { Signer } from "@ethersproject/abstract-signer";
 import { Config } from "../../config";
+import { poll } from "ethers/lib/utils";
 
 export default class WCAccount extends BaseAccount implements AccountWithSigner {
 
@@ -62,7 +64,7 @@ class WCSigner extends Signer {
         params:[this._address, hexlify(bytes)]
       } as any
     });
-    return res.result;
+    return res;
   }
 
   // Signs a transaction and returns the fully serialized, signed transaction.
@@ -70,9 +72,10 @@ class WCSigner extends Signer {
   // - This MAY throw if signing transactions is not supports, but if
   //   it does, sentTransaction MUST be overridden.
   public async signTransaction(transaction: Deferrable<TransactionRequest>): Promise<string> {
+    const chainId = await this.chainId();
     const res = await this.signClient.request<any>({
       topic: this.session.topic,
-      chainId: `eip155:${await this.chainId()}`,
+      chainId: `eip155:${chainId}`,
       request: {
         id: 1,
         jsonrpc: "2.0",
@@ -87,7 +90,38 @@ class WCSigner extends Signer {
         }]
       } as any
     });
-    return res.result;
+    return res;
+  }
+
+  // Populates all fields in a transaction, signs it and sends it to the network
+  async sendTransaction(transaction: Deferrable<TransactionRequest>): Promise<TransactionResponse> {
+    const chainId = await this.chainId();
+    const hash = await this.signClient.request<any>({
+      topic: this.session.topic,
+      chainId: `eip155:${chainId}`,
+      request: {
+        id: 1,
+        jsonrpc: "2.0",
+        method: "eth_sendTransaction",
+        params:[{
+          from: await transaction.from,
+          to: await transaction.to,
+          data: await transaction.data,
+          gasPrice: await transaction.gasPrice ? ethers.BigNumber.from(await transaction.gasPrice).toHexString() : undefined,
+          gasLimit: await transaction.gasLimit ? ethers.BigNumber.from(await transaction.gasLimit).toHexString() : undefined,
+          value: await transaction.value ? ethers.BigNumber.from(await transaction.value).toHexString() : undefined
+        }]
+      } as any
+    });
+    const provider = (this.provider as ethers.providers.JsonRpcProvider);
+    const blockNumber = await provider._getInternalBlockNumber(100 + 2 * provider.pollingInterval);
+    const res = await poll(async () => {
+      const tx = await this.provider.getTransaction(hash);
+      if (tx === null) { return undefined; }
+      return provider._wrapTransaction(tx, hash, blockNumber);
+    }, { oncePoll: this.provider });
+    if(!res) throw new Error(`WCSigner: Failed to poll for transaction response: ${hash}`);
+    return res;
   }
 
   // Returns a new instance of the Signer, connected to provider.
