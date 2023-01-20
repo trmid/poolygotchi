@@ -1,7 +1,7 @@
 # TODO
 
 ## General
-[ ] Pull latest Wallet Connect packages and integrate
+[x] Pull latest Wallet Connect packages and integrate
 [x] Add full prize history claiming
 [ ] Add rename page in personalization menu
 [ ] Add prize claim health factor boost
