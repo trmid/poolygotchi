@@ -57,7 +57,7 @@
 
   const searchPrizeHistory = () => {
     if(!$account || searchingChain == chain) return;
-    const address = "0xd9518342a44e7dfdcd363f28f1ad19e568e2eb85";//$account.address;
+    const address = $account.address;
     if(searchStartTimeout) clearTimeout(searchStartTimeout);
     searchStartTimeout = setTimeout(() => {
       PoolTogether.searchForUnclaimedDraws(chain, address, (unclaimedDraw, done) => {
