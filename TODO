@@ -2,7 +2,7 @@
 
 ## General
 [ ] Pull latest Wallet Connect packages and integrate
-[ ] Add full prize history claiming
+[x] Add full prize history claiming
 [ ] Add rename page in personalization menu
 [ ] Add prize claim health factor boost
 [ ] Fix health factor -0.00 format
