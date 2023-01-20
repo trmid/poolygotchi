@@ -69,6 +69,10 @@
   let web3ModalOpen = false;
   let signClientWC: SignClient | null = null;
   const connectWC = async () => {
+    for(let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if(key && key.startsWith('wc@2')) localStorage.removeItem(key);
+    }
     if(!signClientWC) {
       signClientWC = await SignClient.init({
         projectId: walletConnectProjectId
