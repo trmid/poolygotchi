@@ -1,7 +1,8 @@
-pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-import { IERC165 } from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+pragma solidity ^0.8.0;
+
+import { IERC165 } from "../node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
 interface IWhitelist is IERC165 {
   
