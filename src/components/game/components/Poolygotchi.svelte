@@ -124,7 +124,12 @@
     PoolTogether.getNewestDraw(10)
       .then(newestDraw => {
         // Check if we have already alerted the user about the latest draw:
-        if(PrizeAlert.get(poolygotchi.address) != newestDraw.drawId - 1) {
+        if(
+          PrizeAlert.hasNewPrizes(poolygotchi.address, 1) ||
+          PrizeAlert.hasNewPrizes(poolygotchi.address, 10) ||
+          PrizeAlert.hasNewPrizes(poolygotchi.address, 137) ||
+          PrizeAlert.hasNewPrizes(poolygotchi.address, 43114)
+        ) {
           // Get unclaimed draws:
           PoolTogether.getUnclaimedDraws(poolygotchi.address).then(res => {
             unclaimedDraws = res;
@@ -160,7 +165,7 @@
             speechLock.unlock();
             claimingPrizes = true;
             totalUnclaimedPrizeAmount = BigNumber.from(0);
-            PrizeAlert.set(poolygotchi.address, PrizeInfo.get(poolygotchi.address, 10)?.lastDrawChecked ?? -1);
+            [1,10,137,43114].forEach(chainId => PrizeAlert.update(poolygotchi.address, chainId));
           }});
           confetti = true;
           setTimeout(() => {

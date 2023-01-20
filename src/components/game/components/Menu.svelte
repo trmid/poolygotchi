@@ -99,7 +99,7 @@
   let menu: HTMLElement;
 
   // Reactive statements:
-  $: selectedComponentIndex, enforceComponentSelection();
+  $: selectedComponentIndex, components, enforceComponentSelection();
 
   // Device Buttons:
   let buttons: Partial<DeviceButtons>;
