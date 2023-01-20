@@ -22,28 +22,6 @@ export default class WCAccount extends BaseAccount implements AccountWithSigner 
     return this._signer;
   }
 
-  // public async sign(tx: ethers.providers.TransactionRequest): Promise<string> {
-  //   if(!transactionHasChainId(tx)) throw new Error("missing chainId in transaction");
-  //   const res = await this.signClient.request<any>({
-  //     topic: this.session.topic,
-  //     chainId: `eip155:${tx.chainId}`,
-  //     request: {
-  //       id: 1,
-  //       jsonrpc: "2.0",
-  //       method: "eth_sendTransaction",
-  //       params:[{
-  //         from: this.address,
-  //         to: tx.to,
-  //         data: tx.data,
-  //         gasPrice: tx.gasPrice ? ethers.BigNumber.from(tx.gasPrice).toHexString() : undefined,
-  //         gasLimit: tx.gasLimit ? ethers.BigNumber.from(tx.gasLimit).toHexString() : undefined,
-  //         value: tx.value ? ethers.BigNumber.from(tx.value).toHexString() : undefined
-  //       }]
-  //     } as any
-  //   });
-  //   return res.result;
-  // }
-
   public async switchChain(chain: number) {
     const provider = new ethers.providers.JsonRpcProvider(Config.networks[chain].rpcUrls[0], Config.networks[chain]);
     this._signer = this._signer.connect(provider);
