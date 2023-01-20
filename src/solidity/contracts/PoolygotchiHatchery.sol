@@ -5,8 +5,6 @@ import "./IWhitelist.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract PoolygotchiHatchery is Ownable {
-
-  // uint constant MAX_INT32 = 2**32 - 1;
   
   struct Poolygotchi {
     uint256 goalAmountWeekly;
