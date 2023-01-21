@@ -3,7 +3,8 @@
 ## General
 [x] Pull latest Wallet Connect packages and integrate
 [x] Add full prize history claiming
-[ ] Fix outlines on Safari
+[x] Fix outlines on Safari
+[ ] Add notification if no injected wallet available
 [ ] Change behavior of first speech bubble click to complete typing
 [ ] Add loading animation on first page install
 [ ] Add links for PT, PT docs, discord, github in footer

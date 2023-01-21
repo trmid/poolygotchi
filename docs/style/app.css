@@ -121,14 +121,18 @@ input[type=text], input[type=number] {
 /* Game UI */
 .game-ui, .game-label {
   --border-radius: 0.5rem;
+  outline: none;
+  margin: none;
   box-sizing: border-box;
   height: 40px;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
   padding: 7px 10px;
   background-color: var(--c0);
   background: var(--bg-gradient);
   border-radius: var(--border-radius);
+}
+.game-label {
+  border: 1px solid #fff4;
 }
 .game-ui.disabled,
 .game-ui:disabled,

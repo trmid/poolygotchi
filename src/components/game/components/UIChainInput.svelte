@@ -32,25 +32,43 @@
 </script>
 
 <!-- Select -->
-<select
-  bind:value={chain}
-  title={input.title ?? ""}
-  class="game-ui"
-  style={input.style ?? ""}
-  data-index={index}
-  class:disabled={input.disabled}
-  disabled={input.disabled}
->
-  {#each filteredChains as chain}
-    <option value={chain.id}>{chain.name}</option>
-  {/each}
-</select>
+<div id="wrapper">
+  <select
+    bind:value={chain}
+    title={input.title ?? ""}
+    class="game-ui"
+    style={input.style ?? ""}
+    data-index={index}
+    class:disabled={input.disabled}
+    disabled={input.disabled}
+  >
+    {#each filteredChains as chain}
+      <option value={chain.id}>{chain.name}</option>
+    {/each}
+  </select>
+  <i id="caret" class="icofont-caret-down"/>
+</div>
 
 <!-- Style -->
 <style>
+  #wrapper {
+    position: relative;
+  }
+
+  #caret {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    font-size: 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
   select {
+    width: 100%;
     color: inherit;
     font-family: inherit;
+    appearance: initial;
   }
 
   option {

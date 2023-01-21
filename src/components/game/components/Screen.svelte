@@ -24,6 +24,7 @@
     inset: -6px;
     border-radius: inherit;
     border: 3px solid var(--c3);
+    pointer-events: none;
   }
   #wrapper {
     position: absolute;
