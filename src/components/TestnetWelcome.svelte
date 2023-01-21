@@ -11,7 +11,7 @@
     <div id="container">
       <h3>Welcome, Pooler!</h3>
       <p>
-        This is the <i>test</i> deployment of <strong>Poolygotchi</strong>, if you're looking for the main dapp deployment, you can find it at <a href="https://poolygotchi.com">poolygotchi.com</a>.
+        This is the <i>test</i> deployment of <strong>Poolygotchi</strong>, if you're looking for the main deployment, you can find it at <a href="https://poolygotchi.com">poolygotchi.com</a>.
       </p>
       <h4 class="warning"><i class="icofont-warning"/> Warning! <i class="icofont-warning"/></h4>
       <p>
