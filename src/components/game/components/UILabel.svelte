@@ -3,7 +3,7 @@
   export let label: UILabel;
 </script>
 
-<strong id="label" class="game-ui" title={label.title ?? ""} style={label.style ?? ""} class:disabled={label.disabled}>
+<strong id="label" class="game-label" title={label.title ?? ""} style={label.style ?? ""} class:disabled={label.disabled}>
     {@html label.label}
 </strong>
 
@@ -12,6 +12,9 @@
   #label {
     position: relative;
     background: linear-gradient(165deg, #bbba -50%, var(--c0) 110%);
-    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
   }
 </style>

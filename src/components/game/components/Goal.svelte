@@ -182,6 +182,7 @@
     font-size: small;
     width: 250px;
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   div.stat > span {

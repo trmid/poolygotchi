@@ -130,6 +130,7 @@
   #big-gradient.moving-gradient {
     inset: -3px;
     border-radius: 1rem;
+    isolation: isolate;
   }
 
   #big-gradient.moving-gradient .bg {

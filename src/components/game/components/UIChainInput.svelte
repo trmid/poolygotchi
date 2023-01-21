@@ -35,11 +35,11 @@
 <select
   bind:value={chain}
   title={input.title ?? ""}
-  data-index={index}
   class="game-ui"
+  style={input.style ?? ""}
+  data-index={index}
   class:disabled={input.disabled}
   disabled={input.disabled}
-  style={input.style ?? ""}
 >
   {#each filteredChains as chain}
     <option value={chain.id}>{chain.name}</option>
@@ -51,8 +51,6 @@
   select {
     color: inherit;
     font-family: inherit;
-    height: 100%;
-    border: none;
   }
 
   option {

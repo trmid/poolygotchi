@@ -44,11 +44,11 @@
   #wrapper::before {
     content: "";
     position: absolute;
-    inset: -3px;
+    inset: -5px;
     background: var(--bg-gradient);
     box-shadow: 2px 4px 7px var(--shadow-color);
     border-radius: 2rem;
-    outline: 2px solid var(--c3);
+    border: 2px solid var(--c3);
   }
 
   #meter {

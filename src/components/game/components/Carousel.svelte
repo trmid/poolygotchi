@@ -18,8 +18,9 @@
     align-items: center;
     background: var(--transparent-gradient);
     border-radius: 0.5rem;
-    outline: 1px solid #fff5;
+    border: 1px solid #fff5;
     padding: 0.5rem;
+    box-sizing: border-box;
   }
 
   #carousel > button {
@@ -28,5 +29,8 @@
     min-width: 0;
     width: 32px;
     height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

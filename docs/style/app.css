@@ -62,9 +62,11 @@ h1 {
 h3 {
   background: var(--transparent-gradient);
   color: var(--c3);
-  outline: 1px solid #fff5;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  border: 1px solid #fff5;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
 }
 
 /* Content Box */
@@ -90,7 +92,6 @@ a:hover {
   text-align: center;
   display: inline-block;
   background-color: var(--c0);
-  border: none;
   color: inherit;
   font-size: inherit;
   font-family: inherit;
@@ -99,7 +100,8 @@ a:hover {
   padding: 7px 10px;
   text-decoration: none;
   cursor: pointer;
-  outline: 1px solid #0004;
+  border: 1px solid #0004;
+  outline: none;
 }
 
 input::placeholder {
@@ -113,42 +115,43 @@ input[type=text], input[type=number] {
 .btn:hover, button:hover,
 .btn:focus, button:focus,
 .btn.outline, button.outline {
-  outline: 1px solid #fff4;
+  border: 1px solid #fff4;
 }
 
-/* Game Menu Inputs */
-.game-ui, input.game-ui, button.game-ui, select.game-ui {
+/* Game UI */
+.game-ui, .game-label {
+  --border-radius: 0.5rem;
+  box-sizing: border-box;
+  height: 40px;
   font-size: 14px;
-  border-radius: 0.5rem;
   line-height: 1.5;
   padding: 7px 10px;
   background-color: var(--c0);
-  outline: 1px solid #0004;
-}
-input.game-ui, button.game-ui, select.game-ui {
   background: var(--bg-gradient);
+  border-radius: var(--border-radius);
 }
-.btn.pulse:hover,
-button.pulse:hover,
-input.pulse:hover,
-select.pulse:hover,
-input.game-ui:focus, input.game-ui:hover,
-button.game-ui:focus, button.game-ui:hover,
-select.game-ui:focus, select.game-ui:hover {
-  outline: 1px solid var(--c3);
-  animation-name: outline-pulse;
+.game-ui.disabled,
+.game-ui:disabled,
+.game-label.disabled {
+  filter: grayscale(0.8);
+}
+.game-ui, .pulse {
+  --border-radius: 0.5rem;
+  --pulse-color: var(--c3);
+  box-sizing: border-box;
+  position: relative;
+  border-radius: var(--border-radius);
+  border: 1px solid #0004;
+}
+.pulse:hover, .pulse:focus,
+.game-ui:hover, .game-ui:focus {
+  border: 1px solid var(--c3);
+  outline: none;
+  animation-name: pulse;
   animation-duration: 1.2s;
   animation-play-state: running;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-}
-.game-ui.disabled,
-.btn:disabled,
-input:disabled, button:disabled, select:disabled,
-input.game-ui.disabled,
-button.game-ui.disabled,
-select.game-ui.disabled {
-  filter: grayscale(0.8);
 }
 
 /* Adds uniform margins and centers on parent */
@@ -279,15 +282,15 @@ w3m-modal {
   border-radius: 3px;
 }
 
-@keyframes outline-pulse {
+@keyframes pulse {
   0% {
-    outline-width: 1px;
+    box-shadow: 0 0 0 0 var(--pulse-color);
   }
   50% {
-    outline-width: 5px;
+    box-shadow: 0 0 0 4px var(--pulse-color);
   }
   100% {
-    outline-width: 1px;
+    box-shadow: 0 0 0 0 var(--pulse-color);
   }
 }
 
