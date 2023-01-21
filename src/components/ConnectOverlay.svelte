@@ -44,12 +44,15 @@
   import SignClient from "@walletconnect/sign-client";
   import { W3mModal } from "@web3modal/ui";
   import { Web3Modal } from "@web3modal/standalone";
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import WCAccount from "../utils/account/wc";
   import { ethers } from "ethers";
   import InjectedAccount from "../utils/account/injected";
   import ConnectOption from "./ConnectOption.svelte";
   if(!W3mModal) throw new Error("Missing W3mModal import! This is necessary for rollup iife bundle creation.");
+
+  // Variables:
+  let injectedAvailable = true;
 
   // Function to Close Overlay:
   const close = () => {
@@ -156,6 +159,13 @@
     }
   };
 
+  // On Mount:
+  onMount(() => {
+    if(!("ethereum" in window)) {
+      injectedAvailable = false;
+    }
+  });
+
   // On Destroy:
   onDestroy(() => {
     web3Modal.closeModal();
@@ -165,7 +175,7 @@
 {#if $connectionPromise && !web3ModalOpen}
 <Overlay width={300} {close}>
   <h3>connect</h3>
-  <ConnectOption name="Injected" onClick={() => {connectInjected().catch(console.error);}}>
+  <ConnectOption name="Injected" disabled={!injectedAvailable} onClick={() => {connectInjected().catch(console.error);}}>
     <i class="icofont-wallet" slot="logo" style:font-size="32px"/>
   </ConnectOption>
   <ConnectOption name="Wallet Connect" onClick={() => {connectWC().catch(console.error);}}>
