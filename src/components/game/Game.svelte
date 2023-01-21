@@ -79,7 +79,13 @@
     right: -35%;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 390px) {
+    #device {
+      --game-size: 360px;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
     #device {
       --game-size: 450px;
     }
