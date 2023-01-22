@@ -19,9 +19,6 @@
   });
 </script>
 
-<!-- Service Worker -->
-<ServiceWorker />
-
 <!-- Header -->
 <Header />
 
@@ -45,3 +42,6 @@
 
 <!-- Time -->
 <Time />
+
+<!-- Service Worker -->
+<ServiceWorker />

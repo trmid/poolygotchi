@@ -4,9 +4,9 @@
 [x] Pull latest Wallet Connect packages and integrate
 [x] Add full prize history claiming
 [x] Fix outlines on Safari
-[ ] Add notification if no injected wallet available
-[ ] Change behavior of first speech bubble click to complete typing
-[ ] Add loading animation on first page install
+[x] Disabled injected button if no injected wallet available
+[x] Change behavior of first speech bubble click to complete typing
+[x] Add loading animation on first page install
 [ ] Add links for PT, PT docs, discord, github in footer
 [ ] Update About page with overview, FAQ, & issue reporting, & move PDF to just a link
 [ ] Add share button to share your progress & poolygotchi on twitter / lens
