@@ -15,7 +15,7 @@
 </script>
 
 <!-- Input -->
-<div class='wrapper'>
+<div id='wrapper'>
   <input
     bind:value={value}
     on:keydown|stopPropagation
@@ -41,10 +41,10 @@
     padding-left: 2.1rem;
     text-align: left;
   }
-  .wrapper {
+  #wrapper {
     position: relative;
   }
-  .wrapper > img.token {
+  #wrapper > img.token {
     position: absolute;
     width: 21px;
     height: 21px;

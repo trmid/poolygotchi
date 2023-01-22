@@ -111,7 +111,7 @@
   {:else if page == 3}
     <h3>Hatch Your Poolygotchi</h3>
     <div id="hatch">
-      <button on:click={hatch} disabled={hatching}>
+      <button on:click={hatch} class="pulse" disabled={hatching}>
         {#if hatching}
           Hatching...
         {:else}
@@ -145,6 +145,7 @@
   h3 {
     margin: 0;
     font-size: 16px;
+    padding: 0.5rem;
   }
   
   .column {

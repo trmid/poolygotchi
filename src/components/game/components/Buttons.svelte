@@ -55,19 +55,26 @@
     color: var(--c0);
     background-color: var(--c3);
     border: 2px solid var(--c0);
-    outline: 2px solid var(--c3);
     border-radius: 50%;
     cursor: pointer;
-    transition: outline-offset 0.1s ease-in-out;
+  }
+
+  #buttons > button::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--c3);
+    border-radius: inherit;
+    transition: inset 0.1s ease-in-out;
   }
 
   #buttons > button:active {
     background: var(--tri-gradient);
   }
 
-  #buttons > button:hover,
-  #buttons > button:focus {
-    outline-offset: 2px;
+  #buttons > button:hover::after,
+  #buttons > button:focus::after {
+    inset: -6px;
   }
 
   #buttons > button > i {

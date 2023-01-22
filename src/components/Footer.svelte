@@ -5,7 +5,7 @@
 <!-- Footer -->
 <footer class="margins">
   <span class="no-select">Made by the PoolTogether Community</span>
-  <a href="https://github.com/trmid/poolygotchi/tree/{Config.build.testnet ? "test" : (Config.build.production ? "main" : "dev")}">
+  <a href="https://github.com/trmid/poolygotchi/tree/{Config.build.testnet ? "test" : (Config.build.production ? "main" : "dev")}" target="_blank" rel="noreferrer">
     version {Config.build.version}
   </a>
 </footer>

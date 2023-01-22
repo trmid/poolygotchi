@@ -9,15 +9,20 @@
   export let deviceButtonController: ButtonController | undefined = undefined;
   export let close: (() => void) | undefined = undefined;
 
-  // Constants:
-  const buttons: DeviceButtons = {
+  // Buttons:
+  let buttons: DeviceButtons
+  $: action = actionStage === "continue" ? finishWriting : close;
+  $: buttons = {
     left: EMPTY_BUTTON,
-    middle: { title: "Acknowledge", class: "icofont-ui-check", action: close ?? (() => null) },
+    middle: actionStage === "continue" ?
+      { title: "Continue", class: "icofont-ui-play", action: action ?? (() => null) } :
+      { title: "Acknowledge", class: "icofont-ui-check", action: action ?? (() => null) },
     right: EMPTY_BUTTON,
   };
 
   // Variables:
   let written = "";
+  let actionStage: "continue" | "acknowledge" = "continue";
   let timer: NodeJS.Timer | null = null;
   let bubble: HTMLDivElement | undefined;
   let bubbleWidth = 300;
@@ -28,12 +33,19 @@
   $: written, getBubbleSize();
 
   // Functions:
+  const finishWriting = () => {
+    (timer !== null) && clearInterval(timer);
+    written = speech;
+    actionStage = "acknowledge";
+  };
+
   const reset = () => {
     written = "";
+    actionStage = "continue";
     if(timer) clearInterval(timer);
     timer = setInterval(() => {
       if(written.length == speech.length) {
-        (timer !== null) && clearInterval(timer);
+        finishWriting();
       } else {
         written += speech[written.length];
       }
@@ -74,10 +86,10 @@
   </div>
 </div>
 
-{#if close}
+{#if action}
   <!-- Clickable Overlay -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div id="click-mask" on:click={close} />
+  <div id="click-mask" on:click={action} />
 {/if}
 
 <!-- Style -->
@@ -130,6 +142,7 @@
   #big-gradient.moving-gradient {
     inset: -3px;
     border-radius: 1rem;
+    isolation: isolate;
   }
 
   #big-gradient.moving-gradient .bg {

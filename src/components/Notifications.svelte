@@ -98,6 +98,7 @@
     word-wrap: break-word;
     overflow: hidden;
     box-shadow: 3px 4px 0 var(--shadow-color);
+    z-index: 100;
   }
 
   #notification :global(a) {

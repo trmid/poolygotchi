@@ -23,7 +23,7 @@
       <p>
         Please be careful and have fun!
       </p>
-      <button on:click={() => dismissed = true}>Acknowledge <i class="icofont-ui-check" /></button>
+      <button class="pulse" on:click={() => dismissed = true}>Acknowledge <i class="icofont-ui-check" /></button>
     </div>
   </Overlay>
 {/if}

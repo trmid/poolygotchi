@@ -13,7 +13,7 @@
   import { BigNumber } from "ethers";
   import { formatUSDC } from "../../../utils/token";
   import { PrizeAlert, PrizeInfo } from "../../../utils/storage";
-    import PrizeClaim from "./PrizeClaim.svelte";
+  import PrizeClaim from "./PrizeClaim.svelte";
 
   // Props:
   export let poolygotchi: Poolygotchi;
@@ -107,7 +107,7 @@
     // Get poolygotchi data and animations:
     hatchingStage = null;
     poolygotchi.data().then(data => {
-      name = data.name;
+      name = data.name ?? "Anon";
       if((Math.floor(Date.now() / 1000) - data.hatchDate.toNumber() < 40)) {
         hatch();
       }

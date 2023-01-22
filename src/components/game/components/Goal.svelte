@@ -182,6 +182,8 @@
     font-size: small;
     width: 250px;
     max-width: 100%;
+    box-sizing: border-box;
+    line-height: 1.5;
   }
 
   div.stat > span {
@@ -198,5 +200,7 @@
 
   img.usdc {
     width: 16px;
+    position: relative;
+    top: -1px;
   }
 </style>

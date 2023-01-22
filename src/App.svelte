@@ -10,10 +10,14 @@
   import Time from "./components/Time.svelte";
   import ServiceWorker from "./components/ServiceWorker.svelte";
   import TestnetWelcome from "./components/TestnetWelcome.svelte";
-</script>
 
-<!-- Service Worker -->
-<ServiceWorker />
+  // Don't style the scroll bar on mobile devices:
+  window.addEventListener("load", () => {
+    if("screen" in window && window.screen.availWidth < 600) {
+      document.body.classList.add("classic-scroll");
+    }
+  });
+</script>
 
 <!-- Header -->
 <Header />
@@ -38,3 +42,6 @@
 
 <!-- Time -->
 <Time />
+
+<!-- Service Worker -->
+<ServiceWorker />

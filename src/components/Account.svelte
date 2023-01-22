@@ -85,16 +85,9 @@
 <div id="account" class:raised={showAccountOptions}>
 
   <!-- Avatar Image -->
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <img
-    id="avatar"
-    class="btn pulse"
-    src="{$account.avatar}"
-    alt="User Avatar"
-    tabindex="0"
-    title="account"
-    on:click|stopPropagation={() => toggleAccountOptions()}
-    on:keydown|stopPropagation={ifEnter(() => toggleAccountOptions())}>
+  <button id="avatar" class="btn pulse" title="account" on:click|stopPropagation={() => toggleAccountOptions()}>
+    <img src="{$account.avatar}" alt="User Avatar">
+  </button>
 
   <!-- Account Options -->
   {#if showAccountOptions}
@@ -185,9 +178,21 @@
     height: var(--avatar-size);
     padding: 0;
   }
+  #avatar > img {
+    position: relative;
+    display: block;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    left: -1px;
+    top: -1px;
+    border-radius: calc(0.8 * var(--border-radius));
+  }
   #avatar:hover {
-    outline: 1px solid var(--c3);
     cursor: pointer;
+  }
+  #avatar::after {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
   }
   #options {
     position: absolute;
@@ -204,7 +209,6 @@
     background: var(--bg-gradient);
     width: max-content;
     border: 3px solid var(--c0);
-    outline: 3px solid var(--c3);
     overflow: hidden;
   }
   #address {
@@ -227,7 +231,7 @@
     padding: 0;
     min-width: 0;
     background: var(--bg-gradient);
-    overflow: hidden;
+    border-radius: 0.5rem;
   }
   .avatar-option > .avatar {
     position: relative;
@@ -235,6 +239,7 @@
     width: var(--avatar-size);
     height: var(--avatar-size);
     z-index: 1;
+    border-radius: calc(0.8 * var(--border-radius));
   }
   .avatar-option::before {
     content: "\eff5";
@@ -261,7 +266,12 @@
     position: absolute;
     z-index: 1;
   }
-  .avatar-option.selected {
-    outline: 2px solid var(--c2);
+  .avatar-option.pulse.selected,
+  .avatar-option.pulse.selected::after {
+    border-color: var(--c2);
+    --pulse-color: var(--c2) !important;
+  }
+  .avatar-option.pulse.selected::after {
+    z-index: 1;
   }
 </style>
