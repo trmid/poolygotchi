@@ -26,8 +26,8 @@
 <!-- Navigation -->
 <nav class="margins" class:sticky={stickyNav} bind:this={nav}>
   <Account/>
-  <a class="btn pulse" class:outline={$page?.location === "/"} href="/" use:link>play</a>
-  <a class="btn pulse" class:outline={$page?.location === "/about"} href="/about" use:link>about</a>
+  <!-- <a class="btn pulse" class:outline={$page?.location === "/"} href="/" use:link>play</a> -->
+  <a class="btn pulse" href="https://www.poolygotchi.com/#/?about" target="_blank" rel="noreferrer">about</a>
 </nav>
 
 <!-- Style -->
