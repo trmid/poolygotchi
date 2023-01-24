@@ -10,6 +10,7 @@
   import Time from "./components/Time.svelte";
   import ServiceWorker from "./components/ServiceWorker.svelte";
   import TestnetWelcome from "./components/TestnetWelcome.svelte";
+  import TestnetFeedbackBanner from "./components/TestnetFeedbackBanner.svelte";
 
   // Don't style the scroll bar on mobile devices:
   window.addEventListener("load", () => {
@@ -27,6 +28,9 @@
 
 <!-- Footer -->
 <Footer />
+
+<!-- Testnet Feedback Banner -->
+<TestnetFeedbackBanner />
 
 <!-- Connect Overlay -->
 <ConnectOverlay />
