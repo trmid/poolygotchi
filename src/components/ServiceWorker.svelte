@@ -1,14 +1,23 @@
 <script type="ts">
+  import { tick } from "svelte";
   import { declareGlobal } from "../utils/window";
   import InstallSplash from "./InstallSplash.svelte";
   import { pushNotification } from "./Notifications.svelte";
 
-  let serviceWorkerNotAvailable = false;
-  let installState: "installing" | "installed" | "activating" | "activated" | "parsed" | "redundant" | "ready" = "installing";
+  let serviceWorkerUnavailable = false;
+  let installState: "installing" | "installed" | "activating" | "activated" | "parsed" | "redundant" | "ready" | "justInstalled" = "installing";
 
   // Try to check for service worker before page load so the spinner doesn't show up
   try {
-   if("serviceWorker" in navigator && navigator.serviceWorker.controller) installState = "ready";
+   if("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+    if(localStorage.getItem("sw:justInstalled")) {
+      localStorage.removeItem("sw:justInstalled");
+      installState = "justInstalled";
+      tick().then(() => installState = "ready");
+    } else {
+      installState = "ready";
+    }
+   }
   } catch(err) {
     // nothing
   }
@@ -19,7 +28,7 @@
 
         // Register sw:
         const serviceWorkerExists = !!navigator.serviceWorker.controller;
-        if(serviceWorkerExists) installState = "ready";
+        if(serviceWorkerExists && installState !== "justInstalled") installState = "ready";
         const sw = await navigator.serviceWorker.register("sw.js");
         sw.addEventListener("updatefound", () => {
           if(serviceWorkerExists) pushNotification({ message: "An update has been found! Downloading update <i class='icofont-custom-spinner'></i>", type: "standard", title: "Update Found" });
@@ -27,7 +36,7 @@
           const newWorker = sw.installing;
           newWorker?.addEventListener("statechange", () => {
             console.log(newWorker.state);
-            if(installState !== "ready") installState = newWorker.state;
+            if(!["ready", "justInstalled"].includes(installState)) installState = newWorker.state;
             if (newWorker.state === "activated") {
               if(serviceWorkerExists) {
                 const dismiss = pushNotification({
@@ -47,20 +56,21 @@
                 });
                 declareGlobal("dismissNotification", dismiss);
               } else {
+                localStorage.setItem("sw:justInstalled", "true");
                 location.reload();
               }
             }
           });
         });
       } else {
-        serviceWorkerNotAvailable = true;
+        serviceWorkerUnavailable = true;
       }
     });
   } else {
-    serviceWorkerNotAvailable = true;
+    serviceWorkerUnavailable = true;
   }
 </script>
 
-{#if installState !== "ready" && !serviceWorkerNotAvailable}
-  <InstallSplash {installState}/>
+{#if installState !== "ready" && !serviceWorkerUnavailable}
+  <InstallSplash />
 {/if}

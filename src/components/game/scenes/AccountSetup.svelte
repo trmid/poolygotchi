@@ -102,7 +102,7 @@
     <h3>Select Your Environment</h3>
     <EnvironmentSelector bind:environmentId />
   {:else if page == 2}
-    <h3>Set Your Goal</h3>
+    <h3>Set Your Savings Goal</h3>
     <div id="goal-num">
       <img src="img/usdc.webp" alt="USDC">
       <input class="game-ui" type="number" placeholder="Weekly Savings Goal" bind:value={weeklyGoal}>

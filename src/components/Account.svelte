@@ -123,7 +123,7 @@
 
 </div>
 {:else}
-<button class="pulse" on:click={() => connect().catch(console.error)}>connect</button>
+<button id="connect-btn" class="pulse" on:click={() => connect().catch(console.error)}>connect</button>
 {/if}
 
 <!-- Avatar Selector -->
@@ -162,6 +162,9 @@
 
 <!-- Style -->
 <style>
+  #connect-btn {
+    font-size: inherit;
+  }
   #account {
     position: relative;
     display: flex;

@@ -75,7 +75,7 @@ export default class Poolygotchi {
   }
 
   static expression(state: State, name: string) {
-    const expressionDuration = 20; // 20 seconds
+    const expressionDuration = 5; // 5 seconds
     const possibleExpressions = Poolygotchi.expressions[state];
     const timedIndex = Math.floor((Date.now() / 1000) / expressionDuration) % possibleExpressions.length;
     const expression = possibleExpressions[timedIndex];
