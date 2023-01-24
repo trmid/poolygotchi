@@ -15,7 +15,7 @@
 <!-- Splash -->
 <div id="splash">
   <div id="wrapper">
-    <img src="img/spinner.svg" alt="loading..." style:opacity={progress}>
+    <img src="img/spinner.svg" alt="loading...">
   </div>
 </div>
 
@@ -30,7 +30,6 @@
     align-items: center;
     background-color: var(--c0);
     background: var(--bg-gradient);
-    transition: opacity 0.5s ease-out;
   }
 
   img {
