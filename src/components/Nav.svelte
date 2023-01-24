@@ -42,7 +42,8 @@
     gap: 0.5rem;
     position: -webkit-sticky;
     position: sticky;
-    top: 0;    
+    top: 0;
+    font-size: 16px;
   }
 
   nav::before {
