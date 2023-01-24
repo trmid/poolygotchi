@@ -1,19 +1,9 @@
 <script type="ts">
-  export let installState: "installing" | "installed" | "activating" | "activated" | "parsed" | "redundant";
-  let progress = 0;
-  $: installState, updateProgress();
-  const updateProgress = () => {
-    switch(installState) {
-      case "installing": progress = 0.4; break;
-      case "installed": progress = 0.8; break;
-      case "activating": progress = 1; break;
-      case "activated": progress = 1; break;
-    }
-  };
+  import { fade } from "svelte/transition";
 </script>
 
 <!-- Splash -->
-<div id="splash">
+<div id="splash" out:fade={{ duration: 1000 }}>
   <div id="wrapper">
     <img src="img/spinner.svg" alt="loading...">
   </div>
