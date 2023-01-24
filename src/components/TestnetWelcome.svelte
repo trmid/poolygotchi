@@ -97,6 +97,7 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
     background-color: #fff2;
+    flex: 1 1 0;
   }
 
   .warning {
