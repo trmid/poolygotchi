@@ -40,6 +40,7 @@
 
 <!-- Component -->
 <script type="ts">
+  import InfoTip from "./InfoTip.svelte";
   import Overlay from "./Overlay.svelte";
   import SignClient from "@walletconnect/sign-client";
   import { W3mModal } from "@web3modal/ui";
@@ -181,5 +182,20 @@
   <ConnectOption name="Wallet Connect" onClick={() => {connectWC().catch(console.error);}}>
     <img src="img/wc_logo.svg" alt="" slot="logo">
   </ConnectOption>
+  <div id="connect-info">
+    <InfoTip>
+      <span slot="label">What is this?</span>
+      This app is built on ethereum-based blockchains. You'll need to connect your <a href="https://ethereum.org/en/wallets/" target="_blank" rel="noreferrer">ethereum wallet</a> to the app so it can propose transactions for you to send to the network.
+    </InfoTip>
+  </div>
 </Overlay>
 {/if}
+
+<!-- Style -->
+<style>
+  #connect-info {
+    margin-top: 1rem;
+    font-size: small;
+    font-style: italic;
+  }
+</style>
