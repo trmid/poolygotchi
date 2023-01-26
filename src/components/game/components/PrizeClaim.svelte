@@ -134,4 +134,4 @@
 </script>
 
 <!-- Editing Menu -->
-<Menu {deviceButtonController} selectedComponentIndex={3} {components} itemsPerColumn={3} title="Prizes" />
+<Menu {deviceButtonController} selectedComponentIndex={3} {components} {close} itemsPerColumn={3} title="Prizes" />

@@ -93,6 +93,7 @@
   export let selectedComponentIndex = 0;
   export let itemsPerColumn = 4;
   export let deviceButtonController: ButtonController;
+  export let close: (() => void) | undefined = undefined;
 
   // Variables:
   let selectedComponent: UIComponent | null = null;
@@ -104,7 +105,7 @@
   // Device Buttons:
   let buttons: Partial<DeviceButtons>;
   $: buttons = {
-    // left: components.length > 0 ? { title: "Previous", class: "icofont-caret-up", action: () => selectPreviousComponent() } : EMPTY_BUTTON,
+    left: close ? { title: "Back", class: "icofont-undo", action: close } : undefined,
     middle: (selectedComponent && !selectedComponent.disabled) ?
       {
         title: (selectedComponent as any).title ?? "Select",

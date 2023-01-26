@@ -92,7 +92,7 @@
 {#if editing}
 
   <!-- Editing Menu -->
-  <Menu {deviceButtonController} selectedComponentIndex={2} components={editComponents} itemsPerColumn={2} />
+  <Menu {deviceButtonController} selectedComponentIndex={2} components={editComponents} itemsPerColumn={2} close={() => editing = false} />
 
 {:else}
 
