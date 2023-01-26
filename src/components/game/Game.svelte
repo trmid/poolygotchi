@@ -36,6 +36,20 @@
     middle: EMPTY_BUTTON,
     right: EMPTY_BUTTON
   });
+
+  let currentAccount = $account;
+  $: $account, checkAccountChange();
+  const checkAccountChange = () => {
+    if($account) {
+
+      // Only update if we actually switched accounts, not just modified the object
+      if(!currentAccount || ($account.address !== currentAccount.address)) {
+        currentAccount = $account;
+      }
+    } else {
+      currentAccount = null;
+    }
+  };
 </script>
 
 <!-- Device Container -->
@@ -44,10 +58,18 @@
 
   <!-- Screen -->
   <Screen>
-    {#if $poolygotchi}
-      <Home poolygotchi={$poolygotchi} {deviceButtonController} />
-    {:else if $account}
-      <AccountSetup {deviceButtonController} />
+    {#if currentAccount}
+      {#await currentAccount.poolygotchi()}
+        <div id="spinner">
+          <img src="img/spinner.svg" alt="loading...">
+        </div>
+      {:then poolygotchi}
+        {#if poolygotchi}
+          <Home {poolygotchi} {deviceButtonController} />
+        {:else}
+          <AccountSetup {deviceButtonController} />
+        {/if}
+      {/await}
     {:else}
       <Welcome {deviceButtonController} />
     {/if}
@@ -77,6 +99,23 @@
     bottom: -15%;
     left: -35%;
     right: -35%;
+  }
+
+  #spinner {
+    position: absolute;
+    inset: 0;
+    background-color: var(--c0);
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #spinner > img {
+    width: 150px;
+    height: 150px;
+    max-width: calc(0.7 * var(--game-size));
+    max-height: calc(0.7 * var(--game-size));
   }
 
   @media screen and (min-width: 390px) {
