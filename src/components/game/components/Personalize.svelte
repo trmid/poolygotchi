@@ -28,5 +28,5 @@
 {:else if page === 'species'}
   <ChooseSpecies {deviceButtonController} close={() => page = null} />
 {:else}
-  <Menu components={menuComponents} {deviceButtonController}  />
+  <Menu components={menuComponents} {deviceButtonController} {close}  />
 {/if}

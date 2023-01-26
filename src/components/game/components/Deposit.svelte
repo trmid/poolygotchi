@@ -194,4 +194,4 @@
 </script>
 
 <!-- Menu -->
-<Menu components={menuComponents} title="deposit" selectedComponentIndex={4} {deviceButtonController} />
+<Menu components={menuComponents} title="deposit" selectedComponentIndex={4} {deviceButtonController} {close} />

@@ -133,7 +133,6 @@
           // Get unclaimed draws:
           PoolTogether.getUnclaimedDraws(poolygotchi.address).then(res => {
             unclaimedDraws = res;
-            console.log(res);
             totalUnclaimedPrizeAmount = BigNumber.from(0);
             for(const chain of unclaimedDraws) {
               for(const draw of chain.unclaimedDraws) {

@@ -149,4 +149,4 @@
 </script>
 
 <!-- Menu -->
-<Menu components={menuComponents} title="withdraw" selectedComponentIndex={4} {deviceButtonController} />
+<Menu components={menuComponents} title="withdraw" selectedComponentIndex={4} {deviceButtonController} {close} />

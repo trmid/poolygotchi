@@ -37,7 +37,6 @@ export namespace PrizeInfo {
           if(typeof x !== "number") info = null;
         }), info)
       )) {
-        console.log(info);
         localStorage.removeItem(key);
         delete _parsed[key];
         info = null;

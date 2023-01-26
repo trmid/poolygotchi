@@ -7,8 +7,14 @@
 [x] Disabled injected button if no injected wallet available
 [x] Change behavior of first speech bubble click to complete typing
 [x] Add loading animation on first page install
-[ ] Add links for PT, PT docs, discord, github in footer
-[ ] Update About page with overview, FAQ, & issue reporting, & move PDF to just a link
+[x] Add required checkbox next to mainnet warning
+[x] Add form popup
+[x] Add connect button to welcome screen
+[x] Find a way to integrate menu toggle with menu iterator
+[ ] Weekly savings report interaction
+[?] Dashboard summary toggle
+[x] Add links for PT, PT docs, discord, github in footer
+[x] Update About page with overview, FAQ, & issue reporting, & move PDF to just a link
 [ ] Add share button to share your progress & poolygotchi on twitter / lens
 [ ] Add rename page in personalization menu
 [ ] Add prize claim health factor boost
@@ -16,6 +22,9 @@
 [ ] Add auto connect for injected wallets
 [ ] Add info components
 [ ] Convert Menu object components to actual Svelte Components
+
+## Contract
+[ ] Update Whitelist contract to include `getAssetURI(address)` function (so contracts can return different assets tailored to a specific user)
 
 ## Testnet Deployment
 [x] Add testnet and private key args on deploy script

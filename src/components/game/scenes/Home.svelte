@@ -35,10 +35,11 @@
     uiButton({ icon: "icofont-game colored", name: "minigames", title: "Coming Soon!", action: () => { console.log("minigames") }, disabled: true }),
     uiButton({ icon: "icofont-ui-home colored", name: "visit", title: "Coming Soon!", action: () => { console.log("visit") }, disabled: true }),
   ];
-  const buttons: DeviceButtons = {
-    left: { title: "Home", class: "icofont-ui-home", action: () => { showMenu = false; widget = null; } },
-    middle: { title: "Interact!", class: "icofont-comment", action: () => { console.log(poolygotchiComponent); poolygotchiComponent?.interact();} },
-    right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu = true },
+  let buttons: DeviceButtons;
+  $: buttons = {
+    left: { title: "Menu", class: "icofont-navigation-menu", action: () => { showMenu = !showMenu; widget = null; } },
+    middle: { title: "Interact!", class: "icofont-comment", action: () => { poolygotchiComponent?.interact(); } },
+    right: { title: "Goal", class: "icofont-star", action: () => { showMenu = true; widget = 'goal'; } },
   };
 </script>
 
@@ -56,7 +57,7 @@
     bind:this={poolygotchiComponent}
     {poolygotchi}
     deviceButtonController={
-      (showMenu || widget) ?
+      showMenu ?
       buttonController({ left: EMPTY_BUTTON, middle: EMPTY_BUTTON, right: EMPTY_BUTTON }) :
       deviceButtonController
     }
@@ -65,34 +66,36 @@
 {/await}
 
 <!-- Menu or Widget -->
-{#if showMenu && !widget}
+{#if showMenu}
+  {#if !widget}
 
-  <!-- Menu -->
-  <Menu components={menuComponents} {deviceButtonController} />
+    <!-- Menu -->
+    <Menu components={menuComponents} {deviceButtonController} />
 
-{:else if widget === "deposit"}
+  {:else if widget === "deposit"}
 
-  <!-- Deposit -->
-  <Deposit {deviceButtonController} close={() => widget = null} />
+    <!-- Deposit -->
+    <Deposit {deviceButtonController} close={() => widget = null} />
 
-{:else if widget === "withdraw"}
+  {:else if widget === "withdraw"}
 
-  <!-- Withdraw -->
-  <Withdraw {deviceButtonController} close={() => widget = null} />
+    <!-- Withdraw -->
+    <Withdraw {deviceButtonController} close={() => widget = null} />
 
-{:else if widget === "personalize"}
+  {:else if widget === "personalize"}
 
-  <!-- Personalize -->
-  <Personalize {deviceButtonController} close={() => widget = null} />
+    <!-- Personalize -->
+    <Personalize {deviceButtonController} close={() => widget = null} />
 
-{:else if widget === "goal"}
+  {:else if widget === "goal"}
 
-  <!-- Goal -->
-  <Goal {deviceButtonController} close={() => widget = null} />
+    <!-- Goal -->
+    <Goal {deviceButtonController} close={() => widget = null} />
 
-{:else if widget === "prizes"}
+  {:else if widget === "prizes"}
 
-  <!-- Prizes -->
-  <PrizeClaim {deviceButtonController} close={() => widget = null} />
+    <!-- Prizes -->
+    <PrizeClaim {deviceButtonController} close={() => widget = null} />
 
+  {/if}
 {/if}

@@ -81,7 +81,6 @@ export default class PoolTogether {
             drawIds = storedPrizeInfo.unclaimed.filter(id => validDrawIdSet.has(id)).concat(drawIds);
           }
           if(drawIds.length > 0) {
-            console.log(drawIds);
 
             // Check results:
             const prizeDistributions = await distributor.getPrizeDistributions(drawIds);

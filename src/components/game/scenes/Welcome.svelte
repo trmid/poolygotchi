@@ -1,6 +1,5 @@
 <!-- Component -->
 <script type="ts">
-  import { push } from "svelte-spa-router";
   import { connect } from "../../ConnectOverlay.svelte";
   import ButtonControllerSvelte from "../components/ButtonController.svelte";
   import type { ButtonController } from "../components/ButtonController.svelte";
@@ -31,7 +30,7 @@
         speech = comments.filter(x => x !== speech)[Math.floor(Math.random() * (comments.length - 1))];
       }
     },
-    right: { title: "About", class: "icofont-question", action: () => push("/about") }
+    right: { title: "About", class: "icofont-question", action: () => window.open("https://poolygotchi.com/#/?about", "_blank") }
   };
 
   // Variables:
@@ -47,7 +46,9 @@
 <div id="container">
   <Speech {speech} />
   <img id="welcome-pooly" src="assets/species/0/{(happy !== null) ? 'happy' : 'neutral'}.gif" alt="poolygotchi bird animation" />
-  <div id="connect-message">Connect to hatch a Poolygotchi!</div>
+  <div id="connect-message">
+    <button class="pulse" on:click={() => connect().catch(console.error)}>get started!</button>
+  </div>
 </div>
 
 <!-- Style -->
@@ -73,5 +74,11 @@
     bottom: 7%;
     text-align: center;
     font-style: italic;
+  }
+
+  #connect-message > button {
+    font-size: 16px;
+    background: var(--bg-gradient);
+    border: 1px solid var(--c3);
   }
 </style>
