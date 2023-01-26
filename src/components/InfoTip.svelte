@@ -56,17 +56,17 @@
 </script>
 
 <!-- Alternate way to hide tooltip -->
-<svelte:window on:pointerdown={hide} />
+<svelte:window on:pointerup={hide} />
 
 <!-- Tooltip -->
-<span class="tooltip" class:hover on:pointerenter={pointerenter} on:pointerdown|stopPropagation>
+<span class="tooltip" class:hover on:pointerenter={pointerenter} on:pointerup|stopPropagation>
   <i class="icofont-question-circle" />
   <slot name="label" />
 </span>
 
 <!-- Body -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="body-container" on:pointerdown|stopPropagation on:click|stopPropagation on:pointerleave={hide} bind:this={container}>
+<div class="body-container" on:pointerup|stopPropagation on:click|stopPropagation on:mouseleave={hide} bind:this={container}>
   <div class="body">
     <slot></slot>
   </div>
