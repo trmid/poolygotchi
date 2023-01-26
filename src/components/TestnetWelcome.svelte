@@ -53,7 +53,9 @@
   #container {
     overflow-y: auto;
     max-height: calc(100vh - 5rem);
-    padding: 0 0.5rem 0.5rem 0.5rem;
+    padding: 0 1rem 0.5rem 1rem;
+    box-shadow: inset 1px 2px 3px var(--shadow-color);
+    border-radius: 0.5rem;
   }
 
   .checkbox-container {
