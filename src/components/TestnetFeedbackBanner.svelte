@@ -16,7 +16,6 @@
       const poolygotchi = await $account.poolygotchi();
       if(poolygotchi) {
         const data = await poolygotchi.data();
-        console.log(data.hatchDate);
         if(data.hatchDate.lt(Math.floor(Date.now() / 1000) - (60*60))) {
           let lastClosed = parseInt(localStorage.getItem(storageKey.lastClosed) ?? "0");
           if(Date.now() - lastClosed > (1000 * 60 * 60 * 24)) {

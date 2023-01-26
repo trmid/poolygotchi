@@ -37,7 +37,7 @@
   ];
   const buttons: DeviceButtons = {
     left: { title: "Home", class: "icofont-ui-home", action: () => { showMenu = false; widget = null; } },
-    middle: { title: "Interact!", class: "icofont-comment", action: () => { console.log(poolygotchiComponent); poolygotchiComponent?.interact();} },
+    middle: { title: "Interact!", class: "icofont-comment", action: () => { poolygotchiComponent?.interact();} },
     right: { title: "Menu", class: "icofont-navigation-menu", action: () => showMenu = true },
   };
 </script>
