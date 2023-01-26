@@ -10,13 +10,10 @@
       const observer = new MutationObserver((mutationList) => {
         for (const mutation of mutationList) {
           if (mutation.type === 'childList') {
-            console.log(mutation);
             if(mutation.addedNodes[0] == c) {
               observer.disconnect();
               const bb = c.getBoundingClientRect();
-              console.log(bb);
               const origin = { x: e.clientX - e.offsetX, y: e.clientY - e.offsetY };
-              console.log(origin);
               const padding = 7;
               let top = origin.y - padding;
               let left = origin.x - padding;
