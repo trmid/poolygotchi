@@ -246,8 +246,8 @@ input[type=text], input[type=number] {
 
 /* w3m-modal */
 w3m-modal {
-  --color-fg-accent: #512BC7;
-  --color-overlay: #2900C044;
+  --w3m-color-fg-accent: #512BC7;
+  --w3m-color-overlay: #2900C044;
 }
 
 /* No Text Select Class */
