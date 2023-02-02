@@ -29,12 +29,13 @@
   let settingGoal = false;
 
   // Reactive data updates:
-  $: $poolygotchi && $poolygotchi.data()
-    .then(d => data = d)
-    .then(() => $poolygotchi?.healthFactor())
-    .then(x => (x !== undefined) && (healthFactor = x))
-    .then(() => editing = false)
-    .catch(console.error);
+  $: $poolygotchi && updateData($poolygotchi).catch(console.error);
+  const updateData = async (poolygotchi: Poolygotchi) => {
+    data = await poolygotchi.data();
+    newWeeklyGoal = BigNumber.from(data.goalAmountWeekly);
+    healthFactor = await poolygotchi.healthFactor();
+    editing = false;
+  };
 
   // Device Buttons:
   let buttons: DeviceButtons;
@@ -49,14 +50,22 @@
   $: editComponents = [
     uiLabel({ label: "weekly goal" }),
     uiButton({ icon: "icofont-undo colored", name: "back", title: "Back", action: () => editing = false }),
-    uiNumberInput({ title: "Edit Amount", token: 'usdc', attributes: { min: 0 }, onChange: onGoalChange, disabled: settingGoal }),
+    uiNumberInput({ title: "Edit Amount", token: 'usdc', attributes: { min: 0 }, initialValue: parseFloat(formatUSDC(newWeeklyGoal ?? BigNumber.from(0), false)), onChange: onGoalChange, disabled: settingGoal }),
     uiButton({ icon: "icofont-save colored", name: "set goal", title: "Set New Goal", action: setGoal, disabled: settingGoal }),
   ];
 
   // Functions:
   const onGoalChange = (goal: number) => {
-    const bigGoal = ethers.utils.parseUnits(""+goal, 6);
-    if(!newWeeklyGoal.eq(bigGoal)) newWeeklyGoal = bigGoal;
+    try {
+      const bigGoal = ethers.utils.parseUnits(""+goal.toFixed(6), 6);
+      const decimals = goal.toString().match(/(?<=\.)[0-9]+/);
+      if(!newWeeklyGoal.eq(bigGoal) || (decimals && decimals[0].length > 6)) {
+        newWeeklyGoal = bigGoal;
+      }
+    } catch(err) {
+      console.error(err);
+      newWeeklyGoal = data?.goalAmountWeekly ?? BigNumber.from(0);
+    }
   };
 
   const setGoal = async () => {
