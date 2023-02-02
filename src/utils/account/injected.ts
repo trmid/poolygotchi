@@ -1,7 +1,5 @@
 import { ethers } from "ethers";
-import { AccountWithSigner, BaseAccount, transactionHasChainId } from ".";
-import type { TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
-import { Deferrable, resolveProperties } from "ethers/lib/utils";
+import { AccountWithSigner, BaseAccount } from ".";
 import { Config } from "../../config";
 
 export default class InjectedAccount extends BaseAccount implements AccountWithSigner {
