@@ -185,7 +185,7 @@
 {#if $connectionPromise && !web3ModalOpen}
 <Overlay width={300} {close}>
   <h3>connect</h3>
-  <ConnectOption name="Injected" disabled={!injectedAvailable} onClick={() => {connectInjected().catch(console.error);}}>
+  <ConnectOption name="Browser Wallet" disabled={!injectedAvailable} onClick={() => {connectInjected().catch(console.error);}}>
     <i class="icofont-wallet" slot="logo" style:font-size="32px"/>
   </ConnectOption>
   <ConnectOption name="Wallet Connect" onClick={() => {connectWC().catch(console.error);}}>
