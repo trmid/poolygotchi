@@ -55,6 +55,15 @@
   // Variables:
   let injectedAvailable = true;
 
+  // Function to clear wallet connect local storage:
+  function clearWCStorage() {
+    for(let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if(key && key.startsWith('wc@2')) localStorage.removeItem(key);
+    }
+  }
+  clearWCStorage(); // initial clear
+
   // Function to Close Overlay:
   const close = () => {
     stopConnecting("closed by user");
@@ -73,10 +82,7 @@
   let web3ModalOpen = false;
   let signClientWC: SignClient | null = null;
   const connectWC = async () => {
-    for(let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if(key && key.startsWith('wc@2')) localStorage.removeItem(key);
-    }
+    clearWCStorage();
     if(!signClientWC) {
       signClientWC = await SignClient.init({
         projectId: walletConnectProjectId
@@ -129,6 +135,9 @@
       resolveConnection(new WCAccount(signClientWC, session));
     } catch(err) {
       console.error(err);
+      if(err && typeof err === 'object' && 'message' in err) {
+        pushNotification({ message: "Wallet Connect Error: " + err.message, type: "error" });
+      }
     } finally {
       web3Modal.closeModal();
     }
@@ -176,7 +185,7 @@
 {#if $connectionPromise && !web3ModalOpen}
 <Overlay width={300} {close}>
   <h3>connect</h3>
-  <ConnectOption name="Injected" disabled={!injectedAvailable} onClick={() => {connectInjected().catch(console.error);}}>
+  <ConnectOption name="Browser Wallet" disabled={!injectedAvailable} onClick={() => {connectInjected().catch(console.error);}}>
     <i class="icofont-wallet" slot="logo" style:font-size="32px"/>
   </ConnectOption>
   <ConnectOption name="Wallet Connect" onClick={() => {connectWC().catch(console.error);}}>

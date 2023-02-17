@@ -30,7 +30,7 @@
 <Footer />
 
 <!-- Testnet Feedback Banner -->
-<TestnetFeedbackBanner />
+<!-- <TestnetFeedbackBanner /> -->
 
 <!-- Connect Overlay -->
 <ConnectOverlay />

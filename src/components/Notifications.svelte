@@ -106,22 +106,22 @@
   }
 
   .standard {
-    background-color: dodgerblue;
+    background: dodgerblue;
     color: white;
   }
 
   .error {
-    background-color: var(--c4);
+    background: var(--c4);
     color: white;
   }
 
   .success {
-    background-color: var(--c2);
+    background: var(--c2);
     color: #444;
   }
 
   .warning {
-    background-color: gold;
+    background: gold;
     color: #444;
   }
 

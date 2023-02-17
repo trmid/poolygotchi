@@ -104,8 +104,9 @@
 
   // Handle amount value change:
   const amountChanged = (value: number | BigNumber) => {
-    const newAmount = (typeof value === "number") ? ethers.utils.parseUnits(""+value, 6) : BigNumber.from(value);
-    if(!newAmount.eq(amount)) {
+    const newAmount = (typeof value === "number") ? ethers.utils.parseUnits(""+value.toFixed(6), 6) : BigNumber.from(value);
+    const decimals = value.toString().match(/(?<=\.)[0-9]+/);
+    if(!newAmount.eq(amount) || (decimals && decimals[0].length > 6)) {
       amount = newAmount;
       if(balance && amount.gt(balance)) amount = balance;
     }

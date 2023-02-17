@@ -11,7 +11,7 @@
 <style>
   #label {
     position: relative;
-    background: linear-gradient(165deg, #bbba -50%, var(--c0) 110%);
+    background: var(--transparent-gradient);
     display: flex;
     justify-content: center;
     align-items: center;
