@@ -169,7 +169,6 @@
 
   #name-input {
     display: block;
-    background: var(--transparent-gradient);
   }
 
   button.hidden {
