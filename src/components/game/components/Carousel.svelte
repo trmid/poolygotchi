@@ -18,7 +18,7 @@
     align-items: center;
     background: var(--transparent-gradient);
     border-radius: 0.5rem;
-    border: 1px solid #fff5;
+    border: 1px solid #fffa;
     padding: 0.5rem;
     box-sizing: border-box;
   }
