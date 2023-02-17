@@ -11,10 +11,15 @@
 [x] Add form popup
 [x] Add connect button to welcome screen
 [x] Find a way to integrate menu toggle with menu iterator
-[ ] Weekly savings report interaction
-[?] Dashboard summary toggle
 [x] Add links for PT, PT docs, discord, github in footer
 [x] Update About page with overview, FAQ, & issue reporting, & move PDF to just a link
+[x] Fix big number decimal error
+[x] Rename "injected" to "browser"
+[x] Remove feedback form
+[x] Improve contrast of h3 tags
+[?] Dashboard summary toggle
+[ ] Add more direct info on why your poolygotchi is feeling a certain way
+[ ] Weekly savings report interaction
 [ ] Add share button to share your progress & poolygotchi on twitter / lens
 [ ] Add rename page in personalization menu
 [ ] Add prize claim health factor boost
