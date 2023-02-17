@@ -25,7 +25,7 @@
   --bg-gradient: linear-gradient(165deg, var(--c0), var(--c1));
   --tri-gradient: linear-gradient(-65deg, var(--c2), var(--c3), var(--c4));
   --tri-gradient-light: linear-gradient(-65deg, var(--c2) -150%, var(--c3) 50%, var(--c4) 150%);
-  --transparent-gradient: linear-gradient(175deg, #7f63d4dd, #aaa4);
+  --transparent-gradient: linear-gradient(165deg, #bbba -50%, var(--c0) 110%);
 }
 
 /* HTML & Body */
@@ -64,7 +64,7 @@ h3 {
   color: var(--c3);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #fff5;
+  border: 1px solid #fffa;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
 }
