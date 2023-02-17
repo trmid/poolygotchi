@@ -5,19 +5,31 @@
   import { account } from "../Account.svelte";
 
   // Exports:
+  export const resolvingPoolygotchi = writable<boolean>(true);
   export const poolygotchi = writable<Poolygotchi | null>(null);
 
   // Subscribe poolygotchi to account:
+  let currentAccount: AccountWithSigner | null;
   account.subscribe(async account => {
     try {
       if(!account) {
+        currentAccount = null;
+        resolvingPoolygotchi.set(false);
         poolygotchi.set(null);
       } else {
-        poolygotchi.set(await account.poolygotchi());
+
+        // Only update if we actually switched accounts, not just modified the object
+        if(!currentAccount || (account.address !== currentAccount.address)) {
+          currentAccount = account;
+          resolvingPoolygotchi.set(true);
+          poolygotchi.set(await account.poolygotchi());
+          resolvingPoolygotchi.set(false);
+        }
       }
     } catch(err) {
       console.error(err);
       poolygotchi.set(null);
+      resolvingPoolygotchi.set(false);
     }
   });
 </script>
@@ -30,6 +42,7 @@
   import Buttons, { EMPTY_BUTTON } from "./components/Buttons.svelte";
   import { buttonController } from "./components/ButtonController.svelte";
   import Screen from "./components/Screen.svelte";
+  import type { AccountWithSigner } from "../../utils/account";
 
   const deviceButtonController = buttonController({
     left: EMPTY_BUTTON,
@@ -58,18 +71,18 @@
 
   <!-- Screen -->
   <Screen>
-    {#if currentAccount}
-      {#await currentAccount.poolygotchi()}
+    {#if $account}
+      {#if $resolvingPoolygotchi}
         <div id="spinner">
           <img src="img/spinner.svg" alt="loading...">
         </div>
-      {:then poolygotchi}
-        {#if poolygotchi}
-          <Home {poolygotchi} {deviceButtonController} />
+      {:else}
+        {#if $poolygotchi}
+          <Home poolygotchi={$poolygotchi} {deviceButtonController} />
         {:else}
           <AccountSetup {deviceButtonController} />
         {/if}
-      {/await}
+      {/if}
     {:else}
       <Welcome {deviceButtonController} />
     {/if}
