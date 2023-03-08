@@ -32,7 +32,6 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    opacity: 0.5;
     font-size: small;
     text-align: center;
     margin-top: 5rem;
