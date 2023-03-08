@@ -1,5 +1,4 @@
 import type { ethers } from "ethers";
-import { chains } from "weaverfi/dist/chains";
 
 export namespace Config {
 
@@ -31,14 +30,21 @@ export namespace Config {
   const ethNetwork = {
     name: "Ethereum Mainnet",
     chainId: 1,
-    rpcUrls: chains.eth.rpcs,
+    rpcUrls: [
+      'https://eth-rpc.gateway.pokt.network',
+      'https://rpc.ankr.com/eth'
+    ],
     nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
     blockExplorerUrls: ["https://etherscan.io/"]
   };
   const opNetwork = {
     name: "Optimism",
     chainId: 10,
-    rpcUrls: chains.op.rpcs,
+    rpcUrls: [
+      'https://mainnet.optimism.io',
+      'https://optimism-mainnet.public.blastapi.io',
+      'https://rpc.ankr.com/optimism'
+    ],
     nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
     blockExplorerUrls: ["https://optimistic.etherscan.io/"]
   };
@@ -52,14 +58,21 @@ export namespace Config {
   const polyNetwork = {
     name: "Polygon",
     chainId: 137,
-    rpcUrls: chains.poly.rpcs,
+    rpcUrls: [
+      'https://polygon-rpc.com',
+      'https://poly-rpc.gateway.pokt.network/',
+      'https://rpc.ankr.com/polygon'
+    ],
     nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
     blockExplorerUrls: ["https://polygonscan.com/"]
   };
   const avaxNetwork = {
     name: "Avalanche",
     chainId: 43114,
-    rpcUrls: chains.avax.rpcs,
+    rpcUrls: [
+      'https://api.avax.network/ext/bc/C/rpc',
+      'https://rpc.ankr.com/avalanche'
+    ],
     nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
     blockExplorerUrls: ["https://snowtrace.io/"]
   };
