@@ -1,5 +1,6 @@
 const cacheName = `$PACKAGE_VERSION`; // Change value to force update
-const filesToCache = `$FILES_TO_CACHE`; // Generated filenames as string array
+const essentialFilesToCache = `$ESSENTIAL_FILES_TO_CACHE`; // Generated filenames as string array
+const secondaryFilesToCache = `$SECONDARY_FILES_TO_CACHE`; // Generated filenames as string array
 
 self.addEventListener("install", event => {
 
@@ -18,11 +19,21 @@ self.addEventListener("install", event => {
   
 	// Kick out the old service worker
 	self.skipWaiting();
+
+  // Wait for essential file installation:
 	event.waitUntil(
 		caches.open(cacheName).then(cache => {
-			return cache.addAll(JSON.parse(filesToCache));
+			return cache.addAll(JSON.parse(essentialFilesToCache));
 		})
 	);
+
+  // Trigger async, non-essential file installation:
+  caches.open(cacheName).then(cache => {
+    return Promise.allSettled(
+      JSON.parse(secondaryFilesToCache).map(file => cache.add(file).catch(console.warn))
+    );
+  }).catch(console.error);
+  
 });
 
 // Promise that waits # of seconds before resolving:

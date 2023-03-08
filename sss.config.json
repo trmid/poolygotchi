@@ -1,0 +1,16 @@
+{
+  "cache": {
+    "files": {
+      "essential": [
+        "favicon.png",
+        "build/*",
+        "style/app.css"
+      ],
+      "ignore": [
+        "sw.js",
+        "CNAME",
+        "build/bundle.js.map"
+      ]
+    }
+  }
+}
