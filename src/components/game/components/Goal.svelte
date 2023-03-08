@@ -58,7 +58,7 @@
   const onGoalChange = (goal: number) => {
     try {
       const bigGoal = ethers.utils.parseUnits(""+goal.toFixed(6), 6);
-      const decimals = goal.toString().match(/(?<=\.)[0-9]+/);
+      const decimals = goal.toString().split('.').slice(-1)[0];
       if(!newWeeklyGoal.eq(bigGoal) || (decimals && decimals[0].length > 6)) {
         newWeeklyGoal = bigGoal;
       }

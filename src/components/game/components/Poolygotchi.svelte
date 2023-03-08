@@ -104,6 +104,8 @@
   // Function to refresh poolygotchi and network data:
   const refresh = () => {
 
+    console.log("refreshing...");
+
     // Get poolygotchi data and animations:
     hatchingStage = null;
     poolygotchi.data().then(data => {
