@@ -1,6 +1,6 @@
 {
   "name": "poolygotchi",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production && rollup -c",
@@ -10,7 +10,7 @@
     "dev": "node dev.js",
     "testnet-dev": "POOLYGOTCHI_TESTNET=true && rollup -c -w",
     "testnet-dev-win": "set POOLYGOTCHI_TESTNET=true && rollup -c -w",
-    "start": "sirv docs --no-clear --host --port 3004",
+    "start": "sirv docs --no-clear --port 8080",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
