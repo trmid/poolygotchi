@@ -25,7 +25,7 @@
 
   // Reactive statements:
   $: isApproved = approved && approved.gte(amount);
-  $: queryBalance(chain).catch(err => {
+  $: mounted && queryBalance(chain).catch(err => {
     console.error(err);
     pushNotification({ message: "Failed to fetch balance.", type: "warning" });
   });
@@ -187,10 +187,14 @@
   };
 
   // On Mount:
-  onMount(() => {
-    $account?.signer.getChainId().then(id => {
-      if([1,10,137,43114].includes(id)) chain = id;
-    }).catch(console.error);
+  let mounted = false;
+  onMount(async () => {
+    if($account?.signer) {
+      await $account.signer.getChainId().then(id => {
+        if([1,10,137,43114].includes(id)) chain = id;
+      }).catch(console.error);
+    }
+    mounted = true;
   });
 </script>
 
