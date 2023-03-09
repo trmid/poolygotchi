@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
 import { Config } from "../config";
+import { RpcUrl } from "./storage";
 
-const providers = Object.fromEntries(
+const defaultProviders = Object.fromEntries(
   Object.keys(Config.networks)
     .map(x => parseInt(x))
     .filter(x => !isNaN(x))
@@ -9,8 +10,11 @@ const providers = Object.fromEntries(
  ) as Record<number, ethers.providers.Provider>
 
 export const provider = (chainId: number) => {
-  if(chainId in providers) {
-    return providers[chainId];
+  const customRpc = RpcUrl.get(chainId);
+  if(customRpc) {
+    return new ethers.providers.JsonRpcProvider({ url: customRpc, throttleLimit: 1 }, chainId);
+  } else if(chainId in defaultProviders) {
+    return defaultProviders[chainId];
   } else {
     throw new Error(`No provider for chain: ${chainId}`);
   }

@@ -25,7 +25,6 @@ export default class PoolTogether {
   }
 
   static async totalDeposited(address: string) {
-    console.debug(`Querying deposits: ${address}`);
     const res = await PoolTogether.prizePoolNetwork().getUsersPrizePoolBalances(address);
     let balance = BigNumber.from(0);
     for(const chain of res) {
