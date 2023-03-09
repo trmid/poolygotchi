@@ -3,6 +3,7 @@ import { Config } from "../config";
 import type { PoolygotchiHatchery } from "../solidity/typechain-types/contracts/PoolygotchiHatchery";
 import { BigNumber, ethers } from "ethers";
 import PoolTogether from "./poolTogether";
+import { provider } from "./providers";
 
 export default class Poolygotchi {
 
@@ -25,10 +26,10 @@ export default class Poolygotchi {
     return this.dataCache;
   }
 
-  public async healthFactor() {
+  public async healthFactor(totalDeposited?: BigNumber) {
     const secondsInWeek = 60 * 60 * 24 * 7;
     const { goalAmountWeekly, startBalance, goalStartDate } = await this.data();
-    const totalDeposited = await PoolTogether.totalDeposited(this.address);
+    if(totalDeposited === undefined) totalDeposited = await PoolTogether.totalDeposited(this.address);
     const balanceChange = totalDeposited.sub(startBalance);
     const secondsSaved = balanceChange.mul(secondsInWeek).div(BigNumber.from(goalAmountWeekly));
     const secondsOff = goalStartDate.add(secondsSaved).sub(Math.floor(Date.now() / 1000)).toNumber();
@@ -71,7 +72,7 @@ export default class Poolygotchi {
 
   /* Static Functions */
   static contract() {
-    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, new ethers.providers.JsonRpcProvider(Config.networks.poolygotchi.rpcUrls[0], Config.networks.poolygotchi)) as PoolygotchiHatchery;
+    return new ethers.Contract(Poolygotchi.address, Poolygotchi.abi, provider(Config.networks.poolygotchi.chainId)) as PoolygotchiHatchery;
   }
 
   static expression(state: State, name: string) {
