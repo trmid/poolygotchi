@@ -248,11 +248,6 @@
     }
   }, 6000);
 
-  // On Mount:
-  onMount(() => {
-    poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
-  });
-
   // On Destroy:
   onDestroy(() => {
     clearInterval(timer);
