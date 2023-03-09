@@ -104,6 +104,8 @@
   // Function to refresh poolygotchi and network data:
   const refresh = () => {
 
+    console.log("refreshing...");
+
     // Get poolygotchi data and animations:
     hatchingStage = null;
     poolygotchi.data().then(data => {
@@ -245,11 +247,6 @@
       else console.error(err);
     }
   }, 6000);
-
-  // On Mount:
-  onMount(() => {
-    poolygotchi.healthFactor().then(res => healthFactor = res).catch(console.error);
-  });
 
   // On Destroy:
   onDestroy(() => {

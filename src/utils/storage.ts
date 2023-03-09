@@ -93,3 +93,10 @@ export namespace StoredAvatar {
   export const get = (address: string) => localStorage.getItem(keyOf(address));
   export const set = (address: string, name: string) => localStorage.setItem(keyOf(address), name);
 }
+
+// Storage to get and save rpcUrls:
+export namespace RpcUrl {
+  const keyOf = (chainId: number) => `rpc:${chainId}`;
+  export const get = (chainId: number) => localStorage.getItem(keyOf(chainId));
+  export const set = (chainId: number, rpcUrl: string) => localStorage.setItem(keyOf(chainId), rpcUrl);
+}

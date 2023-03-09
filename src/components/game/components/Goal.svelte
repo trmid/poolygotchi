@@ -27,13 +27,15 @@
   let editing = false;
   let newWeeklyGoal: BigNumber = BigNumber.from(0);
   let settingGoal = false;
+  let totalDeposited: Promise<BigNumber> | null = null;
 
   // Reactive data updates:
   $: $poolygotchi && updateData($poolygotchi).catch(console.error);
   const updateData = async (poolygotchi: Poolygotchi) => {
     data = await poolygotchi.data();
     newWeeklyGoal = BigNumber.from(data.goalAmountWeekly);
-    healthFactor = await poolygotchi.healthFactor();
+    totalDeposited = PoolTogether.totalDeposited(poolygotchi.address);
+    healthFactor = await poolygotchi.healthFactor(await totalDeposited);
     editing = false;
   };
 
@@ -58,7 +60,7 @@
   const onGoalChange = (goal: number) => {
     try {
       const bigGoal = ethers.utils.parseUnits(""+goal.toFixed(6), 6);
-      const decimals = goal.toString().match(/(?<=\.)[0-9]+/);
+      const decimals = goal.toString().split('.').slice(-1)[0];
       if(!newWeeklyGoal.eq(bigGoal) || (decimals && decimals[0].length > 6)) {
         newWeeklyGoal = bigGoal;
       }
@@ -116,8 +118,8 @@
       <div class="stat">
         <strong>Deposited:</strong>
         <span>
-          {#if $account}
-            {#await PoolTogether.totalDeposited($account.address)}
+          {#if totalDeposited}
+            {#await totalDeposited}
               <i class="icofont-custom-spinner" />
               loading
             {:then deposited} 

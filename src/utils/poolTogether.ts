@@ -1,5 +1,5 @@
 import { BigNumber, ethers, Signer } from "ethers";
-import { providers } from "weaverfi/dist/functions";
+import { provider } from "./providers";
 import mainnet from "./poolTogetherContracts.json";
 import { DrawResults, PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
 import type { AccountWithSigner } from "./account";
@@ -7,23 +7,21 @@ import { PrizeInfo } from "./storage";
 
 export default class PoolTogether {
 
+  static getProviders = () => ({
+    1: provider(1),
+    10: provider(10),
+    137: provider(137),
+    43114: provider(43114)
+  });
+
   static gasLimit = {
     deposit: 750_001,
     withdraw: 750_001,
     claim: (numDraws: number) => 200_001 + numDraws * 300_000
   };
 
-  static providers = {
-    1: providers.eth[0],
-    10: providers.op[0],
-    137: providers.poly[0],
-    43114: providers.avax[0]
-  };
-
-  static _prizePoolNetwork: PrizePoolNetwork | null = null;
   static prizePoolNetwork () {
-    if(!PoolTogether._prizePoolNetwork) PoolTogether._prizePoolNetwork = new PrizePoolNetwork(PoolTogether.providers, mainnet as any);
-    return PoolTogether._prizePoolNetwork;
+    return new PrizePoolNetwork(PoolTogether.getProviders(), mainnet as any);
   }
 
   static async totalDeposited(address: string) {
@@ -203,8 +201,8 @@ export default class PoolTogether {
   }
 
   static claim(chain: number, draws: Record<number, DrawResults>, signer: Signer) {
-    if(!signer.provider) signer = signer.connect(PoolTogether.providers[chain as 1]);
-    const network = new PrizePoolNetwork({ ...PoolTogether.providers, [chain]: signer }, mainnet as any);
+    if(!signer.provider) signer = signer.connect(PoolTogether.getProviders()[chain as 1]);
+    const network = new PrizePoolNetwork({ ...PoolTogether.getProviders(), [chain]: signer } as any, mainnet as any);
     return PoolTogether.prizeDistributor(chain, network).claimPrizesAcrossMultipleDrawsByDrawResults(draws, { gasLimit: PoolTogether.gasLimit.claim(Object.keys(draws).length) });
   }
 

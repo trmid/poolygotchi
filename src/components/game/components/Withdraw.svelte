@@ -22,7 +22,7 @@
   let amount: BigNumber = BigNumber.from(0);
 
   // Reactive statements:
-  $: queryBalance(chain).catch(err => {
+  $: mounted && queryBalance(chain).catch(err => {
     console.error(err);
     pushNotification({ message: "Failed to fetch balance.", type: "warning" });
   });
@@ -91,7 +91,7 @@
   // Handle amount value change:
   const amountChanged = (value: number | BigNumber) => {
     const newAmount = (typeof value === "number") ? ethers.utils.parseUnits(""+value.toFixed(6), 6) : BigNumber.from(value);
-    const decimals = value.toString().match(/(?<=\.)[0-9]+/);
+    const decimals = value.toString().split('.').slice(-1)[0];
     if(!newAmount.eq(amount) || (decimals && decimals[0].length > 6)) {
       amount = newAmount;
       if(deposited && amount.gt(deposited)) amount = deposited;
@@ -142,10 +142,14 @@
   };
 
   // On Mount:
-  onMount(() => {
-    $account?.signer.getChainId().then(id => {
-      if([1,10,137,43114].includes(id)) chain = id;
-    }).catch(console.error);
+  let mounted = false;
+  onMount(async () => {
+    if($account?.signer) {
+      await $account.signer.getChainId().then(id => {
+        if([1,10,137,43114].includes(id)) chain = id;
+      }).catch(console.error);
+    }
+    mounted = true;
   });
 </script>
 
