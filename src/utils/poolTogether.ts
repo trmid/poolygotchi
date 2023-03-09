@@ -1,5 +1,5 @@
 import { BigNumber, ethers, Signer } from "ethers";
-import { providers as defaultProviders } from "./providers";
+import { provider } from "./providers";
 import mainnet from "./poolTogetherContracts.json";
 import { DrawResults, PrizePoolNetwork, User } from '@pooltogether/v4-client-js';
 import type { AccountWithSigner } from "./account";
@@ -7,12 +7,12 @@ import { PrizeInfo } from "./storage";
 
 export default class PoolTogether {
 
-  static providers = {
-    1: defaultProviders[1],
-    10: defaultProviders[10],
-    137: defaultProviders[137],
-    43114: defaultProviders[43114]
-  };
+  static getProviders = () => ({
+    1: provider(1),
+    10: provider(10),
+    137: provider(137),
+    43114: provider(43114)
+  });
 
   static gasLimit = {
     deposit: 750_001,
@@ -20,13 +20,12 @@ export default class PoolTogether {
     claim: (numDraws: number) => 200_001 + numDraws * 300_000
   };
 
-  static _prizePoolNetwork: PrizePoolNetwork | null = null;
   static prizePoolNetwork () {
-    if(!PoolTogether._prizePoolNetwork) PoolTogether._prizePoolNetwork = new PrizePoolNetwork(PoolTogether.providers, mainnet as any);
-    return PoolTogether._prizePoolNetwork;
+    return new PrizePoolNetwork(PoolTogether.getProviders(), mainnet as any);
   }
 
   static async totalDeposited(address: string) {
+    console.debug(`Querying deposits: ${address}`);
     const res = await PoolTogether.prizePoolNetwork().getUsersPrizePoolBalances(address);
     let balance = BigNumber.from(0);
     for(const chain of res) {
@@ -203,8 +202,8 @@ export default class PoolTogether {
   }
 
   static claim(chain: number, draws: Record<number, DrawResults>, signer: Signer) {
-    if(!signer.provider) signer = signer.connect(PoolTogether.providers[chain as 1]);
-    const network = new PrizePoolNetwork({ ...PoolTogether.providers, [chain]: signer } as any, mainnet as any);
+    if(!signer.provider) signer = signer.connect(PoolTogether.getProviders()[chain as 1]);
+    const network = new PrizePoolNetwork({ ...PoolTogether.getProviders(), [chain]: signer } as any, mainnet as any);
     return PoolTogether.prizeDistributor(chain, network).claimPrizesAcrossMultipleDrawsByDrawResults(draws, { gasLimit: PoolTogether.gasLimit.claim(Object.keys(draws).length) });
   }
 

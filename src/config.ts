@@ -31,7 +31,7 @@ export namespace Config {
     name: "Ethereum Mainnet",
     chainId: 1,
     rpcUrls: [
-      'https://eth-rpc.gateway.pokt.network',
+      'https://cloudflare-eth.com/v1/mainnet',
       'https://rpc.ankr.com/eth'
     ],
     nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
@@ -41,8 +41,9 @@ export namespace Config {
     name: "Optimism",
     chainId: 10,
     rpcUrls: [
-      'https://mainnet.optimism.io',
+      'https://opt-mainnet.g.alchemy.com/v2/QAyMlX2L20K_NI5WklGRLxFibef13-8Y',
       'https://optimism-mainnet.public.blastapi.io',
+      'https://mainnet.optimism.io',
       'https://rpc.ankr.com/optimism'
     ],
     nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },

@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { AccountWithSigner, BaseAccount } from ".";
 import { Config } from "../../config";
+import { provider } from "../providers";
 
 export default class InjectedAccount extends BaseAccount implements AccountWithSigner {
 
@@ -10,7 +11,7 @@ export default class InjectedAccount extends BaseAccount implements AccountWithS
         console.error("Address does not match! Disconnecting injected wallet...");
         this.disconnect().catch(console.error);
       }
-    })
+    });
     super(address);
   }
 

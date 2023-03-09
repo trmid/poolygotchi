@@ -1,12 +1,13 @@
 import { createIcon } from "@download/blockies";
 import type { Signer } from "@ethersproject/abstract-signer";
 import { Contract, ethers } from "ethers";
-import { providers } from "../providers";
+import { provider } from "../providers";
 import erc721 from "../../solidity/node_modules/@openzeppelin/contracts/build/contracts/ERC721.json";
 import Poolygotchi from "../poolygotchi";
 import { fetchJSON, normalizeImageURI } from "../uri";
 import type { TransactionRequest } from "@ethersproject/abstract-provider";
 import { ENSName, StoredAvatar } from "../storage";
+import { Config } from "../../config";
 
 export abstract class BaseAccount implements Account {
   private _resolvedAvatars: Promise<{ url: string | (() => Promise<string>), category: string, weight: number }[]> | undefined;
@@ -32,8 +33,9 @@ export abstract class BaseAccount implements Account {
   async ensAvatar(): Promise<string | null> {
     const name = await this.ensName();
     if(name) {
-      const provider = providers[1];
-      const resolver = await provider.getResolver(name);
+      let jsonRpcProvider: ethers.providers.JsonRpcProvider | ethers.providers.Provider = provider(1);
+      if(!(jsonRpcProvider instanceof ethers.providers.JsonRpcProvider)) jsonRpcProvider = new ethers.providers.JsonRpcProvider(Config.networks.eth.rpcUrls[0], 1);
+      const resolver = await (jsonRpcProvider as ethers.providers.JsonRpcProvider).getResolver(name);
       const avatar = await resolver?.getAvatar();
       if(avatar) {
         return avatar.url;
@@ -66,7 +68,7 @@ export abstract class BaseAccount implements Account {
     const promises: Promise<any>[] = [];
     for(const key in nftContracts) {
       promises.push((async () => {
-        const contract = new Contract(nftContracts[key].contract, erc721.abi, providers[1]);
+        const contract = new Contract(nftContracts[key].contract, erc721.abi, provider(1));
         const addToken = (tokenId: ethers.BigNumberish) => {
           avatarPromises.push({ url: () => (async () => {
             const tokenURI = await contract.tokenURI(tokenId);
@@ -141,7 +143,7 @@ export abstract class BaseAccount implements Account {
 
   /* Static functions */
   static async ensName(address: string, { useCache = false } = {}) {
-    const promise = providers[1].lookupAddress(address).then(name => {
+    const promise = provider(1).lookupAddress(address).then(name => {
       if(name) {
         ENSName.set(address, name);
       }
