@@ -3,12 +3,12 @@
   "version": "0.1.17",
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=production && rollup -c",
+    "build": "export NODE_ENV=production && rollup -c",
     "build-win": "set NODE_ENV=production && rollup -c",
-    "testnet-build": "POOLYGOTCHI_TESTNET=true && NODE_ENV=production && rollup -c",
+    "testnet-build": "export POOLYGOTCHI_TESTNET=true && export NODE_ENV=production && rollup -c",
     "testnet-build-win": "set POOLYGOTCHI_TESTNET=true && set NODE_ENV=production && rollup -c",
     "dev": "node dev.js",
-    "testnet-dev": "POOLYGOTCHI_TESTNET=true && rollup -c -w",
+    "testnet-dev": "export POOLYGOTCHI_TESTNET=true && rollup -c -w",
     "testnet-dev-win": "set POOLYGOTCHI_TESTNET=true && rollup -c -w",
     "start": "sirv docs --no-clear --port 8080",
     "check": "svelte-check --tsconfig ./tsconfig.json"

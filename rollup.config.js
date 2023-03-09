@@ -15,9 +15,10 @@ import nodePackage from "./package.json";
 
 // Determine production or development:
 const production = !!(process.env.NODE_ENV ?? "").match(/production/);
+console.log(process.env.NODE_ENV);
 
 // Check if we are using testnet deployment:
-const testnet = (process.env.POOLYGOTCHI_TESTNET ?? "").toLowerCase() !== "true";
+const testnet = (process.env.POOLYGOTCHI_TESTNET ?? "").toLowerCase() === "true";
 
 // Get app version:
 const version = nodePackage.version;
